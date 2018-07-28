@@ -11,8 +11,17 @@
       <input type="text" placeholder="西安">
       <ul class="sort">
         <li>热度</li>
-        <li>价格从低到高</li>
-        <li>价格从高到低</li>
+        <li>价格升序</li>
+        <li>价格降序</li>
+      </ul>
+      <ul class="list">
+        <li>
+          <div class="picture"></div>
+          <div class="goods">
+            <p class="message"></p>
+            <span class="price"></span>
+          </div>
+        </li>
       </ul>
     </div>
   </div>
@@ -29,11 +38,7 @@ export default {
 }
 </script>
 
-<style type="text/css">
-  body{
-    margin: 0;
-    padding: 0;
-  }
+<style lang="scss" scoped>
   .searchResults{
     width:750px;
   }
@@ -43,52 +48,67 @@ export default {
     display:flex;
     align-items: center;
     justify-content:space-between;
-  }
-  header img{
-    width:38px;
-    height:38px;
-  }
-  header div{
-    width: 150px;
-    height: 38px;
-    line-height: 38px;
-    font-size: 30px;
-    color: #aaa9a9;
-  }
-  header p{
-    width: 150px;
-    height: 38px;
-    line-height: 38px;
-    font-size: 36px;
-    color: black;
+    div{
+      width: 150px;
+      height: 38px;
+      line-height: 38px;
+      font-size: 30px;
+      color: #aaa9a9;
+      img{
+        width:38px;
+        height:38px;
+      }
+    }
+    p{
+      width: 150px;
+      height: 38px;
+      line-height: 38px;
+      font-size: 36px;
+      color: black;
+    }
   }
   .content{
     width:92%;
     margin: 0 auto;
+    input{
+      width: 90%;
+      height: 63px;
+      margin: 0 auto;
+      border-radius: 26px;
+      background-color: #eef1f8;
+      padding-left: 50px;
+    }
+    .sort{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 100px;
+      li{
+        width:200px;
+        height: 60px;
+        line-height: 60px;
+        font-size: 28px;
+      }
+    }
+    .list{
+      width:100%;
+      li{
+        width: 100%;
+        height: 230px;
+        display: flex;
+        justify-content: space-between;
+        .picture{
+          width: 190px;
+          height: 190px;
+        }
+        .goods{
+          display: flex;
+          width: 480px;
+          height: 170px;
+        }
+      }
+    }
   }
-  .content input{
-    width: 90%;
-    height: 63px;
-    margin: 0 auto;
-    border-radius: 26px;
-    background-color: #eef1f8;
-    border: 0;
-    padding-left: 50px;
-  }
-  .sort{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100px;
-  }
-  .sort li{
-    width:200px;
-    height: 60px;
-    line-height: 60px;
-    font-size: 28px;
-  }
+
 </style>

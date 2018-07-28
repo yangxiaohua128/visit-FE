@@ -40,18 +40,11 @@
         </div>
         <div class="select">
           <div class="budget">
-            <p>单人预算
-              <span></span>
-              元
-            </p>
+            <p>单人预算</p>
           </div>
           <div class="line"></div>
           <div class="days">
-            <p>
-              出行天数
-              <span></span>
-              天
-            </p>
+            <p>出行天数</p>
           </div>
         </div>
         <button class="search">
@@ -72,11 +65,7 @@ export default {
 }
 </script>
 
-<style type="text/css">
-  body{
-    margin: 0;
-    padding: 0;
-  }
+<style lang="scss" scoped>
   .advancedSearch{
     width:750px;
   }
@@ -86,18 +75,18 @@ export default {
     display:flex;
     align-items: center;
     justify-content:space-between;
-  }
-  header img{
-    width:38px;
-    height:38px;
-  }
-  header p,header div{
-    width:150px;
-    height: 38px;
-    line-height: 38px;
-    text-align: center;
-    font-size: 36px;
-    color: black;
+    img{
+      width:38px;
+      height:38px;
+    }
+    p,div{
+      width:150px;
+      height: 38px;
+      line-height: 38px;
+      text-align: center;
+      font-size: 36px;
+      color: black;
+    }
   }
   .content{
     width:92%;
@@ -109,7 +98,6 @@ export default {
     line-height: 68px;
     font-size: 28px;
     color: #1d1d1d;
-    margin: 0;
     text-align: left;
   }
   .destination{
@@ -120,31 +108,31 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-  }
-  .destination div{
-    width:165px;
-    height:62px;
-    border: 1px #ddd solid;
-    border-radius: 5px;
-    line-height: 62px;
-    font-size: 28px;
-    text-align: center;
-    color:#727272;
-    margin-bottom: 6px;
-  }
-  .destination img{
-    width:20px;
-    height:20px;
-  }
-  .destination input{
-    width:100%;
-    height: 72px;
-    border-radius: 6px;
-    background-color: #efefef;
-    color: #909090;
-    padding-left: 22px;
-    border: 0;
-    margin-top: 14px;
+    div{
+      width:165px;
+      height:62px;
+      border: 1px #ddd solid;
+      border-radius: 5px;
+      line-height: 62px;
+      font-size: 28px;
+      text-align: center;
+      color:#727272;
+      margin-bottom: 6px;
+      img{
+        width:20px;
+        height:20px;
+      }
+    }
+
+    input{
+      width:100%;
+      height: 72px;
+      border-radius: 6px;
+      background-color: #efefef;
+      color: #909090;
+      padding-left: 22px;
+      margin-top: 14px;
+    }
   }
   .depart{
     display:flex;
@@ -154,36 +142,35 @@ export default {
     font-size: 28px;
     border-top: 1px #ccc solid;
     border-bottom: 1px #ccc solid;
-  }
-  .start{
-    width:140px;
-    height: 90px;
-    line-height: 90px;
-    color:#242424;
-    text-align: left;
-  }
-  .location{
-    width:490px;
-    display: flex;
-    justify-content: space-between;
-    height: 90px;
-    line-height: 90px;
-
-  }
-  .location img{
-    width:28px;
-    height: 28px;
-  }
-  .time{
-    width:220px;
-    display: flex;
-    justify-content: space-between;
-    height: 90px;
-    line-height: 90px;
-    color:#979797;
-  }
-  .location span:nth-child(2){
-    color:#979797;
+    .start{
+      width:140px;
+      height: 90px;
+      line-height: 90px;
+      color:#242424;
+      text-align: left;
+    }
+    .location{
+      width:490px;
+      display: flex;
+      justify-content: space-between;
+      height: 90px;
+      line-height: 90px;
+      img{
+        width:28px;
+        height: 28px;
+      }
+      span:nth-child(2){
+        color:#979797;
+      }
+    }
+    .time{
+      width:220px;
+      display: flex;
+      justify-content: space-between;
+      height: 90px;
+      line-height: 90px;
+      color:#979797;
+    }
   }
   .line{
     width:100%;
@@ -202,10 +189,15 @@ export default {
     border-bottom: 1px #ccc solid;
     margin-top: 20px;
     flex-wrap: wrap;
-  }
-  .budget,.days{
-    width:100%;
-    height: 238px;
+    .budget,.days{
+      width:100%;
+      height: 238px;
+      p{
+        font-size: 28px;
+        text-align: left;
+        margin-top: 28px;
+      }
+    }
   }
   .search{
     width:91%;
@@ -214,6 +206,5 @@ export default {
     background-color: #ff9a00;
     color: #edffff;
     font-size: 38px;
-    border: 0;
   }
 </style>
