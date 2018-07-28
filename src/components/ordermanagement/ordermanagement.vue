@@ -7,7 +7,6 @@
      <div></div>
     </header>
     <!-- 中间部分-->
-    <div class="content">
       <ul class="nav">
         <li><img src="./img/complatedorder2.png" width="20" height="20"/> <p>全部订单</p><span></span></li>
         <li><img src="./img/waitpay2.png" width="20" height="20"/><p>待支付</p><span></span></li>
@@ -15,6 +14,7 @@
         <li><img src="./img/appraise2.png" width="20" height="20"/><p>待评价</p><span></span></li>
         <li><img src="./img/moneyback2.png" width="20" height="20"/><p>退款订单</p><span></span></li>
       </ul>
+    <div class="content">
       <div class="time">预定日期:<span>7月25日</span></div>
       <div class="order">
         <div class="headline"><img src="./img/inform.png" width="30" height="30"/><span>重庆旅游三天四晚自由行</span></div>
@@ -86,11 +86,10 @@ export default {
     font-size: 27px;
   margin-bottom: 0;
   }
-/*.nav span{*/
-  /*width:67px;*/
-  /*height:14px;*/
-  /*background-color:#fee735;*/
-/*}*/
+.content{
+    display: flex;
+    flex-wrap:wrap;
+}
 .time{
     width: 218px;
     height: 43px;
@@ -103,10 +102,10 @@ export default {
 .order{
   text-align: center;
     display:flex;
-    width: 720px;
+    width: 100%;
     height: 320px;
     border: 1px #e4e4e4 solid ;
-    margin-bottom: 16px;
+    margin: 0 auto;
     justify-content: space-between;
     flex-wrap:wrap;
   }

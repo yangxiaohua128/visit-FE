@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import ordermanagement from '@/components/ordermanagement/ordermanagement'
 import informChange from '@/components/informChange/informChange'
+import order from '@/components/order/order'
 Vue.use(Router)
 
 // const search = (resolve) => {
@@ -29,6 +30,12 @@ export default new Router({
       path: '/ordermanagement',
       name: 'ordermanagement',
       component: ordermanagement
+    },
+    {
+      title: '单个订单',
+      path: '/order',
+      name: 'order',
+      component: order
     }
   ]
 })
