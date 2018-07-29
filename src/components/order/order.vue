@@ -52,7 +52,6 @@ export default {
   name: 'order'
 }
 </script>
-
 <style lang="scss">
   body{
     margin: 0;

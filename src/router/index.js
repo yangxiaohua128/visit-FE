@@ -14,8 +14,11 @@ import userEvaluation from '@/components/userEvaluation/userEvaluation'
 import signin from '@/components/signin/signin'
 import ordermanagement from '@/components/ordermanagement/ordermanagement'
 import informChange from '@/components/informChange/informChange'
-import order from '@/components/order/order'
 import waitpay from '@/components/waitpay/waitpay'
+import order from '@/components/order/order'
+import orderconfirmation from '@/components/orderconfirmation/orderconfirmation'
+import message from '@/components/message/message'
+import showOne from '@/components/showOne/showOne'
 Vue.use(Router)
 // const advancedSearch = (resolve) => {
 //   import('@/components/advancedSearch/advancedSearch').then((module) => {
@@ -23,6 +26,12 @@ Vue.use(Router)
 //   })
 // }
 
+
+// const search = (resolve) => {
+//   import('@components/search/search').then((module) => {
+//     resolve(module)
+//   })
+// }
 
 export default new Router({
   routes: [
@@ -32,7 +41,6 @@ export default new Router({
       component: HelloWorld
     },
     {
-
       title: '搜索页',
       path: '/search',
       name: 'search',
@@ -120,6 +128,29 @@ export default new Router({
       path: '/waitpay',
       name: 'waitpay',
       component: waitpay
+=======
+      title: '预定页',
+      path: '/order',
+      name: 'order',
+      component: order
+    },
+    {
+      title: '确定页',
+      path: '/orderconfirmation',
+      name: 'orderconfirmation',
+      component: orderconfirmation
+    },
+    {
+      title: '信息页',
+      path: '/message',
+      name: 'message',
+      component: message
+    },
+    {
+      title: '单个产品展示',
+      path: '/showOne',
+      name: 'showOne',
+      component: showOne
     }
   ]
 })

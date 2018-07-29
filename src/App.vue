@@ -69,6 +69,14 @@
     margin: 0;
     padding: 0;
   }
+  ul{margin: 0;padding: 0;list-style: none;}
+  .content{
+    width: 93%;
+    margin: 0  auto;}
+  body {
+    margin: 0;
+    padding: 0;
+  }
     p,h1,h2,h3,h4,h5,h6,ul,ol,dl,li,form,table{
       margin:0;
       padding:0;
@@ -86,11 +94,19 @@
     i,em{
       font-style:normal;
     }
+<<<<<<< HEAD
+=======
+    p{
+      -webkit-margin-before: 0;
+      -webkit-margin-after: 0;
+    }
+>>>>>>> origin/drj
     a{
       text-decoration:none;
       color:#000000;
       border:0;
     }
+<<<<<<< HEAD
     a, img, input, button {
       border: none;
     }
@@ -111,4 +127,6 @@
     }
   }
 
+  }
+}
 </style>
