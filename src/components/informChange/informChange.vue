@@ -38,7 +38,7 @@ export default {
 }
 </script>
 
-<style type="text/css">
+<style lang="scss">
   body{
     margin: 0;
     padding: 0;
@@ -54,17 +54,18 @@ export default {
     align-items:center;
     justify-content:space-between;
     margin-bottom: 20px;
-  }
-  header div {
-    width: 150px;
-    height: 38px;
 
-  }
-  header p{
-    text-align: center;
-    line-height: 38px;
-    font-size: 36px;
-    color:black;
+    div{
+      width: 150px;
+      height: 38px;
+    }
+
+     p{
+      text-align: center;
+      line-height: 38px;
+      font-size: 36px;
+      color:black;
+    }
   }
   input{
     border: none;

@@ -20,8 +20,9 @@
         <div class="headline"><img src="./img/inform.png" width="30" height="30"/><span>重庆旅游三天四晚自由行</span></div>
         <div class="money"><p class="p1">￥1500</p><p class="p2">状态</p></div>
         <div class="from"><span>7月25日</span>至<span>7月30日</span></div>
-        <div class="button"><button type="button">评价</button>
-        <button type="button">取消订单</button></div>
+        <div class="button"><button type="button">点评</button><button type="button">去支付</button>
+        <button type="button">取消订单</button>
+        </div>
       </div>
     </div>
   </div>
@@ -37,7 +38,7 @@ export default {
 
 </script>
 
-<style type="text/css">
+<style lang="scss">
   body{
     margin: 0;
     padding: 0;
@@ -53,17 +54,18 @@ export default {
     align-items:center;
     justify-content:space-between;
     margin-bottom: 20px;
-  }
-  header div {
+
+  div{
     width: 150px;
     height: 38px;
-
   }
-  header p{
+
+  p{
     text-align: center;
     line-height: 38px;
     font-size: 36px;
     color:black;
+  }
   }
 .nav{
     display: flex;
@@ -74,19 +76,19 @@ export default {
     padding: 0;
     margin: 0;
     margin-bottom: 35px;
-  }
-.nav li{
+  li{
     width: 150px;
     flex-basis:100%;
-    /*border-bottom:2px #fee735 solid;*/
   }
-.nav p{
+  p{
     text-align: center;
     line-height:26px;
     font-size: 27px;
-  margin-bottom: 0;
+    margin-bottom: 0;
   }
+}
 .content{
+     width: 750px;
     display: flex;
     flex-wrap:wrap;
 }
@@ -102,7 +104,7 @@ export default {
 .order{
   text-align: center;
     display:flex;
-    width: 100%;
+    width: 98%;
     height: 320px;
     border: 1px #e4e4e4 solid ;
     margin: 0 auto;
@@ -113,21 +115,20 @@ export default {
     height:150px ;
     width: 500px;
     text-align: left;
-}
-.headline span{
+  span{
     height:100px;
     color:black;
     font-size: 27px;
+  }
 }
 .money{
   width: 201.992px;
   height:80px;
   margin-top: 20px;
-}
-
-.money p{
+  p{
     margin: 0;
     font-size: 30px;
+  }
 }
 .p1{
    color:#f1b265;
@@ -140,14 +141,14 @@ export default {
   border-radius: 15px;
   line-height: 76px;
 }
-.button button{
-  height: 76px;
-  background-color: #eff4f8;
-  border: none;
-  border-radius: 10px;
-  margin-right:5px;
-}
 .button{
-  align-self:flex-end;
+   align-self:flex-end;
+  button{
+    height: 76px;
+    background-color: #eff4f8;
+    border: none;
+    border-radius: 10px;
+    margin-right:5px;
+  }
 }
 </style>

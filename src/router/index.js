@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import ordermanagement from '@/components/ordermanagement/ordermanagement'
 import informChange from '@/components/informChange/informChange'
 import order from '@/components/order/order'
+import waitpay from '@/components/waitpay/waitpay'
 Vue.use(Router)
 
 // const search = (resolve) => {
@@ -36,6 +37,12 @@ export default new Router({
       path: '/order',
       name: 'order',
       component: order
+    },
+    {
+      title: '待支付',
+      path: '/waitpay',
+      name: 'waitpay',
+      component: waitpay
     }
   ]
 })
