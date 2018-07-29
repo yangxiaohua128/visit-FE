@@ -37,13 +37,14 @@
 
 <style type="text/css">
   body{padding:0;margin:0;}
-  .signin{width:375px;margin:0;padding:0;}
-  .div1{height:203px;margin-left:22px;margin-right:22px;position: relative;}
-  #img1{position:absolute;right:14px;bottom:0;height:104px;width:137px;}
-  #img2{position:absolute;right:0;top:15px;width:24px;height:24px;}
-  .div1 p{display:block;margin-top:66px;color:#424242;font-size:30px;}
-  .div1 div{width:300px;height:100px;background-color:#ffde39;color:#4b414c;font-size:36px;
-    text-align: center;line-height:100px;button:70px;left:0;}
-  .div2 ,.div4{height:10px;background-color:#f8f8f8;}
+  .signin{width:750px;}
+  .div1{height:420px;margin-left:40px;margin-right:40px;position: relative;}
+  #img1{position:absolute;right:30px;bottom:0;height:200px;width:280px;}
+  #img2{margin-top:27px;width:42px;height:46px;}
+  .div1 p{margin-top:130px;color:#424242;font-size:60px;border:1px black solid;}
+  .div1 div{width:150px;height:50px;background-color:#ffde39;color:#4b414c;font-size:36px;
+    text-align: center;line-height:50px;button:70px;left:0;}
+  .div2 ,.div4{height:10px;background-color:#efecec}
   .div3{height:70px;font-size:15px;padding-left:29px;}
+  .div5 img{width:21px;height:21px;}
 </style>
