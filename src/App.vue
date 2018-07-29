@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <!--<img src="./assets/logo.png">-->
-    <router-view/>
   </div>
 </template>
 
@@ -47,4 +46,38 @@ export default {
   }
   button:focus{outline:0;}
   input:focus{outline:0;}
+  body{
+    margin: 0;
+    padding: 0;
+    .content{
+      width:93%;
+      margin: 0 auto;
+    }
+    header{
+      background-color: white;
+    }
+    p,h1,h2,h3,h4,h5,h6,ul,ol,dl,li,form,table{
+      margin:0;
+      padding:0;
+    }
+    a,img,input,button{
+      border:none;
+    }
+    img{
+      vertical-align:middle;
+      border:0;
+    }
+    li{
+      list-style:none;
+    }
+    i,em{
+      font-style:normal;
+    }
+    a{
+      text-decoration:none;
+      color:#000000;
+      border:0;
+    }
+  }
+
 </style>
