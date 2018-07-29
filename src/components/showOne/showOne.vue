@@ -1,10 +1,10 @@
 <template>
-    $END$
+
 </template>
 
 <script>
     export default {
-        name: "order1"
+        name: "showOne"
     }
 </script>
 
