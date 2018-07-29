@@ -4,9 +4,17 @@
     <h2> 终于出来了！</h2>
   </div>
 </template>
-
 <script>export default {name: 'search', data (){return {msg: '加油你是最棒的！'}}
 }
+<script>
+  export default {
+    name: 'search',
+    data () {
+      return {
+        msg: '加油你是最棒的！'
+      }
+    }
+  }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

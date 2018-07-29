@@ -11,6 +11,7 @@ import searchResults from '@/components/searchResults/searchResults'
 import userAlbum from '@/components/userAlbum/userAlbum'
 import userComment from '@/components/userComment/userComment'
 import userEvaluation from '@/components/userEvaluation/userEvaluation'
+import signin from '@/components/signin/signin'
 Vue.use(Router)
 // const advancedSearch = (resolve) => {
 //   import('@/components/advancedSearch/advancedSearch').then((module) => {
@@ -38,6 +39,12 @@ Vue.use(Router)
 //
 // const userEvaluation = (resolve) => {
 //   import('@/components/userEvaluation/userEvaluation').then((module) => {
+//     resolve(module)
+//   })
+// }
+
+// const search = (resolve) => {
+//   import('@components/search/search').then((module) => {
 //     resolve(module)
 //   })
 // }
@@ -106,9 +113,15 @@ export default new Router({
       component: userComment
     },
     {
-      path: '/userEvaluation',
-      name: 'userEvaluation',
-      component: userEvaluation
+       path: '/userEvaluation',
+         name:'userEvaluation',
+      component:userEvaluation
+    },
+    {
+      title: '登录前我的页面',
+      path: '/signin',
+      name: 'signin',
+      component: signin
     }
   ]
 })
