@@ -6,6 +6,8 @@ import router from './router'
 import 'lib-flexible/flexible.js'
 import wcSwiper from 'wc-swiper'
 import 'wc-swiper/style.css'
+
+
 Vue.use(wcSwiper);
 Vue.config.productionTip = false
 

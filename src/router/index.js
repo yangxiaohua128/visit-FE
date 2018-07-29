@@ -4,6 +4,8 @@ import HelloWorld from '@/components/HelloWorld'
 import search from '@/components/search/search'
 import apppage from '@/components/apppage/apppage'
 import News from '@/components/News/News'
+import history from '@/components/history/history'
+import destination from '@/components/destination/destination'
 Vue.use(Router)
 
 // const search = (resolve) => {
@@ -36,6 +38,18 @@ export default new Router({
       path: '/News',
       name: 'News',
       component: News
+    },
+    {
+      title: '目的地',
+      path: '/destination',
+      name: 'destination',
+      component: destination
+    },
+    {
+      title: '浏览历史页',
+      path: '/history',
+      name: 'history',
+      component: history
     },
   ]
 })

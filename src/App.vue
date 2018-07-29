@@ -28,5 +28,23 @@ export default {
     padding: 0;
     margin: 0;
   }
-
+  ul,li{
+    list-style: none;
+  }
+  ul{
+    padding: 0;
+    margin: 0;
+  }
+  input{
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+  button{
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+  button:focus{outline:0;}
+  input:focus{outline:0;}
 </style>
