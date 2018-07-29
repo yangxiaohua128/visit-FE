@@ -3,9 +3,9 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import advancedSearch from '@/components/advancedSearch/advancedSearch'
 import searchResults from '@/components/searchResults/searchResults'
-// import userAlbum from '@/components/userAlbum/userAlbum'
-// import userComment from '@/components/userComment/userComment'
-// import userEvaluation from '@/components/userEvaluation/userEvaluation'
+import userAlbum from '@/components/userAlbum/userAlbum'
+import userComment from '@/components/userComment/userComment'
+import userEvaluation from '@/components/userEvaluation/userEvaluation'
 Vue.use(Router)
 // const advancedSearch = (resolve) => {
 //   import('@/components/advancedSearch/advancedSearch').then((module) => {
@@ -53,21 +53,21 @@ export default new Router({
       path: '/searchResults',
       name: 'searchResults',
       component: searchResults
+    },
+    {
+      path: '/userAlbum',
+      name: 'userAlbum',
+      component: userAlbum
+    },
+    {
+      path: '/userComment',
+      name: 'userComment',
+      component: userComment
+    },
+    {
+      path: '/userEvaluation',
+      name: 'userEvaluation',
+      component: userEvaluation
     }
-    // {
-    //   path: '/userAlbum',
-    //   name: 'userAlbum',
-    //   component: userAlbum
-    // },
-    // {
-    //   path: '/userComment',
-    //   name: 'userComment',
-    //   component: userComment
-    // },
-    // {
-    //   path: '/userEvaluation',
-    //   name: 'userEvaluation',
-    //   component: userEvaluation
-    // }
   ]
 })

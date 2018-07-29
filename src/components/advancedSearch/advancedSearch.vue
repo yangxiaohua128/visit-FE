@@ -8,7 +8,7 @@
         <div></div>
       </header>
       <div class="content">
-        <p class="termini">目的地或关键词</p>
+        <p class="termini">搜索推荐</p>
         <div class="destination">
           <div v-for="item of des" :key="item.id">{{item}}</div>
           <div>
@@ -47,6 +47,7 @@
             <p>出行天数</p>
           </div>
         </div>
+        <div class="white"></div>
         <button class="search">
           搜索
         </button>
@@ -59,7 +60,7 @@ export default {
   name: 'advancedSearch',
   data () {
     return {
-      des: ['周边', '境内', '港澳台', '东南亚', '日韩朝蒙', '欧洲', '美洲']
+      des: ['华山', '青海', '延安', '西北', '三亚', '四川', '北京']
     }
   }
 }
@@ -89,122 +90,127 @@ export default {
     }
   }
   .content{
-    width:92%;
-    margin: 0 auto;
-  }
-  .termini{
-    width:100%;
-    height:68px;
-    line-height: 68px;
-    font-size: 28px;
-    color: #1d1d1d;
-    text-align: left;
-  }
-  .destination{
-    margin-top:14px;
-    margin-bottom:20px;
-    width:100%;
-    height: 225px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    div{
-      width:165px;
-      height:62px;
-      border: 1px #ddd solid;
-      border-radius: 5px;
-      line-height: 62px;
-      font-size: 28px;
-      text-align: center;
-      color:#727272;
-      margin-bottom: 6px;
-      img{
-        width:20px;
-        height:20px;
-      }
-    }
-
-    input{
+    .termini{
       width:100%;
-      height: 72px;
-      border-radius: 6px;
-      background-color: #efefef;
-      color: #909090;
-      padding-left: 22px;
-      margin-top: 14px;
-    }
-  }
-  .depart{
-    display:flex;
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    font-size: 28px;
-    border-top: 1px #ccc solid;
-    border-bottom: 1px #ccc solid;
-    .start{
-      width:140px;
-      height: 90px;
-      line-height: 90px;
-      color:#242424;
+      height:68px;
+      line-height: 68px;
+      font-size: 28px;
+      color: #1d1d1d;
       text-align: left;
     }
-    .location{
-      width:490px;
+    .destination{
+      margin-top:14px;
+      margin-bottom:20px;
+      width:100%;
+      height: 225px;
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
-      height: 90px;
-      line-height: 90px;
-      img{
-        width:28px;
-        height: 28px;
+      div{
+        width:165px;
+        height:62px;
+        border: 1px #ddd solid;
+        border-radius: 5px;
+        line-height: 62px;
+        font-size: 28px;
+        text-align: center;
+        color:#727272;
+        margin-bottom: 6px;
+        img{
+          width:20px;
+          height:20px;
+        }
       }
-      span:nth-child(2){
+      input{
+        width:100%;
+        height: 72px;
+        border-radius: 6px;
+        background-color: #efefef;
+        color: #909090;
+        padding-left: 22px;
+        margin-top: 14px;
+      }
+    }
+    .depart{
+      display:flex;
+      width: 100%;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      font-size: 28px;
+      border-top: 1px #ccc solid;
+      border-bottom: 1px #ccc solid;
+      .start{
+        width:140px;
+        height: 90px;
+        line-height: 90px;
+        color:#242424;
+        text-align: left;
+      }
+      .location{
+        width:490px;
+        display: flex;
+        justify-content: space-between;
+        height: 90px;
+        line-height: 90px;
+        img{
+          width:28px;
+          height: 28px;
+        }
+        span:nth-child(2){
+          color:#979797;
+        }
+      }
+      .time{
+        width:220px;
+        display: flex;
+        justify-content: space-between;
+        height: 90px;
+        line-height: 90px;
         color:#979797;
       }
     }
-    .time{
-      width:220px;
-      display: flex;
-      justify-content: space-between;
-      height: 90px;
-      line-height: 90px;
-      color:#979797;
-    }
-  }
-  .line{
-    width:100%;
-    height: 1px;
-    background-color: #ccc;
-  }
-  .anotherLine{
-    width:1px;
-    height:90px;
-    background-color: #ccc;
-  }
-  .select{
-    display: flex;
-    width:100%;
-    border-top: 1px #ccc solid;
-    border-bottom: 1px #ccc solid;
-    margin-top: 20px;
-    flex-wrap: wrap;
-    .budget,.days{
+    .line{
       width:100%;
-      height: 238px;
-      p{
-        font-size: 28px;
-        text-align: left;
-        margin-top: 28px;
+      height: 1px;
+      background-color: #ccc;
+    }
+    .anotherLine{
+      width:1px;
+      height:90px;
+      background-color: #ccc;
+    }
+    .select{
+      display: flex;
+      width:100%;
+      border-top: 1px #ccc solid;
+      border-bottom: 1px #ccc solid;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      .budget,.days{
+        width:100%;
+        height: 238px;
+        p{
+          font-size: 28px;
+          text-align: left;
+          margin-top: 28px;
+        }
       }
     }
+    .search{
+      width:91%;
+      height:90px;
+      border-radius: 8px;
+      background-color: #ff9a00;
+      color: #edffff;
+      font-size: 38px;
+      position: fixed;
+      bottom: 10px;
+      left: 31px;
+    }
+    .white{
+      height:110px;
+      width: 100%;
+    }
   }
-  .search{
-    width:91%;
-    height:90px;
-    border-radius: 8px;
-    background-color: #ff9a00;
-    color: #edffff;
-    font-size: 38px;
-  }
+
 </style>

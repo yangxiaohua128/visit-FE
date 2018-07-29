@@ -14,15 +14,17 @@
         <li>价格升序</li>
         <li>价格降序</li>
       </ul>
-      <ul class="list">
-        <li>
-          <div class="picture"></div>
+      <div class="list">
+        <div class="produce">
+          <div class="picture">图片</div>
           <div class="goods">
-            <p class="message"></p>
-            <span class="price"></span>
+            <p class="message">商品信息</p>
+            <span class="comment">好评</span>
+            <span class="price">价格</span>
           </div>
-        </li>
-      </ul>
+        </div>
+      </div>
+      <img src="./img/footmark.png" class="footmark">
     </div>
   </div>
 </template>
@@ -68,8 +70,6 @@ export default {
     }
   }
   .content{
-    width:92%;
-    margin: 0 auto;
     input{
       width: 90%;
       height: 63px;
@@ -83,7 +83,7 @@ export default {
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      height: 100px;
+      height: 90px;
       li{
         width:200px;
         height: 60px;
@@ -93,21 +93,58 @@ export default {
     }
     .list{
       width:100%;
-      li{
+      .produce{
         width: 100%;
         height: 230px;
         display: flex;
+        align-items: center;
         justify-content: space-between;
+        flex-wrap: wrap;
+        border-bottom: 1px #ccc solid;
         .picture{
           width: 190px;
           height: 190px;
+          background-color: black;
         }
         .goods{
           display: flex;
           width: 480px;
-          height: 170px;
+          height: 180px;
+          justify-content: space-between;
+          background-color: chartreuse;
+          flex-wrap: wrap;
+          .message{
+            width:100%;
+            height: 80px;
+            font-size: 28px;
+            overflow: hidden;
+            background-color: antiquewhite;
+          }
+          .comment{
+            width:60%;
+            height: 34px;
+            line-height: 34px;
+            font-size: 22px;
+            background-color: aqua;
+            align-self: center;
+          }
+          .price{
+            width: 33%;
+            height: 60px;
+            line-height: 60px;
+            font-size:34px ;
+            background-color: blue;
+            align-self: flex-end;
+          }
         }
       }
+    }
+    .footmark{
+      width: 80px;
+      height: 80px;
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
     }
   }
 

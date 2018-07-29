@@ -23,6 +23,13 @@ export default {
   body{
     margin: 0;
     padding: 0;
+    .content{
+      width:93%;
+      margin: 0 auto;
+    }
+    header{
+      background-color: white;
+    }
     p,h1,h2,h3,h4,h5,h6,ul,ol,dl,li,form,table{
       margin:0;
       padding:0;
