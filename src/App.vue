@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <!--<img src="./assets/logo.png">-->
-
-    <!--< img src="./assets/logo.png">-->
+    <router-view/>
   </div>
 </template>
 
@@ -92,4 +91,24 @@
       color:#000000;
       border:0;
     }
+    a, img, input, button {
+      border: none;
+    }
+    img {
+      vertival-align: middle;
+      border: 0;
+    }
+    li {
+      list-style: none;
+    }
+    i, em {
+      font-style: normal;
+    }
+    a {
+      text-decoration: none;
+      color: #000;
+      border: 0;
+    }
+  }
+
 </style>
