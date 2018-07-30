@@ -58,4 +58,7 @@ export default {
     -webkit-margin-before: 0;
     -webkit-margin-after: 0;
   }
+  input,select,option,textarea{
+  outline: none;
+  }
 </style>

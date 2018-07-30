@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import order from '@/components/order/order'
+import orderPage from '@/components/orderPage/orderPage'
 import orderconfirmation from '@/components/orderconfirmation/orderconfirmation'
 import message from '@/components/message/message'
 import showOne from '@/components/showOne/showOne'
@@ -22,9 +22,9 @@ export default new Router({
     },
     {
       title: '预定页',
-      path: '/order',
-      name: 'order',
-      component: order
+      path: '/orderPage',
+      name: 'orderPage',
+      component: orderPage
     },
     {
       title: '确定页',
