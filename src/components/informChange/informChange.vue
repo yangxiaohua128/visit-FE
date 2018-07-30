@@ -1,7 +1,7 @@
 <template>
 <div class="informChange">
   <header>
-    <div><img src="./img/left.png" width="16" height="16"/></div>
+    <div><img src="./img/left.png" width="19" height="19"/></div>
     <p>编辑个人资料</p>
     <div></div>
   </header>
@@ -13,10 +13,10 @@
     <div class="sex">
    <div class="sex1">
      <div>性别</div>
-     <div style="width:40px;text-align: center;border-bottom:2px dodgerblue solid ">男</div>
+     <div style="width:40px;text-align: center;border-bottom:2px dodgerblue solid "><img src="./img/man.png" width="39" height="39" /></div>
    </div>
     <div class="sex2">
-      <div style="width:40px;text-align: center ">女</div>
+      <div style="width:40px;text-align: center "><img src="./img/woman.png" width="39" height="39" /></div>
       <div></div>
     </div>
     </div>
@@ -56,6 +56,8 @@ export default {
     margin-bottom: 20px;
 
     div{
+      text-align: left;
+      padding-left: 20px;
       width: 150px;
       height: 38px;
     }
@@ -79,7 +81,7 @@ export default {
     text-align: left;
     font-size: 34px;
     border-bottom:1px #e4e4e4 solid ;
-    border-top:1px #e4e4e4 solid ;
+    border-top:2px #e4e4e4 solid ;
     margin-bottom: 150px;
   }
   .name{
@@ -150,11 +152,10 @@ export default {
   button{
     width:91%;
     align-self: center;
-    background-color: #ff9a00;
+    background-color:#f9de57;
     height: 90px;
     border-radius: 8px;
     font-size: 38px;
     border:none;
-    color:#edffff;
   }
 </style>

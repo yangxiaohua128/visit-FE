@@ -2,7 +2,7 @@
   <div class="ordermangement">
     <!--头部-->
     <header>
-      <div><img src="./img/left.png" width="16" height="16"/></div>
+      <div><img src="./img/left.png" width="19" height="19"/></div>
       <p>订单详情</p>
      <div></div>
     </header>
@@ -51,11 +51,12 @@ export default {
     height: 90px;
     align-items:center;
     display: flex;
-    align-items:center;
     justify-content:space-between;
     margin-bottom: 20px;
 
   div{
+    text-align: left;
+    padding-left: 20px;
     width: 150px;
     height: 38px;
   }
@@ -74,7 +75,6 @@ export default {
     border-bottom:6px #dfdfdf solid;
     list-style:none;
     padding: 0;
-    margin: 0;
     margin-bottom: 35px;
   li{
     width: 150px;
@@ -88,7 +88,7 @@ export default {
   }
 }
 .content{
-     width: 750px;
+     width: 100%;
     display: flex;
     flex-wrap:wrap;
 }

@@ -41,5 +41,8 @@ export default {
       color: #000;
       border: 0;
     }
+    input,select,option,textarea{
+      outline: none;
+    }
   }
 </style>

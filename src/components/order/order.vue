@@ -1,7 +1,7 @@
 <template>
   <div class="order">
   <header>
-    <div><img src="./img/left.png" width="16" height="16"/></div>
+    <div><img src="./img/left.png" width="19" height="19"/></div>
     <p>订单详情</p>
     <div></div>
   </header>
@@ -39,8 +39,10 @@
             <p></p>
           </div>
           <div class="main">
+            <div class="touch">联系人:<span>xxx</span></div>
+            <div class="touchPhone">联系人电话:<span>112xxxx1111</span></div>
             <div class="trip">出行人:<span>xxx</span></div>
-            <div class="phone">联系电话:112xxxx1111</div>
+            <div class="phone">联系电话:<span>112xxxx1111</span></div>
           </div>
       </div>
     </div>
@@ -78,6 +80,8 @@ export default {
     margin-bottom: 20px;
 
   div{
+    text-align: left;
+    padding-left: 20px;
     width: 150px;
     height: 38px;
   }
@@ -225,6 +229,20 @@ export default {
         margin: 0 auto;
         border-radius: 14px;
         padding:10px;
+      .touch{
+        width: 540px;
+        margin: 0 auto;
+        text-align: left;
+        font-size: 32px;
+        padding-bottom: 10px;
+      }
+      .touchPhone{
+        width: 540px;
+        margin: 0 auto;
+        text-align: left;
+        font-size: 32px;
+        padding-bottom: 10px;
+      }
       .trip{
         width: 540px;
         margin: 0 auto;
