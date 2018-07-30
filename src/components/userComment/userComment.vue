@@ -2,10 +2,12 @@
   <div class="userComment">
     <header>
       <div>
-        <img src="./img/return.png">
+        <img src="./img/return.png" class="img1">
       </div>
       <p>用户点评</p>
-      <div></div>
+      <div>
+        <img src="./img/news.png" class="img2">
+      </div>
     </header>
     <div class="content">
       <div class="comment">
@@ -33,7 +35,13 @@
           <p></p>
           <img src="./img/down.png">
         </div>
-        <div class="time">2018-7-29 15:42</div>
+        <div class="time">
+          <div>
+            <img src="./img/comment.png">
+            <span>有用</span>
+          </div>
+          <span>2018-7-29 15:42</span>
+        </div>
         <div class="reply">
           <div>查看供应商回复<img src="./img/down.png"></div>
           <div></div>
@@ -64,15 +72,26 @@ export default {
     display:flex;
     align-items: center;
     justify-content:space-between;
-    img{
+    .img1{
       width:38px;
       height:38px;
     }
-    p,div{
-      width:150px;
+    .img2{
+      width:65px;
+      height:65px;
+    }
+    p{
+      width:200px;
       height: 38px;
       line-height: 38px;
       text-align: center;
+      font-size: 36px;
+      color: black;
+    }
+    div{
+      width:100px;
+      height: 38px;
+      line-height: 38px;
       font-size: 36px;
       color: black;
     }
@@ -145,7 +164,6 @@ export default {
             height: 80px;
           }
         }
-
       }
       .picture{
         width: 100%;
@@ -165,9 +183,23 @@ export default {
       }
       .time{
         width: 100%;
-        text-align: right;
-        height: 50px;
-        line-height: 50px;
+        height: 70px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        div{
+          width: 120px;
+          height: 40px;
+          line-height: 40px;
+          border-radius: 5px;
+          img{
+            width: 50px;
+            height: 50px;
+          }
+        }
+        span{
+          font-size: 30px;
+        }
       }
       .reply{
         width: 100%;

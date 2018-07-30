@@ -5,10 +5,13 @@
         <img src="./img/return.png">
       </div>
       <p>西安</p>
-      <div>共180条</div>
+      <div>180条</div>
     </header>
     <div class="content">
-      <input type="text" placeholder="西安">
+      <form>
+        <input type="search" placeholder="西安">
+        <img src="./img/search.png" class="search">
+      </form>
       <ul class="sort">
         <li>热度</li>
         <li>价格升序</li>
@@ -24,7 +27,7 @@
           </div>
         </div>
       </div>
-      <img src="./img/footmark.png" class="footmark">
+      <img src="./img/foot.png" class="foot">
     </div>
   </div>
 </template>
@@ -51,10 +54,11 @@ export default {
     align-items: center;
     justify-content:space-between;
     div{
-      width: 150px;
+      width:100px;
       height: 38px;
       line-height: 38px;
-      font-size: 30px;
+      font-size: 28px;
+      letter-spacing: 0;
       color: #aaa9a9;
       img{
         width:38px;
@@ -62,7 +66,7 @@ export default {
       }
     }
     p{
-      width: 150px;
+      width:200px;
       height: 38px;
       line-height: 38px;
       font-size: 36px;
@@ -70,13 +74,23 @@ export default {
     }
   }
   .content{
-    input{
-      width: 90%;
-      height: 63px;
-      margin: 0 auto;
-      border-radius: 26px;
-      background-color: #eef1f8;
-      padding-left: 50px;
+    form{
+      position: relative;
+      .search{
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 10px;
+        left: 5%;
+      }
+      input{
+        width: 95%;
+        height: 63px;
+        margin: 0 auto;
+        border-radius: 20px;
+        background-color: #eef1f8;
+        padding-left: 100px;
+      }
     }
     .sort{
       display: flex;
@@ -139,7 +153,7 @@ export default {
         }
       }
     }
-    .footmark{
+    .foot{
       width: 80px;
       height: 80px;
       position: fixed;

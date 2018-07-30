@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!--<img src="./assets/logo.png">-->
-    <router-view></router-view>
+    <router-view/>
   </div>
 </template>
 
@@ -29,6 +29,7 @@ export default {
     }
     header{
       background-color: white;
+      letter-spacing: 4px;
     }
     p,h1,h2,h3,h4,h5,h6,ul,ol,dl,li,form,table{
       margin:0;
@@ -51,6 +52,9 @@ export default {
       text-decoration:none;
       color:#000000;
       border:0;
+    }
+    input,select,option,textarea{
+      outline: none;
     }
   }
 </style>
