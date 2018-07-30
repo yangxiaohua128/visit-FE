@@ -37,11 +37,18 @@ export default {
       width:38px;
       height:38px;
     }
-    p,div{
-      width:150px;
+    p{
+      width:200px;
       height: 38px;
       line-height: 38px;
       text-align: center;
+      font-size: 36px;
+      color: black;
+    }
+    div{
+      width:100px;
+      height: 38px;
+      line-height: 38px;
       font-size: 36px;
       color: black;
     }

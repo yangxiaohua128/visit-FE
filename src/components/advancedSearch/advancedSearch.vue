@@ -15,7 +15,9 @@
             更多
             <img src="./img/more.png">
           </div>
-          <input type="text" placeholder="输入目的地、主题或关键字">
+          <form>
+            <input type="search" placeholder="输入目的地、主题或关键字">
+          </form>
         </div>
         <div class="depart">
           <div class="start">出发地</div>
@@ -80,11 +82,18 @@ export default {
       width:38px;
       height:38px;
     }
-    p,div{
-      width:150px;
+    p{
+      width:200px;
       height: 38px;
       line-height: 38px;
       text-align: center;
+      font-size: 36px;
+      color: black;
+    }
+    div{
+      width:100px;
+      height: 38px;
+      line-height: 38px;
       font-size: 36px;
       color: black;
     }
@@ -121,14 +130,17 @@ export default {
           height:20px;
         }
       }
-      input{
-        width:100%;
-        height: 72px;
-        border-radius: 6px;
-        background-color: #efefef;
-        color: #909090;
-        padding-left: 22px;
-        margin-top: 14px;
+      form{
+        width: 100%;
+        input{
+          width:100%;
+          height: 72px;
+          border-radius: 20px;
+          background-color: #efefef;
+          color: #909090;
+          padding-left: 22px;
+          margin-top: 14px;
+        }
       }
     }
     .depart{
@@ -200,8 +212,8 @@ export default {
       width:91%;
       height:90px;
       border-radius: 8px;
-      background-color: #ff9a00;
-      color: #edffff;
+      background-color: #f9de57;
+      color: black;
       font-size: 38px;
       position: fixed;
       bottom: 10px;

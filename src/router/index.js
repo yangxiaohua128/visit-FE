@@ -26,7 +26,6 @@ Vue.use(Router)
 //   })
 // }
 
-
 // const search = (resolve) => {
 //   import('@components/search/search').then((module) => {
 //     resolve(module)
@@ -70,10 +69,13 @@ export default new Router({
       name: 'history',
       component: history
     },
+
     { path:'/advancedSearch',
       name:'advancedSearch',
       component: advancedSearch
     },
+
+
     {
       path: '/searchResults',
       name: 'searchResults',
@@ -107,6 +109,18 @@ export default new Router({
   signin
 },
 {    title: '修改',
+      path: '/userEvaluation',
+      name: 'userEvaluation',
+      component: userEvaluation
+    },
+    {
+      title: '登录前我的页面',
+      path: '/signin',
+      name: 'signin',
+      component: signin
+    },
+    {
+      title: '修改',
       path: '/informChange',
       name: 'informChange',
       component: informChange
@@ -129,7 +143,8 @@ export default new Router({
       name: 'waitpay',
       component: waitpay
     },
-    {  title: '预定页',
+    {
+      title: '预定页',
       path: '/order',
       name: 'order',
       component: order
@@ -154,5 +169,3 @@ export default new Router({
     }
   ]
 })
-
-
