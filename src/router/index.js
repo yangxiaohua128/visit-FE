@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
+import orderPage from '@/components/orderPage/orderPage'
 import search from '@/components/search/search'
 import apppage from '@/components/apppage/apppage'
 import News from '@/components/News/News'
@@ -70,8 +71,8 @@ export default new Router({
       component: history
     },
 
-    { path:'/advancedSearch',
-      name:'advancedSearch',
+    {  path: '/advancedSearch',
+      name: 'advancedSearch',
       component: advancedSearch
     },
 
@@ -143,11 +144,12 @@ export default new Router({
       name: 'waitpay',
       component: waitpay
     },
-    {
+{
+
       title: '预定页',
-      path: '/order',
-      name: 'order',
-      component: order
+      path: '/orderPage',
+      name: 'orderPage',
+      component: orderPage
     },
     {
       title: '确定页',

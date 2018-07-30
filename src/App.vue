@@ -31,10 +31,6 @@
   ul,li{
     list-style: none;
   }
-  ul{
-    padding: 0;
-    margin: 0;
-  }
   input{
     border: none;
     margin: 0;
@@ -48,13 +44,6 @@
   input,select,option,textarea{
   outline: none;
 }
-  body {
-    margin: 0;
-    padding: 0;
-    .content {
-      width: 93%;
-      margin: 0 auto;
-    }
     header {
       background-color: white;
       letter-spacing: 4px;
@@ -67,28 +56,6 @@
     .content {
       width: 93%;
       margin: 0 auto;
-    }
-    body {
-      margin: 0;
-      padding: 0;
-    }
-    ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-    .content {
-      width: 93%;
-      margin: 0 auto;
-    }
-    body {
-      margin: 0;
-      padding: 0;
-    }
-    a {
-      text-decoration: none;
-      color: #000000;
-      border: 0;
     }
     p, h1, h2, h3, h4, h5, h6, ul, ol, dl, li, form, table {
       margin: 0;
@@ -112,25 +79,24 @@
       color: #000000;
       border: 0;
     }
+    i, em {
+      font-style: normal;
+    }
+    a {
+      text-decoration: none;
+      color: #000000;
+      border: 0;
+    }
+<<<<<<< HEAD
     input, select, option, textarea {
       outline: none;
       img {
         vertival-align: middle;
         border: 0;
       }
-      li {
-        list-style: none;
-      }
       i, em {
         font-style: normal;
       }
-      a {
-        text-decoration: none;
-        color: #000;
-        border: 0;
-      }
     }
-  }
-
 
 </style>
