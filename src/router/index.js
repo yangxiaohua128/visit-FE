@@ -70,8 +70,8 @@ export default new Router({
       name: 'history',
       component: history
     },
-      path: '/advancedSearch',
-      name: 'advancedSearch',
+    { path:'/advancedSearch',
+      name:'advancedSearch',
       component: advancedSearch
     },
     {
@@ -91,7 +91,7 @@ export default new Router({
     },
     {
        path: '/userEvaluation',
-         name:'userEvaluation',
+       name:'userEvaluation',
       component:userEvaluation
     },
 {
@@ -128,8 +128,8 @@ export default new Router({
       path: '/waitpay',
       name: 'waitpay',
       component: waitpay
-=======
-      title: '预定页',
+    },
+    {  title: '预定页',
       path: '/order',
       name: 'order',
       component: order

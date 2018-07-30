@@ -45,8 +45,9 @@
     padding: 0;
     margin: 0;
   }
-  button:focus{outline:0;}
-  input:focus{outline:0;}
+  input,select,option,textarea{
+  outline: none;
+}
   body{
     margin: 0;
     padding: 0;
@@ -57,18 +58,6 @@
     header{
       background-color: white;
     }
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-  }
-  body {
-    margin: 0;
-    padding: 0;
-  }
   ul{margin: 0;padding: 0;list-style: none;}
   .content{
     width: 93%;
@@ -94,19 +83,15 @@
     i,em{
       font-style:normal;
     }
-<<<<<<< HEAD
-=======
     p{
       -webkit-margin-before: 0;
       -webkit-margin-after: 0;
     }
->>>>>>> origin/drj
     a{
       text-decoration:none;
       color:#000000;
       border:0;
     }
-<<<<<<< HEAD
     a, img, input, button {
       border: none;
     }
@@ -126,7 +111,4 @@
       border: 0;
     }
   }
-
-  }
-}
 </style>
