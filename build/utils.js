@@ -14,17 +14,10 @@ exports.assetsPath = function (_path) {
 
 exports.cssLoaders = function (options) {
   options = options || {}
-
   const cssLoader = {
     loader: 'css-loader',
     options: {
       minimize: process.env.NODE_ENV === 'production',
-      sourceMap: options.sourceMap
-    }
-  }
-  const postcssLoader = {
-    loader: 'postcss-loader',
-    options: {
       sourceMap: options.sourceMap
     }
   }
@@ -34,18 +27,25 @@ exports.cssLoaders = function (options) {
       remUnit: 75
     }
   }
+
+  const postcssLoader = {
+    loader: 'postcss-loader',
+    options: {
+      sourceMap: options.sourceMap
+    }
+  }
   // generate loader string to be used with extract text plugin
   function generateLoaders (loader, loaderOptions) {
     // const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
-    const loaders = [cssLoader,px2remLoader]
-    if (loader) {
-      loaders.push({
-        loader: loader + '-loader',
-        options: Object.assign({}, loaderOptions, {
-          sourceMap: options.sourceMap
+    const loaders = [cssLoader, px2remLoader]
+      if (loader) {
+        loaders.push({
+          loader: loader + '-loader',
+          options: Object.assign({}, loaderOptions, {
+            sourceMap: options.sourceMap
+          })
         })
-      })
-    }
+      }
 
     // Extract CSS when that option is specified
     // (which is the case during production build)
