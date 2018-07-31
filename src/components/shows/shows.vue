@@ -1,5 +1,5 @@
 <template>
-  <div class="showOne">
+  <div class="shows">
     <div class="home2">
       <k-slider :banners="banners" :swiperOption="swiperOption"></k-slider>
     </div>
