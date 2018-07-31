@@ -42,12 +42,6 @@
 </template>
 
 <script>
-  var ali = document.getElementsByTagName("li");
-  for(let i=0;i<ali.length;i++){
-    this.onclick = function(){
-      this.style.backgroundColor = "yellow"
-    }
-  }
 </script>
 
 <style type="text/css">

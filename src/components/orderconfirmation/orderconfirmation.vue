@@ -42,11 +42,6 @@
 </template>
 
 <script>
-  export default {
-  name: 'order confirmation'
-
-}
-
 </script>
 
 <style type="text/css">

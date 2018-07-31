@@ -1,7 +1,7 @@
 <template>
   <div class="order">
   <header>
-    <div><img src="./img/left.png" width="16" height="16"/></div>
+    <!--<div><img src="./img/left.png" width="16" height="16"/></div>-->
     <p>订单详情</p>
     <div></div>
   </header>
@@ -22,12 +22,12 @@
         </div>
         <div class="change">
             <div class="alter">
-                  <img src="./img/alter.png" width="20" height="20"/>
+                  <!--<img src="./img/alter.png" width="20" height="20"/>-->
                   <button type="button">修改订单</button>
            </div>
            <div class="line2"></div>
            <div class="delete">
-                  <img src="./img/delete.png" width="20" height="20"/>
+                  <!--<img src="./img/delete.png" width="20" height="20"/>-->
                   <button type="button">申请退款</button>
            </div>
         </div>
@@ -68,13 +68,14 @@ export default {
       font-size:30px;
     }
   }
-  header{
+  header {
     width: 100%;
     height: 90px;
-    align-items:center;
+    align-items: center;
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     margin-bottom: 20px;
+  }
 
   div{
     width: 150px;
@@ -86,7 +87,6 @@ export default {
     line-height: 38px;
     font-size: 36px;
     color:black;
-  }
   }
   .content{
     width: 100%;
