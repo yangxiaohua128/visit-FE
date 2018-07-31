@@ -1,7 +1,4 @@
 <template>
-<<<<<<< HEAD
-
-=======
   <div class="message">
     <header>
       <img src="./img/arrowLeft.png"/>
@@ -26,7 +23,6 @@
     </div>
     <footer>完成</footer>
   </div>
->>>>>>> dev
 </template>
 
 <script>
@@ -34,11 +30,6 @@
         name: "message"
     }
 </script>
-
-<<<<<<< HEAD
-<style scoped>
-
-=======
 <style type="text/css">
   body{
     margin: 0;
@@ -97,5 +88,4 @@
     background-color: #fae368;
     line-height: 100px;
   }
->>>>>>> dev
 </style>

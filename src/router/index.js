@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 import signin2 from '@/components/signin2/signin2'
 import phone from '@/components/phone/phone'
 import register from '@/components/register/register'
@@ -62,10 +61,6 @@ export default new Router({
   name: 'register',
   component: register
 },
-    {  path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    },
     {
       title: '搜索页',
       path: '/search',

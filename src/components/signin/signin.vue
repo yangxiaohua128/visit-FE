@@ -1,9 +1,9 @@
 <template>
   <div class="signin">
-    <div class="div1" >
+    <div class="head" >
       <img id="img1" src="./img/picture-1.png"/>
       <p>欢迎来到</p>
-      <div>登录/注册</div>
+      <button type="button">登录/注册</button>
       <img id="img2" src="./img/news.png"/>
     </div>
     <div class="div2"></div>
@@ -79,26 +79,28 @@
 <style lang="scss">
   body{padding:0;margin:0;}
   .signin{width:750px;position:relative;}
-  .div1{height:420px;margin-left:40px;margin-right:40px;position: relative;}
+  .head{height:420px;margin-left:40px;margin-right:40px;position: relative; text-align:left;}
   #img1{position:absolute;right:30px;bottom:0;height:200px;width:280px;}
   #img2{width:42px;height:46px;position:absolute;top:27px;right:0;}
-  .div1 p{width:500px;margin-top:130px;color:#424242;font-size:60px;display: inline-block;}
-  .div1 div{width:300px;height:100px;background-color:#f9de57;color:#4b414c;font-size:40px;
+  .head p{width:500px;margin-top:130px;font-size:60px;display:inline-block;
+   }
+  .head button{width:300px;height:100px;background-color:#f9de57;font-size:40px;
     text-align: center;line-height:100px;margin-top:55px;margin-left:0;display:inline-block;}
   .div2 ,.div4{height:10px;background-color:#efecec}
-  .div3{height:70px;font-size:31px;margin-left:56px;line-height:70px;}
+  .div3{height:70px;font-size:31px;margin-left:57px;line-height:70px;text-align:left;}
   .div5 div{
-      display: inline-block;margin-left:30px;
-      margin-top:45px;height:97px;width:150px;
-      img{width:42px;height:42px;padding-left:54px;}
-      span{display: block; padding-top:25px;font-size:30px;color:#4b414c;text-align:center;}
-    }
+    display: inline-block;margin-left:15px;
+    margin-top:45px;height:97px;width:150px;
+    img{width:42px;height:42px;}
+    span{display: block; padding-top:25px;font-size:30px;
+      text-align:center;}
+  }
   .div6{
     width:750px;height:98px;background-color:#efecec;position: fixed;bottom:0;left:0;
-   div{
-       display:inline-block;width:150px;margin-left:30px;
-     img{width:42px;height:48px;padding-top:10px;padding-left:54px;}
-     span{color:#4b414c;font-size:22px;padding-top:8px;display:block;text-align:center;}
-   }
+    div{
+      display:inline-block;width:150px;margin-left:15px;
+      img{width:42px;height:48px;padding-top:10px;}
+      span{color:#4b414c;font-size:22px;padding-top:8px;display:block;text-align:center;}
+    }
   }
 </style>
