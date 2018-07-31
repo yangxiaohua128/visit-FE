@@ -19,7 +19,7 @@ import waitpay from '@/components/waitpay/waitpay'
 import order from '@/components/order/order'
 import orderconfirmation from '@/components/orderconfirmation/orderconfirmation'
 import message from '@/components/message/message'
-import showOne from '@/components/showOne/showOne'
+import shows from '@/components/shows/shows'
 Vue.use(Router)
 // const advancedSearch = (resolve) => {
 //   import('@/components/advancedSearch/advancedSearch').then((module) => {
@@ -97,18 +97,6 @@ export default new Router({
        name:'userEvaluation',
       component:userEvaluation
     },
-{
-  title: '登录前我的页面',
-    path
-:
-  '/signin',
-    name
-:
-  'signin',
-    component
-:
-  signin
-},
 {    title: '修改',
       path: '/userEvaluation',
       name: 'userEvaluation',
@@ -165,9 +153,9 @@ export default new Router({
     },
     {
       title: '单个产品展示',
-      path: '/showOne',
-      name: 'showOne',
-      component: showOne
+      path: '/shows',
+      name: 'shows',
+      component: shows
     }
   ]
 })

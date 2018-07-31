@@ -8,23 +8,7 @@
       <p>出发地</p>
       <div class="local"></div>
       <p>出发日期</p>
-      <ul class="month">
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
-      <ul class="week">
-        <li>日</li>
-        <li>一</li>
-        <li>二</li>
-        <li>三</li>
-        <li>四</li>
-        <li>五</li>
-        <li>六</li>
-      </ul>
-      <ul class="day">
-
-      </ul>
+      <calendar-input :limit="limit" @getValue="getValue"></calendar-input>
       <div class="choice">
         <p>选择数量</p>
         <div class="choice1">
@@ -54,41 +38,40 @@
 </template>
 
 <script>
-export default {
-  name: 'order'
-}
+  import calendarInput from '../../../node_modules/calendar-plugin/calendar-input.vue';
+  export default {
+    components: {
+      calendarInput
+    }
+  }
 </script>
 
-<style type="text/css">
-  body{
-    padding: 0;
-    margin: 0;
-  }
+<style lang="scss">
   .orderPage{
-    height: 1700px;
+    height: 1600px;
   }
-  header{
+  header {
     width: 100%;
-    height:90px;
-    display:flex;
-    align-items:center;
-    background-color:#fff;
-  }
-  header p{
-    font-size:36px;
-    color:#787878;
-    margin:0 auto;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+  p {
+    font-size: 36px;
+    color: #787878;
+    margin: 0 auto;
     line-height: 100px;
-    height:100px;
+    height: 100px;
   }
-  header img{
+  img {
     width: 22px;
-    height:38px;
+    height: 38px;
+  }
   }
   .content p{
     width:200px;
     font-size: 30px;
-    color:#bbbbbb;
+    color:#8a898a;
     text-align: left;
   }
   .local{
@@ -96,6 +79,9 @@ export default {
     height: 74px;
     background-color:#fdf4c3;
     border: 1px #f9de57 solid;
+    margin-top: 10px;
+    margin-bottom:10px;
+    border-radius: 10%;
   }
   .month{
     width:100%;
@@ -119,37 +105,44 @@ export default {
     width:100%;
     height:728px;
   }
-  .choice p{
-    font-size:32px;
-    color:#bbbbbb;
-    width:200px;
+  .choice {
+  p {
+
+    font-size: 32px;
+    color: #8a898a;
+    width: 200px;
   }
-  .choice span{
+  span {
     font-size: 28px;
   }
-  .choice img{
+  img {
     width: 32px;
     height: 32px;
   }
-  .adult div{
+  }
+  .adult {
+  div {
     width: 80px;
     height: 50px;
-    background-color:#f4f4f4;
+    background-color: #f4f4f4;
     display: flex;
     justify-content: space-around;
     margin: 0;
     display: inline-block;
     align-items: center;
   }
-  .children div{
+  }
+  .children {
+  div {
     width: 80px;
     height: 50px;
-    background-color:#f4f4f4;
+    background-color: #f4f4f4;
     display: flex;
     justify-content: space-around;
     margin: 0;
     display: inline-block;
     align-items: center;
+  }
   }
   .choice1,.choice2{
     display:flex;
@@ -167,6 +160,7 @@ export default {
     left: 0;
     width: 500px;
     height: 100px;
+    background-color: #fff;
     font-size: 28px;
     text-align: left;
   }
@@ -178,7 +172,6 @@ export default {
     line-height: 100px;
     color:#8c8353;
     font-size: 32px;
-
   }
 
 </style>

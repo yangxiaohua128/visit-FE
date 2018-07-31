@@ -31,11 +31,7 @@
     }
 </script>
 
-<style type="text/css">
-  body{
-    margin: 0;
-    padding: 0;
-  }
+<style lang="scss">
   header{
     width: 100%;
     height:90px;
@@ -43,15 +39,14 @@
     justify-content:space-between;
     align-items:center;
     background-color:#fff;
-  }
-  header img{
-    width:22px;
-    height:38px;
-  }
-  .header p{
-    font-size:28px;
-    color: #4e4e4e;
-    width: 20px;
+    img{
+      width:22px;
+      height:38px;
+    }
+    p{
+      font-size:28px;
+      color: #4e4e4e;
+    }
   }
   .name{
     font-size: 48px;
@@ -61,30 +56,32 @@
     text-align: left;
     margin-top: 20px;
   }
-  .detail div{
-    width: 100%;
-    height: 174px;
-    background-color: #fff;
-    margin-bottom: 2px;
-    font-size: 36px;
-    text-align: left;
+  .detail{
+    div{
+      width: 100%;
+      height: 174px;
+      background-color: #fff;
+      margin-bottom: 2px;
+      font-size: 36px;
+      text-align: left;
+    }
+    span{
+      color: red;
+    }
   }
-  .detail span{
-    color: red;
-  }
-  input{
-    border:none;
-    width:350px;
-    height:50px;
-  }
-  footer{
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 100px;
-    font-size: 38px;
-    color: #6e6c65;
-    background-color: #fae368;
-    line-height: 100px;
-  }
+    input{
+      border:none;
+      width:350px;
+      height:50px;
+    }
+    footer{
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: 100px;
+      font-size: 38px;
+      color: #6e6c65;
+      background-color: #fae368;
+      line-height: 100px;
+    }
 </style>
