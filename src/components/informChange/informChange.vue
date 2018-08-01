@@ -1,32 +1,27 @@
 <template>
-<div class="informChange">
-  <header>
-    <div><img src="./img/left.png" width="19" height="19"/></div>
-    <p>编辑个人资料</p>
-    <div></div>
-  </header>
-  <div class="change">
-    <div class="name">
-    <div class="name1">真实姓名</div>
-    <input type="text" class="name2" placeholder="请输入你的真实姓名"/>
-    </div>
-    <div class="sex">
-   <div class="sex1">
-     <div>性别</div>
-     <div style="width:40px;text-align: center;border-bottom:2px dodgerblue solid "><img src="./img/man.png" width="39" height="39" /></div>
-   </div>
-    <div class="sex2">
-      <div style="width:40px;text-align: center "><img src="./img/woman.png" width="39" height="39" /></div>
+  <div class="informChange">
+    <header>
+      <div><img src="./img/left.png" width="19" height="19" @touchend="toBack"/></div>
+      <p>编辑个人资料</p>
       <div></div>
-    </div>
-    </div>
-    <div class="time">
-      <div class="time1">出生日期</div>
-      <div class="time2">日期</div>
-    </div>
+    </header>
+    <form class="change">
+      <div class="name">
+        <div class="name1">真实姓名</div>
+        <input type="text" class="name2" placeholder="请输入你的真实姓名"/>
+      </div>
+      <div class="sex">
+        <div class="sex1">性别</div>
+        <input  type="radio" name="sex"/><img src="./img/man.png" width="20px" height="20px"/>
+        <input  type="radio" name="sex"/><img src="./img/woman.png" width="20px" height="20px"/>
+      </div>
+      <div class="time">
+        <div class="time1">出生日期</div>
+        <input type="text" class="time2" placeholder="请输入你的生日"/>
+      </div>
+    </form>
+    <button type="button">保存</button>
   </div>
-  <button type="button">保存</button>
-</div>
 </template>
 
 <script>
@@ -34,6 +29,11 @@ export default {
   name: 'informChange',
   data () {
     return {}
+  },
+  methods: {
+    toBack: function () {
+      this.$router.back(-1)
+    }
   }
 }
 </script>
@@ -62,7 +62,7 @@ export default {
       height: 38px;
     }
 
-     p{
+    p{
       text-align: center;
       line-height: 38px;
       font-size: 36px;
@@ -105,29 +105,13 @@ export default {
   }
   .sex{
     justify-content: space-between;
+    align-items: center;
     flex-wrap:wrap;
     display: flex;
     width:736px;
-  }
-  .sex1{
-    width:254px;
-    height: 100px;
-    line-height: 100px;
-    display: flex;
-    justify-content: space-between;
-    border-right:1px #e4e4e4 solid ;
-    margin-top:5px;
-    margin-bottom:5px;
-    padding-right: 9px;
-  }
-  .sex2{
-    width:460px;
-    height: 100px;
-    line-height: 100px;
-    margin-top:5px;
-    margin-bottom:5px;
-    display: flex;
-    justify-content: space-between;
+    input{
+      height: 80px;
+    }
   }
   .time{
     justify-content: space-between;

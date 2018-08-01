@@ -1,18 +1,18 @@
 <template>
   <div class="waitpay">
     <header>
-      <div><img src="./img/left.png" width="19" height="19"/></div>
+      <div><img src="./img/left.png" width="19" height="19" @touchend="toBack"/></div>
       <p>订单详情</p>
       <div></div>
     </header>
     <div class="content">
-    <div class="show">
-      <div class="await">
-      <img src="./img/wait.png" width="20" height="20"/>
-      <span class="awaitText">待支付</span>
+      <div class="show">
+        <div class="await">
+          <img src="./img/wait.png" width="20" height="20"/>
+          <span class="awaitText">待支付</span>
+        </div>
+        <span>库存有限，请尽快完成付款</span>
       </div>
-      <span>库存有限，请尽快完成付款</span>
-     </div>
       <div class="waitTime">
         <div class="countDown"><span>剩余支付时间</span>：<span class="time">01:58:55</span></div>
         <button type="button">继续支付</button>
@@ -31,15 +31,26 @@
           <div class="money">总额:￥1200</div>
           <div class="people">人数:2成人</div>
         </div>
-        </div>
-      <button type="button" class="submit">申请取消</button>
-     </div>
-</div>
+      </div>
+      <div class="change">
+        <button type="button" class="submit">申请取消</button>
+        <button type="button" class="back">修改订单</button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'waitpay'
+  name: 'waitpay',
+  data () {
+    return {}
+  },
+  methods: {
+    toBack: function () {
+      this.$router.back(-1)
+    }
+  }
 }
 </script>
 
@@ -176,7 +187,6 @@ export default {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    border: 1px #e4e4e4 solid;
     padding-right: 20px;
     padding-left: 20px;
     margin-bottom: 40px;
@@ -219,17 +229,20 @@ export default {
         text-align: center;
       }
     }
-    .submit{
-      width: 300px;
-      background-color: yellow;
-    }
   }
-  .submit{
-    width: 91%;
-    height: 90px;
-    background-color:#f9de57;
-    border-radius: 8px;
-    font-size: 38px;
-    border:none;
+  .change{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 30px;
+    padding-right: 30px;
+    button {
+      width: 300px;
+      height: 90px;
+      background-color: #f9de57;
+      border-radius: 8px;
+      font-size: 38px;
+      border: none;
+    }
   }
 </style>

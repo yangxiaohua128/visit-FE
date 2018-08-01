@@ -1,49 +1,55 @@
 <template>
   <div class="order">
-  <header>
-    <div><img src="./img/left.png" width="19" height="19"/></div>
-    <p>订单详情</p>
-    <div></div>
-  </header>
+    <header>
+      <div><img src="./img/left.png" width="19" height="19" @touchend="toBack"/></div>
+      <p>订单详情</p>
+      <div></div>
+    </header>
     <div class="content">
-       <div class="details">
-         <div class="number">订单号 ：</div>
-         <div class="time"></div>
-         <div class="img"></div>
-         <div class="text"></div>
-       </div>
+      <div class="details">
+        <div class="number">订单号 ：</div>
+        <div class="time"></div>
+        <div class="img"></div>
+        <div class="text"></div>
+      </div>
       <div class="message">
-         <div class="start">启程日<br/>周五<p>07月24日</p></div>
-         <p class="line"></p>
+        <div class="start">启程日<br/>周五<p>07月24日</p></div>
+        <p class="line"></p>
         <div class="end">返程日<br/>周日<p>07月25日</p></div>
-            <div class="moneyPeople">
-              <div class="money">总额:￥1200</div>
-              <div class="people">人数:2成人</div>
+        <div class="moneyPeople">
+          <div class="money">总额:￥1200</div>
+          <div class="people">人数:2成人</div>
         </div>
         <div class="change">
-            <div class="alter">
-                  <img src="./img/alter.png" width="20" height="20"/>
-                  <button type="button">修改订单</button>
-           </div>
-           <div class="line2"></div>
-           <div class="delete">
-                  <img src="./img/delete.png" width="20" height="20"/>
-                  <button type="button">申请退款</button>
-           </div>
+          <div class="alter">
+            <img src="./img/alter.png" width="26" height="26"/>
+            <button type="button">修改订单</button>
+          </div>
+          <div class="line2"></div>
+          <div class="delete">
+            <img src="./img/delete.png" width="26" height="26"/>
+            <button type="button">申请退款</button>
+          </div>
         </div>
       </div>
       <div class="inform">
-          <div class="caption">
-            <p></p>
-            <span>出行信息</span>
-            <p></p>
-          </div>
-          <div class="main">
-            <div class="touch">联系人:<span>xxx</span></div>
-            <div class="touchPhone">联系人电话:<span>112xxxx1111</span></div>
-            <div class="trip">出行人:<span>xxx</span></div>
-            <div class="phone">联系电话:<span>112xxxx1111</span></div>
-          </div>
+        <div class="caption">
+          <span>出行信息</span>
+        </div>
+        <div class="main">
+          <div class="touch">联系人:<span>xxx</span></div>
+          <div class="touchPhone">联系人电话:<span>112xxxx1111</span></div><br>
+          <div class="trip">出行人:<span>xxx</span></div>
+          <div class="phone">联系电话:<span>112xxxx1111</span></div><br>
+          <div class="trip">出行人:<span>xxx</span></div>
+          <div class="phone">联系电话:<span>112xxxx1111</span></div>
+          <div class="trip">出行人:<span>xxx</span></div>
+          <div class="phone">联系电话:<span>112xxxx1111</span></div>
+          <div class="trip">出行人:<span>xxx</span></div>
+          <div class="phone">联系电话:<span>112xxxx1111</span></div>
+          <div class="trip">出行人:<span>xxx</span></div>
+          <div class="phone">联系电话:<span>112xxxx1111</span></div>
+        </div>
       </div>
     </div>
   </div>
@@ -51,7 +57,15 @@
 
 <script>
 export default {
-  name: 'order'
+  name: 'order',
+  data () {
+    return {}
+  },
+  methods: {
+    toBack: function () {
+      this.$router.back(-1)
+    }
+  }
 }
 </script>
 <style lang="scss">
@@ -78,19 +92,19 @@ export default {
     justify-content:space-between;
     margin-bottom: 20px;
 
-  div{
-    text-align: left;
-    padding-left: 20px;
-    width: 150px;
-    height: 38px;
-  }
+    div{
+      text-align: left;
+      padding-left: 20px;
+      width: 150px;
+      height: 38px;
+    }
 
-  p{
-    text-align: center;
-    line-height: 38px;
-    font-size: 36px;
-    color:black;
-  }
+    p{
+      text-align: center;
+      line-height: 38px;
+      font-size: 36px;
+      color:black;
+    }
   }
   .content{
     width: 100%;
@@ -138,7 +152,6 @@ export default {
     width: 450px;
     height: 200px;
     border: 1px rebeccapurple solid;
-    align-self: center;
     align-self:flex-end ;
   }
   .message{
@@ -147,7 +160,6 @@ export default {
     justify-content: space-between;
     align-items: center;
     flex-wrap:wrap;
-    border:1px #e4e4e4 solid;
     padding-right: 20px;
     padding-left: 20px;
     margin-bottom: 40px;
@@ -194,6 +206,7 @@ export default {
       width:690px;
       display: flex;
       justify-content: space-between;
+      line-height: 50px;
       .line2{
         width: 3px;
         height: 42px;
@@ -208,26 +221,20 @@ export default {
     border-radius: 14px;
     .caption{
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       margin-bottom: 10px;
-      p{
-        width: 287px;
-        height: 4px;
-        background-color: white;
-      }
       span{
         width:150px;
-        height: 34px;
-        font-size: 34px;
+        font-size: 36px;
         color: white;
       }
     }
     .main{
-        width: 80%;
-        background-color: white;
-        margin: 0 auto;
-        border-radius: 14px;
-        padding:10px;
+      width: 80%;
+      background-color: white;
+      margin: 0 auto;
+      border-radius: 14px;
+      padding:10px;
       .touch{
         width: 540px;
         margin: 0 auto;
