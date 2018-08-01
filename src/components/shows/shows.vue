@@ -1,11 +1,15 @@
 <template>
   <div class="shows">
-    <div class="home2">
-      <k-slider :banners="banners" :swiperOption="swiperOption"></k-slider>
-    </div>
+    <header>
+      <img src="./img/arrowLeft.png"/>
+      <div class="home2">
+        <k-slider :banners="banners" :swiperOption="swiperOption"></k-slider>
+      </div>
+      <div class="number"><p>(产品名称)</p><p>产品编号：0000000000</p></div>
+    </header>
     <div class="content">
-      <div class="name"></div>
-      <div class="price">￥</div>
+      <div class="name">(此处显示产品内容和描述）</div>
+      <div class="price">￥（此处显示价格）</div>
       <div class="site">
         <span>选择：出发地</span>
         <img src="./img/arrowRight.png"/>
@@ -15,21 +19,19 @@
         <img src="./img/arrowRight.png"/>
       </div>
       <div class="special">
-        <p>选择：日期</p>
+        <p>选择：出行日期</p>
         <div class="choice">
           <div></div>
           <div></div>
           <div></div>
           <div></div>
-          <img src="./img/arrowRight.png"/>
         </div>
       </div>
       <div class="comment">
-        <span>查看：更多评论</span>
+        <span>查看：评论</span>
         <img src="./img/arrowRight.png"/>
       </div>
-      <div class="company">
-      </div>
+      <div class="company">（此处显示供应商）</div>
     </div>
     <footer>
       <span class="sp1"><img src="./img/collect.png"/><br>收藏</span>
@@ -43,11 +45,13 @@
 <script>
   import Slider from '../../../slider/slider.vue'
   export default {
+
     data:function(){
       return{
         banners:[
           'http://pic.lvmama.com/uploads/pc/place2/2018-07-31/6ca730cd-a8bd-4327-987d-1198bf6cd40d.jpg',
-          'http://pic.lvmama.com/uploads/pc/place2/2018-07-25/2e53cce1-52e6-4ee8-8df4-ab3ed33bfd2e.jpg'
+          'http://pic.lvmama.com/uploads/pc/place2/2018-07-25/2e53cce1-52e6-4ee8-8df4-ab3ed33bfd2e.jpg',
+          'http://dimg19.c-ctrip.com/images/fd/tg/g3/M07/7F/1C/CggYGlXyQh-AR1cyAC9CPR2vz6s070_C_750_500_Q90.jpg'
         ],
         swiperOption:{
           direction:'horizontal',
@@ -62,31 +66,69 @@
         }
       }
     },
-    components:{
-      kSlider :Slider
-    }
+    components: {
+      kSlider: Slider
+    },
+     methods:{
+  }
   }
 </script>
 
 <style lang="scss">
-  .home2{
-    width: 750px;
-    height: 500px;
+  .shows{
+    width: 100%;
+    height: 1200px;
   }
+  header{
+    width: 100%;
+    height: 500px;
+    position: relative;
+    img{
+      z-index: 9999;
+      position:absolute;
+      left: 0;
+      top: 0;
+    }
+    .number{
+      width: 100%;
+      height: 60px;
+      background:rgba(255,255,255,0.3);
+      z-index: 2;
+      position:absolute;
+      left: 0;
+      bottom:0;
+      display: flex;
+      justify-content: space-between;
+    }
+    p{
+      font-size:28px;
+      color:black;
+      opacity: 1;
+      text-align: left;
+      line-height: 60px;
+    }
+    .home2{
+      width: 100%;
+      height: 500px;
+    }
+  }
+
   .name{
     width: 100%;
     height: 150px;
     font-size: 32px;
     font-weight: bold;
     color: #5d5d5d;
+    line-height: 150px;
   }
   .price{
     width: 100%;
     height: 110px;
     font-size:30px;
     font-weight: bold;
-    color: #ee7358;
+    color: #ee7559;
     text-align: left;
+    line-height: 110px;
   }
   .site,.date,.comment,.company{
     width: 100%;
@@ -96,8 +138,9 @@
     align-items: center;
   }
   .special{
-    width: 100%;
-    height: 200px;
+
+    width:100%;
+    height:200px;
     p{
       font-size: 32px;
       color:#818181;
@@ -153,4 +196,7 @@
       position: fixed;
       right: 0;
     }
+  /*.site,.date{*/
+    /*display: none;*/
+  /*}*/
 </style>

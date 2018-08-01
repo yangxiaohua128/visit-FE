@@ -2,26 +2,27 @@
   <div class="message">
     <header>
       <img src="./img/arrowLeft.png"/>
-      <p>跳过</p>
     </header>
+    <form class="detail" method="get" action="">
     <div class="content">
-      <div class="name">新增出行人信息</div>
-      <div class="detail">
+       <div class="name" >新增出行人信息</div>
         <div>
           <p>中文姓名<span>*</span></p>
-          <input type="text" placeholder="请输入姓名"/>
+          <input type="search" placeholder="请输入姓名"/>
         </div>
         <div>
           <p>身份证号<span>*</span></p>
-          <input type="text" placeholder="请输入身份证号"/>
+          <input type="search" placeholder="请输入身份证号"/>
         </div>
         <div>
           <p>联系电话<span>*</span></p>
-          <input type="text" placeholder="请输入联系电话"/>
+          <input type="search" placeholder="请输入联系电话"/>
         </div>
-      </div>
     </div>
-    <footer>完成</footer>
+    <footer>
+      <input type="submit" value="提交" name="submit"/>
+    </footer>
+    </form>
   </div>
 </template>
 
@@ -36,7 +37,6 @@
     width: 100%;
     height:90px;
     display:flex;
-    justify-content:space-between;
     align-items:center;
     background-color:#fff;
     img{
@@ -48,40 +48,46 @@
       color: #4e4e4e;
     }
   }
-  .name{
-    font-size: 48px;
-    font-weight: bold;
-    color: #4e4e4e;
-    background-color: #fff;
-    text-align: left;
-    margin-top: 20px;
-  }
-  .detail{
+
+  .content{
+    .name{
+      font-size: 48px;
+      font-weight: bold;
+      color: #4e4e4e;
+      background-color: #fff;
+      text-align: left;
+      margin-top: 20px;
+    }
     div{
       width: 100%;
-      height: 174px;
+      height: 150px;
       background-color: #fff;
       margin-bottom: 2px;
       font-size: 36px;
       text-align: left;
-    }
-    span{
-      color: red;
+      input{
+        border:none;
+        width:350px;
+        height:50px;
+      }
+      span{
+        color: red;
+      }
     }
   }
+  footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
     input{
-      border:none;
-      width:350px;
-      height:50px;
-    }
-    footer{
-      position: fixed;
-      bottom: 0;
-      width: 100%;
+      width:750px;
       height: 100px;
-      font-size: 38px;
       color: #6e6c65;
       background-color: #fae368;
-      line-height: 100px;
+      font-size: 38px;
     }
+  }
+
+
 </style>

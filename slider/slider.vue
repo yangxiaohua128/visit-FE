@@ -50,6 +50,6 @@
   }
   .swiper-box ,.swiper-box img{
     width: 100%;
-    height: 300px;
+    height: 100%;
   }
 </style>

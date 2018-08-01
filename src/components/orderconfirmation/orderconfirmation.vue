@@ -13,7 +13,7 @@
        <p>出行信息</p>
        <div>
          <span>出行人</span>
-         <input type="text"  placeholder="添加出行人"/>
+         <input type="search"  placeholder="添加出行人"/>
          <img src="./img/addBlue.png">
        </div>
      </div>
@@ -21,17 +21,18 @@
        <p>预订人信息</p>
        <div>
          <span>联系人</span>
-         <input type="text" placeholder="请填写订单联系人姓名"/>
+         <input type="search" placeholder="请填写订单联系人姓名"/>
        </div>
      </div>
      <div class="peopleMassage">
-       <div><p>电话</p><input type="text" placeholder="请输入手机号码"/></div>
-       <div class="div1"><p>验证码</p><input type="text" placeholder="请输入验证码"/><span>发送验证码</span></div>
-       <div><p>邮箱</p><input  type="text" placeholder="请输入邮箱"/></div>
+       <div><p>电话</p><input type="search" placeholder="请输入手机号码"/></div>
+       <div class="div1"><p>验证码</p><input type="search" placeholder="请输入验证码"/><span>发送验证码</span></div>
+       <div><p>邮箱</p><input  type="search" placeholder="请输入邮箱"/></div>
      </div>
+
      <div class="save">
-       <span>选择优惠券</span>
-       <img src="./img/arrowRight.png"/>
+       <p >优惠信息</p>
+       <span>选择优惠券<img src="./img/arrowRight.png"/></span>
      </div>
    </div>
    <footer>
@@ -211,6 +212,13 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      p{
+        font-size:30px;
+        height:30px;
+        font-weight: bold;
+        color: #616161;
+        text-align: left;
+      }
       img{
         width: 32px;
         height: 32px;

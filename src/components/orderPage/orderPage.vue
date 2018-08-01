@@ -14,17 +14,17 @@
         <div class="choice1">
           <span>成人：</span>
           <div class="adult">
-            <img src="./img/sub.png"/>
-            <div></div>
-            <img src="./img/add.png"/>
+            <img src="./img/sub.png" class="sub"/>
+            <div class="number1">0</div>
+            <img src="./img/add.png" class="add"/>
           </div>
         </div>
         <div class="choice2">
           <span>儿童：</span>
           <div class="children">
-            <img src="./img/sub.png"/>
-            <div></div>
-            <img src="./img/add.png"/>
+            <img src="./img/sub.png" class="sub"/>
+            <div class="number2">0</div>
+            <img src="./img/add.png" class="add"/>
           </div>
         </div>
       </div>
@@ -39,10 +39,26 @@
 
 <script>
   import calendarInput from '../../../node_modules/calendar-plugin/calendar-input.vue';
+
+  // var oDiv1 = document.getElementsByClassName(number1);
+  // var oDiv2 = document.getElementsByClassName(number2);
+  // var aAdd = document.getElementsByClassName(add);
+  // var aSub = document.getElementsByClassName(sub);
+
   export default {
     components: {
       calendarInput
-    }
+    },
+    // methods:{
+    //   toSub:function () {
+    //     if(oDiv1.innerHTML>0){
+    //       oStr.innerHTML--;
+    //     }
+    //   }
+    //   }
+
+
+
   }
 </script>
 
