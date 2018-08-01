@@ -2,7 +2,7 @@
   <div class="userEvaluation">
     <header>
       <div>
-        <img src="./img/return.png">
+        <img src="./img/return.png" @touchend="toBack">
       </div>
       <p>评价晒单</p>
       <div>提交</div>
@@ -17,7 +17,7 @@
       <div class="comment">
         <textarea name="comment" title="comment" style="width:100%; height:70%"></textarea>
         <img src="./img/photo.png">
-        <div class="anonymous"><img src="./img/select.png">匿名评价</div>
+        <div class="anonymous"><img :src="imgUrl"  @touchend="changeUrl()">匿名评价</div>
       </div>
       <div class="details">
           <div class="prompt">
@@ -39,7 +39,18 @@ export default {
   name: 'userEvaluation',
   data () {
     return {
-      items: ['行程安排', '描述相符', '导游讲解']
+      items: ['行程安排', '描述相符', '导游讲解'],
+      imgUrl: require('./img/select.png'),
+      bOn: false
+    }
+  },
+  methods: {
+    toBack () {
+      this.$router.back(-1)
+    },
+    changeUrl () {
+      this.bOn ? this.imgUrl = require('./img/select.png') : this.imgUrl = require('./img/unselect.png')
+      this.bOn = !this.bOn
     }
   }
 }
@@ -120,6 +131,7 @@ export default {
           align-self: left;
           width: 50px;
           height: 50px;
+          vertical-align: middle;
         }
       }
     }

@@ -26,9 +26,9 @@
 </template>
 
 <script>
-    export default {
-        name: "message"
-    }
+export default {
+  name: 'message'
+}
 </script>
 
 <style type="text/css">

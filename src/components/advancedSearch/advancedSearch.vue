@@ -2,7 +2,7 @@
     <div class="advancedSearch">
       <header>
         <div>
-          <img src="./img/return.png">
+          <img src="./img/return.png"  @touchend="toBack">
         </div>
         <p>高级搜索</p>
         <div></div>
@@ -63,6 +63,11 @@ export default {
   data () {
     return {
       des: ['华山', '青海', '延安', '西北', '三亚', '四川', '北京']
+    }
+  },
+  methods: {
+    toBack () {
+      this.$router.back(-1)
     }
   }
 }
@@ -218,6 +223,7 @@ export default {
       position: fixed;
       bottom: 10px;
       left: 31px;
+      outline: none;
     }
     .white{
       height:110px;

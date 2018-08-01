@@ -25,14 +25,14 @@
 </template>
 
 <script>
-  export default {
-    name: 'signin',
-    data () {
-      return {
-        msg: 'Welcome to Your Vue.js App'
-      }
+export default {
+  name: 'signin',
+  data () {
+    return {
+      msg: 'Welcome to Your Vue.js App'
     }
   }
+}
 </script>
 
 <style type="text/css">

@@ -2,7 +2,7 @@
   <div class="searchResults">
     <header>
       <div>
-        <img src="./img/return.png">
+        <img src="./img/return.png" @touchend="toBack">
       </div>
       <p>西安</p>
       <div>180条</div>
@@ -39,6 +39,11 @@ export default {
     return {
       msg: '[]'
     }
+  },
+  methods: {
+    toBack () {
+      this.$router.back(-1)
+    }
   }
 }
 </script>
@@ -74,35 +79,36 @@ export default {
     }
   }
   .content{
+    position: relative;
     form{
-      position: relative;
+      width: 90%;
       .search{
-        width: 50px;
-        height: 50px;
+        width: 80px;
+        height: 80px;
         position: absolute;
-        top: 10px;
-        left: 5%;
+        top: -5px;
+        right: 2%;
       }
       input{
-        width: 95%;
+        width: 90%;
         height: 63px;
-        margin: 0 auto;
         border-radius: 20px;
         background-color: #eef1f8;
-        padding-left: 100px;
+        padding-left: 50px;
       }
     }
     .sort{
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       align-items: center;
       width: 100%;
       height: 90px;
       li{
-        width:200px;
+        width:120px;
         height: 60px;
         line-height: 60px;
         font-size: 28px;
+        border-bottom:3px #f9de57 solid;
       }
     }
     .list{

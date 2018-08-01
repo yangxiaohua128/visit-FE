@@ -26,9 +26,9 @@
 </template>
 
 <script>
-    export default {
-        name: "showOne"
-    }
+export default {
+  name: 'showOne'
+}
 </script>
 
 <style type="text/css">

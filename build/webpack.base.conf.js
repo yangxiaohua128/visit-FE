@@ -84,4 +84,3 @@ module.exports = {
   node: {}
 };
 // prevent webpack from injecting useless setImmed
-

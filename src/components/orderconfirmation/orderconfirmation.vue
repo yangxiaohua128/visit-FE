@@ -42,9 +42,8 @@
 </template>
 
 <script>
-  export default {
+export default {
   name: 'order confirmation'
-
 }
 
 </script>
@@ -178,7 +177,7 @@
     font-size: 28px;
     color:#7ab4ee;
     position: absolute;
-    right:0px;
+    right:0;
   }
   .save{
     width:100%;

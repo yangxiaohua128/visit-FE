@@ -1,7 +1,7 @@
 <template>
   <div class="order">
   <header>
-    <div><img src="./img/left.png" width="16" height="16"/></div>
+    <!--<div><img src="./img/left.png" width="16" height="16"/></div>-->
     <p>订单详情</p>
     <div></div>
   </header>
@@ -22,12 +22,12 @@
         </div>
         <div class="change">
             <div class="alter">
-                  <img src="./img/alter.png" width="20" height="20"/>
+                  <!--<img src="./img/alter.png" width="20" height="20"/>-->
                   <button type="button">修改订单</button>
            </div>
            <div class="line2"></div>
            <div class="delete">
-                  <img src="./img/delete.png" width="20" height="20"/>
+                  <!--<img src="./img/delete.png" width="20" height="20"/>-->
                   <button type="button">申请退款</button>
            </div>
         </div>
@@ -134,7 +134,6 @@ export default {
     width: 450px;
     height: 200px;
     border: 1px rebeccapurple solid;
-    align-self: center;
     align-self:flex-end ;
   }
   .message{

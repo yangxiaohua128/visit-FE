@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import orderPage from '@/components/orderPage/orderPage'
-import search from '@/components/search/search'
 import apppage from '@/components/apppage/apppage'
 import News from '@/components/News/News'
 import history from '@/components/history/history'
@@ -41,12 +40,6 @@ export default new Router({
       component: HelloWorld
     },
     {
-      title: '搜索页',
-      path: '/search',
-      name: 'search',
-      component: search
-    },
-    {
       title: '首页',
       path: '/apppage',
       name: 'apppage',
@@ -70,13 +63,11 @@ export default new Router({
       name: 'history',
       component: history
     },
-
-    {  path: '/advancedSearch',
+    {
+      path: '/advancedSearch',
       name: 'advancedSearch',
       component: advancedSearch
     },
-
-
     {
       path: '/searchResults',
       name: 'searchResults',
@@ -93,23 +84,18 @@ export default new Router({
       component: userComment
     },
     {
-       path: '/userEvaluation',
-       name:'userEvaluation',
-      component:userEvaluation
+      path: '/userEvaluation',
+      name: 'userEvaluation',
+      component: userEvaluation
     },
-{
-  title: '登录前我的页面',
-    path
-:
-  '/signin',
-    name
-:
-  'signin',
-    component
-:
-  signin
-},
-{    title: '修改',
+    {
+      title: '登录前我的页面',
+      path: '/signin',
+      name: 'signin',
+      component: signin
+    },
+    {
+      title: '修改',
       path: '/userEvaluation',
       name: 'userEvaluation',
       component: userEvaluation
@@ -144,8 +130,7 @@ export default new Router({
       name: 'waitpay',
       component: waitpay
     },
-{
-
+    {
       title: '预定页',
       path: '/orderPage',
       name: 'orderPage',

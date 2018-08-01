@@ -6,9 +6,9 @@
 </template>
 
 <script>
-  export default {
-    name: 'App'
-  }
+export default {
+  name: 'App'
+}
 </script>
 
 <style lang="scss">
@@ -20,83 +20,45 @@
   color: #2c3e50;
   margin-top: 60px;
 }
-  body {
-    padding: 0;
-    margin: 0;
-  }
-  p{
+  body{
     padding: 0;
     margin: 0;
   }
   ul,li{
     list-style: none;
   }
-  input{
+  input,button{
     border: none;
     margin: 0;
     padding: 0;
-  }
-  button{
-    border: none;
-    padding: 0;
-    margin: 0;
   }
   input,select,option,textarea{
-  outline: none;
-}
-    header {
-      background-color: white;
-      letter-spacing: 4px;
-    }
-    ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-    .content {
-      width: 93%;
-      margin: 0 auto;
-    }
-    p, h1, h2, h3, h4, h5, h6, ul, ol, dl, li, form, table {
-      margin: 0;
-      padding: 0;
-    }
-    a, img, input, button {
-      border: none;
-    }
-    img {
-      vertical-align: middle;
-      border: 0;
-    }
-    li {
-      list-style: none;
-    }
-    i, em {
-      font-style: normal;
-    }
-    a {
-      text-decoration: none;
-      color: #000000;
-      border: 0;
-    }
-    i, em {
-      font-style: normal;
-    }
-    a {
-      text-decoration: none;
-      color: #000000;
-      border: 0;
-    }
-<<<<<<< HEAD
-    input, select, option, textarea {
-      outline: none;
-      img {
-        vertival-align: middle;
-        border: 0;
-      }
-      i, em {
-        font-style: normal;
-      }
-    }
-
+    outline: none;
+  }
+  header {
+    background-color: white;
+    letter-spacing: 4px;
+  }
+  .content {
+    width: 93%;
+    margin: 0 auto;
+  }
+  p, h1, h2, h3, h4, h5, h6, ul, ol, dl, li, form, table {
+    margin: 0;
+    padding: 0;
+  }
+  a, img, input, button {
+    border: none;
+  }
+  img {
+    border: 0;
+  }
+  i, em {
+    font-style: normal;
+  }
+  a {
+    text-decoration: none;
+    color: #000000;
+    border: 0;
+  }
 </style>
