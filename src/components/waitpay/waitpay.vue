@@ -1,7 +1,7 @@
 <template>
   <div class="waitpay">
     <header>
-      <div><img src="./img/left.png" width="19" height="19"/></div>
+      <div><img src="./img/left.png" width="19" height="19" @touchend="toBack"/></div>
       <p>订单详情</p>
       <div></div>
     </header>
@@ -32,14 +32,25 @@
           <div class="people">人数:2成人</div>
         </div>
         </div>
+      <div class="change">
       <button type="button" class="submit">申请取消</button>
+      <button type="button" class="back">修改订单</button>
+      </div>
      </div>
 </div>
 </template>
 
 <script>
 export default {
-  name: 'waitpay'
+  name: 'waitpay',
+  data () {
+    return {}
+  },
+  methods: {
+    toBack: function () {
+      this.$router.back(-1)
+    }
+  }
 }
 </script>
 
@@ -176,7 +187,6 @@ export default {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    border: 1px #e4e4e4 solid;
     padding-right: 20px;
     padding-left: 20px;
     margin-bottom: 40px;
@@ -219,17 +229,20 @@ export default {
         text-align: center;
       }
     }
-    .submit{
-      width: 300px;
-      background-color: yellow;
-    }
   }
-  .submit{
-    width: 91%;
-    height: 90px;
-    background-color:#f9de57;
-    border-radius: 8px;
-    font-size: 38px;
-    border:none;
+  .change{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 30px;
+    padding-right: 30px;
+     button {
+       width: 300px;
+       height: 90px;
+       background-color: #f9de57;
+       border-radius: 8px;
+       font-size: 38px;
+       border: none;
+     }
   }
 </style>

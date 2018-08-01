@@ -2,19 +2,20 @@
   <div class="ordermangement">
     <!--头部-->
     <header>
-      <div><img src="./img/left.png" width="19" height="19"/></div>
+      <div><img src="./img/left.png" class="img1" width="19" height="19" @touchend="toBack"/></div>
       <p>订单详情</p>
      <div></div>
     </header>
     <!-- 中间部分-->
       <ul class="nav">
-        <li><img src="./img/complatedorder2.png" width="20" height="20"/> <p>全部订单</p><span></span></li>
-        <li><img src="./img/waitpay2.png" width="20" height="20"/><p>待支付</p><span></span></li>
-        <li><img src="./img/payorder2.png" width="20" height="20"/><p>待出行</p><span></span></li>
-        <li><img src="./img/appraise2.png" width="20" height="20"/><p>待评价</p><span></span></li>
-        <li><img src="./img/moneyback2.png" width="20" height="20"/><p>退款订单</p><span></span></li>
+        <li><img src="./img/complatedorder2.png" width="20" height="20"/><p>全部订单</p></li>
+        <li><img src="./img/waitpay2.png" width="20" height="20"/><p>待支付</p></li>
+        <li><img src="./img/payorder2.png" width="20" height="20"/><p>待出行</p></li>
+        <li><img src="./img/appraise2.png" width="20" height="20"/><p>待评价</p></li>
+        <li><img src="./img/moneyback2.png" width="20" height="20"/><p>退款订单</p></li>
       </ul>
     <div class="content">
+      <div class="oneOrder">
       <div class="time">预定日期:<span>7月25日</span></div>
       <div class="order">
         <div class="headline"><img src="./img/inform.png" width="30" height="30"/><span>重庆旅游三天四晚自由行</span></div>
@@ -24,15 +25,27 @@
         <button type="button">取消订单</button>
         </div>
       </div>
+      </div>
     </div>
+    <footer>
+      <div class="sort"><button type="button">近--远</button></div>
+      <div class="lose"><button type="button">失效订单</button></div>
+    </footer>
   </div>
 </template>
 
 <script>
+// var oImg1 = document.querySelector('.img1')
+// oImg1.touchend = function () {}
 export default {
   name: 'ordermanagement',
   data () {
     return {}
+  },
+  methods: {
+    toBack: function () {
+      this.$router.back(-1)
+    }
   }
 }
 
@@ -76,9 +89,9 @@ export default {
     list-style:none;
     padding: 0;
     margin-bottom: 35px;
+    align-items: center;
   li{
     width: 150px;
-    flex-basis:100%;
   }
   p{
     text-align: center;
@@ -91,6 +104,7 @@ export default {
      width: 100%;
     display: flex;
     flex-wrap:wrap;
+    margin-bottom: 40px;
 }
 .time{
     width: 218px;
@@ -151,4 +165,19 @@ export default {
     margin-right:5px;
   }
 }
+  footer{
+    position: fixed;
+    display: flex;bottom: 0;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #e8edf1;
+    justify-content: space-between;
+    button{
+      width: 300px;
+      height: 40px;
+      font-size: 35px;
+      background-color:#e8edf1;
+      color: black;
+    }
+  }
 </style>
