@@ -21,6 +21,7 @@ import order from '@/components/order/order'
 import orderconfirmation from '@/components/orderconfirmation/orderconfirmation'
 import message from '@/components/message/message'
 import showOne from '@/components/showOne/showOne'
+import modify from '@/components/modify/modify'
 Vue.use(Router)
 // const advancedSearch = (resolve) => {
 //   import('@/components/advancedSearch/advancedSearch').then((module) => {
@@ -50,7 +51,7 @@ export default new Router({
       component: signin2
     },
     {
-      title: '手机号登录页面',
+      title: '登录页面',
       path: '/phone',
       name: 'phone',
       component: phone
@@ -61,6 +62,12 @@ export default new Router({
   name: 'register',
   component: register
 },
+    {
+      title: '用户信息修改页（1）',
+      path: '/modify',
+      name: 'modify',
+      component: modify
+    },
     {
       title: '搜索页',
       path: '/search',

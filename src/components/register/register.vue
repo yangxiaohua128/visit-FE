@@ -37,7 +37,6 @@
 </script>
 
 <style lang="scss">
-  body{margin:0;padding:0;}
     .register{width:750px;position:relative;
       .one {height:67px;
       img{width:25px;height:40px;position:absolute;top:6px;left:40px;}
