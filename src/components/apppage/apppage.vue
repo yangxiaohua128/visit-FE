@@ -70,6 +70,9 @@
     },
     components: {
       kSlider : Slider
+    },
+    methods : {
+
     }
   }
 </script>
@@ -95,6 +98,7 @@
     height: 50px;
   }
   .search input{
+    text-indent: 1em;
     height: 60px;
     margin-right: 110px;
     margin-left: 30px;

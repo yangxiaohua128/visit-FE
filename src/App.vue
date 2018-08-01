@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!--< img src="./assets/logo.png">-->
-    <router-view/>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -28,7 +28,7 @@ export default {
     list-style: none;
   }
   input,button{
-    border: none;
+    /*border: none;*/
     margin: 0;
     padding: 0;
   }
@@ -48,7 +48,7 @@ export default {
     padding: 0;
   }
   a, img, input, button {
-    border: none;
+    /*border: none;*/
   }
   img {
     border: 0;

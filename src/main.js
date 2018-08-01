@@ -5,6 +5,7 @@ import Vue from 'vue'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 Vue.use(VueAwesomeSwiper)
 // vue.config.productionTip = false;
+router.push('apppage')
 let vm = new Vue({
   el: '#app',
   router,

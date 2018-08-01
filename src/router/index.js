@@ -19,6 +19,7 @@ import order from '@/components/order/order'
 import orderconfirmation from '@/components/orderconfirmation/orderconfirmation'
 import message from '@/components/message/message'
 import showOne from '@/components/showOne/showOne'
+import position from '@/components/position/position'
 Vue.use(Router)
 // const advancedSearch = (resolve) => {
 //   import('@/components/advancedSearch/advancedSearch').then((module) => {
@@ -58,10 +59,16 @@ export default new Router({
       component: destination
     },
     {
-      title: '浏览历史页',
+      title: '浏览历史',
       path: '/history',
       name: 'history',
       component: history
+    },
+    {
+      tille: '选择定位',
+      path: '/position',
+      name: 'position',
+      component: position
     },
 
     {path: '/advancedSearch',

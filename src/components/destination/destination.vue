@@ -42,6 +42,9 @@
 </template>
 
 <script>
+  export default {
+    name: 'destination'
+  }
 </script>
 
 <style type="text/css">
@@ -80,6 +83,7 @@
     color: #000000;
   }
   input{
+    border: 2px #5dc7b9 solid;
     width: 500px;
     height: 60px;
     border-radius: 20px;
@@ -90,7 +94,7 @@
   .section{
     position: fixed;
     left: 0;
-    bottom: 102px;
+    bottom: 105px;
   }
   .section li{
     width: 176px;
