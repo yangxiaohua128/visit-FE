@@ -1,60 +1,60 @@
 <template>
-    <div class="advancedSearch">
-      <header>
-        <div>
-          <img src="./img/return.png">
-        </div>
-        <p>高级搜索</p>
-        <div></div>
-      </header>
-      <div class="content">
-        <p class="termini">搜索推荐</p>
-        <div class="destination">
-          <div v-for="item of des" :key="item.id">{{item}}</div>
-          <div>
-            更多
-            <img src="./img/more.png">
-          </div>
-          <form>
-            <input type="search" placeholder="输入目的地、主题或关键字">
-          </form>
-        </div>
-        <div class="depart">
-          <div class="start">出发地</div>
-          <div class="location">
-            <div>
-              <img src="./img/location.png">
-              <span></span>
-            </div>
-            <span>&gt;</span>
-          </div>
-          <div class="line"></div>
-          <div class="start">出发日期</div>
-          <div class="time">
-            <span>最早</span>
-            <span>&gt;</span>
-          </div>
-          <div class="anotherLine"></div>
-          <div class="time">
-            <span>最晚</span>
-            <span>&gt;</span>
-          </div>
-        </div>
-        <div class="select">
-          <div class="budget">
-            <p>单人预算</p>
-          </div>
-          <div class="line"></div>
-          <div class="days">
-            <p>出行天数</p>
-          </div>
-        </div>
-        <div class="white"></div>
-        <button class="search">
-          搜索
-        </button>
+  <div class="advancedSearch">
+    <header>
+      <div>
+        <img src="./img/return.png"  @touchend="toBack">
       </div>
+      <p>高级搜索</p>
+      <div></div>
+    </header>
+    <div class="content">
+      <p class="termini">搜索推荐</p>
+      <div class="destination">
+        <div v-for="item of des" :key="item.id">{{item}}</div>
+        <div>
+          更多
+          <img src="./img/more.png">
+        </div>
+        <form>
+          <input type="search" placeholder="输入目的地、主题或关键字">
+        </form>
+      </div>
+      <div class="depart">
+        <div class="start">出发地</div>
+        <div class="location">
+          <div>
+            <img src="./img/location.png">
+            <span></span>
+          </div>
+          <span>&gt;</span>
+        </div>
+        <div class="line"></div>
+        <div class="start">出发日期</div>
+        <div class="time">
+          <span>最早</span>
+          <span>&gt;</span>
+        </div>
+        <div class="anotherLine"></div>
+        <div class="time">
+          <span>最晚</span>
+          <span>&gt;</span>
+        </div>
+      </div>
+      <div class="select">
+        <div class="budget">
+          <p>单人预算</p>
+        </div>
+        <div class="line"></div>
+        <div class="days">
+          <p>出行天数</p>
+        </div>
+      </div>
+      <div class="white"></div>
+      <button class="search">
+        搜索
+      </button>
     </div>
+  </div>
 </template>
 
 <script>
@@ -63,6 +63,11 @@ export default {
   data () {
     return {
       des: ['华山', '青海', '延安', '西北', '三亚', '四川', '北京']
+    }
+  },
+  methods: {
+    toBack () {
+      this.$router.back(-1)
     }
   }
 }
@@ -218,6 +223,7 @@ export default {
       position: fixed;
       bottom: 10px;
       left: 31px;
+      outline: none;
     }
     .white{
       height:110px;

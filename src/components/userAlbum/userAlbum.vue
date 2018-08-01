@@ -1,20 +1,20 @@
 <template>
- <div class="userAlbum">
-   <header>
-     <div>
-       <img src="./img/return.png">
-     </div>
-     <p>用户相册</p>
-     <div></div>
-   </header>
-   <div class="content">
-     <ul>
-       <li class="album">
-         <p></p>
-       </li>
-     </ul>
-   </div>
- </div>
+  <div class="userAlbum">
+    <header>
+      <div>
+        <img src="./img/return.png">
+      </div>
+      <p>用户相册</p>
+      <div></div>
+    </header>
+    <div class="content">
+      <ul>
+        <li class="album">
+          <p></p>
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -37,18 +37,11 @@ export default {
       width:38px;
       height:38px;
     }
-    p{
-      width:200px;
+    p,div{
+      width:150px;
       height: 38px;
       line-height: 38px;
       text-align: center;
-      font-size: 36px;
-      color: black;
-    }
-    div{
-      width:100px;
-      height: 38px;
-      line-height: 38px;
       font-size: 36px;
       color: black;
     }
