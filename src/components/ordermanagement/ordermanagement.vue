@@ -21,8 +21,8 @@
           <div class="headline"><img src="./img/inform.png" width="30" height="30"/><span>重庆旅游三天四晚自由行</span></div>
           <div class="money"><p class="p1">￥1500</p><p class="p2">状态</p></div>
           <div class="from"><span>7月25日</span>至<span>7月30日</span></div>
-          <div class="button"><button type="button">点评</button><button type="button">去支付</button>
-            <button type="button">取消订单</button>
+          <div class="button"><button type="button" @touchend="again">点评</button><button type="button" @touchend="again">去支付</button>
+            <button type="button" @touchend="again">取消订单</button>
           </div>
         </div>
       </div>
@@ -45,6 +45,18 @@ export default {
   methods: {
     toBack: function () {
       this.$router.back(-1)
+    },
+    again: function () {
+      if (this.button === '点评') {
+        this.$router.push({
+          path: '/userComment'
+        })
+      } else if (this.button === '去支付') {
+        this.$router.push({
+          path: '/waitPay'
+        })
+      } else {
+      }
     }
   }
 }
@@ -111,7 +123,7 @@ export default {
     height: 43px;
     font-size: 25px;
     border-radius: 16px 16px;
-    background-color:#a9cdef;
+    background-color:#f9de57;
     margin-left: 17px;margin-bottom: 16px;
     text-align: center;line-height: 43px;
   }
@@ -124,10 +136,11 @@ export default {
     margin: 0 auto;
     justify-content: space-between;
     flex-wrap:wrap;
+    padding: 10px;
   }
   .headline{
     height:150px ;
-    width: 500px;
+    width: 450px;
     text-align: left;
     span{
       height:100px;

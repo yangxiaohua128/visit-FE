@@ -95,6 +95,4 @@ export default {
     line-height: 100px;
     border: 2px #ccc solid;
   }
-
-
 </style>

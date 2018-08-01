@@ -7,25 +7,21 @@
     </header>
     <div class="content">
       <div class="details">
+        <div class="state">订单状态：xxx</div>
         <div class="number">订单号 ：</div>
         <div class="time"></div>
         <div class="img"></div>
         <div class="text"></div>
       </div>
       <div class="message">
-        <div class="start">启程日<br/>周五<p>07月24日</p></div>
+        <div class="start">启程日<p>07月24日</p></div>
         <p class="line"></p>
-        <div class="end">返程日<br/>周日<p>07月25日</p></div>
+        <div class="end">返程日<p>07月25日</p></div>
         <div class="moneyPeople">
           <div class="money">总额:￥1200</div>
-          <div class="people">人数:2成人</div>
+          <div class="people">人数:<br>2成人 1小孩</div>
         </div>
         <div class="change">
-          <div class="alter">
-            <img src="./img/alter.png" width="26" height="26"/>
-            <button type="button">修改订单</button>
-          </div>
-          <div class="line2"></div>
           <div class="delete">
             <img src="./img/delete.png" width="26" height="26"/>
             <button type="button">申请退款</button>
@@ -37,18 +33,20 @@
           <span>出行信息</span>
         </div>
         <div class="main">
-          <div class="touch">联系人:<span>xxx</span></div>
-          <div class="touchPhone">联系人电话:<span>112xxxx1111</span></div><br>
-          <div class="trip">出行人:<span>xxx</span></div>
-          <div class="phone">联系电话:<span>112xxxx1111</span></div><br>
-          <div class="trip">出行人:<span>xxx</span></div>
-          <div class="phone">联系电话:<span>112xxxx1111</span></div>
+          <div class="touch">预定人:<span>xxx</span></div>
+          <div class="touchPhone">预定人电话:<span>112xxxx1111</span></div><br>
+          <div>
           <div class="trip">出行人:<span>xxx</span></div>
           <div class="phone">联系电话:<span>112xxxx1111</span></div>
-          <div class="trip">出行人:<span>xxx</span></div>
-          <div class="phone">联系电话:<span>112xxxx1111</span></div>
-          <div class="trip">出行人:<span>xxx</span></div>
-          <div class="phone">联系电话:<span>112xxxx1111</span></div>
+          </div><br>
+          <!--<div class="trip">出行人:<span>xxx</span></div>-->
+          <!--<div class="phone">联系电话:<span>112xxxx1111</span></div>-->
+          <!--<div class="trip">出行人:<span>xxx</span></div>-->
+          <!--<div class="phone">联系电话:<span>112xxxx1111</span></div>-->
+          <!--<div class="trip">出行人:<span>xxx</span></div>-->
+          <!--<div class="phone">联系电话:<span>112xxxx1111</span></div>-->
+          <!--<div class="trip">出行人:<span>xxx</span></div>-->
+          <!--<div class="phone">联系电话:<span>112xxxx1111</span></div>-->
         </div>
       </div>
     </div>
@@ -59,7 +57,8 @@
 export default {
   name: 'order',
   data () {
-    return {}
+    return {
+    }
   },
   methods: {
     toBack: function () {
@@ -112,47 +111,54 @@ export default {
     flex-wrap:wrap;
     justify-content:center;
   }
-  .details{
+  .details {
     width: 92%;
     display: flex;
     justify-content: space-between;
-    flex-wrap:wrap;
-    border:1px #e4e4e4 solid;
+    flex-wrap: wrap;
+    border: 1px #e4e4e4 solid;
     margin-bottom: 80px;
-  }
-  .number{
-    width: 300px;
-    height: 40px;
-    border:1px #0094e3 solid;
-    border-radius: 12px;
-    color:#858585;
-    text-align: left;
-    line-height: 40px;
-    padding: 10px;
-    font-size:24px;
-    margin-bottom: 30px;
-  }
-  .time{
-    width: 300px;
-    height: 40px;
-    color:#858585;
-    text-align: left;
-    line-height: 40px;
-    padding: 10px;
-    font-size:24px;
-    margin-bottom: 30px;
-  }
-  .img{
-    width: 200px;
-    height: 200px;
-    border: 1px rebeccapurple solid;
-    align-self:flex-end ;
-  }
-  .text{
-    width: 450px;
-    height: 200px;
-    border: 1px rebeccapurple solid;
-    align-self:flex-end ;
+    .state{
+      width: 100%;
+      background-color: #f9de57;;
+      margin-bottom: 20px;
+      font-size: 35px;
+      border-radius: 12px;
+    }
+    .number {
+      width: 300px;
+      height: 40px;
+      border: 1px #0094e3 solid;
+      border-radius: 12px;
+      color: #858585;
+      text-align: left;
+      line-height: 40px;
+      padding: 10px;
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+    .time {
+      width: 250px;
+      height: 40px;
+      color: #858585;
+      text-align: left;
+      line-height: 40px;
+      padding: 10px;
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+    .img {
+      width: 200px;
+      height: 200px;
+      border: 1px rebeccapurple solid;
+      align-self: flex-end;
+    }
+    .text {
+      width: 400px;
+      height: 200px;
+      border: 1px rebeccapurple solid;
+      align-self: flex-end;
+    }
   }
   .message{
     width: 92%;
@@ -191,7 +197,6 @@ export default {
       font-size: 32px;
       color:#2a2a2a;
       border-bottom: 3px #e2e2e2 solid;
-      border-radius: 14px;
       margin-bottom: 70px;
       .money{
         width: 250px;
@@ -205,13 +210,8 @@ export default {
     .change{
       width:690px;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       line-height: 50px;
-      .line2{
-        width: 3px;
-        height: 42px;
-        background-color:#e2e2e2 ;
-      }
     }
   }
   .inform{

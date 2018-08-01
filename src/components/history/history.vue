@@ -36,5 +36,4 @@ export default {
     height: 60px;
   }
 
-
 </style>

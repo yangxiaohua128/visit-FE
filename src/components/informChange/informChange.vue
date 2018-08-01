@@ -5,22 +5,22 @@
       <p>编辑个人资料</p>
       <div></div>
     </header>
-    <form class="change">
-      <div class="name">
+    <form class="change" action="" method="post" name="myForm" onsubmit="console.log(input.value)">
+          <div class="name">
         <div class="name1">真实姓名</div>
-        <input type="text" class="name2" placeholder="请输入你的真实姓名"/>
-      </div>
+        <input type="text" class="name2" name="myName" placeholder="请输入你的真实姓名" required="required" v-model.lazy="msg"/>
+</div>
       <div class="sex">
         <div class="sex1">性别</div>
-        <input  type="radio" name="sex"/><img src="./img/man.png" width="20px" height="20px"/>
-        <input  type="radio" name="sex"/><img src="./img/woman.png" width="20px" height="20px"/>
+        <div><input  type="radio" name="sex" value="男"/><img src="./img/man.png" width="50px" height="50px"/></div>
+        <div><input  type="radio" name="sex" value="女"/><img src="./img/woman.png" width="50px" height="50px"/></div>
       </div>
       <div class="time">
         <div class="time1">出生日期</div>
-        <input type="text" class="time2" placeholder="请输入你的生日"/>
+        <input type="text" class="time2"  name="myBirthday" placeholder="请输入你的生日" required="required"/>
       </div>
+      <div class="save"><input type="submit" value="保存" name="submit"/></div>
     </form>
-    <button type="button">保存</button>
   </div>
 </template>
 
@@ -28,12 +28,20 @@
 export default {
   name: 'informChange',
   data () {
-    return {}
+    return {
+      msg: 'whh'
+      // arr = ["userName","msg"]
+    }
   },
   methods: {
     toBack: function () {
       this.$router.back(-1)
     }
+    // onBlue: function () {
+    //   if (this.msg || this.msg === '') {
+    //     alert('输入不能为空')
+    //   }
+    // }
   }
 }
 </script>
@@ -80,9 +88,7 @@ export default {
     margin-right: 6px;
     text-align: left;
     font-size: 34px;
-    border-bottom:1px #e4e4e4 solid ;
     border-top:2px #e4e4e4 solid ;
-    margin-bottom: 150px;
   }
   .name{
     justify-content: space-between;
@@ -118,6 +124,8 @@ export default {
     flex-wrap:wrap;
     display: flex;
     width:736px;
+    margin-bottom: 150px;
+    border-bottom: 1px #e4e4e4 solid ;
   }
   .time1{
     width:200px ;
@@ -133,13 +141,18 @@ export default {
     border-top:1px #e4e4e4 solid;
     margin: 0;
   }
-  button{
-    width:91%;
-    align-self: center;
-    background-color:#f9de57;
+  .save{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  input {
+    width: 91%;
+    background-color: #f9de57;
     height: 90px;
     border-radius: 8px;
     font-size: 38px;
-    border:none;
+    border: none;
+    margin: 0 auto;
+  }
   }
 </style>
