@@ -38,9 +38,8 @@
 </template>
 
 <script>
-  export default {
+export default {
   name: 'order confirmation'
-
 }
 
 </script>

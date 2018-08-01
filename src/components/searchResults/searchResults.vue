@@ -8,21 +8,16 @@
       <div>180条</div>
     </header>
     <div class="content">
-      <form>
-        <input type="search" placeholder="西安">
-        <img src="./img/search.png" class="search">
-      </form>
       <ul class="sort">
-        <li>热度</li>
-        <li>价格升序</li>
-        <li>价格降序</li>
+        <li v-for="(item,index) of items" :key="item.id" :class="{ 'checked':n==index}"
+            @touchend="changeN(index)">{{item}}</li>
       </ul>
       <div class="list">
         <div class="produce">
           <div class="picture">图片</div>
           <div class="goods">
             <p class="message">商品信息</p>
-            <span class="comment">好评</span>
+            <span class="comment">销量</span>
             <span class="price">价格</span>
           </div>
         </div>
@@ -37,12 +32,16 @@ export default {
   name: 'searchResults',
   data () {
     return {
-      msg: '[]'
+      items: ['热度', '价格升序', '价格降序'],
+      n: 0
     }
   },
   methods: {
     toBack () {
       this.$router.back(-1)
+    },
+    changeN (i) {
+      this.n = i
     }
   }
 }
@@ -80,23 +79,6 @@ export default {
   }
   .content{
     position: relative;
-    form{
-      width: 90%;
-      .search{
-        width: 80px;
-        height: 80px;
-        position: absolute;
-        top: -5px;
-        right: 2%;
-      }
-      input{
-        width: 90%;
-        height: 63px;
-        border-radius: 20px;
-        background-color: #eef1f8;
-        padding-left: 50px;
-      }
-    }
     .sort{
       display: flex;
       justify-content: space-around;
@@ -108,6 +90,10 @@ export default {
         height: 60px;
         line-height: 60px;
         font-size: 28px;
+      }
+      li.checked{
+        color:#000;
+        font-size: 30px;
         border-bottom:3px #f9de57 solid;
       }
     }

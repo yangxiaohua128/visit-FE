@@ -8,24 +8,24 @@
       <div></div>
     </header>
     <div class="content">
-      <p class="termini">搜索推荐</p>
+      <p class="termini">目的地推荐</p>
       <div class="destination">
         <div v-for="item of des" :key="item.id">{{item}}</div>
         <div>
           更多
           <img src="./img/more.png">
         </div>
-        <form>
-          <input type="search" placeholder="输入目的地、主题或关键字">
-        </form>
       </div>
       <div class="depart">
+        <div class="end">目的地</div>
+        <div class="location">
+          <span></span>
+          <span>&gt;</span>
+        </div>
+        <div class="line"></div>
         <div class="start">出发地</div>
         <div class="location">
-          <div>
-            <img src="./img/location.png">
-            <span></span>
-          </div>
+          <span></span>
           <span>&gt;</span>
         </div>
         <div class="line"></div>
@@ -116,7 +116,7 @@ export default {
       margin-top:14px;
       margin-bottom:20px;
       width:100%;
-      height: 225px;
+      height: 140px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -156,7 +156,7 @@ export default {
       font-size: 28px;
       border-top: 1px #ccc solid;
       border-bottom: 1px #ccc solid;
-      .start{
+      .start,.end{
         width:140px;
         height: 90px;
         line-height: 90px;

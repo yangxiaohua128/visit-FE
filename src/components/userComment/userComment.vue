@@ -192,7 +192,6 @@ export default {
       }
       .picture{
         width: 100%;
-        height: 150px;
         background-color: #ccc;
       }
       .write{

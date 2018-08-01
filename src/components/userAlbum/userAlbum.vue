@@ -2,24 +2,28 @@
   <div class="userAlbum">
     <header>
       <div>
-        <img src="./img/return.png">
+        <img src="./img/return.png" @touchend="toBack">
       </div>
       <p>用户相册</p>
       <div></div>
     </header>
     <div class="content">
-      <ul>
-        <li class="album">
-          <p></p>
-        </li>
-      </ul>
+      <div class="album">
+        <p>2033</p>
+        <div></div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'userAlbum'
+  name: 'userAlbum',
+  methods: {
+    toBack () {
+      this.$router.back(-1)
+    }
+  }
 }
 </script>
 
@@ -37,25 +41,36 @@ export default {
       width:38px;
       height:38px;
     }
-    p,div{
-      width:150px;
+    p{
+      width:200px;
       height: 38px;
       line-height: 38px;
       text-align: center;
       font-size: 36px;
       color: black;
     }
+    div{
+      width:100px;
+      height: 38px;
+      line-height: 38px;
+      font-size: 36px;
+      color: black;
+    }
   }
   .content {
-    ul{
+    .album{
       width: 100%;
-      li{
-        height: 260px;
+      p{
+        height: 50px;
+        line-height: 50px;
+        font-size: 36px;
+        width: 200px;
+        background-color: #007aff;
+        margin-bottom: 10px;
+      }
+      div{
+        background-color: aqua;
         width: 100%;
-        p{
-          height: 50px;
-          width: 200px;
-        }
       }
     }
   }

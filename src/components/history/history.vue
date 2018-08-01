@@ -8,9 +8,9 @@
 </template>
 
 <script>
-    export default {
-        name: "history"
-    }
+export default {
+  name: 'history'
+}
 </script>
 
 <style type="text/css">
@@ -35,6 +35,4 @@
     width: 50px;
     height: 60px;
   }
-
-
 </style>
