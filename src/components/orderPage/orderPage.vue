@@ -7,8 +7,6 @@
     <div class="content">
       <p>出发地</p>
       <div class="local"></div>
-      <p>出发日期</p>
-      <calendar-input :limit="limit" @getValue="getValue"></calendar-input>
       <div class="choice">
         <p>选择数量</p>
         <div class="choice1">
@@ -28,6 +26,8 @@
           </div>
         </div>
       </div>
+      <p>出发日期</p>
+      <calendar-input :limit="limit" @getValue="getValue"></calendar-input>
     </div>
     <footer>
       <span class="sp1">总价：<br>￥</span>
@@ -40,11 +40,6 @@
 <script>
   import calendarInput from '../../../node_modules/calendar-plugin/calendar-input.vue';
 
-  // var oDiv1 = document.getElementsByClassName(number1);
-  // var oDiv2 = document.getElementsByClassName(number2);
-  // var aAdd = document.getElementsByClassName(add);
-  // var aSub = document.getElementsByClassName(sub);
-
   export default {
     components: {
       calendarInput
@@ -56,15 +51,12 @@
     //     }
     //   }
     //   }
-
-
-
   }
 </script>
 
 <style lang="scss">
   .orderPage{
-    height: 1600px;
+    width: 100%;
   }
   header {
     width: 100%;
@@ -84,110 +76,108 @@
     height: 38px;
   }
   }
-  .content p{
-    width:200px;
-    font-size: 30px;
-    color:#8a898a;
-    text-align: left;
-  }
-  .local{
-    width:200px;
-    height: 74px;
-    background-color:#fdf4c3;
-    border: 1px #f9de57 solid;
-    margin-top: 10px;
-    margin-bottom:10px;
-    border-radius: 10%;
-  }
-  .month{
-    width:100%;
-    height: 144px;
-    display:flex;
-  }
-  .month li{
-    width:138px;
-    height: 138px;
-  }
-  .week{
-    width: 100%;
-    height:60px;
-    border-bottom: 1px solid #cacaca;
-    border-top: 1px solid #cacaca;
-    display:flex;
-    justify-content:space-around;
-    align-items: center;
-  }
-  .day{
-    width:100%;
-    height:728px;
-  }
-  .choice {
-  p {
-
-    font-size: 32px;
-    color: #8a898a;
-    width: 200px;
-  }
-  span {
-    font-size: 28px;
-  }
-  img {
-    width: 32px;
-    height: 32px;
-  }
-  }
-  .adult {
-  div {
-    width: 80px;
-    height: 50px;
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: space-around;
-    margin: 0;
-    display: inline-block;
-    align-items: center;
-  }
-  }
-  .children {
-  div {
-    width: 80px;
-    height: 50px;
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: space-around;
-    margin: 0;
-    display: inline-block;
-    align-items: center;
-  }
-  }
-  .choice1,.choice2{
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  footer{
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 100px;
-  }
-  .sp1{
-    position: fixed;
-    left: 0;
-    width: 500px;
-    height: 100px;
-    background-color: #fff;
-    font-size: 28px;
-    text-align: left;
-  }
-  .sp2{
-    position: fixed;
-    right:0;
-    width: 250px;
-    background:#f9de57;
-    line-height: 100px;
-    color:#8c8353;
-    font-size: 32px;
+  .content {
+    p{
+      width:200px;
+      font-size: 32px;
+      color:#8a898a;
+      text-align: left;
+      height: 100px;
+      line-height: 100px;
+    }
+    .local{
+      width:200px;
+      height: 74px;
+      background-color:#fdf4c3;
+      border: 1px #f9de57 solid;
+      margin-top: 10px;
+      margin-bottom:10px;
+      border-radius: 10%;
+    }
+    .month{
+      width:100%;
+      height: 144px;
+      display:flex;
+      li{
+        width:138px;
+        height: 138px;
+      }
+    }
+    .week{
+      width: 100%;
+      height:60px;
+      border-bottom: 1px solid #cacaca;
+      border-top: 1px solid #cacaca;
+      display:flex;
+      justify-content:space-around;
+      align-items: center;
+    }
+    .day{
+      width:100%;
+      height:728px;
+    }
+    .choice {
+      span {
+        font-size: 28px;
+      }
+      img {
+        width: 32px;
+        height: 32px;
+      }
+    }
+    .adult{
+      div {
+        width: 80px;
+        height: 50px;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: space-around;
+        margin: 0;
+        display: inline-block;
+        align-items: center;
+      }
+    }
+    .children {
+      div {
+        width: 80px;
+        height: 50px;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: space-around;
+        margin: 0;
+        display: inline-block;
+        align-items: center;
+      }
+    }
+    .choice1,.choice2{
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer{
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: 100px;
+    }
+    .sp1{
+      position: fixed;
+      left: 0;
+      width: 500px;
+      height: 100px;
+      background-color: #fff;
+      font-size: 28px;
+      text-align: left;
+    }
+    .sp2{
+      position: fixed;
+      right:0;
+      width: 250px;
+      background:#f9de57;
+      line-height: 100px;
+      color:#8c8353;
+      font-size: 32px;
+    }
   }
 
 </style>

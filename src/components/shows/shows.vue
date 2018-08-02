@@ -1,7 +1,7 @@
 <template>
   <div class="shows">
     <header>
-      <img src="./img/arrowLeft.png"/>
+      <img src="./img/arrowLeft.png" />
       <div class="home2">
         <k-slider :banners="banners" :swiperOption="swiperOption"></k-slider>
       </div>
@@ -18,14 +18,14 @@
         <span>选择：日期和出游人群</span>
         <img src="./img/arrowRight.png"/>
       </div>
-      <div class="special">
+       <div class="special">
         <p>选择：出行日期</p>
-        <div class="choice">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
+        <ul class="choice" >
+          <li v-for="site,index in sites"
+              :class="{active:index===n}"
+              @touchend="changeN(index)">{{site}}
+          </li>
+        </ul>
       </div>
       <div class="comment">
         <span>查看：评论</span>
@@ -34,7 +34,7 @@
       <div class="company">（此处显示供应商）</div>
     </div>
     <footer>
-      <span class="sp1"><img src="./img/collect.png"/><br>收藏</span>
+      <span class="sp1"><img :src="dataUrl" @touchend="changeColor()"/><br>收藏</span>
       <span class="sp2">立即购买</span>
     </footer>
   </div>
@@ -63,21 +63,31 @@
             disableOnInteraction: false,
             delay: 2500
           }
-        }
+        },
+        bOn:false,
+        dataUrl:require("./img/collect.png"),
+        sites:["9.10","10.3","10.9","11.11" ],
+        n:-1
       }
     },
     components: {
       kSlider: Slider
     },
-     methods:{
-  }
+     methods: {
+       changeColor() {
+         this.bOn ? this.dataUrl = require("./img/collect.png") : this.dataUrl = require("./img/collected.png");
+         this.bOn = !this.bOn;
+       },
+         changeN(i) {
+           this.n = i;
+         }
+       }
   }
 </script>
 
 <style lang="scss">
   .shows{
     width: 100%;
-    height: 1200px;
   }
   header{
     width: 100%;
@@ -112,7 +122,6 @@
       height: 500px;
     }
   }
-
   .name{
     width: 100%;
     height: 150px;
@@ -152,14 +161,19 @@
       width: 100%;
       height:110px;
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       align-items: center;
-      div{
+      li{
         width: 150px;
         height: 75px;
         border: 1px solid #ccc;
         border-radius: 15%;
+        text-align: center;
+        line-height: 75px;
       }
+    }
+    li.active{
+      background-color:#fdf4c3;
     }
   }
   .content {
