@@ -1,3 +1,4 @@
+:
 <template>
   <div class="destination">
     <div class="hwarp">
@@ -64,7 +65,8 @@ export default {
     return {
       list: [
         { src: './img/test.jpg' }, { src: './img/test.jpg' }, { src: './img/test.jpg' }, { src: './img/test.jpg' }
-      ]}
+      ]
+    }
   }
 }
 </script>
@@ -86,6 +88,19 @@ export default {
   .header{
     z-index: 999;
     width: 750px;
+  :
+  height: 240px;
+    background-color: #fae368;
+  }
+  .top{
+    margin-bottom: 50px;
+    padding-top: 40px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .header img{
+    padding-left: 30px;
+    width: 50px;
     height: 50px;
   }
   .sp1{

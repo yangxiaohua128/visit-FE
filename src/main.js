@@ -1,17 +1,17 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from 'vue'
 import App from './App'
 import router from './router'
 import 'lib-flexible/flexible.js'
-// import wcSwiper from 'wc-swiper'
-// import 'wc-swiper/style.css'
-Vue.config.productionTip = false
-// Vue.use(wcSwiper);
-/* eslint-disable no-new */
-new Vue({
+import Vue from 'vue'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+Vue.use(VueAwesomeSwiper)
+// vue.config.productionTip = false;
+router.push('apppage')
+let vm = new Vue({
   el: '#app',
   router,
   components: { App },
   template: '<App/>'
+})
+Vue.use({
+  vm
 })

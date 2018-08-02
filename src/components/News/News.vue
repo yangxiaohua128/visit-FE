@@ -3,22 +3,27 @@
     <div class="header">
       <img src="./img/Rleft.png">
       <span class="sp1">消息</span>
-      <span class="sp2">全部已读</span>
     </div>
     <div class="middle">
       <span class="sp3">供应商</span>
-      <span class="sp4">活动</span>
+      <span class="sp4" v-show="isshow" @touchend="hidden()">活动</span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'history'
-}
-let osp1 = document.getElementsByClassName('sp1')
-osp1.touchstart = function () {
-  alert('消息已经读过')
+  name: 'history，',
+  data: function () {
+        return {
+          isshow: false
+        }
+  },
+  methods: {
+    hidden () {
+          this.isshow = !this.isshow
+    }
+  }
 }
 </script>
 
@@ -43,7 +48,8 @@ osp1.touchstart = function () {
     justify-content: space-between;
 
   }
-  .sp1 ,.sp2 {
+  .sp1  {
+    margin-right: 318px;
     color: #000;
     line-height: 88px;
     font-size: 38px;
@@ -63,9 +69,6 @@ osp1.touchstart = function () {
   .sp1{
     margin-left: 40px;
   }
-  .sp2{
-    margin-right: 40px;
-  }
   .sp3{
     margin-left: 47px;
   }
@@ -74,6 +77,7 @@ osp1.touchstart = function () {
 
   }
   .sp3,.sp4{
+    background-color: #ffffff;
     font-weight: bold;
-  }
+}
 </style>
