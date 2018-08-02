@@ -22,6 +22,7 @@ import backMoneyOk from '@/components/backMoneyOk/backMoneyOk'
 import backMoneyNo from '@/components/backMoneyNo/backMoneyNo'
 import pay from '@/components/pay/pay'
 import position from '@/components/position/position'
+import shows from '@/components/shows/shows'
 Vue.use(Router)
 // const advancedSearch = (resolve) => {
 //   import('@/components/advancedSearch/advancedSearch').then((module) => {
@@ -92,13 +93,8 @@ export default new Router({
       name: 'userComment',
       component: userComment
     },
-    {
-      title: '登录前我的页面',
-      path: '/signin',
-      name: 'signin',
-      component: signin
-    },
-    { path: '/userEvaluation',
+    { title: '修改',
+      path: '/userEvaluation',
       name: 'userEvaluation',
       component: userEvaluation
     },
@@ -173,6 +169,13 @@ export default new Router({
       path: '/pay',
       name: 'pay',
       component: pay
+      },
+     {
+      title: '单个产品展示',
+      path: '/shows',
+      name: 'shows',
+      component: shows
+
     }
   ]
 })

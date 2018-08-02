@@ -11,34 +11,32 @@
     </swiper>
   </div>
 </template>
-
 <script>
-  import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  export default {
-    data: function () {
-      return {
-      }
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+export default {
+  data:function() {
+    return {
+    }
+  },
+  props: {
+    banners: {
+      type: Array
     },
-    props: {
-      banners: {
-        type: Array
-      },
-      swiperOption: {
-      }
-    },
-    components: {
-      swiper: swiper,
-      swiperSlide: swiperSlide
-    },
-    //定义这个sweiper对象
-    computed: {
-      swiper: function () {
-        return this.$refs.mySwiper.swiper
-      }
+    swiperOption:{
+    }
+  },
+  components:{
+    swiper: swiper,
+    swiperSlide: swiperSlide
+  },
+  // 定义这个sweiper对象
+  computed: {
+    swiper: function () {
+      return this.$refs.mySwiper.swiper
     }
   }
+}
 </script>
-
 <style type="text/css">
   @import "../src/assets/swiper-3.4.2.min.css";
   .swiper-box{
@@ -52,6 +50,6 @@
   }
   .swiper-box ,.swiper-box img{
     width: 100%;
-    height: 250px;
+    height: 100%;
   }
 </style>
