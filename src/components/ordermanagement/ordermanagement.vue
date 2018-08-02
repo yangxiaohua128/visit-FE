@@ -8,11 +8,7 @@
     </header>
     <!-- 中间部分-->
     <ul class="nav">
-      <li><img src="./img/complatedorder2.png" width="20" height="20"/><p>全部订单</p></li>
-      <li><img src="./img/waitpay2.png" width="20" height="20"/><p>待支付</p></li>
-      <li><img src="./img/payorder2.png" width="20" height="20"/><p>待出行</p></li>
-      <li><img src="./img/appraise2.png" width="20" height="20"/><p>待评价</p></li>
-      <li><img src="./img/moneyback2.png" width="20" height="20"/><p>退款订单</p></li>
+      <li v-for="item in items" :key="item.id" v-bind:class="{'class-a':isA,'class-b':!isA}" @touchend="changeColor()"><img :src='item.path'/><p >{{item.text}}</p></li>
     </ul>
     <div class="content">
       <div class="oneOrder">
@@ -22,14 +18,13 @@
           <div class="money"><p class="p1">￥1500</p><p class="p2">状态</p></div>
           <div class="from"><span>7月25日</span>至<span>7月30日</span></div>
           <div class="button"><button type="button" @touchend="again">点评</button><button type="button" @touchend="again">去支付</button>
-            <button type="button" @touchend="again">取消订单</button>
           </div>
         </div>
       </div>
     </div>
     <footer>
-      <div class="sort"><button type="button">近--远</button></div>
-      <div class="lose"><button type="button">失效订单</button></div>
+      <div class="sort"><img :src='dataUrl' @touchend="changeUrl"/></div>
+      <div class="lose"><img src="./img/lose.png"/></div>
     </footer>
   </div>
 </template>
@@ -38,9 +33,17 @@
 // var oImg1 = document.querySelector('.img1')
 // oImg1.touchend = function () {}
 export default {
-  name: 'ordermanagement',
   data () {
-    return {}
+    return {
+      items: [{path: require('./img/complatedorder2.png'), text: '全部订单'},
+        {path: require('./img/waitpay2.png'), text: '待支付'},
+        {path: require('./img/payorder2.png'), text: '待出行'},
+        {path: require('./img/appraise2.png'), text: '待评价'},
+        {path: require('./img/moneyback2.png'), text: '退款订单'}],
+      dataUrl: require('./img/down.png'),
+      bOn: false,
+      isA: false
+    }
   },
   methods: {
     toBack: function () {
@@ -55,12 +58,17 @@ export default {
         this.$router.push({
           path: '/waitPay'
         })
-      } else {
       }
+    },
+    changeColor: function () {
+      this.isA = !this.isA
+    },
+    changeUrl: function () {
+      this.bOn ? this.dataUrl = require('./img/up.png') : this.dataUrl = require('./img/down.png')
+      this.bOn = !this.bOn
     }
   }
 }
-
 </script>
 
 <style lang="scss">
@@ -68,7 +76,7 @@ export default {
     margin: 0;
     padding: 0;
   }
-  .ordermangement{
+  .ordermanagement{
     width: 750px;
   }
   header{
@@ -85,7 +93,6 @@ export default {
       width: 150px;
       height: 38px;
     }
-
     p{
       text-align: center;
       line-height: 38px;
@@ -93,30 +100,50 @@ export default {
       color:black;
     }
   }
-  .nav{
+  .nav {
     display: flex;
-    height:127px;
+    height: 127px;
     width: 100%;
-    border-bottom:6px #dfdfdf solid;
-    list-style:none;
+    border-bottom: 6px #dfdfdf solid;
+    list-style: none;
     padding: 0;
     margin-bottom: 35px;
     align-items: center;
-    li{
+    .class-a {
       width: 150px;
+      img {
+        margin-bottom: 30px;
+        width: 40px;
+        height: 40px;
+        p {
+          height: 40px;
+          text-align: center;
+          line-height: 40px;
+          font-size: 30px;
+          margin-bottom: 0;
+        }
+      }
     }
-    p{
-      text-align: center;
-      line-height:26px;
-      font-size: 27px;
-      margin-bottom: 0;
+    .class-b{
+      width: 150px;
+      img {
+        margin-bottom: 30px;
+        width: 40px;
+        height: 40px;
+        p {
+          height: 40px;
+          text-align: center;
+          line-height: 40px;
+          font-size: 30px;
+          margin-bottom: 0;
+        }
+      }
     }
   }
   .content{
     width: 100%;
     display: flex;
     flex-wrap:wrap;
-    margin-bottom: 40px;
   }
   .time{
     width: 218px;
@@ -133,10 +160,10 @@ export default {
     width: 98%;
     height: 320px;
     border: 1px #e4e4e4 solid ;
-    margin: 0 auto;
     justify-content: space-between;
     flex-wrap:wrap;
     padding: 10px;
+    margin-bottom: 100px;
   }
   .headline{
     height:150px ;
@@ -171,9 +198,9 @@ export default {
   .button{
     align-self:flex-end;
     button{
-      height: 76px;
+      height: 50px;
       background-color: #eff4f8;
-      border: none;
+      border: 3px #f9de57 solid;
       border-radius: 10px;
       margin-right:5px;
     }
@@ -182,15 +209,18 @@ export default {
     position: fixed;
     display: flex;bottom: 0;
     width: 100%;
-    margin: 0 auto;
-    background-color: #e8edf1;
     justify-content: space-between;
-    button{
-      width: 300px;
-      height: 40px;
-      font-size: 35px;
-      background-color:#e8edf1;
-      color: black;
+    background-color: #f9de57 ;
+    align-items: center;
+    border-radius: 20px 20px 0px 0px;
+    div{
+      width: 200px;
+      height: 80px;
+      text-align: center;
+    }
+    img{
+      width:80px;
+      height: 80px;
     }
   }
 </style>

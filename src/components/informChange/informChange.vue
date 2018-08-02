@@ -17,7 +17,7 @@
       </div>
       <div class="time">
         <div class="time1">出生日期</div>
-        <input type="text" class="time2"  name="myBirthday" placeholder="请输入你的生日" required="required"/>
+        <input type="date" class="time2"  name="myBirthday" placeholder="请输入你的生日" required="required"/>
       </div>
       <div class="save"><input type="submit" value="保存" name="submit"/></div>
     </form>
