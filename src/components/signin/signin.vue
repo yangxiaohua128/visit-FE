@@ -9,40 +9,10 @@
     <div class="div2"></div>
     <div class="div3">积分：</div>
     <div class="div4"></div>
-    <div class="div5">
-      <div>
-        <img src="./img/collection.png"/><br/>
-        <span>我的收藏</span>
-      </div>
-      <div>
-        <img src="./img/order.png"/><br/>
-        <span>我的订单</span>
-      </div>
-      <div>
-        <img src="./img/travel.png"/><br/>
-        <span>未出行订单</span>
-      </div>
-      <div>
-        <img src="./img/payment.png"/><br/>
-        <span>未付款订单</span>
-      </div>
-      <div>
-        <img src="./img/evaluate.png"/><br/>
-        <span>待评价订单</span>
-      </div>
-      <div>
-        <img src="./img/refund.png"/><br/>
-        <span>退款订单</span>
-      </div>
-      <div>
-        <img src="./img/coupon.png"/><br/>
-        <span>优惠券</span>
-      </div>
-      <div>
-        <img src="./img/album.png"/><br/>
-        <span>我的相册</span>
-      </div>
-    </div>
+    <ul class="nav">
+      <li v-for="item in items" :key="item.id" @touchend="choice(index)">
+        <img :src='item.path'/><span>{{item.text}}</span></li>
+    </ul>
     <div class="div6">
       <div>
         <img src="./img/homepage.jpg"/><br/>
@@ -67,12 +37,26 @@
 
 <script>
   export default {
-    name: 'signin',
-    data () {
-      return {
-        msg: 'Welcome to Your Vue.js App'
+    name:"signin",
+    data(){
+      return{
+        items:[
+          {path:require('./img/collection.png'),text:"我的收藏"},
+          {path:require('./img/order.png'),text:"我的订单"},
+          {path:require('./img/travel.png'),text:"未出行订单"},
+          {path:require('./img/payment.png'),text:"未付款订单"},
+          {path:require('./img/evaluate.png'),text:"待评价订单"},
+          {path:require('./img/refund.png'),text:"退款订单"},
+          {path:require('./img/coupon.png'),text:"优惠券"},
+          {path:require('./img/album.png'),text:"我的相册"}]
+      }
+    },
+    methods:{
+      choice(i){
+        
       }
     }
+
   }
 </script>
 
@@ -88,7 +72,7 @@
     text-align: center;line-height:100px;margin-top:55px;margin-left:0;display:inline-block;}
   .div2 ,.div4{height:10px;background-color:#efecec}
   .div3{height:70px;font-size:31px;margin-left:57px;line-height:70px;text-align:left;}
-  .div5 div{
+  .nav li{
     display: inline-block;margin-left:15px;
     margin-top:45px;height:97px;width:150px;
     img{width:42px;height:42px;}

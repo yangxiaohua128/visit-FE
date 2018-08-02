@@ -41,13 +41,13 @@
 </template>
 
 <script>
-    export default {
-        name: "phone"
-    }
+  export default {
+    name: "phone"
+  }
 </script>
 
 <style lang="scss">
- .phone{width:750px;}
+  .phone{width:750px;}
   .head{
     font-size:32px;margin-top:37px;text-align:left;
     #s1{margin-left:234px;}
@@ -76,17 +76,16 @@
     .enroll{width:666px;height:98px;border:1px #000 solid;background-color:#fff;
       margin-top:304px;}
   }
- .content2{
-   margin-left:42px;margin-right:42px;
-   span{width:666px;height:120px;font-size:32px;line-height:120px;text-align:left;
-     display:inline-block}
-   input{width:202px;}
-   .butn{width:240px;height:70px;background-color:#ffe14d;}
-   p{width:666px;height:2px;background-color:#e6e6e6;}
-   .sign{width:666px;height:100px;background-color:#d8d8d8;
-     font-size:30px;margin-top:122px;}
-   .enroll{width:666px;height:98px;border:1px #000 solid;background-color:#fff;
-     margin-top:304px;}
- }
-
+  .content2{
+    margin-left:42px;margin-right:42px;
+    span{width:666px;height:120px;font-size:32px;line-height:120px;text-align:left;
+      display:inline-block}
+    input{width:202px;}
+    .butn{width:240px;height:70px;background-color:#ffe14d;}
+    p{width:666px;height:2px;background-color:#e6e6e6;}
+    .sign{width:666px;height:100px;background-color:#d8d8d8;
+      font-size:30px;margin-top:122px;}
+    .enroll{width:666px;height:98px;border:1px #000 solid;background-color:#fff;
+      margin-top:304px;}
+  }
 </style>
