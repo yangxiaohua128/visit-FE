@@ -8,6 +8,9 @@
 </template>
 
 <script>
+export default {
+  name: 'history'
+}
 </script>
 
 <style type="text/css">

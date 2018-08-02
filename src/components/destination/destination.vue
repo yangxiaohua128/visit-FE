@@ -170,4 +170,8 @@ export default {
     right: 0;
     top: 240px;
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/sy
 </style>

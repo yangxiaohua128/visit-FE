@@ -28,6 +28,9 @@
 </template>
 
 <script>
+export default {
+  name: 'message'
+}
 </script>
 
 <style lang="scss">

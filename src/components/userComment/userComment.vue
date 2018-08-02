@@ -69,11 +69,11 @@ export default {
     changeN (i) {
       this.n = i
     },
-    // showReply () {
-    //   this.show ? this.imgUrl = require('./img/down.png') : this.imgUrl = require('./img/up.png')
-    //   this.show = !this.show
-    //   this.isShow = !this.isShow
-    // },
+    showReply () {
+      this.show ? this.imgUrl = require('./img/down.png') : this.imgUrl = require('./img/up.png')
+      this.show = !this.show
+      this.isShow = !this.isShow
+    },
     changeNumber () {
       this.number++
       console.log(Number)
