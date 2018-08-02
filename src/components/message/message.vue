@@ -34,6 +34,14 @@ export default {
 </script>
 
 <style lang="scss">
+<style type="text/css">
+  body{
+    margin: 0;
+    padding: 0;
+  }
+  .message{
+    background-color:#f7f7f7;
+  }
   header{
     width: 100%;
     height:90px;

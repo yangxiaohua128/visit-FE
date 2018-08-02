@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 import orderPage from '@/components/orderPage/orderPage'
+import signin2 from '@/components/signin2/signin2'
+import phone from '@/components/phone/phone'
+import register from '@/components/register/register'
 import apppage from '@/components/apppage/apppage'
 import News from '@/components/News/News'
 import history from '@/components/history/history'
@@ -23,6 +25,8 @@ import backMoneyNo from '@/components/backMoneyNo/backMoneyNo'
 import pay from '@/components/pay/pay'
 import position from '@/components/position/position'
 import shows from '@/components/shows/shows'
+import showOne from '@/components/showOne/showOne'
+import modify from '@/components/modify/modify'
 Vue.use(Router)
 // const advancedSearch = (resolve) => {
 //   import('@/components/advancedSearch/advancedSearch').then((module) => {
@@ -39,9 +43,34 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      title: '登录前我的页面',
+      path: '/signin',
+      name: 'signin',
+      component: signin
+    },
+    {
+      title: '登录后我的页面',
+      path: '/signin2',
+      name: 'signin2',
+      component: signin2
+    },
+    {
+      title: '登录页面',
+      path: '/phone',
+      name: 'phone',
+      component: phone
+    },
+    {
+      title: '注册页面',
+      path: '/register',
+      name: 'register',
+      component: register
+    },
+    {
+      title: '用户信息修改页（1）',
+      path: '/modify',
+      name: 'modify',
+      component: modify
     },
     {
       title: '首页',
@@ -105,7 +134,11 @@ export default new Router({
       component: signin
     },
     {
-      title: '修改',
+      path: '/userEvaluation',
+      name: 'userEvaluation',
+      component: userEvaluation
+    },
+    { title: '修改',
       path: '/informChange',
       name: 'informChange',
       component: informChange
@@ -128,6 +161,7 @@ export default new Router({
       name: 'waitpay',
       component: waitpay
     },
+
     { title: '预定页',
       path: '/orderPage',
       name: 'orderPage',
@@ -169,13 +203,25 @@ export default new Router({
       path: '/pay',
       name: 'pay',
       component: pay
-      },
-     {
+    },
+    {
       title: '单个产品展示',
       path: '/shows',
       name: 'shows',
       component: shows
 
+    },
+    {
+      title: '注册页面',
+      path: '/register',
+      name: 'register',
+      component: register
+    },
+    {title: '单个产品展示',
+      path: '/showOne',
+      name: 'showOne',
+      component: showOne
     }
+
   ]
 })
