@@ -132,7 +132,6 @@ export default {
           border: 3px #ec7e3f solid;
           line-height: 84px;
           font-size: 32px;
-        ;
         }
       }
       .details{

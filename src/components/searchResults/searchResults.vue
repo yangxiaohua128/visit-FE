@@ -18,7 +18,7 @@
           <div class="goods">
             <p class="message">商品信息</p>
             <span class="comment">销量</span>
-            <span class="price">价格</span>
+            <span class="price">￥价格</span>
           </div>
         </div>
       </div>
@@ -130,7 +130,7 @@ export default {
             width:60%;
             height: 34px;
             line-height: 34px;
-            font-size: 22px;
+            font-size: 28px;
             background-color: aqua;
             align-self: center;
           }
@@ -138,7 +138,7 @@ export default {
             width: 33%;
             height: 60px;
             line-height: 60px;
-            font-size:34px ;
+            font-size:38px ;
             background-color: blue;
             align-self: flex-end;
           }

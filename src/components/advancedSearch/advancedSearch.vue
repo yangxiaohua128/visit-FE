@@ -10,21 +10,21 @@
     <div class="content">
       <p class="termini">目的地推荐</p>
       <div class="destination">
-        <div v-for="item of des" :key="item.id">{{item}}</div>
+        <div v-for="(item,index) of des" :key="item.id" @touchend="changeN(index)" :class="{'checked' : n==index}">{{item}}</div>
         <div>
           更多
           <img src="./img/more.png">
         </div>
       </div>
       <div class="depart">
-        <div class="end">目的地</div>
         <div class="location">
-          <span></span>
+          <div>目的地</div>
+          <span>{{des[n]}}</span>
           <span>&gt;</span>
         </div>
         <div class="line"></div>
-        <div class="start">出发地</div>
         <div class="location">
+          <div>出发地</div>
           <span></span>
           <span>&gt;</span>
         </div>
@@ -62,12 +62,17 @@ export default {
   name: 'advancedSearch',
   data () {
     return {
-      des: ['华山', '青海', '延安', '西北', '三亚', '四川', '北京']
+      des: ['华山', '青海', '延安', '西北', '三亚', '四川', '北京'],
+      n: 0,
+      arr: []
     }
   },
   methods: {
     toBack () {
       this.$router.back(-1)
+    },
+    changeN (i) {
+      this.n = i
     }
   }
 }
@@ -112,40 +117,32 @@ export default {
       color: #1d1d1d;
       text-align: left;
     }
-    .destination{
-      margin-top:14px;
-      margin-bottom:20px;
-      width:100%;
+    .destination {
+      margin-top: 14px;
+      margin-bottom: 20px;
+      width: 100%;
       height: 140px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      div{
-        width:165px;
-        height:62px;
+      div {
+        width: 165px;
+        height: 62px;
         border: 1px #ddd solid;
         border-radius: 5px;
         line-height: 62px;
         font-size: 28px;
         text-align: center;
-        color:#727272;
+        color: #727272;
         margin-bottom: 6px;
-        img{
-          width:20px;
-          height:20px;
+        img {
+          width: 20px;
+          height: 20px;
         }
       }
-      form{
-        width: 100%;
-        input{
-          width:100%;
-          height: 72px;
-          border-radius: 20px;
-          background-color: #efefef;
-          color: #909090;
-          padding-left: 22px;
-          margin-top: 14px;
-        }
+      div.checked{
+        background-color: #f9de57;
+        color: black;
       }
     }
     .depart{
@@ -156,15 +153,8 @@ export default {
       font-size: 28px;
       border-top: 1px #ccc solid;
       border-bottom: 1px #ccc solid;
-      .start,.end{
-        width:140px;
-        height: 90px;
-        line-height: 90px;
-        color:#242424;
-        text-align: left;
-      }
       .location{
-        width:490px;
+        width:100%;
         display: flex;
         justify-content: space-between;
         height: 90px;
@@ -174,8 +164,16 @@ export default {
           height: 28px;
         }
         span:nth-child(2){
-          color:#979797;
+          color:black;
+          font-size: 30px;
         }
+      }
+      .start{
+        width:140px;
+        height: 90px;
+        line-height: 90px;
+        color:#242424;
+        text-align: left;
       }
       .time{
         width:220px;
@@ -224,6 +222,9 @@ export default {
       bottom: 10px;
       left: 31px;
       outline: none;
+    }
+    .search:hover{
+      background-color: #f9ee0a;
     }
     .white{
       height:110px;

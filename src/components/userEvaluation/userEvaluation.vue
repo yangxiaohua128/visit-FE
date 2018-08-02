@@ -5,26 +5,24 @@
         <img src="./img/return.png" @touchend="toBack">
       </div>
       <p>评价晒单</p>
-      <div>提交</div>
+      <div></div>
     </header>
-    <div class="content">
+    <form class="content" method="get" action="">
+      <p class="score">评分</p>
       <div class="level">
-        <img src="./img/picture.jpg">
-        <div class="star">
-          <p>评分</p>
-        </div>
+          <div v-for="(sel,index) in select" :key="sel.id">
+            <input id="item1" type="radio" name="item" value="sel" checked/>
+            <label for="item1" :class="{ 'active':n==index}" @touchend="changeN(index)">{{sel}}</label>
+          </div>
       </div>
       <div class="comment">
         <textarea name="comment" title="comment" style="width:100%; height:70%"></textarea>
         <div class="photo">
           <input id="pic" type="file" @change="handleFileChange" ref="inputer" capture="video"
-          />
+                 multiple="multiple" accept="image/png,image/gif,image/jpeg"/>
           <label for="pic"></label>
           <img :src="dataUrl" />
-          <!-- other element-->
-          <img src="./img/photo.png">
         </div>
-        <div class="anonymous"><img :src="imgUrl"  @touchend="changeUrl()">匿名评价</div>
       </div>
       <div class="details">
         <div class="prompt">
@@ -35,43 +33,27 @@
           <div></div>
         </div>
       </div>
-      <div>
-      </div>
-    </div>
-    <div class="star" :class="starType">
-    <span v-for="itemClass in itemClasses" :class="itemClass" class="star-item" track-by="$index" :key="itemClass.id">
-    </span>
-    </div>
+    </form>
   </div>
 </template>
 
 <script>
-import star from '../../../star.vue'
 export default {
   name: 'userEvaluation',
   data () {
     return {
       items: ['行程安排', '描述相符', '导游讲解'],
-      imgUrl: require('./img/select.png'),
-      bOn: false,
-      dataUrl: '',
+      dataUrl: require('./img/photo.png'),
       file: null,
       fileName: '',
       errText: '',
-      size: 36,
-      score: 10
+      select: ['很差', '差', '一般', '满意', '完美'],
+      n: -1
     }
-  },
-  components: {
-    'star': star
   },
   methods: {
     toBack () {
       this.$router.back(-1)
-    },
-    changeUrl () {
-      this.bOn ? this.imgUrl = require('./img/select.png') : this.imgUrl = require('./img/unselect.png')
-      this.bOn = !this.bOn
     },
     handleFileChange (e) {
       if (typeof e.target === 'undefined') this.file = e[0]
@@ -100,7 +82,9 @@ export default {
           self.dataUrl = this.result
         }
       }
-      console.log(this.dataUrl)
+    },
+    changeN (i) {
+      this.n = i
     }
   }
 }
@@ -137,25 +121,46 @@ export default {
     }
   }
   .content{
+    .score{
+      font-size: 40px;
+      line-height: 50px;
+      height: 50px;
+      width: 85%;
+      margin: 0 auto;
+      text-align: left;
+    }
     .level{
       width: 90%;
       margin: 0 auto;
+      height: 130px;
+      font-size: 30px;
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       align-items: center;
-      height: 230px;
-      img{
-        width: 200px;
-        height: 170px;
+        div{
+          position: relative;
+          line-height: 30px;
+          input[type="radio"] {
+            width: 100px;
+            height: 50px;
+            opacity: 0;
+          }
+          label{
+            position: absolute;
+            left: 5px;
+            top: 3px;
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 10px;
+            border: 1px solid #999;
+          }
+          label.active{
+            background-color: #f9de57;
+            border: 1px solid #f9de57;
+          }
+        }
       }
-      .star{
-        font-size: 36px;
-        width: 350px;
-        height: 170px;
-        text-align: left;
-        color: black;
-      }
-    }
     .comment{
       width: 100%;
       height: 550px;
@@ -196,6 +201,9 @@ export default {
         position: absolute;
         top: 0;left: 0;right: 0;bottom: 0;
         z-index: 10;
+      }
+      img:nth-child(1){
+        background-color: white;
       }
     }
     .details{
