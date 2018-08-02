@@ -7,13 +7,9 @@
      <div></div>
     </header>
     <!-- 中间部分-->
-      <ul class="nav">
-        <li><img src="./img/complatedorder2.png" width="20" height="20"/><p>全部订单</p></li>
-        <li><img src="./img/waitpay2.png" width="20" height="20"/><p>待支付</p></li>
-        <li><img src="./img/payorder2.png" width="20" height="20"/><p>待出行</p></li>
-        <li><img src="./img/appraise2.png" width="20" height="20"/><p>待评价</p></li>
-        <li><img src="./img/moneyback2.png" width="20" height="20"/><p>退款订单</p></li>
-      </ul>
+      <!--<div class="nav">-->
+        <!--<div v-for="item in items" :key="item.id"><img :src="{{item.path}}"/><p>{{item.text}}</p></div>-->
+      <!--</div>-->
     <div class="content">
       <div class="oneOrder">
       <div class="time">预定日期:<span>7月25日</span></div>
@@ -22,13 +18,12 @@
         <div class="money"><p class="p1">￥1500</p><p class="p2">状态</p></div>
         <div class="from"><span>7月25日</span>至<span>7月30日</span></div>
         <div class="button"><button type="button">点评</button><button type="button">去支付</button>
-        <button type="button">取消订单</button>
         </div>
       </div>
       </div>
     </div>
     <footer>
-      <div class="sort"><button type="button">近--远</button></div>
+      <div class="sort"><button type="button" >近--远</button></div>
       <div class="lose"><button type="button">失效订单</button></div>
     </footer>
   </div>
@@ -40,7 +35,15 @@
 export default {
   name: 'ordermanagement',
   data () {
-    return {}
+    return {
+      items: [
+        {path: require('./img/complatedorder2.png'), text: '全部订单'},
+        {path: require('./img/waitpay2.png'), text: '待支付'},
+        {path: require('./img/payorder2.png'), text: '待出行'},
+        {path: require('./img/appraise2.png'), text: '待评价'},
+        {path: require('./img/moneyback2.png'), text: '退款订单'}
+      ]
+    }
   },
   methods: {
     toBack: function () {
@@ -48,7 +51,6 @@ export default {
     }
   }
 }
-
 </script>
 
 <style lang="scss">
@@ -90,8 +92,12 @@ export default {
     padding: 0;
     margin-bottom: 35px;
     align-items: center;
-  li{
+  div{
     width: 150px;
+  }
+  img{
+    width: 40px;
+    height: 40px;
   }
   p{
     text-align: center;
