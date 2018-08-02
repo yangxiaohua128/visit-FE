@@ -2,28 +2,23 @@
   <div class="searchResults">
     <header>
       <div>
-        <img src="./img/return.png">
+        <img src="./img/return.png" @touchend="toBack">
       </div>
       <p>西安</p>
       <div>180条</div>
     </header>
     <div class="content">
-      <form>
-        <input type="search" placeholder="西安">
-        <img src="./img/search.png" class="search">
-      </form>
       <ul class="sort">
-        <li>热度</li>
-        <li>价格升序</li>
-        <li>价格降序</li>
+        <li v-for="(item,index) of items" :key="item.id" :class="{ 'checked':n==index}"
+            @touchend="changeN(index)">{{item}}</li>
       </ul>
       <div class="list">
         <div class="produce">
           <div class="picture">图片</div>
           <div class="goods">
             <p class="message">商品信息</p>
-            <span class="comment">好评</span>
-            <span class="price">价格</span>
+            <span class="comment">销量</span>
+            <span class="price">￥价格</span>
           </div>
         </div>
       </div>
@@ -37,7 +32,16 @@ export default {
   name: 'searchResults',
   data () {
     return {
-      msg: '[]'
+      items: ['热度', '价格升序', '价格降序'],
+      n: 0
+    }
+  },
+  methods: {
+    toBack () {
+      this.$router.back(-1)
+    },
+    changeN (i) {
+      this.n = i
     }
   }
 }
@@ -74,35 +78,23 @@ export default {
     }
   }
   .content{
-    form{
-      position: relative;
-      .search{
-        width: 50px;
-        height: 50px;
-        position: absolute;
-        top: 10px;
-        left: 5%;
-      }
-      input{
-        width: 95%;
-        height: 63px;
-        margin: 0 auto;
-        border-radius: 20px;
-        background-color: #eef1f8;
-        padding-left: 100px;
-      }
-    }
+    position: relative;
     .sort{
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       align-items: center;
       width: 100%;
       height: 90px;
       li{
-        width:200px;
+        width:120px;
         height: 60px;
         line-height: 60px;
         font-size: 28px;
+      }
+      li.checked{
+        color:#000;
+        font-size: 30px;
+        border-bottom:3px #f9de57 solid;
       }
     }
     .list{
@@ -138,7 +130,7 @@ export default {
             width:60%;
             height: 34px;
             line-height: 34px;
-            font-size: 22px;
+            font-size: 28px;
             background-color: aqua;
             align-self: center;
           }
@@ -146,7 +138,7 @@ export default {
             width: 33%;
             height: 60px;
             line-height: 60px;
-            font-size:34px ;
+            font-size:38px ;
             background-color: blue;
             align-self: flex-end;
           }

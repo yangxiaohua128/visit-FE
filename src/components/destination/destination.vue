@@ -17,13 +17,29 @@
         <li>热门</li>
         <li>周边</li>
         <li>国内</li>
-        <li>港澳台</li>
         <li>欧洲</li>
         <li>美州</li>
         <li>澳中东非</li>
       </ul>
     </div>
-    <div class="showpage"></div>
+    <div class="showwrap">
+      <div class="showpage">
+        <!--< img src="./img/test.jpg">-->
+        <!--< img src="./img/test.jpg">-->
+        <!--< img src="./img/test.jpg">-->
+        <!--< img src="./img/test.jpg">-->
+        <!--< img src="./img/test.jpg">-->
+        <!--< img src="./img/test.jpg">-->
+        <!--< img src="./img/test.jpg">-->
+        <!--< img src="./img/test.jpg">-->
+        <ul>
+          <li v-for ="item in flowers" :key="item">
+            <img :src="defaultImg" alt="flowers">
+            <p>{{item}}</p >
+          </li>
+        </ul>
+      </div>
+    </div>
     <div class="wrap">
       <div class="footer">
         <div><img src="./img/home.png"/></div>
@@ -42,10 +58,13 @@
 </template>
 
 <script>
-var ali = document.getElementsByTagName('li')
-for (let i = 0; i < ali.length; i++) {
-  this.onclick = function () {
-    this.style.backgroundColor = 'yellow'
+export default {
+  name: 'destination',
+  data () {
+    return {
+      list: [
+        { src: './img/test.jpg' }, { src: './img/test.jpg' }, { src: './img/test.jpg' }, { src: './img/test.jpg' }
+      ]}
   }
 }
 </script>
@@ -58,26 +77,15 @@ for (let i = 0; i < ali.length; i++) {
   .hwarp{
     width: 100%;
     position: fixed;
-    top: 60px;
+    top: 0;
   }
   .destination{
     width: 750px;
     height: 2000px;
   }
   .header{
+    z-index: 999;
     width: 750px;
-    height: 240px;
-    background-color: #ffe14d;
-  }
-  .top{
-    margin-bottom: 50px;
-    padding-top: 25px;
-    display: flex;
-    justify-content: space-between;
-  }
-  .header img{
-    padding-left: 30px;
-    width: 50px;
     height: 50px;
   }
   .sp1{
@@ -86,9 +94,11 @@ for (let i = 0; i < ali.length; i++) {
     color: #000000;
   }
   input{
+    border: 2px #5dc7b9 solid;
     width: 500px;
     height: 60px;
     border-radius: 20px;
+    margin-left:120px
   }
   .search{
     position: relative;
@@ -96,14 +106,14 @@ for (let i = 0; i < ali.length; i++) {
   .section{
     position: fixed;
     left: 0;
-    bottom: 102px;
+    bottom: 105px;
   }
   .section li{
     width: 176px;
-    height: 131px;
+    height: 163px;
     background-color:#f5f5f5;
     text-align: center;
-    line-height: 100px;
+    line-height: 152px;
     border-bottom: 2px #ccc solid;
   }
   .footer{
@@ -115,6 +125,7 @@ for (let i = 0; i < ali.length; i++) {
     height: 70px;
   }
   .wrap{
+    background-color: #f5f5f5;
     border-top: 2px #ccc solid;
     position: fixed;
     bottom: 0;
@@ -125,5 +136,23 @@ for (let i = 0; i < ali.length; i++) {
     display: flex;
     justify-content:space-around ;
   }
-
+  .showpage{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  .showpage img{
+    margin-bottom: 20px;
+    width: 250px;
+    height: 250px;
+  }
+  .showwrap{
+    margin-top: 20px;
+    z-index: -999;
+    width: 573px;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 240px;
+  }
 </style>

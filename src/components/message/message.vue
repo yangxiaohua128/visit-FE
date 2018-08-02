@@ -2,21 +2,21 @@
   <div class="message">
     <header>
       <img src="./img/arrowLeft.png"/>
-      <p>跳过</p>
+      <p>跳过</p >
     </header>
     <div class="content">
       <div class="name">新增出行人信息</div>
       <div class="detail">
         <div>
-          <p>中文姓名<span>*</span></p>
+          <p>中文姓名<span>*</span></p >
           <input type="text" placeholder="请输入姓名"/>
         </div>
         <div>
-          <p>身份证号<span>*</span></p>
+          <p>身份证号<span>*</span></p >
           <input type="text" placeholder="请输入身份证号"/>
         </div>
         <div>
-          <p>联系电话<span>*</span></p>
+          <p>联系电话<span>*</span></p >
           <input type="text" placeholder="请输入联系电话"/>
         </div>
       </div>
@@ -26,9 +26,6 @@
 </template>
 
 <script>
-export default {
-  name: 'message'
-}
 </script>
 
 <style type="text/css">

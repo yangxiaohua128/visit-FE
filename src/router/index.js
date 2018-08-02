@@ -18,7 +18,9 @@ import waitpay from '@/components/waitpay/waitpay'
 import order from '@/components/order/order'
 import orderconfirmation from '@/components/orderconfirmation/orderconfirmation'
 import message from '@/components/message/message'
-import showOne from '@/components/showOne/showOne'
+import backMoneyOk from '@/components/backMoneyOk/backMoneyOk'
+import backMoneyNo from '@/components/backMoneyNo/backMoneyNo'
+import pay from '@/components/pay/pay'
 Vue.use(Router)
 // const advancedSearch = (resolve) => {
 //   import('@/components/advancedSearch/advancedSearch').then((module) => {
@@ -63,8 +65,8 @@ export default new Router({
       name: 'history',
       component: history
     },
-
-    { path: '/advancedSearch',
+    {
+      path: '/advancedSearch',
       name: 'advancedSearch',
       component: advancedSearch
     },
@@ -138,6 +140,13 @@ export default new Router({
       component: orderPage
     },
     {
+      title: '预定页面',
+      path: '/order',
+      name: 'order',
+      component: order
+
+    },
+    {
       title: '确定页',
       path: '/orderconfirmation',
       name: 'orderconfirmation',
@@ -150,10 +159,22 @@ export default new Router({
       component: message
     },
     {
-      title: '单个产品展示',
-      path: '/showOne',
-      name: 'showOne',
-      component: showOne
+      title: '退款成功',
+      path: '/backMoneyOk',
+      name: 'backMoneyOk',
+      component: backMoneyOk
+    },
+    {
+      title: '退款失败',
+      path: '/backMoneyNo',
+      name: 'backMoneyNo',
+      component: backMoneyNo
+    },
+    {
+      title: '支付',
+      path: '/pay',
+      name: 'pay',
+      component: pay
     }
   ]
 })

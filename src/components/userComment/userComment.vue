@@ -2,12 +2,10 @@
   <div class="userComment">
     <header>
       <div>
-        <img src="./img/return.png" class="img1">
+        <img src="./img/return.png" class="img" @touchend="toBack">
       </div>
       <p>用户点评</p>
-      <div>
-        <img src="./img/news.png" class="img2">
-      </div>
+      <div></div>
     </header>
     <div class="content">
       <div class="comment">
@@ -20,31 +18,32 @@
           <div>导游讲解</div>
         </div>
         <div class="repertory">
-          <div v-for="item of items" :key="item.id">{{item}}</div>
+          <div v-for="(item,index) of items" :key="item.id" :class="{ 'checked':n==index}"
+               @touchend="changeN(index)">{{item}}</div>
         </div>
       </div>
       <div class="message">
         <div class="order">
           <span class="number1">
             <img src="./img/icon.png">
-            eqoqeuq21</span>
+            37407
+          </span>
           <span class="number2">2334***0844</span>
         </div>
         <div class="picture"></div>
         <div class="write">
           <p></p>
-          <img src="./img/down.png">
         </div>
         <div class="time">
-          <div>
+          <div @touchend="changeNumber()">
             <img src="./img/comment.png">
-            <span>有用</span>
+            <span>赞({{number}})</span>
           </div>
           <span>2018-7-29 15:42</span>
         </div>
         <div class="reply">
-          <div>查看供应商回复<img src="./img/down.png"></div>
-          <div></div>
+          <div>查看供应商回复<img :src="imgUrl"  @touchend="showReply()"></div>
+          <p v-if="show">[供应商回复]：</p>
         </div>
       </div>
     </div>
@@ -56,7 +55,28 @@ export default {
   name: 'userComment',
   data () {
     return {
-      items: ['全部', '好评', '中评', '差评', '有图']
+      items: ['全部', '好评', '中评', '差评', '有图'],
+      n: 0,
+      imgUrl: require('./img/down.png'),
+      number: 0,
+      show: false
+    }
+  },
+  methods: {
+    toBack () {
+      this.$router.back(-1)
+    },
+    changeN (i) {
+      this.n = i
+    },
+    // showReply () {
+    //   this.show ? this.imgUrl = require('./img/down.png') : this.imgUrl = require('./img/up.png')
+    //   this.show = !this.show
+    //   this.isShow = !this.isShow
+    // },
+    changeNumber () {
+      this.number++
+      console.log(Number)
     }
   }
 }
@@ -72,13 +92,9 @@ export default {
     display:flex;
     align-items: center;
     justify-content:space-between;
-    .img1{
+    .img{
       width:38px;
       height:38px;
-    }
-    .img2{
-      width:65px;
-      height:65px;
     }
     p{
       width:200px;
@@ -116,7 +132,6 @@ export default {
           border: 3px #ec7e3f solid;
           line-height: 84px;
           font-size: 32px;
-          ;
         }
       }
       .details{
@@ -142,6 +157,13 @@ export default {
           border: 1px #666 solid;
           border-radius: 5px;
           color: #666;
+          cursor:pointer;
+          transition:all 0.3s linear;
+        }
+        div.checked{
+          background-color:#f9de57;
+          color:#000;
+          border:1px #fff solid;
         }
       }
     }
@@ -150,51 +172,60 @@ export default {
       .order{
         display: flex;
         width: 100%;
-        height: 70px;
+        height: 80px;
         border-top: 1px #ccc solid;
         justify-content: space-between;
-        margin-bottom: 30px;
         span{
           font-size: 30px;
           color: black;
           height: 80px;
           line-height: 80px;
+          width: 200px;
+          vertical-align: center;
           img{
             width: 80px;
             height: 80px;
+            vertical-align: middle;
           }
         }
       }
       .picture{
         width: 100%;
-        height: 150px;
         background-color: #ccc;
       }
       .write{
         p{
           width: 100%;
-          height: 150px;
-          overflow: hidden;
-        }
-        img{
-          width: 50px;
-          height: 50px;
+          font-size: 30px;
+          text-align: left;
+          letter-spacing: 2px;
+          line-height: 40px;
         }
       }
       .time{
         width: 100%;
-        height: 70px;
+        height: 80px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         div{
-          width: 120px;
-          height: 40px;
+          width: 200px;
+          height: 50px;
           line-height: 40px;
-          border-radius: 5px;
+          border-radius: 20px;
+          border: 1px #ccc solid;
+          display: flex;
+          justify-content: center;
+          align-items: center;
           img{
             width: 50px;
             height: 50px;
+          }
+          span{
+            display: inline-block;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
           }
         }
         span{
@@ -210,18 +241,21 @@ export default {
           font-size: 30px;
           color: #324452;
           img{
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
+            vertical-align: middle;
           }
         }
-        div:nth-child(2){
+        p{
           width: 100%;
           box-sizing: border-box;
           background-color: #f8f8f8;
           color: #666;
           padding: 10px;
-          height: 100px;
           border-radius: 10px;
+          text-align: left;
+          font-size: 30px;
+          line-height: 40px;
         }
       }
     }

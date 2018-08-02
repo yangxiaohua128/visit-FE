@@ -7,7 +7,8 @@ import 'lib-flexible/flexible.js'
 // import wcSwiper from 'wc-swiper'
 // import 'wc-swiper/style.css'
 Vue.config.productionTip = false
-// Vue.use(wcSwiper)
+// Vue.use(wcSwiper);
+/* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
