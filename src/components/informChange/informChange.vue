@@ -1,39 +1,42 @@
 <template>
-<div class="informChange">
-  <header>
-    <div><img src="./img/left.png" width="16" height="16"/></div>
-    <p>编辑个人资料</p>
-    <div></div>
-  </header>
-  <div class="change">
-    <div class="name">
-    <div class="name1">真实姓名</div>
-    <input type="text" class="name2" placeholder="请输入你的真实姓名"/>
-    </div>
-    <div class="sex">
-   <div class="sex1">
-     <div>性别</div>
-     <div style="width:40px;text-align: center;border-bottom:2px dodgerblue solid ">男</div>
-   </div>
-    <div class="sex2">
-      <div style="width:40px;text-align: center ">女</div>
+  <div class="informChange">
+    <header>
+      <div><img src="./img/left.png" width="19" height="19" @touchend="toBack"/></div>
+      <p>编辑个人资料</p>
       <div></div>
-    </div>
-    </div>
-    <div class="time">
-      <div class="time1">出生日期</div>
-      <div class="time2">日期</div>
-    </div>
-  </div>
-  <button type="button">保存</button>
+    </header>
+    <form class="change" action="" method="post" name="myForm" onsubmit="console.log(input.value)">
+          <div class="name">
+        <div class="name1">真实姓名</div>
+        <input type="text" class="name2" name="myName" placeholder="请输入你的真实姓名" required="required" v-model.lazy="msg"/>
 </div>
+      <div class="sex">
+        <div class="sex1">性别</div>
+        <div><input  type="radio" name="sex" value="男"/><img src="./img/man.png" width="50px" height="50px"/></div>
+        <div><input  type="radio" name="sex" value="女"/><img src="./img/woman.png" width="50px" height="50px"/></div>
+      </div>
+      <div class="time">
+        <div class="time1">出生日期</div>
+        <input type="date" class="time2"  name="myBirthday" placeholder="请输入你的生日" required="required"/>
+      </div>
+      <div class="save"><input type="submit" value="保存" name="submit"/></div>
+    </form>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'informChange',
   data () {
-    return {}
+    return {
+      msg: 'whh'
+      // arr = ["userName","msg"]
+    }
+  },
+  methods: {
+    toBack: function () {
+      this.$router.back(-1)
+    }
   }
 }
 </script>
@@ -56,11 +59,13 @@ export default {
     margin-bottom: 20px;
 
     div{
+      text-align: left;
+      padding-left: 20px;
       width: 150px;
       height: 38px;
     }
 
-     p{
+    p{
       text-align: center;
       line-height: 38px;
       font-size: 36px;
@@ -78,9 +83,7 @@ export default {
     margin-right: 6px;
     text-align: left;
     font-size: 34px;
-    border-bottom:1px #e4e4e4 solid ;
-    border-top:1px #e4e4e4 solid ;
-    margin-bottom: 150px;
+    border-top:2px #e4e4e4 solid ;
   }
   .name{
     justify-content: space-between;
@@ -103,35 +106,21 @@ export default {
   }
   .sex{
     justify-content: space-between;
+    align-items: center;
     flex-wrap:wrap;
     display: flex;
     width:736px;
-  }
-  .sex1{
-    width:254px;
-    height: 100px;
-    line-height: 100px;
-    display: flex;
-    justify-content: space-between;
-    border-right:1px #e4e4e4 solid ;
-    margin-top:5px;
-    margin-bottom:5px;
-    padding-right: 9px;
-  }
-  .sex2{
-    width:460px;
-    height: 100px;
-    line-height: 100px;
-    margin-top:5px;
-    margin-bottom:5px;
-    display: flex;
-    justify-content: space-between;
+    input{
+      height: 80px;
+    }
   }
   .time{
     justify-content: space-between;
     flex-wrap:wrap;
     display: flex;
     width:736px;
+    margin-bottom: 150px;
+    border-bottom: 1px #e4e4e4 solid ;
   }
   .time1{
     width:200px ;
@@ -147,14 +136,18 @@ export default {
     border-top:1px #e4e4e4 solid;
     margin: 0;
   }
-  button{
-    width:91%;
-    align-self: center;
-    background-color: #ff9a00;
+  .save{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  input {
+    width: 91%;
+    background-color: #f9de57;
     height: 90px;
     border-radius: 8px;
     font-size: 38px;
-    border:none;
-    color:#edffff;
+    border: none;
+    margin: 0 auto;
+  }
   }
 </style>

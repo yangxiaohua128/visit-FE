@@ -8,11 +8,18 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 Vue.use(VueAwesomeSwiper)
 // Vue.config.productionTip = false;
 let vm = new Vue({
-  el: '#app',
-  router,
-  components: { App },
-  template: '<App/>'
-})
-Vue.use({
-  vm
+// import wcSwiper from 'wc-swiper'
+// import 'wc-swiper/style.css'
+  Vue: config.productionTip = false,
+// Vue.use(wcSwiper);
+  /* eslint-disable no-new */
+  new: Vue({
+    el: '#app',
+    router,
+    components: {App},
+    template: '<App/>'
+  }),
+  Vue: use({
+    vm
+  })
 })

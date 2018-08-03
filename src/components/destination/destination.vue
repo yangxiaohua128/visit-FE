@@ -10,6 +10,14 @@
           <input type="search" placeholder="西安"/>
           <!--<button type="button" class="btn1">搜索</button>-->
         </div>
+    <div class="header">
+      <div class="top">
+        <img src="./img/Rleft.png">
+        <span class="sp1">选择目的地</span>
+      </div>
+      <div class="search">
+        <input type="search" placeholder="西安"/>
+        <button type="button" class="btn1">搜索</button>
       </div>
     </div>
     <div class="section">
@@ -37,6 +45,14 @@
         <span>浏览历史</span>
         <span>我的</span>
       </div>
+    <div class="foter">
+      <img>
+      <img>
+      <img>
+      <img>
+    </div>
+  </div>
+      </div>
     </div>
   </div>
 </template>
@@ -48,6 +64,9 @@
       this.style.backgroundColor = "yellow"
     }
   }
+export default {
+  name: 'destination'
+}
 </script>
 
 <style type="text/css">
@@ -65,7 +84,11 @@
     height: 2000px;
   }
   .header{
+    width: 750px;}
+  .destination{
     width: 750px;
+  }
+  .header{
     height: 240px;
     background-color: #ffe14d;
   }
@@ -79,6 +102,8 @@
     padding-left: 30px;
     width: 50px;
     height: 50px;
+    width: 50px;
+    height: 60px;
   }
   .sp1{
     margin-right: 275px;
@@ -89,6 +114,12 @@
     width: 500px;
     height: 60px;
     border-radius: 20px;
+    color: #ffffff;
+  }
+  input{
+    width: 450px;
+    height: 60px;
+    border-radius: 10px;
   }
   .search{
     position: relative;
@@ -126,4 +157,27 @@
     justify-content:space-around ;
   }
 
+  .btn1{
+    height: 60px;
+    width: 100px;
+    border-radius: 10px;
+    color: #ffe14d;
+    background-color: #f5f5f5;
+    position: absolute;
+    right: 58px;
+
+  }
+  .btn1:focus{outline:0;}
+  .section{
+    position: fixed;
+    left: 0;
+  }
+  .section li{
+    width: 176px;
+    height: 100px;
+    background-color:#f5f5f5;
+    text-align: center;
+    line-height: 100px;
+    border: 2px #ccc solid;
+  }
 </style>

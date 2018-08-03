@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import orderPage from '@/components/orderPage/orderPage'
-import search from '@/components/search/search'
 import apppage from '@/components/apppage/apppage'
 import News from '@/components/News/News'
 import history from '@/components/history/history'
@@ -20,6 +19,10 @@ import order from '@/components/order/order'
 import orderconfirmation from '@/components/orderconfirmation/orderconfirmation'
 import message from '@/components/message/message'
 import shows from '@/components/shows/shows'
+import showOne from '@/components/showOne/showOne'
+import backMoneyOk from '@/components/backMoneyOk/backMoneyOk'
+import backMoneyNo from '@/components/backMoneyNo/backMoneyNo'
+import pay from '@/components/pay/pay'
 Vue.use(Router)
 // const advancedSearch = (resolve) => {
 //   import('@/components/advancedSearch/advancedSearch').then((module) => {
@@ -39,12 +42,6 @@ export default new Router({
       path: '/',
       name: 'HelloWorld',
       component: HelloWorld
-    },
-    {
-      title: '搜索页',
-      path: '/search',
-      name: 'search',
-      component: search
     },
     {
       title: '首页',
@@ -70,13 +67,11 @@ export default new Router({
       name: 'history',
       component: history
     },
-
-    {  path: '/advancedSearch',
+    {
+      path: '/advancedSearch',
       name: 'advancedSearch',
       component: advancedSearch
     },
-
-
     {
       path: '/searchResults',
       name: 'searchResults',
@@ -97,7 +92,8 @@ export default new Router({
        name:'userEvaluation',
       component:userEvaluation
     },
-{    title: '修改',
+{
+  title: '修改',
       path: '/userEvaluation',
       name: 'userEvaluation',
       component: userEvaluation
@@ -132,12 +128,18 @@ export default new Router({
       name: 'waitpay',
       component: waitpay
     },
-{
+    {
 
       title: '预定页',
       path: '/orderPage',
       name: 'orderPage',
       component: orderPage
+    },
+    {
+      title: '预定页',
+      path: '/order',
+      name: 'order',
+      component: order
     },
     {
       title: '确定页',
@@ -156,6 +158,24 @@ export default new Router({
       path: '/shows',
       name: 'shows',
       component: shows
+    },
+    {
+      title: '退款成功',
+      path: '/backMoneyOk',
+      name: 'backMoneyOk',
+      component: backMoneyOk
+    },
+    {
+      title: '退款失败',
+      path: '/backMoneyNo',
+      name: 'backMoneyNo',
+      component: backMoneyNo
+    },
+    {
+      title: '支付',
+      path: '/pay',
+      name: 'pay',
+      component: pay
     }
   ]
 })

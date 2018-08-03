@@ -27,41 +27,44 @@ export default {
   .advancedSearch{
     width:750px;
   }
-  header{
-    width:100%;
-    height:90px;
-    display:flex;
+  header {
+    width: 100%;
+    height: 90px;
+    display: flex;
     align-items: center;
-    justify-content:space-between;
-    img{
-      width:38px;
-      height:38px;
-    }
-    p{
-      width:200px;
+    justify-content: space-between;
+    img {
+      width: 38px;
       height: 38px;
-      line-height: 38px;
-      text-align: center;
-      font-size: 36px;
-      color: black;
     }
-    div{
-      width:100px;
-      height: 38px;
-      line-height: 38px;
-      font-size: 36px;
-      color: black;
+    p {
+      width: 200px;
+      p, div {
+        width: 150px;
+        height: 38px;
+        line-height: 38px;
+        text-align: center;
+        font-size: 36px;
+        color: black;
+      }
+      div {
+        width: 100px;
+        height: 38px;
+        line-height: 38px;
+        font-size: 36px;
+        color: black;
+      }
     }
-  }
-  .content {
-    ul{
-      width: 100%;
-      li{
-        height: 260px;
+    .content {
+      ul {
         width: 100%;
-        p{
-          height: 50px;
-          width: 200px;
+        li {
+          height: 260px;
+          width: 100%;
+          p {
+            height: 50px;
+            width: 200px;
+          }
         }
       }
     }
