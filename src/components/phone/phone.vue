@@ -4,26 +4,28 @@
       <span id="s1">马蜂窝旅行欢迎您</span>
       <span id="s2">取消</span>
     </div>
-    <div class="navigation">
-      <span id="s3">账号登录</span>
-      <span id="s4">短信验证码登录</span>
-      <p id="p1"></p>
-      <p id="p2"></p>
-    </div>
-    <div class="content">
+    <div id="box">
+      <ul>
+       <li v-on:touchend="qh(true)" class="li1" >账号登录</li>
+       <li v-on:touchend="qh(false)" class="li2">短信验证码登录</li>
+        <p id="p1"></p>
+        <p id="p2"></p>
+      </ul>
+    <div class="content" v-if="temp">
       <span>账号
         <input type="text" placeholder="手机号"/>
       </span>
       <p></p>
       <span>密码
-        <input type="password">
-        <img src="./img/hide.png"/>
+        <input type="text" v-if="pwdType" v-model="eyetxt">
+        <input type="password" v-model="eyetxt" v-else>
+        <img :src="seen?seenimg:unseenimg" @touchend="changeType()"/>
       </span>
       <p></p>
       <button type="button" class="sign">登录</button>
       <button type="button" class="enroll">手机快速注册</button>
     </div>
-    <div class="content2">
+    <div class="content2" v-if="!temp">
       <span>手机号
         <input type="text" placeholder="输入手机号"/>
       </span>
@@ -36,13 +38,34 @@
       <button type="button" class="sign">登录</button>
       <button type="button" class="enroll">手机快速注册</button>
     </div>
-
-  </div>
+    </div>
+    </div>
 </template>
 
 <script>
   export default {
-    name: "phone"
+    name: 'phone',
+    data() {
+      return {
+        seen: '',
+        unseenimg: require('./img/hide.png'),
+        seenimg: require('./img/hide2.png'),
+        eyetxt: "",
+        pwdType: false,
+        temp:true
+      }
+    },
+    methods: {
+      changeType: function () {
+          this.seen = !this.seen;
+          this.pwdType=!this.pwdType;
+      },
+      qh:function(t){
+        console.log(t);
+        this.temp=t
+      }
+
+    }
   }
 </script>
 
@@ -53,15 +76,18 @@
     #s1{margin-left:234px;}
     #s2{margin-left:130px;}
   }
-  .navigation{
+
+  #box{
     font-size:30px;margin-top:60px;text-align:left;
-    #s3{margin-left:125px;}
-    #s4{margin-left:203px;}
+    .li1{margin-left:125px;width:120px;display:inline-block;}
+    .li2{margin-left:203px;width:210px;
+      display: inline-block;}
     #p1{width:240px;height:6px;background-color:#ffe24c;margin-top:28px;}
     #p2{width:750px;height:2px;background-color:#e6e6e6;}
   }
+
   .content{
-    margin-left:42px;margin-right:42px;display:none;
+    margin-left:42px;margin-right:42px;
     span{width:666px;height:120px;font-size:32px;line-height:120px;text-align:left;
       display:inline-block}
     input{margin-left:55px;}
@@ -88,4 +114,14 @@
     .enroll{width:666px;height:98px;border:1px #000 solid;background-color:#fff;
       margin-top:304px;}
   }
+  /*.li1{*/
+    /*font-size:30px;*/
+    /*position: absolute;*/
+    /*left:128px;*/
+  /*}*/
+  /*.li2{*/
+    /*font-size:30px;*/
+    /*position: absolute;*/
+    /*right:77px;*/
+  /*}*/
 </style>

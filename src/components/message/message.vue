@@ -27,7 +27,7 @@
 
 <script>
     export default {
-        name: "message"
+        name: 'message'
     }
 </script>
 <style type="text/css">

@@ -22,6 +22,7 @@ import orderconfirmation from '@/components/orderconfirmation/orderconfirmation'
 import message from '@/components/message/message'
 import showOne from '@/components/showOne/showOne'
 import modify from '@/components/modify/modify'
+import collection from '@/components/collection/collection'
 Vue.use(Router)
 // const advancedSearch = (resolve) => {
 //   import('@/components/advancedSearch/advancedSearch').then((module) => {
@@ -62,6 +63,12 @@ export default new Router({
   name: 'register',
   component: register
 },
+    {
+      title:'我的收藏',
+      path:'collection',
+      name:'collection',
+      component:collection
+    },
     {
       title: '用户信息修改页（1）',
       path: '/modify',
@@ -161,12 +168,6 @@ export default new Router({
       path: '/message',
       name: 'message',
       component: message
-    },
-    {
-      title: '注册页面',
-      path: '/register',
-      name: 'register',
-      component: register
     },
     {title: '单个产品展示',
       path: '/showOne',

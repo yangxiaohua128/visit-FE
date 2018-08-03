@@ -37,8 +37,8 @@
 
 <script>
   export default {
-    name:"signin",
-    data(){
+    name:'signin',
+     data (){
       return{
         items:[
           {path:require('./img/collection.png'),text:"我的收藏"},
@@ -53,7 +53,7 @@
     },
     methods:{
       choice(i){
-        
+
       }
     }
 
