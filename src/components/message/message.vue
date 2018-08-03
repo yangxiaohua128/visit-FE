@@ -3,7 +3,7 @@
     <header>
       <img src="./img/arrowLeft.png"/>
     </header>
-    <form class="detail" method="get" action="">
+    <form class="detail" method="get" action="" require="required">
     <div class="content">
        <div class="name" >新增出行人信息</div>
         <div>

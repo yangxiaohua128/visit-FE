@@ -6,6 +6,7 @@
         <k-slider :banners="banners" :swiperOption="swiperOption"></k-slider>
       </div>
       <div class="number"><p>(产品名称)</p><p>产品编号：0000000000</p></div>
+      <div class="timer">{{ `${day}天 ${hr}小时 ${min}分钟 ${sec}秒` }}</div>
     </header>
     <div class="content">
       <div class="name">(此处显示产品内容和描述）</div>
@@ -53,6 +54,10 @@
           'http://pic.lvmama.com/uploads/pc/place2/2018-07-25/2e53cce1-52e6-4ee8-8df4-ab3ed33bfd2e.jpg',
           'http://dimg19.c-ctrip.com/images/fd/tg/g3/M07/7F/1C/CggYGlXyQh-AR1cyAC9CPR2vz6s070_C_750_500_Q90.jpg'
         ],
+        day: 0,
+        hr: 0,
+        min: 0,
+        sec: 0,
         swiperOption:{
           direction:'horizontal',
           loop:true,
@@ -81,7 +86,27 @@
          changeN(i) {
            this.n = i;
          }
-       }
+       },
+    mounted: function () {
+      this.countdown()
+    },
+    countdown: function () {
+      const end = Date.parse(new Date('2018-8-4'))
+      const now = Date.parse(new Date())
+      const msec = end - now
+      let day = parseInt(msec / 1000 / 60 / 60 / 24)
+      let hr = parseInt(msec / 1000 / 60 / 60 % 24)
+      let min = parseInt(msec / 1000 / 60 % 60)
+      let sec = parseInt(msec / 1000 % 60)
+      this.day = day
+      this.hr = hr > 9 ? hr : '0' + hr
+      this.min = min > 9 ? min : '0' + min
+      this.sec = sec > 9 ? sec : '0' + sec
+      const that = this
+      setTimeout(function () {
+        that.countdown()
+      }, 1000)
+    }
   }
 </script>
 
@@ -121,6 +146,14 @@
       width: 100%;
       height: 500px;
     }
+    .timer{
+      z-index: 9999;
+      position:absolute;
+      right: 0;
+      top: 0;
+      font-size: 36px;
+
+    }
   }
   .name{
     width: 100%;
@@ -151,6 +184,7 @@
     width:100%;
     height:200px;
     p{
+      width: 100%;
       font-size: 32px;
       color:#818181;
       text-align: left;
@@ -210,7 +244,5 @@
       position: fixed;
       right: 0;
     }
-  /*.site,.date{*/
-    /*display: none;*/
-  /*}*/
+
 </style>

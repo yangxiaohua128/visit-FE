@@ -4,7 +4,7 @@
      <img src="./img/arrowLeft.png"/>
      <p>订单填写</p>
    </header>
-   <from class="information" method="get" action="http://www.baidu.com">
+   <from class="information" method="get" action="http://www.baidu.com" require="required">
      <div class="content">
        <div class="orderPage">
          <p>(订单显示)</p>
@@ -121,7 +121,7 @@
       justify-content:space-between;
       align-items:center;
       span{
-        color:#7d7c7d;
+        color:#565656;
         font-size:28px;
       }
     }
@@ -150,8 +150,8 @@
       align-items:center;
       span{
         width:100px;
-        color:#c1c1c1;
-        font-size:28px;
+        color:#565656;
+        font-size:30px;
         text-align:left;
       }
     }
@@ -183,6 +183,7 @@
       font-size: 30px;
       display: inline-block;
       width: 100px;
+      color:#565656;
     }
     div{
       width:100%;
@@ -217,10 +218,10 @@
       justify-content: space-between;
       align-items: center;
       p{
-        font-size:30px;
+        font-size:28px;
         height:30px;
         font-weight: bold;
-        color: #616161;
+        color: #565656;
         text-align: left;
       }
       img{
