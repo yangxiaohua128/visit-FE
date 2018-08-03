@@ -21,5 +21,12 @@ let vm = new Vue({
   }),
   Vue: use({
     vm
-  })
-})
+  }),
+  Vue: config.productionTip = false,
+  /* eslint-disable no-new */
+  new: Vue({
+    el: '#app',
+    router,
+    components: {App},
+    template: '<App/>',}
+  )})

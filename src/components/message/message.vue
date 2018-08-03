@@ -47,10 +47,9 @@
 
 <script>
     export default {
-        name: "message"
+        name: 'message'
     }
 </script>
-
 <style type="text/css">
   body{
     margin: 0;

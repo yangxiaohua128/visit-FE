@@ -9,7 +9,7 @@
 
 <script>
     export default {
-        name: "history"
+        name: 'history'
     }
 export default {
   name: 'history'
