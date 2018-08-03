@@ -16,7 +16,7 @@
     justify-content: space-between;
     width: 750px;
     height: 88px;
-    background-color: #2785e9;
+    background-color: #fae368;
 
   }
   .sp1{

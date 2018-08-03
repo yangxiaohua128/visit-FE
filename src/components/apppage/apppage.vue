@@ -25,6 +25,7 @@
     <div class="timesale">
       <div class="sale">
         <span class="sp3"></span><span class="sp2">限时特惠</span><span class="sp4"></span>
+        <div class="timer">{{ `${day}天 ${hr}小时 ${min}分钟 ${sec}秒` }}</div>
       </div>
       <div class="show">
         <img src="./img/banner2.jpg">
@@ -48,10 +49,11 @@
   </div>
 </template>
 <script>
-  import Slider from '../../../slider/slider.vue'
+  import Slider from '../../../sslider/sslider.vue'
   export default {
     data: function () {
       return{
+        day: 0, hr: 0, min: 0, sec: 0,
         banners: ['http://pic.lvmama.com/uploads/pc/place2/2018-07-16/c388073b-66b8-4a4a-ba73-a037d5479791.jpg', 'http://pic.lvmama.com/uploads/pc/place2/2018-07-31/6ca730cd-a8bd-4327-987d-1198bf6cd40d.jpg','http://pic.lvmama.com/uploads/pc/place2/2018-07-25/2e53cce1-52e6-4ee8-8df4-ab3ed33bfd2e.jpg','http://pic.lvmama.com/uploads/pc/place2/2018-07-16/5e772246-0115-40d1-b57d-eef53ffd242a.jpg'],
         swiperOption: {
           pagination: '.swiper-pagination',
@@ -60,19 +62,38 @@
           loop: true,
           observer: true,
           observeParents: true,
-          autoplayDisableOnInteraction : false,
-          autoplay: {
+          autoplayDisableOnInteraction: false,
+          autoplay2bs: {
             disableOnInteraction: false,
             delay: 2000
           }
         }
       }
     },
+    mounted: function () {
+      this.countdown()
+    },
     components: {
       kSlider : Slider
     },
-    methods : {
-
+    methods: {
+      countdown: function () {
+        const end = Date.parse(new Date('2018-8-4'))
+        const now = Date.parse(new Date())
+        const msec = end - now
+        let day = parseInt(msec / 1000 / 60 / 60 / 24)
+        let hr = parseInt(msec / 1000 / 60 / 60 % 24)
+        let min = parseInt(msec / 1000 / 60 % 60)
+        let sec = parseInt(msec / 1000 % 60)
+        this.day = day
+        this.hr = hr > 9 ? hr : '0' + hr
+        this.min = min > 9 ? min : '0' + min
+        this.sec = sec > 9 ? sec : '0' + sec
+        const that = this
+        setTimeout(function () {
+          that.countdown()
+        }, 1000)
+      }
     }
   }
 </script>
@@ -188,7 +209,12 @@
     width: 96%;
     height: auto;
   }
-  .fwrap{
+  .fwrap {
     background-color: #f4f4f4;
+  }
+  .timer{
+    margin-top: 20px;
+    font-size: 30px;
+    color: #ff0000;
   }
 </style>

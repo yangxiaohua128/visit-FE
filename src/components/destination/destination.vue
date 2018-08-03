@@ -14,30 +14,32 @@
     </div>
     <div class="section">
       <ul>
-        <li>热门</li>
-        <li>周边</li>
-        <li>国内</li>
-        <li>欧洲</li>
-        <li>美州</li>
-        <li>澳中东非</li>
+        <!--<li>热门</li>-->
+        <!--<li>周边</li>-->
+        <!--<li>国内</li>-->
+        <!--<li>欧洲</li>-->
+        <!--<li>美州</li>-->
+        <!--<li>澳中东非</li>-->
+        <li
+          v-for="(item,index) in tabs"
+          :class="{active:index === num}"
+          @touchend="tab(index)">{{item}}</li>
       </ul>
     </div>
     <div class="showwrap">
       <div class="showpage">
+        <img src="http://pcrj3k1qu.bkt.clouddn.com/FqOykJj6L5mh3mlJW4vfiRI398Rq">
+        <img src="http://pcrj3k1qu.bkt.clouddn.com/FqOykJj6L5mh3mlJW4vfiRI398Rq">
         <!--<img src="./img/test.jpg">-->
         <!--<img src="./img/test.jpg">-->
         <!--<img src="./img/test.jpg">-->
         <!--<img src="./img/test.jpg">-->
         <!--<img src="./img/test.jpg">-->
-        <!--<img src="./img/test.jpg">-->
-        <!--<img src="./img/test.jpg">-->
-        <!--<img src="./img/test.jpg">-->
-        <ul>
-          <li v-for ="item in flowers" :key="item">
-            <img :src="defaultImg" alt="flowers">
-            <p>{{item}}</p>
-          </li>
-        </ul>
+      </div>
+      <div class="tabCon">
+        <div
+          v-for='(itemCon,index) in tabContents'
+          v-show=" index === num">{{itemCon}}</div>
       </div>
     </div>
     <div class="wrap">
@@ -60,10 +62,17 @@
 <script>
   export default {
     name: 'destination',
-    data : {
-      list : [
-        {src: './img/test.jpg' }, { src: './img/test.jpg' }, { src: './img/test.jpg' }, { src: './img/test.jpg' }
-      ]
+    data: function () {
+      return {
+        tabs: ['热门', '国内', '周边', '欧洲', '美洲', '澳中东非'],
+        tabContents: [ { src: require('./img/test.jpg')}],
+        num: 1
+      }
+    },
+    methods: {
+      tab (index) {
+        this.num = index
+      }
     }
   }
 </script>
@@ -104,12 +113,12 @@
     font-size: 40px;
     color: #000000;
   }
-  input{
+   .search  input{
     border: 2px #5dc7b9 solid;
     width: 500px;
     height: 60px;
     border-radius: 20px;
-    margin-left:120px
+    margin-left: 120px;
   }
   .search{
     position: relative;
@@ -120,12 +129,13 @@
     bottom: 105px;
   }
   .section li{
+    border-top: 1px #ccc solid;
     width: 176px;
-    height: 163px;
+    height: 162.5px;
     background-color:#f5f5f5;
     text-align: center;
     line-height: 152px;
-    border-bottom: 2px #ccc solid;
+    border-bottom: 1px #ccc solid;
   }
   .footer{
     display: flex;
@@ -143,7 +153,7 @@
     width: 100%;
   }
   .text{
-    width: 733.5px;
+    width: 733px;
     display: flex;
     justify-content:space-around ;
   }
@@ -165,5 +175,9 @@
     position: absolute;
     right: 0;
     top: 240px;
+  }
+  li.active{
+    background-color:  #fae368;
+    transition: 0.1s all linear;
   }
 </style>

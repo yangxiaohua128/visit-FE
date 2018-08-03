@@ -1,30 +1,45 @@
 <template>
-  <div class="history">
+  <div class="news">
     <div class="header">
       <img src="./img/Rleft.png">
       <span class="sp1">消息</span>
     </div>
-    <div class="middle">
-      <span class="sp3">供应商</span>
-      <span class="sp4" v-show="isshow" @touchend="hidden()">活动</span>
+    <ul>
+      <li
+        v-for="(item,index) in tabs"
+        :class="{active:index === num}"
+        @touchend="tab(index)">{{item}}</li>
+    </ul>
+    <div >
+      <div class="tabCon"
+        v-for='(itemCon,index) in tabContents'
+        v-show=" index === num"
+           :class="{bgc:index===num}">{{itemCon}}</div>
     </div>
   </div>
 </template>
 
-<script>
+<script>import axios from 'axios'
 export default {
   name: 'history，',
   data: function () {
-        return {
-          isshow: false
-        }
+    return {
+      tabs: ['供应商', '活动'],
+      tabContents: [{1: '1'}, {2: '1'}],
+      num: 1
+    }
   },
-  methods: {
-    hidden () {
-          this.isshow = !this.isshow
+    methods: {
+      tab (index) {
+        this.num = index
+      },
+      getnews: function () {
+        axios.get('http://www.baidu.com').catch(resp => {
+          alert(123)
+        })
+      }
     }
   }
-}
 </script>
 
 <style type="text/css">
@@ -42,6 +57,7 @@ export default {
     height: 60px;
   }
   .header{
+    background-color: #fae368;
     display: flex;
     width: 750px;
     height: 88px;
@@ -55,29 +71,27 @@ export default {
     font-size: 38px;
     text-align: center;
   }
-  .middle{
-    display: flex;
-    padding-top: 5px;
-    width: 750px;
-    height: 88px;
-    line-height: 88px;
-    font-size: 36px;
-    background-color: #fcfcfc ;
-    border: 1px solid #e6e6e6;
-    justify-content: space-between;
-  }
   .sp1{
     margin-left: 40px;
   }
-  .sp3{
-    margin-left: 47px;
+  ul{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
   }
-  .sp4{
-    margin-right: 47px;
-
-  }
-  .sp3,.sp4{
-    background-color: #ffffff;
+  li{
+    margin-right: 20px;
+    margin-left: 20px;
+    font-size: 36px;
     font-weight: bold;
-}
+  }
+  li.active{
+    color: #fae368 ;
+  }
+  .tabCon.bgc{
+    margin-top: 20px;
+    width: 750px;
+    height: 1000px;
+    border-top: 2px #ccc solid ;
+  }
 </style>
