@@ -96,13 +96,14 @@ export default {
       font-size:30px;
     }
   }
-  header{
+  header {
     width: 100%;
     height: 90px;
-    align-items:center;
+    align-items: center;
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     margin-bottom: 20px;
+  }
 
     div{
       text-align: left;
@@ -117,6 +118,11 @@ export default {
       font-size: 36px;
       color:black;
     }
+  p{
+    text-align: center;
+    line-height: 38px;
+    font-size: 36px;
+    color:black;
   }
   .content{
     width: 100%;

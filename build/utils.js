@@ -28,7 +28,7 @@ exports.cssLoaders = function (options) {
     }
   }
 
-  const postcssLoader = {
+  const  postcssLoader = {
     loader: 'postcss-loader',
     options: {
       sourceMap: options.sourceMap

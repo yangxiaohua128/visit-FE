@@ -27,6 +27,7 @@ import backMoneyNo from '@/components/backMoneyNo/backMoneyNo'
 import pay from '@/components/pay/pay'
 import modify from '@/components/modify/modify'
 import collection from '@/components/collection/collection'
+import position from '@/components/position/position'
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -86,7 +87,7 @@ export default new Router({
       component: destination
     },
     {
-      title: '浏览历史页',
+      title: '浏览历史',
       path: '/history',
       name: 'history',
       component: history
@@ -94,6 +95,17 @@ export default new Router({
     {
       title: '高级搜索页',
       path: '/advancedSearch',
+      name: 'advancedSearch',
+      component: advanceSearch
+    },
+    {
+      tille: '选择定位',
+      path: '/position',
+      name: 'position',
+      component: position
+    },
+
+    {path: '/advancedSearch',
       name: 'advancedSearch',
       component: advancedSearch
     },
@@ -115,13 +127,18 @@ export default new Router({
       name: 'userComment',
       component: userComment
     },
+
     {
        path: '/userEvaluation',
        name:'userEvaluation',
       component:userEvaluation
     },
-{
-      title: '用户评价',
+    { path: '/userEvaluation',
+      name: 'userEvaluation',
+      component: userEvaluation
+    },
+    {title: '修改',
+
       path: '/userEvaluation',
       name: 'userEvaluation',
       component: userEvaluation
@@ -156,9 +173,7 @@ export default new Router({
       name: 'waitpay',
       component: waitpay
     },
-    {
-
-      title: '预定页',
+    { title: '预定页',
       path: '/orderPage',
       name: 'orderPage',
       component: orderPage

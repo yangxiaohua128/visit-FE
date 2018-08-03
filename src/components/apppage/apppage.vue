@@ -1,34 +1,43 @@
 <template>
   <div class="apppage">
-    <div class="shuffling">
-      <img src="./img/banner1.jpg">
+    <div class="home2">
+      <k-slider :banners="banners" :swiperOption="swiperOption"></k-slider>
     </div>
     <div class="search">
       <img src="./img/air.png"/>
-      <span>高级搜索</span>
-      <input type="search"/>
+      <input type="search" placeholder="高级搜索"/>
     </div>
     <div class="nav">
       <div class="pic">
-        <img/>
-        <img/>
-        <img/>
-        <img/>
+        <img src="./img/saround.png"/>
+        <img src="./img/destination.png"/>
+        <img src="./img/sfree.png"/>
+        <img src="./img/advant.png"/>
+      </div>
+      <div class="ntext">
+        <span>周边游</span>
+        <span>目的地出行</span>
+        <span class="sp1">自由行</span>
+        <span>高端游</span>
       </div>
     </div>
-      <div class="text">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+    <div class="trans"></div>
+    <div class="timesale">
+      <div class="sale">
+        <span class="sp3"></span><span class="sp2">限时特惠</span><span class="sp4"></span>
+        <div class="timer">{{ `${day}天 ${hr}小时 ${min}分钟 ${sec}秒` }}</div>
       </div>
-    <div class="timesale"></div>
+      <div class="show">
+        <img src="./img/banner2.jpg">
+        <img src="./img/banner3.jpg">
+      </div>
+    </div>
     <div class="fwrap">
       <div class="footer">
-        <div><img src="./img/home.png"/></div>
-        <div><img src="./img/dstns.png"/></div>
-        <div><img src="./img/History.png"/></div>
-        <div><img src="./img/my.png"/></div>
+        <div><img src="./img/homes.png"/></div>
+        <div><img src="./img/destss.png"/></div>
+        <div><img src="./img/historys.png"/></div>
+        <div><img src="./img/mine.png"/></div>
       </div>
       <div class="text">
         <span>旅游首页</span>
@@ -41,35 +50,86 @@
 </template>
 
 <script>
-
-
+  import Slider from '../../../sslider/sslider.vue'
+  export default {
+    data: function () {
+      return{
+        day: 0, hr: 0, min: 0, sec: 0,
+        banners: ['http://pic.lvmama.com/uploads/pc/place2/2018-07-16/c388073b-66b8-4a4a-ba73-a037d5479791.jpg', 'http://pic.lvmama.com/uploads/pc/place2/2018-07-31/6ca730cd-a8bd-4327-987d-1198bf6cd40d.jpg','http://pic.lvmama.com/uploads/pc/place2/2018-07-25/2e53cce1-52e6-4ee8-8df4-ab3ed33bfd2e.jpg','http://pic.lvmama.com/uploads/pc/place2/2018-07-16/5e772246-0115-40d1-b57d-eef53ffd242a.jpg'],
+        swiperOption: {
+          pagination: '.swiper-pagination',
+          paginationClickable: true,
+          speed: 500,
+          loop: true,
+          observer: true,
+          observeParents: true,
+          autoplayDisableOnInteraction: false,
+          autoplay2bs: {
+            disableOnInteraction: false,
+            delay: 2000
+          }
+        }
+      }
+    },
+    mounted: function () {
+      this.countdown()
+    },
+    components: {
+      kSlider : Slider
+    },
+    methods: {
+      countdown: function () {
+        const end = Date.parse(new Date('2018-8-4'))
+        const now = Date.parse(new Date())
+        const msec = end - now
+        let day = parseInt(msec / 1000 / 60 / 60 / 24)
+        let hr = parseInt(msec / 1000 / 60 / 60 % 24)
+        let min = parseInt(msec / 1000 / 60 % 60)
+        let sec = parseInt(msec / 1000 % 60)
+        this.day = day
+        this.hr = hr > 9 ? hr : '0' + hr
+        this.min = min > 9 ? min : '0' + min
+        this.sec = sec > 9 ? sec : '0' + sec
+        const that = this
+        setTimeout(function () {
+          that.countdown()
+        }, 1000)
+      }
+    }
+  }
 </script>
 
 <style type="text/css">
-  .shuffling{
-    width: 750px;
-    width: 600px;
-  }
+  /*.home2{*/
+    /*width: 750px;*/
+    /*height: auto;*/
+  /*}*/
   .shuffling img{
     width: 750px;
-    height: auto;
+     height: auto;
   }
   .search{
+    margin-top: 44px;
     display: flex;
     justify-content: space-between;
     width: 100%;
-    background-color: #98d8fc;
   }
   .search img{
+    padding-left: 20px;
     width: 50px;
     height: 50px;
   }
-  .search span{
-    text-align: center;
-    display: inline-block;
-    font-size: 24px;
+  .search input{
+    text-indent: 1em;
+    height: 60px;
+    margin-right: 110px;
+    margin-left: 30px;
+    border-radius: 20px;
+    width: 500px;
+    border: 2px #98d8fc solid;
   }
   .nav{
+    margin-top: 60px;
     width: 100%;
     height: 130px;
   }
@@ -94,5 +154,68 @@
     width: 733.5px;
     display: flex;
     justify-content:space-around ;
+  }
+  .pic{
+    display: flex;
+    justify-content: space-around;
+  }
+  .pic img{
+    width: 80px;
+    height: 80px;
+  }
+  .ntext{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+  }
+  .sp1{
+    display: block;
+    margin-right: 20px;
+  }
+  .ntext span{
+    font-size: 30px;
+  }
+  .timesale{
+    margin-top: 40px;
+  }
+  hr{
+    width:100px;
+    height:4px ;
+    background-color: #7db7a9;
+  }
+  .sp2{
+    vertical-align: middle;
+    font-size: 36px;
+    color: #7db7a9;
+    margin: 0 30px 0 30px;
+  }
+  .trans{
+    width: 750px;
+    height: 36px;
+    background-color:#f9f9f9 ;
+    margin-top: 38px;
+  }
+  .sp3,.sp4{
+    vertical-align: middle;
+    width: 200px;
+    display: inline-block;
+    height: 2px;
+    background-color: #7db7a9;
+  }
+  .show{
+    margin-top: 48px;
+  }
+  .show img{
+    margin-bottom: 60px;
+    width: 96%;
+    height: auto;
+  }
+  .fwrap {
+    background-color: #f4f4f4;
+  }
+  .timer{
+    margin-top: 20px;
+    font-size: 30px;
+    color: #ff0000;
   }
 </style>

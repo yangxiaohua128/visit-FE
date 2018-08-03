@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "calendar-plugin": "^1.0.1",
+    "axios": "^0.18.0",
     "lib-flexible": "^0.3.2",
     "px2rem-loader": "^0.1.9",
     "vue": "^2.5.2",
@@ -23,7 +24,8 @@
     "wc-swiper": "^1.3.9",
     "vue-router": "^3.0.1",
     "vux": "^2.9.2",
-    "wc-swiper": "^1.3.9"
+    "wc-swiper": "^1.3.9",
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

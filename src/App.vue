@@ -2,6 +2,7 @@
   <div id="app">
     <!--< img src="./assets/logo.png">-->
     <router-view/>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -187,6 +188,7 @@ export default {
   }
   input,button{
     border: none;
+    /*border: none;*/
     margin: 0;
     padding: 0;
   }
@@ -210,7 +212,10 @@ export default {
   }
   img {
     border: 0;
-    vertical-align:middle;
+    /*border: none;*/
+  }
+  img {
+    border: 0;
   }
   i, em {
     font-style: normal;
