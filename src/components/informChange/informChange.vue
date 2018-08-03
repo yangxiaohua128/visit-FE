@@ -37,11 +37,6 @@ export default {
     toBack: function () {
       this.$router.back(-1)
     }
-    // onBlue: function () {
-    //   if (this.msg || this.msg === '') {
-    //     alert('输入不能为空')
-    //   }
-    // }
   }
 }
 </script>

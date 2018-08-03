@@ -7,7 +7,6 @@
     </header>
     <div class="content">
       <div class="details">
-        <div class="state">订单状态：xxx</div>
         <div class="number">订单号 ：</div>
         <div class="time"></div>
         <div class="img"></div>

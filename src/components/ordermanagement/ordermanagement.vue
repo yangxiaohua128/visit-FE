@@ -1,5 +1,5 @@
 <template>
-  <div class="ordermangement">
+  <div class="orderMangement">
     <!--头部-->
     <header>
       <div><img src="./img/left.png" class="img1" width="19" height="19" @touchend="toBack"/></div>
@@ -8,14 +8,14 @@
     </header>
     <!-- 中间部分-->
     <ul class="nav">
-      <li v-for="item in items" :key="item.id" v-bind:class="{'class-a':isA,'class-b':!isA}" @touchend="changeColor()"><img :src='item.path'/><p >{{item.text}}</p></li>
+      <li v-for="(item,index) in items" :key="item.id" ><img :src='item.path' /><p :class="{'checked':index===n}" @touchend="changeP(index)">{{item.text[0]}}</p></li>
     </ul>
-    <div class="content">
+    <div class="content" >
       <div class="oneOrder">
         <div class="time">预定日期:<span>7月25日</span></div>
         <div class="order">
           <div class="headline"><img src="./img/inform.png" width="30" height="30"/><span>重庆旅游三天四晚自由行</span></div>
-          <div class="money"><p class="p1">￥1500</p><p class="p2">状态</p></div>
+          <div class="money"><p class="p1">￥1500</p><p class="p2">{{state[m]}}}</p></div>
           <div class="from"><span>7月25日</span>至<span>7月30日</span></div>
           <div class="button"><button type="button" @touchend="again">点评</button><button type="button" @touchend="again">去支付</button>
           </div>
@@ -35,14 +35,17 @@
 export default {
   data () {
     return {
-      items: [{path: require('./img/complatedorder2.png'), text: '全部订单'},
-        {path: require('./img/waitpay2.png'), text: '待支付'},
-        {path: require('./img/payorder2.png'), text: '待出行'},
-        {path: require('./img/appraise2.png'), text: '待评价'},
-        {path: require('./img/moneyback2.png'), text: '退款订单'}],
+      items: [{path: require('./img/complatedorder2.png'), text: ['全部订单', '1']},
+        {path: require('./img/waitpay2.png'), text: ['待支付', '2']},
+        {path: require('./img/payorder2.png'), text: ['待出行', '3']},
+        {path: require('./img/appraise2.png'), text: ['待评价', '4']},
+        {path: require('./img/moneyback2.png'), text: ['退款订单', '5']}],
       dataUrl: require('./img/down.png'),
       bOn: false,
-      isA: false
+      n: -1,
+      test: [{content: 1}],
+      state: ['待评价', '待出行', '待付款', '已退款'],
+      m: 0
     }
   },
   methods: {
@@ -60,12 +63,24 @@ export default {
         })
       }
     },
-    changeColor: function () {
-      this.isA = !this.isA
+    changeP (i) {
+      this.n = i
     },
     changeUrl: function () {
       this.bOn ? this.dataUrl = require('./img/up.png') : this.dataUrl = require('./img/down.png')
       this.bOn = !this.bOn
+    },
+    judge: function () {
+      let data = []
+      if (data.isevaluate === 0 ) {
+        this.m = 0
+      } else if (data.isout === 0) {
+        this.m = 1
+      } else if (data.ispay === 0) {
+        this.m = 2
+      } else if (data.isfound === 0) {
+        this.m = 3
+      }
     }
   }
 }
@@ -76,7 +91,7 @@ export default {
     margin: 0;
     padding: 0;
   }
-  .ordermanagement{
+  .orderManagement{
     width: 750px;
   }
   header{
@@ -104,30 +119,14 @@ export default {
     display: flex;
     height: 127px;
     width: 100%;
-    border-bottom: 6px #dfdfdf solid;
     list-style: none;
     padding: 0;
     margin-bottom: 35px;
     align-items: center;
-    .class-a {
+    li {
       width: 150px;
       img {
-        margin-bottom: 30px;
-        width: 40px;
-        height: 40px;
-        p {
-          height: 40px;
-          text-align: center;
-          line-height: 40px;
-          font-size: 30px;
-          margin-bottom: 0;
-        }
-      }
-    }
-    .class-b{
-      width: 150px;
-      img {
-        margin-bottom: 30px;
+        margin-bottom: 20px;
         width: 40px;
         height: 40px;
         p {
@@ -140,6 +139,7 @@ export default {
       }
     }
   }
+  .nav p.checked{font-size: 34px;border-bottom: 8px #F9DE57 solid}
   .content{
     width: 100%;
     display: flex;

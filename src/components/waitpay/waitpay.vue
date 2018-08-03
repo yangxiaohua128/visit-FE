@@ -14,7 +14,7 @@
         <span>库存有限，请尽快完成付款</span>
       </div>
       <div class="waitTime">
-        <div class="countDown"><span>剩余支付时间</span>：<span class="time">01:58:55</span></div>
+        <div class="countDown"><span>剩余支付时间</span>：<span class="time">{{'${min}分钟${sec}秒'}}</span></div>
         <button type="button">继续支付</button>
       </div>
       <div class="details">
@@ -44,11 +44,34 @@
 export default {
   name: 'waitpay',
   data () {
-    return {}
+    return {
+      min: 0,
+      sec: 0
+    }
+  },
+  mounted: function () {
+    this.countdown()
   },
   methods: {
     toBack: function () {
       this.$router.back(-1)
+    },
+    countdown: function () {
+      let t = 180 * 1000
+      if (t > 0) {
+        let min = parseInt(t / 60)
+        let sec = parseInt(t % 60)
+        this.min = min > 9 ? min : '0' + min
+        this.sec = sec > 9 ? sec : '0' + sec
+        // } else {
+        //  let min = '00'
+        //  let sec = '00'
+        // }
+        const that = this
+        setTimeout(function () {
+          that.countdown()
+        }, 1000)
+      }
     }
   }
 }
@@ -126,10 +149,11 @@ export default {
     .countDown{
       width: 430px;
       text-align: left;
-      font-size: 37px;
+      font-size: 35px;
       display: inline-block;
       .time{
         width: 100px;
+        font-size:20px
       }
     }
     button{
