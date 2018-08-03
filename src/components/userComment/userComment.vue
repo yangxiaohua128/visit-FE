@@ -126,16 +126,16 @@ export default {
         display: flex;
         justify-content: center;
         div {
-          width: 84px;
-          height: 84px;
+          width: 100px;
+          height: 100px;
           border-radius: 50%;
-          border: 3px #ec7e3f solid;
-          line-height: 84px;
-          font-size: 32px;
+          border: 5px #ec7e3f solid;
+          line-height: 100px;
+          font-size: 40px;
         }
       }
       .details{
-        width:40%;
+        width:60%;
         height: 170px;
         div{
           width: 180px;

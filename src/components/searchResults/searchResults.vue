@@ -94,7 +94,7 @@ export default {
       li.checked{
         color:#000;
         font-size: 30px;
-        border-bottom:3px #f9de57 solid;
+        border-bottom:5px #f9de57 solid;
       }
     }
     .list{

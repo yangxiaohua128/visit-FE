@@ -19,18 +19,6 @@ import orderconfirmation from '@/components/orderconfirmation/orderconfirmation'
 import message from '@/components/message/message'
 import showOne from '@/components/showOne/showOne'
 Vue.use(Router)
-// const advancedSearch = (resolve) => {
-//   import('@/components/advancedSearch/advancedSearch').then((module) => {
-//     resolve(module)
-//   })
-// }
-
-// const search = (resolve) => {
-//   import('@components/search/search').then((module) => {
-//     resolve(module)
-//   })
-// }
-
 export default new Router({
   routes: [
     {
@@ -63,26 +51,31 @@ export default new Router({
       component: history
     },
     {
+      title: '高级搜索页',
       path: '/advancedSearch',
       name: 'advancedSearch',
       component: advancedSearch
     },
     {
+      title: '搜索结果页',
       path: '/searchResults',
       name: 'searchResults',
       component: searchResults
     },
     {
+      title: '用户相册',
       path: '/userAlbum',
       name: 'userAlbum',
       component: userAlbum
     },
     {
+      title: '用户点评',
       path: '/userComment',
       name: 'userComment',
       component: userComment
     },
     {
+      title: '用户评价',
       path: '/userEvaluation',
       name: 'userEvaluation',
       component: userEvaluation
