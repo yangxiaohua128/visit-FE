@@ -54,18 +54,8 @@
     methods:{
       choice(i){
 
-      }
-    }
+      },},}
 
-  }
-export default {
-  name: 'signin',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  }
-}
 </script>
 
 <style lang="scss">

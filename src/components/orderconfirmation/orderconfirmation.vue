@@ -80,6 +80,10 @@
   name: 'orderconfirmation',
     components: {InformChange}
   }
+export default {
+  name: 'order confirmation'
+}
+
 </script>
 <style type="text/css">
   body{

@@ -2,7 +2,7 @@
   <div class="searchResults">
     <header>
       <div>
-        <img src="./img/return.png">
+        <img src="./img/return.png" @touchend="toBack">
       </div>
       <p>西安</p>
       <div>180条</div>
@@ -16,18 +16,18 @@
     </div>
     <div class="content">
       <input type="text" placeholder="西安">
+
       <ul class="sort">
-        <li>热度</li>
-        <li>价格升序</li>
-        <li>价格降序</li>
+        <li v-for="(item,index) of items" :key="item.id" :class="{ 'checked':n==index}"
+            @touchend="changeN(index)">{{item}}</li>
       </ul>
       <div class="list">
         <div class="produce">
           <div class="picture">图片</div>
           <div class="goods">
             <p class="message">商品信息</p>
-            <span class="comment">好评</span>
-            <span class="price">价格</span>
+            <span class="comment">销量</span>
+            <span class="price">￥价格</span>
           </div>
         </div>
       </div>
@@ -42,7 +42,16 @@ export default {
   name: 'searchResults',
   data () {
     return {
-      msg: '[]'
+      items: ['热度', '价格升序', '价格降序'],
+      n: 0
+    }
+  },
+  methods: {
+    toBack () {
+      this.$router.back(-1)
+    },
+    changeN (i) {
+      this.n = i
     }
   }
 }
@@ -110,73 +119,117 @@ export default {
         padding-left: 50px;
       }
       .sort {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        height: 90px;
-        li {
-          width: 200px;
-          height: 60px;
-          line-height: 60px;
-          font-size: 28px;
-        }
-      }
-      .list {
-        width: 100%;
-        .produce {
-          width: 100%;
-          height: 230px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          flex-wrap: wrap;
-          border-bottom: 1px #ccc solid;
-          .picture {
-            width: 190px;
-            height: 190px;
-            background-color: black;
-          }
-          .goods {
+        .content {
+          position: relative;
+          .sort {
             display: flex;
-            width: 480px;
-            height: 180px;
-            justify-content: space-between;
-            background-color: chartreuse;
-            flex-wrap: wrap;
-            .message {
-              width: 100%;
-              height: 80px;
-              font-size: 28px;
-              overflow: hidden;
-              background-color: antiquewhite;
-            }
-            .comment {
-              width: 60%;
-              height: 34px;
-              line-height: 34px;
-              font-size: 22px;
-              background-color: aqua;
-              align-self: center;
-            }
-            .price {
-              width: 33%;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            height: 90px;
+            li {
+              width: 120px;
               height: 60px;
               line-height: 60px;
-              font-size: 34px;
-              background-color: blue;
-              align-self: flex-end;
+              font-size: 28px;
+            }
+            li.checked {
+              color: #000;
+              font-size: 30px;
+              border-bottom: 5px #f9de57 solid;
             }
           }
-        }
-      }
-      .foot {
-        .footmark {
-          width: 80px;
-          height: 80px;
-          position: fixed;
-          bottom: 100px;
-          right: 30px;
+          .list {
+            width: 100%;
+            .produce {
+              width: 100%;
+              height: 230px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              width: 100%;
+              height: 90px;
+              li {
+                width: 200px;
+                height: 60px;
+                line-height: 60px;
+                font-size: 28px;
+              }
+            }
+            .list {
+              width: 100%;
+              .produce {
+                width: 100%;
+                height: 230px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                border-bottom: 1px #ccc solid;
+                .picture {
+                  width: 190px;
+                  height: 190px;
+                  background-color: black;
+                }
+                .goods {
+                  display: flex;
+                  width: 480px;
+                  height: 180px;
+                  justify-content: space-between;
+                  background-color: chartreuse;
+                  flex-wrap: wrap;
+                  .message {
+                    width: 100%;
+                    height: 80px;
+                    font-size: 28px;
+                    overflow: hidden;
+                    background-color: antiquewhite;
+                  }
+                  .comment {
+                    width: 60%;
+                    height: 34px;
+                    line-height: 34px;
+                    font-size: 22px;
+                    background-color: aqua;
+                    align-self: center;
+                  }
+                  .price {
+                    width: 33%;
+                    height: 60px;
+                    line-height: 60px;
+                    font-size: 34px;
+                    background-color: blue;
+                    align-self: flex-end;
+                  }
+                  .comment {
+                    width: 60%;
+                    height: 34px;
+                    line-height: 34px;
+                    font-size: 28px;
+                    background-color: aqua;
+                    align-self: center;
+                  }
+                  .price {
+                    width: 33%;
+                    height: 60px;
+                    line-height: 60px;
+                    font-size: 38px;
+                    background-color: blue;
+                    align-self: flex-end;
+                  }
+                }
+              }
+              .foot {
+                .footmark {
+                  width: 80px;
+                  height: 80px;
+                  position: fixed;
+                  bottom: 100px;
+                  right: 30px;
+                }
+              }
+            }
+          }
         }
       }
     }

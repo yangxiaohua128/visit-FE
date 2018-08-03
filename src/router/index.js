@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 import orderPage from '@/components/orderPage/orderPage'
 import signin2 from '@/components/signin2/signin2'
 import phone from '@/components/phone/phone'
@@ -29,18 +28,6 @@ import pay from '@/components/pay/pay'
 import modify from '@/components/modify/modify'
 import collection from '@/components/collection/collection'
 Vue.use(Router)
-// const advancedSearch = (resolve) => {
-//   import('@/components/advancedSearch/advancedSearch').then((module) => {
-//     resolve(module)
-//   })
-// }
-
-// const search = (resolve) => {
-//   import('@components/search/search').then((module) => {
-//     resolve(module)
-//   })
-// }
-
 export default new Router({
   routes: [
     {
@@ -80,6 +67,7 @@ export default new Router({
       component: modify
     },
     {
+
       title: '首页',
       path: '/apppage',
       name: 'apppage',
@@ -103,21 +91,26 @@ export default new Router({
       name: 'history',
       component: history
     },
-    {path: '/advancedSearch',
+    {
+      title: '高级搜索页',
+      path: '/advancedSearch',
       name: 'advancedSearch',
       component: advancedSearch
     },
     {
+      title: '搜索结果页',
       path: '/searchResults',
       name: 'searchResults',
       component: searchResults
     },
     {
+      title: '用户相册',
       path: '/userAlbum',
       name: 'userAlbum',
       component: userAlbum
     },
     {
+      title: '用户点评',
       path: '/userComment',
       name: 'userComment',
       component: userComment
@@ -128,7 +121,7 @@ export default new Router({
       component:userEvaluation
     },
 {
-  title: '修改',
+      title: '用户评价',
       path: '/userEvaluation',
       name: 'userEvaluation',
       component: userEvaluation
