@@ -56,6 +56,26 @@
 
       },},}
 
+export default {
+  name: 'signin',
+  data () {
+    return {
+      items: [
+        {path: require('./img/collection.png'), text: '我的收藏'},
+        {path: require('./img/order.png'), text: '我的订单'},
+        {path: require('./img/travel.png'), text: '未出行订单'},
+        {path: require('./img/payment.png'), text: '未付款订单'},
+        {path: require('./img/evaluate.png'), text: '待评价订单'},
+        {path: require('./img/refund.png'), text: '退款订单'},
+        {path: require('./img/coupon.png'), text: '优惠券'},
+        {path: require('./img/album.png'), text: '我的相册'}]
+    }
+  },
+  methods: {
+    choice (i) {
+    }
+  }
+}
 </script>
 
 <style lang="scss">

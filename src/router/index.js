@@ -20,14 +20,14 @@ import waitpay from '@/components/waitpay/waitpay'
 import order from '@/components/order/order'
 import orderconfirmation from '@/components/orderconfirmation/orderconfirmation'
 import message from '@/components/message/message'
-import shows from '@/components/shows/shows'
-import showOne from '@/components/showOne/showOne'
+import collection from '@/components/collection/collection'
 import backMoneyOk from '@/components/backMoneyOk/backMoneyOk'
 import backMoneyNo from '@/components/backMoneyNo/backMoneyNo'
 import pay from '@/components/pay/pay'
-import modify from '@/components/modify/modify'
-import collection from '@/components/collection/collection'
 import position from '@/components/position/position'
+import shows from '@/components/shows/shows'
+import showOne from '@/components/showOne/showOne'
+import modify from '@/components/modify/modify'
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -50,11 +50,11 @@ export default new Router({
       component: phone
     },
     {
-  title: '注册页面',
-    path: '/register',
-  name: 'register',
-  component: register
-},
+      title: '注册页面',
+      path: '/register',
+      name: 'register',
+      component: register
+    },
     {
       title:'我的收藏',
       path:'collection',
@@ -104,7 +104,6 @@ export default new Router({
       name: 'position',
       component: position
     },
-
     {path: '/advancedSearch',
       name: 'advancedSearch',
       component: advancedSearch
@@ -127,7 +126,6 @@ export default new Router({
       name: 'userComment',
       component: userComment
     },
-
     {
        path: '/userEvaluation',
        name:'userEvaluation',
@@ -137,8 +135,8 @@ export default new Router({
       name: 'userEvaluation',
       component: userEvaluation
     },
-    {title: '修改',
 
+    { title: '修改',
       path: '/userEvaluation',
       name: 'userEvaluation',
       component: userEvaluation
@@ -149,8 +147,13 @@ export default new Router({
       name: 'signin',
       component: signin
     },
-{    title: '修改',
 
+    {
+      path: '/userEvaluation',
+      name: 'userEvaluation',
+      component: userEvaluation
+    },
+    { title: '修改',
       path: '/informChange',
       name: 'informChange',
       component: informChange
@@ -178,7 +181,8 @@ export default new Router({
       name: 'orderPage',
       component: orderPage
     },
-        {title: '预定页',
+    {
+      title: '预定页',
       path: '/order',
       name: 'order',
       component: order
@@ -219,6 +223,19 @@ export default new Router({
       path: '/pay',
       name: 'pay',
       component: pay
+    },
+    {
+      title: '单个产品展示',
+      path: '/shows',
+      name: 'shows',
+      component: shows
+
+    },
+    {
+      title: '注册页面',
+      path: '/register',
+      name: 'register',
+      component: register
     },
     {title: '单个产品展示',
       path: '/showOne',

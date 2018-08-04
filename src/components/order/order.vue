@@ -49,8 +49,8 @@
           <div class="touch">预定人:<span>xxx</span></div>
           <div class="touchPhone">预定人电话:<span>112xxxx1111</span></div><br>
           <div>
-          <div class="trip">出行人:<span>xxx</span></div>
-          <div class="phone">联系电话:<span>112xxxx1111</span></div>
+            <div class="trip">出行人:<span>xxx</span></div>
+            <div class="phone">联系电话:<span>112xxxx1111</span></div>
           </div><br>
           <!--<div class="trip">出行人:<span>xxx</span></div>-->
           <!--<div class="phone">联系电话:<span>112xxxx1111</span></div>-->
@@ -96,14 +96,13 @@ export default {
       font-size:30px;
     }
   }
-  header {
+  header{
     width: 100%;
     height: 90px;
-    align-items: center;
+    align-items:center;
     display: flex;
-    justify-content: space-between;
+    justify-content:space-between;
     margin-bottom: 20px;
-  }
 
     div{
       text-align: left;
@@ -283,5 +282,6 @@ export default {
         padding-bottom: 10px;
       }
     }
-  }
+  }}
+
 </style>

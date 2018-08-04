@@ -39,12 +39,13 @@ export default {
     justify-content: space-between;
     img {
       width: 38px;
-      height: 38px;
-    }
-    p {
-      width: 200px;
-      p, div {
-        width: 150px;
+      justify-content: space-between;
+      img {
+        width: 38px;
+        height: 38px;
+      }
+      p {
+        width: 200px;
         height: 38px;
         line-height: 38px;
         text-align: center;
@@ -54,37 +55,61 @@ export default {
       div {
         width: 100px;
         height: 38px;
-        line-height: 38px;
-        font-size: 36px;
-        color: black;
       }
-    }
-    .content {
-      ul {
-        width: 100%;
-        li {
-          height: 260px;
-          width: 100%;
-          p {
-            height: 50px;
-            width: 200px;
-          }
+      p {
+        width: 200px;
+        p, div {
+          width: 150px;
+          height: 38px;
+          line-height: 38px;
+          text-align: center;
         }
-      }
-      .content {
-        .album {
-          width: 100%;
-          p {
-            height: 50px;
-            line-height: 50px;
-            font-size: 36px;
-            width: 200px;
-            background-color: #007aff;
-            margin-bottom: 10px;
-          }
-          div {
-            background-color: aqua;
+        .content {
+          .album {
             width: 100%;
+            p {
+              height: 50px;
+              line-height: 50px;
+              font-size: 36px;
+              color: black;
+            }
+            div {
+              width: 100px;
+              height: 38px;
+              line-height: 38px;
+              font-size: 36px;
+              color: black;
+            }
+          }
+          .content {
+            ul {
+              width: 100%;
+              li {
+                height: 260px;
+                width: 100%;
+                p {
+                  height: 50px;
+                  width: 200px;
+                }
+              }
+            }
+            .content {
+              .album {
+                width: 100%;
+                p {
+                  height: 50px;
+                  line-height: 50px;
+                  font-size: 36px;
+                  width: 200px;
+                  background-color: #007aff;
+                  margin-bottom: 10px;
+                }
+                div {
+                  background-color: aqua;
+                  width: 100%;
+                }
+              }
+            }
           }
         }
       }

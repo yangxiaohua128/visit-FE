@@ -6,10 +6,10 @@
       <div></div>
     </header>
     <form class="change" action="" method="post" name="myForm" onsubmit="console.log(input.value)">
-          <div class="name">
+      <div class="name">
         <div class="name1">真实姓名</div>
         <input type="text" class="name2" name="myName" placeholder="请输入你的真实姓名" required="required" v-model.lazy="msg"/>
-</div>
+      </div>
       <div class="sex">
         <div class="sex1">性别</div>
         <div><input  type="radio" name="sex" value="男"/><img src="./img/man.png" width="50px" height="50px"/></div>
@@ -140,14 +140,14 @@ export default {
     width: 100%;
     display: flex;
     justify-content: center;
-  input {
-    width: 91%;
-    background-color: #f9de57;
-    height: 90px;
-    border-radius: 8px;
-    font-size: 38px;
-    border: none;
-    margin: 0 auto;
-  }
+    input {
+      width: 91%;
+      background-color: #f9de57;
+      height: 90px;
+      border-radius: 8px;
+      font-size: 38px;
+      border: none;
+      margin: 0 auto;
+    }
   }
 </style>

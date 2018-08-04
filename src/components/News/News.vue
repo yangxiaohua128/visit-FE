@@ -15,7 +15,11 @@
         v-for='(itemCon,index) in tabContents'
         v-show=" index === num"
            :class="{bgc:index===num}">{{itemCon}}</div>
+    <div class="middle">
+      <span class="sp3">供应商</span>
+      <span class="sp4" v-show="isshow" @touchend="hidden()">活动</span>
     </div>
+  </div>
   </div>
 </template>
 
@@ -39,10 +43,10 @@ export default {
         })
       }
     }
-  }
+}
 </script>
 
-<style type="text/css">
+<style lang="scss">
   body{
     margin: 0;
     padding: 0;
@@ -73,7 +77,6 @@ export default {
   }
   .sp1{
     margin-left: 40px;
-  }
   ul{
     margin-top: 20px;
     display: flex;
@@ -83,7 +86,9 @@ export default {
     margin-right: 20px;
     margin-left: 20px;
     font-size: 36px;
-    font-weight: bold;
+    font-weight: bold;}
+  .sp3{
+    margin-left: 47px;
   }
   li.active{
     color: #fae368 ;
@@ -93,5 +98,9 @@ export default {
     width: 750px;
     height: 1000px;
     border-top: 2px #ccc solid ;
-  }
+  .sp3,.sp4{
+    background-color: #ffffff;
+    font-weight: bold;
+}}}
+
 </style>

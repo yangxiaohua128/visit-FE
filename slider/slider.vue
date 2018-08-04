@@ -33,15 +33,15 @@
     computed: {
       swiper:function() {
         return this.$refs.mySwiper.swiper;
-      }
-    },
-  }
+      },
+import :{ swiper, swiperSlide }, from :'vue-awesome-swiper',},}
 </script>
 <style type="text/css">
   @import "../src/assets/swiper-3.4.2.min.css";
   .swiper-box{
     width: 100%;
     height: 180px;
+    height: 200px;
     margin: 0 auto;
   }
   .swiper-box, .swiper-container{

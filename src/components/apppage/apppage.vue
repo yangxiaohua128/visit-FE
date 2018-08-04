@@ -94,11 +94,8 @@
         setTimeout(function () {
           that.countdown()
         }, 1000)
-      }
-    }
-  }
+      },},}
 </script>
-
 <style type="text/css">
   /*.home2{*/
     /*width: 750px;*/

@@ -159,6 +159,35 @@ export default {
     img {
       width: 38px;
       height: 38px;
+    justify-content:space-between;
+    img{
+      width:38px;
+      height:38px;
+    }
+    p{
+      width:200px;
+      height: 38px;
+      line-height: 38px;
+      text-align: center;
+      font-size: 36px;
+      color: black;
+    }
+    div{
+      width:100px;
+      height: 38px;
+      line-height: 38px;
+      font-size: 36px;
+      color: black;
+    }
+  }
+  .content{
+    .termini{
+      width:100%;
+      height:68px;
+      line-height: 68px;
+      font-size: 28px;
+      color: #1d1d1d;
+      text-align: left;
     }
     p {
       width: 200px;
@@ -175,6 +204,8 @@ export default {
         height: 38px;
         line-height: 38px;
         font-size: 36px;
+      div.checked{
+        background-color: #f9de57;
         color: black;
       }
     }
@@ -469,5 +500,24 @@ export default {
         }
       }
     }
-  }
+    .search{
+      width:91%;
+      height:90px;
+      border-radius: 8px;
+      background-color: #f9de57;
+      color: black;
+      font-size: 38px;
+      position: fixed;
+      bottom: 10px;
+      left: 31px;
+      outline: none;
+    }
+    .search:hover{
+      background-color: #f9ee0a;
+    }
+    .white{
+      height:110px;
+      width: 100%;
+    }
+  }}}
 </style>

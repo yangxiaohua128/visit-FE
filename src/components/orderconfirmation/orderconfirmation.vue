@@ -74,22 +74,15 @@
  </div>
 </template>
 
-<script>
-  import InformChange from "../informChange/informChange";
-  export default {
-  name: 'orderconfirmation',
-    components: {InformChange}
-  }
-export default {
-  name: 'order confirmation'
-}
 
+<script>
+import InformChange from '../informChange/informChange'
+export default {
+  name: 'orderconfirmation',
+  components: {InformChange}
+}
 </script>
-<style type="text/css">
-  body{
-    padding: 0;
-    margin: 0;
-  }
+<style lang="scss">
   .confirmation{
     width:750px;
     height:1450px;
@@ -129,6 +122,7 @@ export default {
   header img{
     width:22px;
     height:38px;
+
   }
   .orderPage{
     width:100%;
@@ -149,7 +143,7 @@ export default {
   .photo {
     width:100px;
     height:100px;
-    }
+  }
   .massage{
     width:100%;
     height:232px;
@@ -340,6 +334,8 @@ export default {
   }
   .orderMassage input{margin-left: 60px;}
   .peopleMassage div{
+  }
+  .save{
     width:100%;
     height:102px;
     background-color:#fff;
@@ -347,24 +343,20 @@ export default {
     font-size:28px;
     text-align: left;
     color:#c1c1c1;
-    padding-top: 40px;
-  }
-  .peopleMassage input{margin-left: 60px;}
-  .peopleMassage div p{
-    display: inline-block;
-    width:116px;
-    margin: 0;
-    -webkit-margin-before: 0;
-    -webkit-margin-after: 0;
-  }
-  .peopleMassage:last-child{
-    position: relative;
-  }
-  .peopleMassage span{
-    font-size: 28px;
-    color:#7ab4ee;
-    position: absolute;
-    right:0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    p{
+      font-size:28px;
+      height:30px;
+      font-weight: bold;
+      color: #565656;
+      text-align: left;
+    }
+    img{
+      width: 32px;
+      height: 32px;
+    }
   }
   footer{
     position: fixed;
@@ -372,23 +364,25 @@ export default {
     width: 100%;
     height: 100px;
     background-color: #fff;
-  }
-  .sp1{
-    position: fixed;
-    left: 0;
-    font-size: 32px;
-    width:500px;
-    height:100px;
-    background-color:#fff;
-    text-align: left;
+    span{
+      position: fixed;
+      left: 0;
+      font-size: 32px;
+      width:500px;
+      height:100px;
+      background-color:#fff;
+      text-align: left;
     }
-  .sp2{
-    position: fixed;
-    right: 0;
-    width:250px;
-    height:100px;
-    background-color:#fae368;
-    color:#8c8353;font-size: 32px;
-    line-height: 100px;
-    }
+    input{
+      position: fixed;
+      right: 0;
+      width:250px;
+      height:100px;
+      background-color:#fae368;
+      color:#8c8353;
+      font-size: 32px;
+      line-height: 100px;
+    }}
+
 </style>
+

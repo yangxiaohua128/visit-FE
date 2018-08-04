@@ -32,6 +32,12 @@
           v-for="(item,index) in tabs"
           :class="{active:index === num}"
           @touchend="tab(index)">{{item}}</li>
+        <li>热门</li>
+        <li>周边</li>
+        <li>国内</li>
+        <li>欧洲</li>
+        <li>美州</li>
+        <li>澳中东非</li>
       </ul>
     </div>
     <div class="showwrap">
@@ -48,6 +54,20 @@
         <div
           v-for='(itemCon,index) in tabContents'
           v-show=" index === num">{{itemCon}}</div>
+        <!--< img src="./img/test.jpg">-->
+        <!--< img src="./img/test.jpg">-->
+        <!--< img src="./img/test.jpg">-->
+        <!--< img src="./img/test.jpg">-->
+        <!--< img src="./img/test.jpg">-->
+        <!--< img src="./img/test.jpg">-->
+        <!--< img src="./img/test.jpg">-->
+        <!--< img src="./img/test.jpg">-->
+        <ul>
+          <li v-for ="item in flowers" :key="item">
+            <img :src="defaultImg" alt="flowers">
+            <p>{{item}}</p >
+          </li>
+        </ul>
       </div>
     </div>
     <div class="wrap">
@@ -90,9 +110,6 @@
         this.num = index
       }
     }
-  }
-export default {
-  name: 'destination'
 }
 </script>
 
@@ -118,6 +135,8 @@ export default {
   }
   .header{
     height: 240px;
+    z-index: 999;
+    width: 750px;
     background-color: #fae368;
   }
   .top{
@@ -150,6 +169,7 @@ export default {
     height: 60px;
     border-radius: 10px;
     margin-left: 120px;
+    margin-left:120px
   }
   .search{
     position: relative;
@@ -234,5 +254,24 @@ export default {
   li.active{
     background-color:  #fae368;
     transition: 0.1s all linear;
+  }
+  .showpage{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  .showpage img{
+    margin-bottom: 20px;
+    width: 250px;
+    height: 250px;
+  }
+  .showwrap{
+    margin-top: 20px;
+    z-index: -999;
+    width: 573px;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 240px;
   }
 </style>

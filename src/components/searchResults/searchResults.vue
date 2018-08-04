@@ -16,7 +16,6 @@
     </div>
     <div class="content">
       <input type="text" placeholder="西安">
-
       <ul class="sort">
         <li v-for="(item,index) of items" :key="item.id" :class="{ 'checked':n==index}"
             @touchend="changeN(index)">{{item}}</li>
@@ -117,8 +116,6 @@ export default {
         border-radius: 26px;
         background-color: #eef1f8;
         padding-left: 50px;
-      }
-      .sort {
         .content {
           position: relative;
           .sort {
@@ -136,99 +133,129 @@ export default {
             li.checked {
               color: #000;
               font-size: 30px;
-              border-bottom: 5px #f9de57 solid;
+              border-bottom: 3px #f9de57 solid;
+            }
+            .sort {
+              .content {
+                position: relative;
+                .sort {
+                  display: flex;
+                  justify-content: space-around;
+                  align-items: center;
+                  width: 100%;
+                  height: 90px;
+                  li {
+                    width: 120px;
+                    height: 60px;
+                    line-height: 60px;
+                    font-size: 28px;
+                  }
+                  li.checked {
+                    color: #000;
+                    font-size: 30px;
+                    border-bottom: 5px #f9de57 solid;
+                  }
+                }
+                .list {
+                  width: 100%;
+                  .produce {
+                    width: 100%;
+                    height: 230px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 100%;
+                    height: 90px;
+                    li {
+                      width: 200px;
+                      height: 60px;
+                      line-height: 60px;
+                      font-size: 28px;
+                    }
+                  }
+                  .list {
+                    width: 100%;
+                    .produce {
+                      width: 100%;
+                      height: 230px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: space-between;
+                      flex-wrap: wrap;
+                      border-bottom: 1px #ccc solid;
+                      .picture {
+                        width: 190px;
+                        height: 190px;
+                        background-color: black;
+                      }
+                      .goods {
+                        display: flex;
+                        width: 480px;
+                        height: 180px;
+                        justify-content: space-between;
+                        background-color: chartreuse;
+                        flex-wrap: wrap;
+                        .message {
+                          width: 100%;
+                          height: 80px;
+                          font-size: 28px;
+                          overflow: hidden;
+                          background-color: antiquewhite;
+                        }
+                        .comment {
+                          width: 60%;
+                          height: 34px;
+                          line-height: 34px;
+                          font-size: 22px;
+                          background-color: aqua;
+                          align-self: center;
+                        }
+                        .price {
+                          width: 33%;
+                          height: 60px;
+                          line-height: 60px;
+                          font-size: 34px;
+                          background-color: blue;
+                          align-self: flex-end;
+                        }
+                        .comment {
+                          width: 60%;
+                          height: 34px;
+                          line-height: 34px;
+                          font-size: 28px;
+                          background-color: aqua;
+                          align-self: center;
+                        }
+                        .price {
+                          width: 33%;
+                          height: 60px;
+                          line-height: 60px;
+                          font-size: 38px;
+                          background-color: blue;
+                          align-self: flex-end;
+                        }
+                      }
+                    }
+                    .foot {
+                      .footmark {
+                        width: 80px;
+                        height: 80px;
+                        position: fixed;
+                        bottom: 100px;
+                        right: 30px;
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
-          .list {
-            width: 100%;
-            .produce {
-              width: 100%;
-              height: 230px;
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              width: 100%;
-              height: 90px;
-              li {
-                width: 200px;
-                height: 60px;
-                line-height: 60px;
-                font-size: 28px;
-              }
-            }
-            .list {
-              width: 100%;
-              .produce {
-                width: 100%;
-                height: 230px;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                flex-wrap: wrap;
-                border-bottom: 1px #ccc solid;
-                .picture {
-                  width: 190px;
-                  height: 190px;
-                  background-color: black;
-                }
-                .goods {
-                  display: flex;
-                  width: 480px;
-                  height: 180px;
-                  justify-content: space-between;
-                  background-color: chartreuse;
-                  flex-wrap: wrap;
-                  .message {
-                    width: 100%;
-                    height: 80px;
-                    font-size: 28px;
-                    overflow: hidden;
-                    background-color: antiquewhite;
-                  }
-                  .comment {
-                    width: 60%;
-                    height: 34px;
-                    line-height: 34px;
-                    font-size: 22px;
-                    background-color: aqua;
-                    align-self: center;
-                  }
-                  .price {
-                    width: 33%;
-                    height: 60px;
-                    line-height: 60px;
-                    font-size: 34px;
-                    background-color: blue;
-                    align-self: flex-end;
-                  }
-                  .comment {
-                    width: 60%;
-                    height: 34px;
-                    line-height: 34px;
-                    font-size: 28px;
-                    background-color: aqua;
-                    align-self: center;
-                  }
-                  .price {
-                    width: 33%;
-                    height: 60px;
-                    line-height: 60px;
-                    font-size: 38px;
-                    background-color: blue;
-                    align-self: flex-end;
-                  }
-                }
-              }
-              .foot {
-                .footmark {
-                  width: 80px;
-                  height: 80px;
-                  position: fixed;
-                  bottom: 100px;
-                  right: 30px;
-                }
-              }
-            }
+          .foot {
+            width: 80px;
+            height: 80px;
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
           }
         }
       }

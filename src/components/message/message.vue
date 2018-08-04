@@ -2,6 +2,7 @@
   <div class="message">
     <header>
       <img src="./img/arrowLeft.png"/>
+      <p>跳过</p >
     </header>
     <form class="detail" method="get" action="" require="required">
     <div class="content">
@@ -53,6 +54,7 @@ export default {
   name: 'message'
 }
 </script>
+<style lang="scss">
 <style type="text/css">
   body{
     margin: 0;
@@ -141,6 +143,31 @@ export default {
     border:none;
     width:300px;
     height:50px;
+  .content{
+    .name{
+      font-size: 48px;
+      font-weight: bold;
+      color: #4e4e4e;
+      background-color: #fff;
+      text-align: left;
+      margin-top: 20px;
+    }
+    div{
+      width: 100%;
+      height: 150px;
+      background-color: #fff;
+      margin-bottom: 2px;
+      font-size: 36px;
+      text-align: left;
+      input{
+        border:none;
+        width:350px;
+        height:50px;
+      }
+      span{
+        color: red;
+      }
+    }
   }
   footer{
     position: fixed;
@@ -159,5 +186,5 @@ export default {
     color: #6e6c65;
     background-color: #fae368;
     line-height: 100px;
-  }
+  }}
 </style>
