@@ -36,9 +36,6 @@ export default {
     margin: 0;
     padding: 0;
   }
-  .message{
-    background-color:#f7f7f7;
-  }
   header{
     width: 100%;
     height:90px;
@@ -62,6 +59,7 @@ export default {
     color: #4e4e4e;
     background-color: #fff;
     text-align: left;
+    margin-top: 20px;
   }
   .detail div{
     width: 100%;
@@ -76,7 +74,7 @@ export default {
   }
   input{
     border:none;
-    width:300px;
+    width:350px;
     height:50px;
   }
   footer{

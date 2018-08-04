@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
+import orderPage from '@/components/orderPage/orderPage'
 import apppage from '@/components/apppage/apppage'
 import News from '@/components/News/News'
 import history from '@/components/history/history'
@@ -17,7 +18,6 @@ import waitpay from '@/components/waitpay/waitpay'
 import order from '@/components/order/order'
 import orderconfirmation from '@/components/orderconfirmation/orderconfirmation'
 import message from '@/components/message/message'
-import showOne from '@/components/showOne/showOne'
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -88,6 +88,18 @@ export default new Router({
     },
     {
       title: '修改',
+      path: '/userEvaluation',
+      name: 'userEvaluation',
+      component: userEvaluation
+    },
+    {
+      title: '登录前我的页面',
+      path: '/signin',
+      name: 'signin',
+      component: signin
+    },
+    {
+      title: '修改',
       path: '/informChange',
       name: 'informChange',
       component: informChange
@@ -112,9 +124,9 @@ export default new Router({
     },
     {
       title: '预定页',
-      path: '/order',
-      name: 'order',
-      component: order
+      path: '/orderPage',
+      name: 'orderPage',
+      component: orderPage
     },
     {
       title: '确定页',
@@ -127,12 +139,6 @@ export default new Router({
       path: '/message',
       name: 'message',
       component: message
-    },
-    {
-      title: '单个产品展示',
-      path: '/showOne',
-      name: 'showOne',
-      component: showOne
     }
   ]
 })

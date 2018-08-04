@@ -218,30 +218,30 @@ export default {
       display: flex;
       justify-content: space-around;
       align-items: center;
-        div{
-          position: relative;
-          line-height: 30px;
-          input[type="radio"] {
-            width: 100px;
-            height: 50px;
-            opacity: 0;
-          }
-          label{
-            position: absolute;
-            left: 5px;
-            top: 3px;
-            width: 100px;
-            height: 50px;
-            line-height: 50px;
-            border-radius: 10px;
-            border: 1px solid #999;
-          }
-          input:checked+label {
-            background-color: #f9de57;
-            border: 1px solid #f9de57;
-          }
+      div{
+        position: relative;
+        line-height: 30px;
+        input[type="radio"] {
+          width: 100px;
+          height: 50px;
+          opacity: 0;
+        }
+        label{
+          position: absolute;
+          left: 5px;
+          top: 3px;
+          width: 100px;
+          height: 50px;
+          line-height: 50px;
+          border-radius: 10px;
+          border: 1px solid #999;
+        }
+        input:checked+label {
+          background-color: #f9de57;
+          border: 1px solid #f9de57;
         }
       }
+    }
     .comment{
       width: 100%;
       height: 550px;

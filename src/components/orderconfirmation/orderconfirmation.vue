@@ -26,8 +26,12 @@
      </div>
      <div class="peopleMassage">
        <div><p>电话</p><input type="text" placeholder="请输入手机号码"/></div>
-       <div><p>验证码</p><input type="text" placeholder="请输入验证码"/><span>发送验证码</span></div>
+       <div class="div1"><p>验证码</p><input type="text" placeholder="请输入验证码"/><span>发送验证码</span></div>
        <div><p>邮箱</p><input  type="text" placeholder="请输入邮箱"/></div>
+     </div>
+     <div class="save">
+       <span>选择优惠券</span>
+       <img src="./img/arrowRight.png"/>
      </div>
    </div>
    <footer>
@@ -51,7 +55,7 @@ export default {
   }
   .confirmation{
     width:750px;
-    height:1450px;
+    height:1600px;
     background-color:#f7f7f7;
   }
   input{
@@ -166,7 +170,7 @@ export default {
     -webkit-margin-before: 0;
     -webkit-margin-after: 0;
   }
-  .peopleMassage:last-child{
+  .div1{
     position: relative;
   }
   .peopleMassage span{
@@ -174,6 +178,23 @@ export default {
     color:#7ab4ee;
     position: absolute;
     right:0;
+  }
+  .save{
+    width:100%;
+    height:102px;
+    background-color:#fff;
+    margin-top:20px;
+    font-size:28px;
+    text-align: left;
+    color:#c1c1c1;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .save img{
+    width: 32px;
+    height: 32px;
   }
   footer{
     position: fixed;
@@ -197,7 +218,8 @@ export default {
     width:250px;
     height:100px;
     background-color:#fae368;
-    color:#8c8353;font-size: 32px;
+    color:#8c8353;
+    font-size: 32px;
     line-height: 100px;
     }
 </style>

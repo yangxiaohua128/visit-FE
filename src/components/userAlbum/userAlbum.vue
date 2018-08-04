@@ -10,7 +10,7 @@
     <div class="content">
       <div class="album">
         <p>2033</p>
-        <div></div>
+        <img>
       </div>
     </div>
   </div>
