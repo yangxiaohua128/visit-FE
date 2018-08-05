@@ -14,7 +14,7 @@
         <span>库存有限，请尽快完成付款</span>
       </div>
       <div class="waitTime">
-        <div class="countDown"><span>剩余支付时间</span>：<span class="time">{{'${min}分钟${sec}秒'}}</span></div>
+        <div class="countDown"><span>剩余支付时间</span>：<span class="time">{{`${min}分钟${sec}秒`}}</span></div>
         <button type="button">继续支付</button>
       </div>
       <div class="details">
@@ -46,33 +46,49 @@ export default {
   data () {
     return {
       min: 0,
-      sec: 0
+      sec: 0,
+      authTime: 0
     }
   },
   mounted: function () {
-    this.countdown()
+    this.countdown(this.authTime)
   },
   methods: {
     toBack: function () {
       this.$router.back(-1)
     },
     countdown: function () {
-      let t = 180 * 1000
-      if (t > 0) {
-        let min = parseInt(t / 60)
-        let sec = parseInt(t % 60)
+      this.authTime = 180
+      let authTimeTimer = setInterval(() => {
+        let min = parseInt(this.authTime / 60)
+        let sec = parseInt(this.authTime % 60)
         this.min = min > 9 ? min : '0' + min
         this.sec = sec > 9 ? sec : '0' + sec
-        // } else {
-        //  let min = '00'
-        //  let sec = '00'
-        // }
+        this.authTime--
         const that = this
-        setTimeout(function () {
-          that.countdown()
-        }, 1000)
-      }
+        if (that.authTime <= 0) {
+          this.min = '00'
+          this.sec = '00'
+          clearInterval(authTimeTimer)
+        }
+      }, 1000)
     }
+    // countdown: function () {
+    //   let t = 180
+    //   let min = parseInt(t / 60)
+    //   let sec = parseInt(t % 60)
+    //   this.min = min > 9 ? min : '0' + min
+    //   this.sec = sec > 9 ? sec : '0' + sec
+    //   if (t < 0) {
+    //     this.min = 0
+    //     this.sec = 0
+    //   }
+    //   // const that = this
+    //   setTimeout(function () {
+    //     this.countdown()
+    //     t = t--
+    //   }, 1000)
+    // }
   }
 }
 </script>

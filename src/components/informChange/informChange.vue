@@ -5,21 +5,21 @@
       <p>编辑个人资料</p>
       <div></div>
     </header>
-    <form class="change" action="" method="post" name="myForm" onsubmit="console.log(input.value)">
+    <form class="change" action="" method="post" id="myForm" onsubmit="console.log(input.value)">
           <div class="name">
         <div class="name1">真实姓名</div>
-        <input type="text" class="name2" name="myName" placeholder="请输入你的真实姓名" required="required" v-model.lazy="msg"/>
+        <input type="text" class="name2" id="myName" placeholder="请输入你的真实姓名" required="required" v-model.lazy="msg"/>
 </div>
       <div class="sex">
         <div class="sex1">性别</div>
-        <div><input  type="radio" name="sex" value="男"/><img src="./img/man.png" width="50px" height="50px"/></div>
-        <div><input  type="radio" name="sex" value="女"/><img src="./img/woman.png" width="50px" height="50px"/></div>
+        <div><input  type="radio" name ="sex" id="sex1" value="男"/><img src="./img/man.png" width="50px" height="50px"/></div>
+        <div><input  type="radio" name ="sex" id="sex2" value="女"/><img src="./img/woman.png" width="50px" height="50px"/></div>
       </div>
       <div class="time">
         <div class="time1">出生日期</div>
-        <input type="date" class="time2"  name="myBirthday" placeholder="请输入你的生日" required="required"/>
+        <input type="date" class="time2"  id="myBirthday" placeholder="请输入你的生日" required="required"/>
       </div>
-      <div class="save"><input type="submit" value="保存" name="submit"/></div>
+      <div class="save"><input type="submit" value="保存" id="submit"/></div>
     </form>
   </div>
 </template>

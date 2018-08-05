@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import search from '@/components/search/search'
+import orderPage from '@/components/orderPage/orderPage'
 import apppage from '@/components/apppage/apppage'
 import News from '@/components/News/News'
 import history from '@/components/history/history'
@@ -18,10 +18,12 @@ import waitpay from '@/components/waitpay/waitpay'
 import order from '@/components/order/order'
 import orderconfirmation from '@/components/orderconfirmation/orderconfirmation'
 import message from '@/components/message/message'
-import showOne from '@/components/showOne/showOne'
+import shows from '@/components/shows/shows'
 import backMoneyOk from '@/components/backMoneyOk/backMoneyOk'
 import backMoneyNo from '@/components/backMoneyNo/backMoneyNo'
 import pay from '@/components/pay/pay'
+import revocatory from '@/components/revocatory/revocatory'
+import save from '@/components/save/save'
 Vue.use(Router)
 // const advancedSearch = (resolve) => {
 //   import('@/components/advancedSearch/advancedSearch').then((module) => {
@@ -41,12 +43,6 @@ export default new Router({
       path: '/',
       name: 'HelloWorld',
       component: HelloWorld
-    },
-    {
-      title: '搜索页',
-      path: '/search',
-      name: 'search',
-      component: search
     },
     {
       title: '首页',
@@ -128,12 +124,6 @@ export default new Router({
       component: waitpay
     },
     {
-      title: '预定页',
-      path: '/order',
-      name: 'order',
-      component: order
-    },
-    {
       title: '确定页',
       path: '/orderconfirmation',
       name: 'orderconfirmation',
@@ -147,9 +137,9 @@ export default new Router({
     },
     {
       title: '单个产品展示',
-      path: '/showOne',
-      name: 'showOne',
-      component: showOne
+      path: '/shows',
+      name: 'shows',
+      component: shows
     },
     {
       title: '退款成功',
@@ -168,6 +158,24 @@ export default new Router({
       path: '/pay',
       name: 'pay',
       component: pay
+    },
+    {
+      title: '取消成功',
+      path: '/revocatory',
+      name: 'revocatory',
+      component: revocatory
+    },
+    {
+      title: '预定页',
+      path: '/orderPage',
+      name: 'orderPage',
+      component: orderPage
+    },
+    {
+      title: '优惠券',
+      path: '/save',
+      name: 'save',
+      component: save
     }
   ]
 })

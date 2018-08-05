@@ -11,13 +11,15 @@
       <li v-for="(item,index) in items" :key="item.id" ><img :src='item.path' /><p :class="{'checked':index===n}" @touchend="changeP(index)">{{item.text[0]}}</p></li>
     </ul>
     <div class="content" >
+     {{test[n]}}
       <div class="oneOrder">
         <div class="time">预定日期:<span>7月25日</span></div>
         <div class="order">
           <div class="headline"><img src="./img/inform.png" width="30" height="30"/><span>重庆旅游三天四晚自由行</span></div>
-          <div class="money"><p class="p1">￥1500</p><p class="p2">{{state[m]}}}</p></div>
+          <div class="money"><p class="p1">￥1500</p><p class="p2">{{state[m]}}</p></div>
           <div class="from"><span>7月25日</span>至<span>7月30日</span></div>
-          <div class="button"><button type="button" @touchend="again">点评</button><button type="button" @touchend="again">去支付</button>
+          <div class="button">
+            <button type="button" @touchend="again">{{arr[i]}}</button>
           </div>
         </div>
       </div>
@@ -35,17 +37,20 @@
 export default {
   data () {
     return {
-      items: [{path: require('./img/complatedorder2.png'), text: ['全部订单', '1']},
-        {path: require('./img/waitpay2.png'), text: ['待支付', '2']},
-        {path: require('./img/payorder2.png'), text: ['待出行', '3']},
-        {path: require('./img/appraise2.png'), text: ['待评价', '4']},
-        {path: require('./img/moneyback2.png'), text: ['退款订单', '5']}],
+      items: [{path: require('./img/complatedorder2.png'), text: ['全部订单']},
+        {path: require('./img/waitpay2.png'), text: ['待支付']},
+        {path: require('./img/payorder2.png'), text: ['待出行']},
+        {path: require('./img/appraise2.png'), text: ['待评价']},
+        {path: require('./img/moneyback2.png'), text: ['退款订单']}],
       dataUrl: require('./img/down.png'),
       bOn: false,
       n: -1,
-      test: [{content: 1}],
-      state: ['待评价', '待出行', '待付款', '已退款'],
-      m: 0
+      m: 0,
+      i: 0,
+      test: [ {content: 1}, {content: 2}, {content: 3}, {content: 4}, {content: 5} ],
+      state: ['待付款', '待出行', '待评价', '已退款'],
+      arr: ['支付', '点评']
+      // data1: [ { 'ispay': 1, 'isout': 1, 'isevaluate': 0, 'isfound': 0, 'money': '1599', 'ordetime': '2018-07-30', 'producttitle': '三亚旅游' } ]
     }
   },
   methods: {
@@ -53,13 +58,13 @@ export default {
       this.$router.back(-1)
     },
     again: function () {
-      if (this.button === '点评') {
+      if (this.button.value === '点评') {
         this.$router.push({
-          path: '/userComment'
+          path: '/userComment/:id'
         })
-      } else if (this.button === '去支付') {
+      } else if (this.button.value === '去支付') {
         this.$router.push({
-          path: '/waitPay'
+          path: '/waitPay/:id'
         })
       }
     },
@@ -71,14 +76,17 @@ export default {
       this.bOn = !this.bOn
     },
     judge: function () {
-      let data = []
-      if (data.isevaluate === 0 ) {
+      let data = [ {ispay: 1}, {isout: 1}, {isevaluate: 0}, {isfound: 0} ]
+      // const data = data1
+      if (data.ispay === 0) {
         this.m = 0
-      } else if (data.isout === 0) {
+        this.i = 0
+      } else if (data.ispay === 1 || data.isout === 0) {
         this.m = 1
-      } else if (data.ispay === 0) {
+      } else if (data.ispay === 1 || data.isout === 1 || data.isevaluate === 0) {
         this.m = 2
-      } else if (data.isfound === 0) {
+        this.i = 1
+      } else if (data.isfound === 1) {
         this.m = 3
       }
     }
