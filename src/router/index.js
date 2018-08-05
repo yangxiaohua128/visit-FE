@@ -20,6 +20,7 @@ import order from '@/components/order/order'
 import orderconfirmation from '@/components/orderconfirmation/orderconfirmation'
 import message from '@/components/message/message'
 import shows from '@/components/shows/shows'
+import save from '@/components/save/save'
 Vue.use(Router)
 // const advancedSearch = (resolve) => {
 //   import('@/components/advancedSearch/advancedSearch').then((module) => {
@@ -69,6 +70,12 @@ export default new Router({
       path: '/history',
       name: 'history',
       component: history
+    },
+    {
+      title: '优惠券',
+      path: '/save',
+      name: 'save',
+      component: save
     },
 
     {  path: '/advancedSearch',
