@@ -2,7 +2,7 @@
   <div class="swiper-box" rel="swiperBox">
     <swiper :options="swiperOption" class="swiper-container" ref="mySwiper">
       <!-- 轮播项 -->
-      <swiper-slide v-for="banner in banners">
+      <swiper-slide v-for="banner in banners" :key="banner.id">
         <img :src="banner" class="swiper-image">
       </swiper-slide>
       <!-- 轮播的小圆点 -->
@@ -30,7 +30,6 @@
       swiper: swiper,
       swiperSlide: swiperSlide
     },
-    //定义这个sweiper对象
     computed: {
       swiper: function () {
         return this.$refs.mySwiper.swiper
@@ -54,4 +53,4 @@
     width: 100%;
     height: 250px;
   }
-</style>
+  </style>

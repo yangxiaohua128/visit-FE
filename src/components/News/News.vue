@@ -8,17 +8,17 @@
       <li
         v-for="(item,index) in tabs"
         :class="{active:index === num}"
-        @touchend="tab(index)">{{item}}</li>
+        @touchend="tab(index)"
+        :key="item.id">{{item}}</li>
     </ul>
     <div >
-      <div class="tabCon"
+      <div class="tabCon" :key="itemCon.id"
         v-for='(itemCon,index) in tabContents'
-        v-show=" index === num"
+        v-show="index===num"
            :class="{bgc:index===num}">{{itemCon}}</div>
     </div>
   </div>
 </template>
-
 <script>import axios from 'axios'
 export default {
   name: 'history，',

@@ -1,7 +1,9 @@
 <template>
   <div class="apppage">
     <div class="home2">
+      <a href="http://www.baidu.com">
       <k-slider :banners="banners" :swiperOption="swiperOption"></k-slider>
+      </a>
     </div>
     <div class="search">
       <img src="./img/air.png"/>
@@ -50,22 +52,22 @@
 </template>
 <script>
   import Slider from '../../../sslider/sslider.vue'
-  export default {
+export default {
     data: function () {
-      return{
-        day: 0, hr: 0, min: 0, sec: 0,
-        banners: ['http://pic.lvmama.com/uploads/pc/place2/2018-07-16/c388073b-66b8-4a4a-ba73-a037d5479791.jpg', 'http://pic.lvmama.com/uploads/pc/place2/2018-07-31/6ca730cd-a8bd-4327-987d-1198bf6cd40d.jpg','http://pic.lvmama.com/uploads/pc/place2/2018-07-25/2e53cce1-52e6-4ee8-8df4-ab3ed33bfd2e.jpg','http://pic.lvmama.com/uploads/pc/place2/2018-07-16/5e772246-0115-40d1-b57d-eef53ffd242a.jpg'],
+      return {
+        day: 0,
+        hr: 0,
+        min: 0,
+        sec: 0,
+        banners: ['http://pic.lvmama.com/uploads/pc/place2/2018-07-16/c388073b-66b8-4a4a-ba73-a037d5479791.jpg', 'http://pic.lvmama.com/uploads/pc/place2/2018-07-31/6ca730cd-a8bd-4327-987d-1198bf6cd40d.jpg', 'http://pic.lvmama.com/uploads/pc/place2/2018-07-25/2e53cce1-52e6-4ee8-8df4-ab3ed33bfd2e.jpg', 'http://pic.lvmama.com/uploads/pc/place2/2018-07-16/5e772246-0115-40d1-b57d-eef53ffd242a.jpg'],
         swiperOption: {
-          pagination: '.swiper-pagination',
-          paginationClickable: true,
-          speed: 500,
+          direction: 'horizontal',
           loop: true,
-          observer: true,
-          observeParents: true,
-          autoplayDisableOnInteraction: false,
-          autoplay2bs: {
+          paginationType: 'fraction',
+          pagination: '.swiper-pagination',
+          autoplay: {
             disableOnInteraction: false,
-            delay: 2000
+            delay: 2500
           }
         }
       }
@@ -74,11 +76,11 @@
       this.countdown()
     },
     components: {
-      kSlider : Slider
+      kSlider: Slider
     },
     methods: {
       countdown: function () {
-        const end = Date.parse(new Date('2018-8-4'))
+        const end = Date.parse(new Date('2018-8-5'))
         const now = Date.parse(new Date())
         const msec = end - now
         let day = parseInt(msec / 1000 / 60 / 60 / 24)
@@ -209,7 +211,7 @@
     width: 96%;
     height: auto;
   }
-  .fwrap {
+  .fwrap{
     background-color: #f4f4f4;
   }
   .timer{

@@ -11,14 +11,33 @@
       <div>定位失败</div>
     </div>
     <div class="hotcity">
-      <div>热门城市</div>
+      <div class="hc">热门城市</div>
+      <div class="city">
+      <ul>
+        <li v-for="(item,index) in tabs"
+            :class="{active:index === num}"
+            @touchend="tab(index)"
+            :key="item.id">{{item}}</li>
+      </ul>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
     export default {
-        name: "position"
+        name: 'position',
+      data : function () {
+          return {
+            tabs : ['西安', '上海', '北京', '广州', '汉中', '成都', '上海', '北京', '广州', '汉中', '成都'],
+            num : 1
+          }
+      },
+      methods: {
+        tab (index) {
+          this.num = index
+        }
+      }
     }
 </script>
 
@@ -69,14 +88,34 @@
     border-radius: 30px;
     font-size: 24px;
   }
-  .hotcity{
-    display: flex;
-    justify-content: space-between;
-    height: 32px;
+  .hc{
+    text-align: left;
+    text-indent: 1em;
+    width: 750px;
+    color: #5dc7b9;
     background-color: #f4f4f4;
   }
-  .hotcity div{
-    color: #5dc7b9;
-    margin-left: 20px;
+  ul{
+    display: flex;
+    flex-wrap: wrap;
+    align-content:space-between;
+  }
+  li{
+    order:;
+    width: 20%;
+    height: 50px;
+    margin:0 0 30px 30px;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 50px;
+    background-color: #f4f4f4;
+  }
+  .city{
+
+    width: 750px;
+    padding-top: 30px;
+  }
+  li.active{
+    background-color: #5dc7b9;
   }
 </style>

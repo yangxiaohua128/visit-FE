@@ -18,8 +18,9 @@ import waitpay from '@/components/waitpay/waitpay'
 import order from '@/components/order/order'
 import orderconfirmation from '@/components/orderconfirmation/orderconfirmation'
 import message from '@/components/message/message'
-import showOne from '@/components/showOne/showOne'
+import shows from '@/components/shows/shows'
 import position from '@/components/position/position'
+import save from '@/components/save/save'
 Vue.use(Router)
 // const advancedSearch = (resolve) => {
 //   import('@/components/advancedSearch/advancedSearch').then((module) => {
@@ -59,10 +60,22 @@ export default new Router({
       component: destination
     },
     {
+      title: '单个产品',
+      path: '/shows',
+      name: 'shows',
+      component: shows
+    },
+    {
       title: '浏览历史',
       path: '/history',
       name: 'history',
       component: history
+    },
+    {
+      title: '优惠券',
+      path: '/save',
+      name: 'save',
+      component: save
     },
     {
       tille: '选择定位',
@@ -145,12 +158,6 @@ export default new Router({
       path: '/message',
       name: 'message',
       component: message
-    },
-    {
-      title: '单个产品展示',
-      path: '/showOne',
-      name: 'showOne',
-      component: showOne
     }
   ]
 })

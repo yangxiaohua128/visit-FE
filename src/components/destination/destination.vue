@@ -20,10 +20,10 @@
         <!--<li>欧洲</li>-->
         <!--<li>美州</li>-->
         <!--<li>澳中东非</li>-->
-        <li
-          v-for="(item,index) in tabs"
+        <li v-for="(item,index) in tabs"
           :class="{active:index === num}"
-          @touchend="tab(index)">{{item}}</li>
+          @touchend="tab(index)"
+            :key="item.id">{{item}}</li>
       </ul>
     </div>
     <div class="showwrap">
@@ -39,7 +39,8 @@
       <div class="tabCon">
         <div
           v-for='(itemCon,index) in tabContents'
-          v-show=" index === num">{{itemCon}}</div>
+          v-show=" index === num"
+          :key="itemCon.id">{{itemCon}}</div>
       </div>
     </div>
     <div class="wrap">
@@ -65,7 +66,7 @@
     data: function () {
       return {
         tabs: ['热门', '国内', '周边', '欧洲', '美洲', '澳中东非'],
-        tabContents: [ { src: require('./img/test.jpg')}],
+        tabContents: [{'热门': '图片'}, {'国内': '图片'}, {'周边': '图片'}, {'欧洲': '图片'}, {'美洲': '图片'}, {'澳中东非': '图片'}],
         num: 1
       }
     },
