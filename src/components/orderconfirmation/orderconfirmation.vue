@@ -72,7 +72,7 @@
       toBlock1: function () {
         let reg = /^1[3456789]\d{9}$/
         let phone = document.getElementById('phone')
-        if (!reg.test(this.$refs.N.value)) {
+        if(!reg.test(this.$refs.N.value)) {
           phone.style.display = 'block'
         }
         else {
@@ -82,7 +82,7 @@
       toBlock2: function () {
         let reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
         let Email = document.getElementById('Email')
-        if (!reg.test(this.$refs.E.value)) {
+        if(!reg.test(this.$refs.E.value)) {
           Email.style.display = 'block'
         }
         else {

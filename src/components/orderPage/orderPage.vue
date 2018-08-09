@@ -77,7 +77,7 @@
         this.$router.back(-1)
       },
       turnToOderConfirmation: function () {
-        if (this.orderAdultnum + this.orderChildnum > 0) {
+        if(this.orderAdultnum + this.orderChildnum > 0) {
           this.$router.push({
             path: '/orderconfirmation'
           })

@@ -95,7 +95,7 @@
         const end = Date.parse(new Date('all[0].starttimes[0]'))
         const now = Date.parse(new Date())
         const msec = end - now
-        if(msec > 0) {
+        if (msec > 0) {
           let day = parseInt(msec / 1000 / 60 / 60 / 24)
           let hr = parseInt(msec / 1000 / 60 / 60 % 24)
           let min = parseInt(msec / 1000 / 60 % 60)
@@ -134,13 +134,15 @@
           let data = resp.data
           this.all.push(data)
           this.banners.push(data.imgProducts)
-          for (let i=0;i<data.starttimes.length; i++) {
+          for (let i = 0; i < data.starttimes.length; i++) {
             this.sites.push(data.starttimes[i])
           }
-          for (let i=0;i<data.spemoneys.length; i++) {
+          for (let i = 0; i < data.spemoneys.length; i++) {
             this.priceN.push(parseInt(data.spemoneys[i]))
-            this.priceN.sort(function (a, b) { return a - b })
-    }
+            this.priceN.sort(function (a, b) {
+              return a - b
+            })
+          }
           this.priceL = this.priceN[0]
           this.priceH = this.priceN[this.priceN.length - 1]
         }).catch(error => {
@@ -298,4 +300,8 @@
     position: fixed;
     right: 0;
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/drj
 </style>

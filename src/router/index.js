@@ -26,8 +26,10 @@ import backMoneyNo from '@/components/backMoneyNo/backMoneyNo'
 import pay from '@/components/pay/pay'
 import shows from '@/components/shows/shows'
 import modify from '@/components/modify/modify'
-import position from '@/components/position/position'
 import save from '@/components/save/save'
+import shown from '@/components/shown/shown'
+import position from '@/components/position/position'
+
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -98,9 +100,7 @@ export default new Router({
       name: 'history',
       component: history
     },
-    {
-      title: '高级搜索页',
-      path: '/advancedSearch',
+    { path: '/advancedSearch',
       name: 'advancedSearch',
       component: advancedSearch
     },
@@ -195,7 +195,7 @@ export default new Router({
       component: message
     },
     {
-      title: '单个产品展示',
+      title: '特卖单个产品展示',
       path: '/shows',
       name: 'shows',
       component: shows
@@ -230,6 +230,17 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: register
-    }
-  ]
+    },
+    {
+      title: '普通单个产品展示',
+      path: '/shown',
+      name: 'shown',
+      component: shown
+    },
+    {
+      tille: '选择定位',
+      path: '/position',
+      name: 'position',
+      component: position
+    }]
 })
