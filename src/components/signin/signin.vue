@@ -2,15 +2,15 @@
   <div class="signin">
     <div class="head" >
       <img id="img1" src="./img/picture-1.png"/>
-      <p>欢迎来到</p>
-      <button type="button">登录/注册</button>
-      <img id="img2" src="./img/news.png"/>
+      <p>欢迎来到拾叁</p>
+      <button type="button" @touchend="tophone">登录/注册</button>
+      <img id="img2" src="./img/news.png" @touchend="tophone"/>
     </div>
     <div class="div2"></div>
     <div class="div3">积分：</div>
     <div class="div4"></div>
     <ul class="nav">
-      <li v-for="item in items" :key="item.id" @touchend="choice(index)">
+      <li v-for="item in items" :key="item.id" @touchend="tophone">
         <img :src='item.path'/><span>{{item.text}}</span></li>
     </ul>
     <div class="div6">
@@ -36,28 +36,29 @@
 </template>
 
 <script>
-  export default {
-    name:'signin',
-     data (){
-      return{
-        items:[
-          {path:require('./img/collection.png'),text:"我的收藏"},
-          {path:require('./img/order.png'),text:"我的订单"},
-          {path:require('./img/travel.png'),text:"未出行订单"},
-          {path:require('./img/payment.png'),text:"未付款订单"},
-          {path:require('./img/evaluate.png'),text:"待评价订单"},
-          {path:require('./img/refund.png'),text:"退款订单"},
-          {path:require('./img/coupon.png'),text:"优惠券"},
-          {path:require('./img/album.png'),text:"我的相册"}]
-      }
-    },
-    methods:{
-      choice(i){
-
-      }
+export default {
+  name: 'signin',
+  data () {
+    return {
+      items: [
+        {path: require('./img/collection.png'), text: '我的收藏'},
+        {path: require('./img/order.png'), text: '我的订单'},
+        {path: require('./img/travel.png'), text: '未出行订单'},
+        {path: require('./img/payment.png'), text: '未付款订单'},
+        {path: require('./img/evaluate.png'), text: '待评价订单'},
+        {path: require('./img/refund.png'), text: '退款订单'},
+        {path: require('./img/coupon.png'), text: '优惠券'},
+        {path: require('./img/album.png'), text: '我的相册'}]
     }
-
+  },
+  methods: {
+    tophone: function() {
+      this.$router.push({
+        path: '/phone'
+      })
+    }
   }
+}
 </script>
 
 <style lang="scss">

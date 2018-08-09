@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import signin2 from '@/components/signin2/signin2'
 import phone from '@/components/phone/phone'
 import register from '@/components/register/register'
-import search from '@/components/search/search'
 import apppage from '@/components/apppage/apppage'
 import News from '@/components/News/News'
 import history from '@/components/history/history'
@@ -20,17 +19,22 @@ import waitpay from '@/components/waitpay/waitpay'
 import order from '@/components/order/order'
 import orderconfirmation from '@/components/orderconfirmation/orderconfirmation'
 import message from '@/components/message/message'
-import showOne from '@/components/showOne/showOne'
+import shows from '@/components/shows/shows'
 import modify from '@/components/modify/modify'
 import collection from '@/components/collection/collection'
+import orderPage from '@/components/orderPage/orderPage'
+import save from '@/components/save/save'
+import phonechange from '@/components/phonechange/phonechange'
+import names from '@/components/names/names'
+import emilechange from '@/components/emilechange/emilechange'
+import password from '@/components/password/password'
+import Head from '@/components/Head/Head'
 Vue.use(Router)
 // const advancedSearch = (resolve) => {
 //   import('@/components/advancedSearch/advancedSearch').then((module) => {
 //     resolve(module)
 //   })
 // }
-
-
 // const search = (resolve) => {
 //   import('@components/search/search').then((module) => {
 //     resolve(module)
@@ -58,16 +62,16 @@ export default new Router({
       component: phone
     },
     {
-  title: '注册页面',
-    path: '/register',
-  name: 'register',
-  component: register
-},
+      title: '注册页面',
+      path: '/register',
+      name: 'register',
+      component: register
+    },
     {
-      title:'我的收藏',
-      path:'collection',
-      name:'collection',
-      component:collection
+      title: '我的收藏',
+      path: '/collection',
+      name: 'collection',
+      component: collection
     },
     {
       title: '用户信息修改页（1）',
@@ -76,10 +80,34 @@ export default new Router({
       component: modify
     },
     {
-      title: '搜索页',
-      path: '/search',
-      name: 'search',
-      component: search
+      title: '手机号修改',
+      path: '/phonechange',
+      name: 'phonechange',
+      component: phonechange
+    },
+    {
+      title: '昵称修改',
+      path: '/names',
+      name: 'names',
+      component: names
+    },
+    {
+      title: '邮箱',
+      path: '/emilechange',
+      name: 'emilechange',
+      component: emilechange
+    },
+    {
+      title: '密码修改',
+      path: '/password',
+      name: 'password',
+      component: password
+    },
+    {
+      title: '更换头像',
+      path: '/Head',
+      name: 'Head',
+      component: Head
     },
     {
       title: '首页',
@@ -125,11 +153,12 @@ export default new Router({
       component: userComment
     },
     {
-       path: '/userEvaluation',
-         name:'userEvaluation',
-      component:userEvaluation
+      path: '/userEvaluation',
+      name: 'userEvaluation',
+      component: userEvaluation
     },
-{    title: '修改',
+    {
+      title: '修改',
       path: '/informChange',
       name: 'informChange',
       component: informChange
@@ -152,11 +181,6 @@ export default new Router({
       name: 'waitpay',
       component: waitpay
     },
-        {title: '预定页',
-      path: '/order',
-      name: 'order',
-      component: order
-    },
     {
       title: '确定页',
       path: '/orderconfirmation',
@@ -169,13 +193,24 @@ export default new Router({
       name: 'message',
       component: message
     },
-    {title: '单个产品展示',
-      path: '/showOne',
-      name: 'showOne',
-      component: showOne
-    }
+    {
+      title: '单个产品展示',
+      path: '/shows',
+      name: 'shows',
+      component: shows
+    },
+    {
+      title: '预定页',
+      path: '/orderPage',
+      name: 'orderPage',
+      component: orderPage
+    },
+    {
 
+      title: '优惠券',
+      path: '/save',
+      name: 'save',
+      component: save
+    }
   ]
 })
-
-

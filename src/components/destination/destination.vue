@@ -32,9 +32,9 @@
 </template>
 
 <script>
-    export default {
-        name: "destination"
-    }
+export default {
+  name: 'destination'
+}
 </script>
 
 <style type="text/css">
@@ -95,6 +95,4 @@
     line-height: 100px;
     border: 2px #ccc solid;
   }
-
-
 </style>
