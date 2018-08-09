@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import orderPage from '@/components/orderPage/orderPage'
 import signin2 from '@/components/signin2/signin2'
 import phone from '@/components/phone/phone'
 import register from '@/components/register/register'
+import orderPage from '@/components/orderPage/orderPage'
 import apppage from '@/components/apppage/apppage'
 import News from '@/components/News/News'
 import history from '@/components/history/history'
@@ -29,7 +29,6 @@ import modify from '@/components/modify/modify'
 import save from '@/components/save/save'
 import shown from '@/components/shown/shown'
 import position from '@/components/position/position'
-
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -100,10 +99,6 @@ export default new Router({
       name: 'history',
       component: history
     },
-    { path: '/advancedSearch',
-      name: 'advancedSearch',
-      component: advancedSearch
-    },
     { title: '优惠券',
       path: '/save',
       name: 'save',
@@ -114,6 +109,12 @@ export default new Router({
       path: '/position',
       name: 'position',
       component: position
+    },
+    {
+      title: '高级搜索页',
+      path: '/advancedSearch',
+      name: 'advancedSearch',
+      component: advancedSearch
     },
     {
       title: '搜索结果页',
@@ -137,7 +138,20 @@ export default new Router({
       name: 'userEvaluation',
       component: userEvaluation
     },
-    { title: '修改',
+    {
+      title: '用户评价',
+      path: '/userEvaluation',
+      name: 'userEvaluation',
+      component: userEvaluation
+    },
+    {
+      title: '登录前我的页面',
+      path: '/signin',
+      name: 'signin',
+      component: signin
+    },
+    {
+      title: '修改',
       path: '/userEvaluation',
       name: 'userEvaluation',
       component: userEvaluation
@@ -171,7 +185,8 @@ export default new Router({
       name: 'waitpay',
       component: waitpay
     },
-    { title: '预定页',
+    {
+      title: '预定页',
       path: '/orderPage',
       name: 'orderPage',
       component: orderPage
@@ -223,7 +238,6 @@ export default new Router({
       path: '/shows',
       name: 'shows',
       component: shows
-
     },
     {
       title: '注册页面',

@@ -98,7 +98,7 @@
         }).then(resp => {
           let data2 = resp.data
           this.tabContents = []
-          for (let i=0;i<data2.length; i++) {
+          for (let i = 0; i < data2.length; i++) {
             this.tabContents.push(data2[i])
           }
         })
@@ -117,7 +117,7 @@
         }).then(resp => {
           let data3 = resp.data
           this.tabContents = []
-          for (let i=0;i<data3.length; i++) {
+          for (let i = 0; i < data3.length; i++) {
             this.tabContents.push(data3[i])
           }
         })

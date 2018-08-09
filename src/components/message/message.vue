@@ -24,7 +24,7 @@
   import axios from 'axios'
   export default {
     name: 'message',
-    data: function () {
+    data : function () {
       return {
         sites: [
           // {name:"张",sex:"男",id:"739273829102700093"},
@@ -45,7 +45,7 @@
       toBack: function () {
         this.$router.back(-1)
       },
-      show: function () {
+      show:function () {
         axios.post('http://192.168.43.229/orders/showVisitors.do').then(resp => {
           let data = resp.data
           for (let i = 0; i < data.length; i++) {

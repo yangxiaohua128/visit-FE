@@ -45,7 +45,7 @@
         show: function () {
           axios.post('http://60.205.208.7/Travel_Summer_war/orders/showUDiscount.do').then(resp => {
             let data = resp.data
-            for (let i=0;i<data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
               this.arr.push(data[i])
             }
           }).catch(error => {
@@ -55,7 +55,7 @@
       },
     mounted: function () {
       this.show()
-    }
+    },
   }
 </script>
 

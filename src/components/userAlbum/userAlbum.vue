@@ -8,111 +8,103 @@
       <div></div>
     </header>
     <div class="content">
-      <div class="album">
-        <p>2033</p>
-        <div></div>
+      <div class="none" ref="show">--暂时还没有照片--</div>
+      <div class="album" v-for="item in userAlbumList" :key="item.id">
+        <p>{{item.date}}</p>
+        <img v-for="item1 in item.urls" :key="item1.id" :src="item1">
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'userAlbum',
-  methods: {
-    toBack () {
-      this.$router.back(-1)
+  import axios from 'axios'
+  export default {
+    name: 'userAlbum',
+    data () {
+      return {
+        userAlbumList: []
+      }
+    },
+    mounted () {
+      this.InitData()
+    },
+    methods: {
+      toBack () {
+        this.$router.back(-1)
+      },
+      InitData () {
+        axios.get('http://192.168.43.29:8080/comment/photo.do').then(resp => {
+          let data = resp.data
+          if (data.length) {
+            for (let i = 0; i < data.length; i++) {
+              this.userAlbumList.push(data[i])
+            }
+          } else {
+            this.$refs.show.style.display = 'block'
+          }
+        }).catch(error => {
+          console.log(error)
+        })
+      }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>
   .advancedSearch{
     width:750px;
   }
-  header {
-    width: 100%;
-    height: 90px;
-    display: flex;
+  header{
+    width:100%;
+    height:90px;
+    display:flex;
     align-items: center;
-    justify-content: space-between;
-    img {
-      width: 38px;
-      justify-content: space-between;
-      img {
-        width: 38px;
-        height: 38px;
-      }
-      p {
-        width: 200px;
-        height: 38px;
-        line-height: 38px;
-        text-align: center;
+    justify-content:space-between;
+    img{
+      width:38px;
+      height:38px;
+    }
+    p{
+      width:200px;
+      height: 38px;
+      line-height: 38px;
+      text-align: center;
+      font-size: 36px;
+      color: black;
+    }
+    div{
+      width:100px;
+      height: 38px;
+      line-height: 38px;
+      font-size: 36px;
+      color: black;
+    }
+  }
+  .content {
+    .album{
+      width: 100%;
+      text-align: left;
+      p{
+        height: 80px;
+        line-height: 80px;
         font-size: 36px;
-        color: black;
+        width: 300px;
+        padding-left: 20px;
       }
-      div {
-        width: 100px;
-        height: 38px;
-      }
-      p {
+      img{
         width: 200px;
-        p, div {
-          width: 150px;
-          height: 38px;
-          line-height: 38px;
-          text-align: center;
-        }
-        .content {
-          .album {
-            width: 100%;
-            p {
-              height: 50px;
-              line-height: 50px;
-              font-size: 36px;
-              color: black;
-            }
-            div {
-              width: 100px;
-              height: 38px;
-              line-height: 38px;
-              font-size: 36px;
-              color: black;
-            }
-          }
-          .content {
-            ul {
-              width: 100%;
-              li {
-                height: 260px;
-                width: 100%;
-                p {
-                  height: 50px;
-                  width: 200px;
-                }
-              }
-            }
-            .content {
-              .album {
-                width: 100%;
-                p {
-                  height: 50px;
-                  line-height: 50px;
-                  font-size: 36px;
-                  width: 200px;
-                  background-color: #007aff;
-                  margin-bottom: 10px;
-                }
-                div {
-                  background-color: aqua;
-                  width: 100%;
-                }
-              }
-            }
-          }
-        }
+        height: 200px;
+        margin: 5px;
       }
     }
+  }
+  .none{
+    width: 100%;
+    height: 300px;
+    line-height: 300px;
+    font-size: 38px;
+    color: #ccc;
+    display: none;
   }
 </style>

@@ -136,6 +136,7 @@ export default {
     flex-wrap: wrap;
     border: 1px #e4e4e4 solid;
     margin-bottom: 80px;
+<<<<<<< HEAD
     .state{
       width: 100%;
       background-color: #f9de57;;
@@ -177,6 +178,42 @@ export default {
       border: 1px rebeccapurple solid;
       align-self: flex-end;
     }
+=======
+  }
+  .number{
+    width: 300px;
+    height: 40px;
+    border:1px #0094e3 solid;
+    border-radius: 12px;
+    color:#858585;
+    text-align: left;
+    line-height: 40px;
+    padding: 10px;
+    font-size:24px;
+    margin-bottom: 30px;
+  }
+  .time{
+    width: 300px;
+    height: 40px;
+    color:#858585;
+    text-align: left;
+    line-height: 40px;
+    padding: 10px;
+    font-size:24px;
+    margin-bottom: 30px;
+  }
+  .img{
+    width: 200px;
+    height: 200px;
+    border: 1px rebeccapurple solid;
+    align-self:flex-end ;
+  }
+  .text{
+    width: 450px;
+    height: 200px;
+    border: 1px rebeccapurple solid;
+    align-self:flex-end ;
+>>>>>>> origin/sy
   }
   .message{
     width: 92%;

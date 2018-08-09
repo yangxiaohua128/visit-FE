@@ -1,218 +1,305 @@
 <template>
-  <div class="orderPage">
+  <div class="order">
     <header>
-      <img src="./img/arrowLeft.png" @touchend="toBack"/>
-      <p>选择班期和人数</p>
+      <div><img src="./img/left.png" width="19" height="19" @touchend="toBack"/></div>
+      <p>订单详情</p>
+      <div></div>
     </header>
     <div class="content">
-      <p>出发地</p>
-      <div class="local"></div>
-      <div class="choice">
-        <p>选择数量</p>
-        <div class="choice1">
-          <span>成人：</span>
-          <div class="coutter-wrapper">
-            <img src="./img/sub.png"  @touchend="minus();allPrice()">
-            <div>{{ orderAdultnum }}</div>
-            <img src="./img/add.png"  @touchend="plus();allPrice()">
-          </div>
+      <div class="details">
+        <div class="number">订单号 ：{{data1[0].orderNumber}}</div>
+        <div class="time">{{data1[0].orderTime}}</div>
+        <div class="img"><img :src="data1[0].productImgurl" width="100" height="100"></div>
+        <!--<div class="img"></div>-->
+        <div class="text">{{data1[0].productContent}}</div>
+      </div>
+      <div class="message">
+        <div class="start">启程日<p>{{data1[0].orderTraveltime}}</p></div>
+        <p class="line"></p>
+        <div class="end">返程日<p>{{data1[0].orderReturntime}}</p></div>
+        <div class="moneyPeople">
+          <div class="money">总额:￥{{data1[0].orderTotalmoney}}</div>
+          <div class="people">人数:<br>{{data1[0].orderAdultnum}}成人 {{data1[0].orderChildnum}}小孩</div>
         </div>
-        <div class="choice2">
-          <span>儿童：</span>
-          <div class="coutter-wrapper">
-            <img src="./img/sub.png"  @touchend="sub();allPrice()">
-            <div>{{ orderChildnum }}</div>
-            <img src="./img/add.png" @touchend="add();allPrice()">
+        <div class="change">
+          <div class="delete">
+            <img src="./img/delete.png" width="26" height="26"/>
+            <button type="button" @touchend="returnBack()">申请退款</button>
           </div>
         </div>
       </div>
-      <p>出发日期</p>
-      <input type="date" class="date" id="calendar"/>
-      <!--<calendar-input :limit="limit" @getValue="getValue" id = "calendar"></calendar-input>-->
+      <div class="inform">
+        <div class="caption">
+          <span>出行信息</span>
+        </div>
+        <div class="main">
+          <div class="touch">预定人:<span>{{data1[0].orderContactname}}</span></div>
+          <div class="touchPhone">预定人电话:<span>{{data1[0].orderContactphone}}</span></div><br>
+          <div v-for="data in data2" :key="data.id">
+            <div class="trip">出行人:<span>{{data.visitorName}}</span></div>
+            <div class="phone">身份证号码:<span>{{data.visitorPersonid}}</span></div>
+          </div><br>
+        </div>
+      </div>
     </div>
-    <footer>
-      <div class="bottom">
-        <div class="sp1">总价：<br>￥{{price}}</div>
-        <div class="sp2" @touchend="returnDetail()">立即购买</div>
-      </div>
-    </footer>
   </div>
 </template>
 
 <script>
-  import calendarInput from '../../../node_modules/calendar-plugin/calendar-input.vue'
   import axios from 'axios'
   export default {
-    components: {
-      calendarInput
-    },
+    name: 'order',
     data () {
       return {
-        orderAdultnum: 0,
-        orderChildnum: 0,
-        price: 0
+        data1: [],
+        data2: [],
+        data3: []
       }
     },
+    mounted: function () {
+      this._initData()
+      this.getInform()
+    },
     methods: {
-      minus () {
-        if (this.orderAdultnum > 0) {
-          --this.orderAdultnum
-        }
-      },
-      plus () {
-        ++this.orderAdultnum
-      },
-      sub () {
-        if (this.orderChildnum > 0) {
-          --this.orderChildnum
-        }
-      },
-      add () {
-        ++this.orderChildnum
-      },
-      allPrice: function () {
-        this.price = 1000 * this.orderAdultnum + 500 * this.orderChildnum
-      },
       toBack: function () {
         this.$router.back(-1)
       },
-      turnToOderConfirmation: function () {
-        if(this.orderAdultnum + this.orderChildnum > 0) {
-          this.$router.push({
-            path: '/orderconfirmation'
-          })
-        }
+      _initData: function () {
+        axios.get('http://192.168.43.229/orders/showSingleOrderF.do').then(resp => {
+          let data = resp.data
+          this.data1.push(data)
+        }).catch(error => {
+          console.log(error)
+        })
       },
-      returnDetail: function () {
-        let calendar = document.getElementById('calendar').value
-        let result = {'orderTraveltime': calendar, 'orderAdultnum': this.orderAdultnum, 'orderChildnum': this.orderChildnum, 'orderTotalmoney': this.price}
+      getInform: function () {
+        axios.get('http://192.168.43.229/orders/showSingleOrderS.do').then(resp => {
+          let data = resp.data
+          if (data.length) {
+            for (let i = 0; i < data.length; i++) {
+              this.data2.push(data[i])
+            }
+          } else if (!data.length) {
+          }
+        }).catch(error => {
+          console.log(error)
+        })
+      },
+      returnBack: function () {
+        let dataBack = {'orderId': this.data1[0].orderId}
         axios({
-          url: 'http://192.168.43.229/orders/insertOrder.do',
-          'Content-Type': 'application/x-www-form-urlencoded',
           method: 'post',
-          data: result
-        }).then(
-          this.$router.push({
-            path: '/orderconfirmation'
-          })
-        ).catch(error => {
+          url: 'http://192.168.43.229/orders/refund.do',
+          'Content-Type': 'application/json;charset=utf-8',
+          data: dataBack
+        }).then(resp => {
+          let data = resp.data
+          if (parseInt(data.isSuccess) == 1) {
+            this.$router.push({
+              path: '/backMoneyOk'
+            })
+          } else {
+            this.$router.push({
+              path: '/backMoneyNo'
+            })
+          }
+        }).catch(error => {
           console.log(error)
         })
       }
     }
   }
 </script>
-
 <style lang="scss">
-  header {
+  body{
+    margin: 0;
+    padding: 0;
+  }
+  .order{
+    width: 750px;
+    button{
+      border: 1px #e2e2e2 solid;
+      height: 60px;
+      width: 202px;
+      background-color: white;
+      border-radius: 10px;
+      font-size:30px;
+    }
+  }
+  header{
     width: 100%;
     height: 90px;
+    align-items:center;
     display: flex;
-    align-items: center;
-    background-color: #fff;
-    p {
-      font-size: 36px;
-      color: #787878;
-      margin: 0 auto;
-      line-height: 90px;
-    }
-    img {
-      width: 22px;
+    justify-content:space-between;
+    margin-bottom: 20px;
+    div{
+      text-align: left;
+      padding-left: 20px;
+      width: 150px;
       height: 38px;
     }
-  }
-  .content {
-    p {
-      width: 200px;
-      font-size: 32px;
-      color: #8a898a;
-      text-align: left;
-      height: 70px;
-      line-height: 70px;
-    }
-    .local {
-      width: 200px;
-      height: 60px;
-      background-color: #fdf4c3;
-      border: 1px #f9de57 solid;
-      margin-top: 5px;
-      margin-bottom: 10px;
-      border-radius: 10%;
-      font-size: 30px;
-      line-height: 74px;
-    }
-    .choice {
-      span {
-        font-size: 28px;
-        height:32px;
-      }
-      .choice1,.choice2{
-        height: 60px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        img {
-          width: 32px;
-          height: 32px;
-        }
-        .coutter-wrapper{
-          display: flex;
-          justify-content: space-around;
-          align-items: center;
-          div{
-            background-color: #e0dfdf;
-            width: 40px;
-            height: 40px;
-            font-size: 30px;
-          }
-        }
-      }
-      p{
-        font-size: 32px;
-      }
-    }
-    /*.coutter-wrapper {*/
-    /*div {*/
-    /*width: 80px;*/
-    /*height: 50px;*/
-    /*line-height: 50px;*/
-    /*background-color: #f4f4f4;*/
-    /*display: flex;*/
-    /*justify-content: space-around;*/
-    /*align-items: center;*/
-    /*margin: 0;*/
-    /*display: inline-block;*/
-    /*}*/
-    /*}*/
-    .date{
-      height: 74px;
-      border-radius: 10%;
-      margin-right: 500px;
-      background-color: #fdf4c3;
-      border: 1px #f9de57 solid;
+    p{
+      text-align: center;
+      line-height: 38px;
+      font-size: 36px;
+      color:black;
     }
   }
-  footer{
-    position: fixed;
-    bottom:0;
+  .content{
     width: 100%;
-    height: 100px;
-    .bottom{
+    display: flex;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .details {
+    width: 92%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 80px;
+    .state{
+      width: 100%;
+      background-color: #f9de57;;
+      margin-bottom: 20px;
+      font-size: 35px;
+      border-radius: 12px;
+    }
+    .number {
+      width: 300px;
+      height: 40px;
+      border: 1px #0094e3 solid;
+      border-radius: 12px;
+      color: #858585;
+      text-align: left;
+      line-height: 40px;
+      padding: 10px;
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+    .time {
+      width: 250px;
+      height: 40px;
+      color: #858585;
+      text-align: left;
+      line-height: 40px;
+      padding: 10px;
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+    .img {
+      border: 1px rebeccapurple solid;
+      align-self: flex-end;
+    }
+    .text {
+      width: 400px;
+      height: 200px;
+      border: 1px rebeccapurple solid;
+      align-self: flex-end;
+    }
+  }
+  .message{
+    width: 92%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap:wrap;
+    padding-right: 20px;
+    padding-left: 20px;
+    margin-bottom: 40px;
+    .line{
+      width: 300px;
+      height: 3px;
+      background-color:#e2e2e2;
+    }
+    .start{
+      width: 170px;
+      height: 200px;
+      font-size: 28px;
+      p{
+        font-size: 36px;
+      }
+    }
+    .end{
+      width: 170px;
+      height: 200px;
+      font-size: 28px;
+      p{
+        font-size: 36px;
+      }
+    }
+    .moneyPeople{
+      width:690px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
       font-size: 32px;
-      sp1{
-        width: 500px;
-        height: 100px;
-        background-color: #fff;
-        text-align: left;
-      }
-      .sp2{
+      color:#2a2a2a;
+      border-bottom: 3px #e2e2e2 solid;
+      margin-bottom: 70px;
+      .money{
         width: 250px;
-        background:#f9de57;
-        line-height: 100px;
-        color:#8c8353;
+        text-align: center;
+      }
+      .people{
+        width: 200px;
+        text-align: center;
+      }
+    }
+    .change{
+      width:690px;
+      display: flex;
+      justify-content: center;
+      line-height: 50px;
+    }
+  }
+  .inform{
+    width: 100%;
+    background-color: #9fa2b6;
+    padding-bottom: 20px;
+    border-radius: 14px;
+    .caption{
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+      span{
+        width:150px;
+        font-size: 36px;
+        color: white;
+      }
+    }
+    .main{
+      width: 80%;
+      background-color: white;
+      margin: 0 auto;
+      border-radius: 14px;
+      padding:10px;
+      .touch{
+        width: 540px;
+        margin: 0 auto;
+        text-align: left;
+        font-size: 32px;
+        padding-bottom: 10px;
+      }
+      .touchPhone{
+        width: 540px;
+        margin: 0 auto;
+        text-align: left;
+        font-size: 32px;
+        padding-bottom: 10px;
+      }
+      .trip{
+        width: 540px;
+        margin: 0 auto;
+        text-align: left;
+        font-size: 32px;
+        padding-bottom: 10px;
+      }
+      .phone{
+        width: 540px;
+        margin: 0 auto;
+        text-align: left;
+        font-size: 32px;
+        padding-bottom: 10px;
       }
     }
   }
