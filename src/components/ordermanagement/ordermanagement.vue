@@ -2,41 +2,59 @@
   <div class="orderMangement">
     <!--头部-->
     <header>
-      <div><img src="./img/left.png" class="img1" width="19" height="19" @touchend="toBack"/></div>
+      <div><img src="./img/left.png" class="img1" width="19" height="19" @touchend="toBack()"/></div>
       <p>订单详情</p>
       <div></div>
     </header>
     <!-- 中间部分-->
     <ul class="nav">
-      <li v-for="(item,index) in items" :key="item.id" ><img :src='item.path' /><p :class="{'checked':index===n}" @touchend="changeP(index)">{{item.text[0]}}</p></li>
+      <li v-for="(item,index) in items"
+          :key="item.id" :class="{'checked':index===n}" @touchend="changeP(index),check()"><img :src='item.path'/><p>{{item.text[0]}}</p></li>
     </ul>
     <div class="content" >
-     {{test[n]}}
-      <div class="oneOrder">
-        <div class="time">预定日期:<span>7月25日</span></div>
+      <p id="none"><img src="./img/point.png" width="30px" height="30px"/>   暂时还没有订单   <img src="./img/point.png" width="30px" height="30px"/></p>
+      <div class="oneOrder" @touchend="toOrder(data.orderId)" v-for="data in data1" :key="data.id">
+        <div class="time">预定日期：{{data.ordertime}}</div>
+        <div class="id">{{data.orderId}}</div>
         <div class="order">
-          <div class="headline"><img src="./img/inform.png" width="30" height="30"/><span>重庆旅游三天四晚自由行</span></div>
-          <div class="money"><p class="p1">￥1500</p><p class="p2">{{state[m]}}</p></div>
-          <div class="from"><span>7月25日</span>至<span>7月30日</span></div>
+          <div class="img"><img :src="data.img" /></div>
+          <div class="inform">
+            <div class="div1">
+            <div class="text">
+              <div class="title"><span>{{data.producttitle}}</span></div>
+              <div class="from"><span>{{data.traveltime}}</span>至<span>{{data.returntime}}</span></div>
+            </div>
+          <div class="money"><p class="p1">￥1500</p><p class="p2" >{{state[m]}}</p></div>
+            </div>
+          </div>
+          <div class="block"></div>
           <div class="button">
-            <button type="button" @touchend="again">{{arr[i]}}</button>
+            <button type="button" id="btn1" v-show="show1" @touchend.stop="again(2)">去支付</button>
+            <button type="button" class="btn2" v-show="show2" @touchend.stop="again(1)">去点评</button>
           </div>
         </div>
       </div>
     </div>
     <footer>
-      <div class="sort"><img :src='dataUrl' @touchend="changeUrl"/></div>
-      <div class="lose"><img src="./img/lose.png"/></div>
+      <div>
+      <!--<button type="button" @touchend="timeLose(x),changeUrl()">时间<img :src='dataUrl' width="25" height="25"> </button>-->
+        <button type="button" @touchend="timeLose(2)">近-->远<img src="./img/up.png" width="20" height="20"> </button>
+      <button type="button" @touchend="timeLose(1)">远-->近<img src="./img/down.png" width="20" height="20"> </button>
+      <button type="button" @touchend="timeLose(3)">失效订单</button>
+      </div>
+      <!--<div class="sort"><img :src='dataUrl' @touchend="changeUrl"/></div>-->
+      <!--<div class="lose"><img src="./img/lose.png" @touchend=" _initData(),judge" ></div>-->
     </footer>
   </div>
 </template>
 
 <script>
-// var oImg1 = document.querySelector('.img1')
-// oImg1.touchend = function () {}
+import axios from 'axios'
 export default {
   data () {
     return {
+      data1: [],
+      data2: [],
       items: [{path: require('./img/complatedorder2.png'), text: ['全部订单']},
         {path: require('./img/waitpay2.png'), text: ['待支付']},
         {path: require('./img/payorder2.png'), text: ['待出行']},
@@ -44,56 +62,259 @@ export default {
         {path: require('./img/moneyback2.png'), text: ['退款订单']}],
       dataUrl: require('./img/down.png'),
       bOn: false,
-      n: -1,
+      n: 0,
       m: 0,
-      i: 0,
-      test: [ {content: 1}, {content: 2}, {content: 3}, {content: 4}, {content: 5} ],
-      state: ['待付款', '待出行', '待评价', '已退款'],
-      arr: ['支付', '点评']
-      // data1: [ { 'ispay': 1, 'isout': 1, 'isevaluate': 0, 'isfound': 0, 'money': '1599', 'ordetime': '2018-07-30', 'producttitle': '三亚旅游' } ]
+      x: 0,
+      state: ['待付款', '待出行', '待评价', '已退款', '已失效'],
+      show1: true,
+      show2: true
     }
+  },
+  mounted: function () {
+    this.check()
   },
   methods: {
     toBack: function () {
       this.$router.back(-1)
     },
-    again: function () {
-      if (this.button.value === '点评') {
+    again: function (number) {
+      if (number === 1) {
         this.$router.push({
-          path: '/userComment/:id'
+          path: '/userEvaluation'
         })
-      } else if (this.button.value === '去支付') {
+      } else if (number === 2) {
         this.$router.push({
-          path: '/waitPay/:id'
+          path: '/waitPay'
         })
       }
+    },
+    toOrder: function (id) {
+      this.$router.push({
+        path: '/order',
+        params: {
+          orderId: id
+        }
+      })
     },
     changeP (i) {
       this.n = i
     },
+    // changeUrl: function () {
+    //   if (this.bOn) {
+    //     this.dataUrl = require('./img/down.png')
+    //     this.x = 2
+    //     this.bOn = !this.bOn
+    //   } else if (!this.bOn) {
+    //     this.dataUrl = require('./img/up.png')
+    //     this.x = 1
+    //     this.bOn = !this.bOn
+    //   }
+    // },
     changeUrl: function () {
       this.bOn ? this.dataUrl = require('./img/up.png') : this.dataUrl = require('./img/down.png')
       this.bOn = !this.bOn
     },
-    judge: function () {
-      let data = [ {ispay: 1}, {isout: 1}, {isevaluate: 0}, {isfound: 0} ]
-      // const data = data1
-      if (data.ispay === 0) {
-        this.m = 0
-        this.i = 0
-      } else if (data.ispay === 1 || data.isout === 0) {
-        this.m = 1
-      } else if (data.ispay === 1 || data.isout === 1 || data.isevaluate === 0) {
-        this.m = 2
-        this.i = 1
-      } else if (data.isfound === 1) {
-        this.m = 3
+    // _initData: function () {
+    //   axios.get('http://172.20.10.3:8080/orders/showAllOrders.do').then(resp => {
+    //     let data = resp.data
+    //     if (data.length) {
+    //       for (var i = 0; i < data.length; i++) {
+    //         this.data1.push(data[i])
+    //       }
+    //     } else if (!data.length) {
+    //       let None = document.getElementById('none')
+    //       None.style.display = 'block'
+    //     }
+    //   }).catch(error => {
+    //     console.log(error)
+    //   })
+    // }
+
+    // if (this.data[i].ispay === 0) {
+    //   this.m = 0
+    //   this.i = 0
+    // } else if (this.data[i].ispay === 1 && this.data[i].isout === 0) {
+    //   this.m = 1
+    // } else if (this.data[i].ispay === 1 && this.data[i].isout === 1 && this.data[i].isevaluate === 0) {
+    //   this.m = 2
+    //   this.i = 1
+    // } else if (this.data[i].isfound === 1) {
+    //   this.m = 3
+    // }
+    // } else if (!data.length) {
+    // let None = document.getElementById('none')
+    //       None.style.display = 'block'
+    //     }
+    //   }).catch(error => {
+    //     console.log(error)
+    //   })
+    // },
+    // judge: function () {
+    //   for (var i = 0; i < this.data1.length; i++) {
+    //     if (this.data1[i].ispay === 0) {
+    //       this.m = 0
+    //       this.i = 0
+    //     } else if (this.data1[i].ispay === 1 && this.data1[i].isout === 0) {
+    //       this.m = 1
+    //     } else if (this.data1[i].ispay === 1 && this.data1[i].isout === 1 && this.data1[i].isevaluate === 0) {
+    //       this.m = 2
+    //       this.i = 1
+    //     } else if (this.data1[i].isfound === 1) {
+    //       this.m = 3
+    //     }
+    //   }
+    // },
+    check: function () {
+      this.data1 = []
+      if (this.n === 0) {
+        axios.get('http://192.168.43.57:8080/orders/showAllOrders.do').then(resp => {
+          let data = resp.data
+          if (data.length) {
+            for (let i = 0; i < data.length; i++) {
+              this.data1.push(data[i])
+              this.show1 = this.show2 = true
+            }
+          } else if (!data.length) {
+            let None = document.getElementById('none')
+            None.style.display = 'block'
+          }
+        }).catch(error => {
+          console.log(error)
+        })
+      } else if (this.n === 1) {
+        this.data1 = []
+        axios.get('http://192.168.43.57:8080/orders/showAllOrdersByispay.do').then(resp => {
+          let data = resp.data
+          if (data.length) {
+            for (let i = 0; i < data.length; i++) {
+              this.data1.push(data[i])
+              this.m = 0
+              this.show2 = false
+              this.show1 = true
+            }
+            // let show = document.getElementsByClassName('btn2')
+            // let arr = []
+            // for (let i = 0; i < show.length; i++) {
+            //   arr.push(show[i])
+            //   arr[i].style.display = 'none'
+            //   alert(arr)
+            // }
+          } else {
+            let None = document.getElementById('none')
+            None.style.display = 'block'
+          }
+        }).catch(error => {
+          console.log(error)
+        })
+      } else if (this.n === 2) {
+        this.data1 = []
+        axios.get('http://192.168.43.57:8080/orders/showAllOrdersByisout.do').then(resp => {
+          let data = resp.data
+          if (data.length) {
+            for (let i = 0; i < data.length; i++) {
+              this.data1.push(data[i])
+              this.m = 1
+              this.show1 = this.show2 = false
+            }
+          } else if (!data.length) {
+            let None = document.getElementById('none')
+            None.style.display = 'block'
+          }
+        }).catch(error => {
+          console.log(error)
+        })
+      } else if (this.n === 3) {
+        this.data1 = []
+        axios.get('http://192.168.43.57:8080/orders/showAllOrdersByisevaluate.do').then(resp => {
+          let data = resp.data
+          if (data.length) {
+            for (let i = 0; i < data.length; i++) {
+              this.data1.push(data[i])
+              this.m = 2
+              this.show1 = false
+              this.show2 = true
+            }
+          } else if (!data.length) {
+            let None = document.getElementById('none')
+            None.style.display = 'block'
+          }
+        }).catch(error => {
+          console.log(error)
+        })
+      } else if (this.n === 4) {
+        this.data1 = []
+        axios.get('http://192.168.43.57:8080/orders/showAllOrdersByisrefund.do').then(resp => {
+          let data = resp.data
+          if (data.length) {
+            for (let i = 0; i < data.length; i++) {
+              this.data1.push(data[i])
+              this.m = 3
+              this.show1 = this.show2 = false
+            }
+          } else if (!data.length) {
+            let None = document.getElementById('none')
+            None.style.display = 'block'
+          }
+        }).catch(error => {
+          console.log(error)
+        })
       }
+    },
+    timeLose: function (num) {
+      if (num === 1) {
+        this.data1 = []
+        axios.get('http://192.168.43.57:8080/orders/showAllOrdersBytime.do').then(resp => {
+          let data = resp.data
+          if (data.length) {
+            for (let i = 0; i < data.length; i++) {
+              this.data1.push(data[i])
+            }
+          } else if (!data.length) {
+            let None = document.getElementById('none')
+            None.style.display = 'block'
+          }
+        }).catch(error => {
+          console.log(error)
+        })
+      } else if (num === 2) {
+        this.data1 = []
+        axios.get('http://192.168.43.57:8080/orders/showAllOrdersBydesctime.do').then(resp => {
+          let data = resp.data
+          if (data.length) {
+            for (let i = 0; i < data.length; i++) {
+              this.data1.push(data[i])
+            }
+          } else if (!data.length) {
+            let None = document.getElementById('none')
+            None.style.display = 'block'
+          }
+        }).catch(error => {
+          console.log(error)
+        })
+      } else if (num === 3) {
+        this.data1 = []
+        axios.get('http://192.168.43.57:8080/orders/showAllOrdersByislose.do').then(resp => {
+          let data = resp.data
+          if (data.length) {
+            for (let i = 0; i < data.length; i++) {
+              this.data1.push(data[i])
+              this.m = 4
+            }
+          } else if (!data.length) {
+            let None = document.getElementById('none')
+            None.style.display = 'block'
+          }
+        }).catch(error => {
+          console.log(error)
+        })
+      }
+    },
+    skip: function () {
+
     }
   }
 }
 </script>
-
 <style lang="scss">
   body{
     margin: 0;
@@ -147,88 +368,137 @@ export default {
       }
     }
   }
-  .nav p.checked{font-size: 34px;border-bottom: 8px #F9DE57 solid}
+  .nav li.checked{font-size: 34px;border-bottom: 8px #F9DE57 solid}
   .content{
-    width: 100%;
+    width: 750px;
     display: flex;
     flex-wrap:wrap;
+    #none{
+      margin: 300px auto;
+      font-size: 33px;
+      display: none;
+    }
+  }
+  .oneOrder{
+    width: 100%;
   }
   .time{
-    width: 218px;
+    width: 280px;
     height: 43px;
     font-size: 25px;
     border-radius: 16px 16px;
-    background-color:#f9de57;
+    background-color: #f9ee75;
     margin-left: 17px;margin-bottom: 16px;
-    text-align: center;line-height: 43px;
-  }
-  .order{
+    line-height: 43px;
     text-align: center;
-    display:flex;
-    width: 98%;
-    height: 320px;
-    border: 1px #e4e4e4 solid ;
-    justify-content: space-between;
-    flex-wrap:wrap;
-    padding: 10px;
-    margin-bottom: 100px;
   }
-  .headline{
-    height:150px ;
-    width: 450px;
-    text-align: left;
-    span{
-      height:100px;
-      color:black;
-      font-size: 27px;
+  .id{
+    display: none;
+  }
+  .oneOrder:last-child{
+    margin-bottom: 80px;
+  }
+  .order {
+    text-align: center;
+    display: flex;
+    border: 1px #e4e4e4 solid;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 10px;
+    margin-bottom: 50px;
+    img {
+      width : 150px;
+      height: 150px;
+    }
+    .block{
+      width: 300px;
     }
   }
-  .money{
-    width: 201.992px;
-    height:80px;
-    margin-top: 20px;
-    p{
+  .inform{
+    width: 75%;
+    .div1{
+      display: flex;
+      justify-content: space-between;
+      .text{
+        .title{
+          color: #000000;
+          font-size:30px;
+          margin-left: 20px;
+          margin-top: 10px;
+          margin-bottom: 50px;
+          text-align: left;
+        }
+        .form{
+          font-size: 25px;
+        }
+      }
+    }
+    .money{
+      width: 150px;
+      height:100px;
       margin: 0;
       font-size: 30px;
+      p{
+        margin: 0;
+        font-size: 30px;
+      }
     }
   }
   .p1{
-    color:#f1b265;
+    color:#db2219;
     font-size:30px;
   }
   .from{
-    width: 240px;
-    height: 76px;
+    padding: 2px;
     border:2px #a9cdef solid;
     border-radius: 15px;
-    line-height: 76px;
+    align-self:flex-end;
+    /*line-height: 76px;*/
   }
   .button{
     align-self:flex-end;
     button{
       height: 50px;
       background-color: #eff4f8;
-      border: 3px #f9de57 solid;
-      border-radius: 10px;
+      border-radius: 20px;
       margin-right:5px;
+      padding: 5px;
     }
   }
+  /*#show2{*/
+    /*display: none;*/
+  /*}*/
   footer{
     position: fixed;
     display: flex;bottom: 0;
     width: 100%;
     justify-content: space-between;
-    background-color: #f9de57 ;
+    background-color: #f9ee75 ;
     align-items: center;
-    border-radius: 20px 20px 0px 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     div{
-      width: 200px;
-      height: 80px;
-      text-align: center;
+      width:80%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
     }
-    img{
-      width:80px;
-      height: 80px;
+    button{
+      height: 70px;
+      background-color:  #f9ee75;
+      font-size: 34px;
+      border-radius: 12px;
+      padding: 5px;
+      font-weight: 500;
     }
+    /*div{*/
+      /*width: 200px;*/
+      /*height: 80px;*/
+      /*text-align: center;*/
+    /*}*/
+    /*img{*/
+      /*width:80px;*/
+      /*height: 80px;*/
+    /*}*/
   }
 </style>

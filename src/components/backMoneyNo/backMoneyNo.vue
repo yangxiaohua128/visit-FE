@@ -9,7 +9,7 @@
     <content>
       <div class="case2">
         <div class="text2"><img src="./img/sad.png" width="30" height="30"/><br>对不起<br>您的订单已不可以取消</div>
-        <button class="backHome">返回首页</button>
+        <button class="backHome" @touchend="toOrdermanagement">返回我的订单</button>
       </div>
     </content>
   </div>
@@ -24,6 +24,11 @@ export default {
   methods: {
     toBack: function () {
       this.$router.back(-1)
+    },
+    toOrdermanagement: function () {
+      this.$router.push({
+        path: '/ordermanagement'
+      })
     }
   }
 }

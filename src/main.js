@@ -4,6 +4,8 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import 'lib-flexible/flexible.js'
+import axios from 'axios'
+axios.defaults.withCredentials = true
 // import wcSwiper from 'wc-swiper'
 // import 'wc-swiper/style.css'
 Vue.config.productionTip = false
@@ -15,3 +17,4 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+// router.push('apppage')

@@ -15,47 +15,55 @@
       </div>
       <div class="waitTime">
         <div class="countDown"><span>剩余支付时间</span>：<span class="time">{{`${min}分钟${sec}秒`}}</span></div>
-        <button type="button">继续支付</button>
+        <button type="button" @touchend="returnPay()">继续支付</button>
       </div>
       <div class="details">
-        <div class="number">订单号 ：</div>
-        <div class="time"></div>
-        <div class="img"></div>
-        <div class="text"></div>
+        <div class="number">订单号 :{{data1[0].orderNumber}}</div>
+        <div class="time">{{data1[0].orderTime}}</div>
+        <div class="img"><img :src="data1[0].productImgurl" width="100" height="100"></div>
+        <div class="text">{{data1[0].productContent}}</div>
       </div>
       <div class="message">
-        <div class="start">启程日<br/>周五<p>07月24日</p></div>
+        <div class="start">启程日<br/><p>{{data1[0].orderTraveltime}}</p></div>
         <p class="line"></p>
-        <div class="end">返程日<br/>周日<p>07月25日</p></div>
+        <div class="end">返程日<br/><p>{{data1[0].orderReturntime}}</p></div>
         <div class="moneyPeople">
-          <div class="money">总额:￥1200</div>
-          <div class="people">人数:<br>2成人 1小孩</div>
+          <div class="money">总额:￥{{data1[0].orderTotalmoney}}</div>
+          <div class="people">人数:<br>{{data1[0].orderAdultnum}}成人 {{data1[0].orderChildnum}}小孩</div>
         </div>
       </div>
       <div class="change">
-        <button type="button" class="submit">申请取消</button>
-        <button type="button" class="back">修改订单</button>
+        <button type="button" class="submit" @touchend="returnDelelt()">申请取消</button>
+        <button type="button" class="back" @touchend="toOrderComfirmation()">修改订单</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'waitpay',
   data () {
     return {
       min: 0,
       sec: 0,
-      authTime: 0
+      authTime: 0,
+      data1: []
     }
   },
   mounted: function () {
     this.countdown(this.authTime)
+    this._initData()
   },
   methods: {
     toBack: function () {
       this.$router.back(-1)
+    },
+    toOrdercomfirmation: function () {
+      this.$router.push({
+        path: '/orderconfirmation'
+      })
     },
     countdown: function () {
       this.authTime = 180
@@ -72,23 +80,45 @@ export default {
           clearInterval(authTimeTimer)
         }
       }, 1000)
+    },
+    _initData: function () {
+      axios.get('http://192.168.43.229/orders/showSingleOrderF.do').then(resp => {
+        let data = resp.data
+        this.data1.push(data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    returnPay: function () {
+      let dataPay = {'orderId': this.data1[0].orderId}
+      axios({
+        method: 'post',
+        url: 'http://192.168.43.229/orders/pay.do',
+        'Content-Type': 'application/json;charset=utf-8',
+        data: dataPay
+      }).then(
+        this.$router.push({
+          path: '/pay'
+        })
+      ).catch(error => {
+        console.log(error)
+      })
+    },
+    returnDelelt: function () {
+      let dataDelete = {'orderId': this.data1[0].orderId}
+      axios({
+        method: 'post',
+        url: 'http://192.168.43.229/orders/deleteOrder.do',
+        'Content-Type': 'application/json;charset=utf-8',
+        data: dataDelete
+      }).then(
+        this.$router.push({
+          path: '/pay'
+        })
+      ).catch(error => {
+        console.log(error)
+      })
     }
-    // countdown: function () {
-    //   let t = 180
-    //   let min = parseInt(t / 60)
-    //   let sec = parseInt(t % 60)
-    //   this.min = min > 9 ? min : '0' + min
-    //   this.sec = sec > 9 ? sec : '0' + sec
-    //   if (t < 0) {
-    //     this.min = 0
-    //     this.sec = 0
-    //   }
-    //   // const that = this
-    //   setTimeout(function () {
-    //     this.countdown()
-    //     t = t--
-    //   }, 1000)
-    // }
   }
 }
 </script>
@@ -184,7 +214,6 @@ export default {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    border: 1px #e4e4e4 solid;
     margin-bottom: 80px;
     .state{
       width: 100%;

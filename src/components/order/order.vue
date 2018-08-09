@@ -7,23 +7,24 @@
     </header>
     <div class="content">
       <div class="details">
-        <div class="number">订单号 ：</div>
-        <div class="time"></div>
-        <div class="img"></div>
-        <div class="text"></div>
+        <div class="number">订单号 ：{{data1[0].orderNumber}}</div>
+        <div class="time">{{data1[0].orderTime}}</div>
+        <div class="img"><img :src="data1[0].productImgurl" width="100" height="100"></div>
+        <!--<div class="img"></div>-->
+        <div class="text">{{data1[0].productContent}}</div>
       </div>
       <div class="message">
-        <div class="start">启程日<p>07月24日</p></div>
+        <div class="start">启程日<p>{{data1[0].orderTraveltime}}</p></div>
         <p class="line"></p>
-        <div class="end">返程日<p>07月25日</p></div>
+        <div class="end">返程日<p>{{data1[0].orderReturntime}}</p></div>
         <div class="moneyPeople">
-          <div class="money">总额:￥1200</div>
-          <div class="people">人数:<br>2成人 1小孩</div>
+          <div class="money">总额:￥{{data1[0].orderTotalmoney}}</div>
+          <div class="people">人数:<br>{{data1[0].orderAdultnum}}成人 {{data1[0].orderChildnum}}小孩</div>
         </div>
         <div class="change">
           <div class="delete">
             <img src="./img/delete.png" width="26" height="26"/>
-            <button type="button">申请退款</button>
+            <button type="button" @touchend="returnBack()">申请退款</button>
           </div>
         </div>
       </div>
@@ -32,20 +33,12 @@
           <span>出行信息</span>
         </div>
         <div class="main">
-          <div class="touch">预定人:<span>xxx</span></div>
-          <div class="touchPhone">预定人电话:<span>112xxxx1111</span></div><br>
-          <div>
-          <div class="trip">出行人:<span>xxx</span></div>
-          <div class="phone">联系电话:<span>112xxxx1111</span></div>
+          <div class="touch">预定人:<span>{{data1[0].orderContactname}}</span></div>
+          <div class="touchPhone">预定人电话:<span>{{data1[0].orderContactphone}}</span></div><br>
+          <div v-for="data in data2" :key="data.id">
+          <div class="trip">出行人:<span>{{data.visitorName}}</span></div>
+          <div class="phone">身份证号码:<span>{{data.visitorPersonid}}</span></div>
           </div><br>
-          <!--<div class="trip">出行人:<span>xxx</span></div>-->
-          <!--<div class="phone">联系电话:<span>112xxxx1111</span></div>-->
-          <!--<div class="trip">出行人:<span>xxx</span></div>-->
-          <!--<div class="phone">联系电话:<span>112xxxx1111</span></div>-->
-          <!--<div class="trip">出行人:<span>xxx</span></div>-->
-          <!--<div class="phone">联系电话:<span>112xxxx1111</span></div>-->
-          <!--<div class="trip">出行人:<span>xxx</span></div>-->
-          <!--<div class="phone">联系电话:<span>112xxxx1111</span></div>-->
         </div>
       </div>
     </div>
@@ -53,15 +46,66 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'order',
   data () {
     return {
+      data1: [],
+      data2: [],
+      data3: []
     }
+  },
+  mounted: function () {
+    this._initData()
+    this.getInform()
   },
   methods: {
     toBack: function () {
       this.$router.back(-1)
+    },
+    _initData: function () {
+      axios.get('http://192.168.43.229/orders/showSingleOrderF.do').then(resp => {
+        let data = resp.data
+        this.data1.push(data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    getInform: function () {
+      axios.get('http://192.168.43.229/orders/showSingleOrderS.do').then(resp => {
+        let data = resp.data
+        if (data.length) {
+          for (let i = 0; i < data.length; i++) {
+            this.data2.push(data[i])
+          }
+        } else if (!data.length) {
+        }
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    returnBack: function () {
+      let dataBack = {'orderId': this.data1[0].orderId}
+      axios({
+        method: 'post',
+        url: 'http://192.168.43.229/orders/refund.do',
+        'Content-Type': 'application/json;charset=utf-8',
+        data: dataBack
+      }).then(resp => {
+        let data = resp.data
+        if (parseInt(data.isSuccess) == 1) {
+          this.$router.push({
+            path: '/backMoneyOk'
+          })
+        } else {
+          this.$router.push({
+            path: '/backMoneyNo'
+          })
+        }
+      }).catch(error => {
+        console.log(error)
+      })
     }
   }
 }
@@ -115,7 +159,6 @@ export default {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    border: 1px #e4e4e4 solid;
     margin-bottom: 80px;
     .state{
       width: 100%;
@@ -147,8 +190,6 @@ export default {
       margin-bottom: 30px;
     }
     .img {
-      width: 200px;
-      height: 200px;
       border: 1px rebeccapurple solid;
       align-self: flex-end;
     }
