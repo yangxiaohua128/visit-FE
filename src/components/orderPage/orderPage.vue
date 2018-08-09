@@ -84,7 +84,7 @@
         }
       },
       returnDetail: function () {
-        let calendar = document.getElementById('calendar').Value
+        let calendar = document.getElementById('calendar').value
         let result = {'orderTraveltime':calendar,'orderAdultnum':this.orderAdultnum,'orderChildnum':this.orderChildnum,'orderTotalmoney':this.price}
           axios({
           url:  'http://192.168.43.229/orders/insertOrder.do',

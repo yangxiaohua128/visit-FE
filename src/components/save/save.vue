@@ -44,7 +44,7 @@
           this.$router.back(-1)
         },
         show :function(){
-          axios.post('http://192.168.43.229/orders/showUDiscount.do').then(resp => {
+          axios.post('http://60.205.208.7/Travel_Summer_war/orders/showUDiscount.do').then(resp => {
             let data = resp.data
             for(let i=0;i<data.length;i++){
               this.arr.push(data[i])
