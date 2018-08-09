@@ -10,7 +10,7 @@
     <div class="content">
       <div class="comment"  v-for="item2 in scoreList" :key="item2.id">
         <div class="level">
-          <div>{{item2.commentScore}}</div>
+          <div>{{item2.commentScore}}.0</div>
         </div>
         <div class="details">
           <div>行程安排<div>{{item2.commentScheduling}}.0</div></div>
@@ -199,6 +199,7 @@ export default {
         height: 170px;
         display: flex;
         justify-content: center;
+        align-items: center;
         div {
           width: 100px;
           height: 100px;
@@ -209,22 +210,24 @@ export default {
         }
       }
       .details{
-        width:60%;
+        width:40%;
         display: flex;
+        flex-wrap: wrap;
         div{
-          width: 140px;
-          height: 150px;
+          width: 80%;
+          height: 50px;
           font-size: 28px;
-          line-height: 48px;
+          line-height: 50px;
           display: flex;
           flex-wrap: wrap;
-          justify-content: center;
+          justify-content: space-around;
+          align-items: center;
           div{
-            width: 80px;
-            height: 80px;
+            width: 60px;
+            height: 30px;
             border:2px #ec7e3f solid;
-            border-radius: 50%;
-            line-height: 80px;
+            border-radius: 8px;
+            line-height: 30px;
           }
         }
       }
