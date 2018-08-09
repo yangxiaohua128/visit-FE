@@ -12,10 +12,11 @@
         <!--:key="item.id">{{item}}</li>-->
     <!--</ul>-->
     <div class="newstype">
-      <div class="shop" @touchend="hotcity()">供应商</div>
-      <div class="activity" @touchend="active()">活动</div>
+      <div class="shop" @touchend="hotcity();getGoodsList();loadMore()">供应商</div>
+      <div class="activity" >活动</div>
     </div>
     <div class="banner"></div>
+    <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
     <div class="shownews">
       <div v-for="(item,index) in tabs"
            :class="{active:index === num}"
@@ -36,6 +37,7 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 <script>
   import axios from 'axios'
@@ -43,6 +45,8 @@ export default {
   name: 'News',
   data: function () {
     return {
+      busy: true,
+      page: '0',
       tabs: [],
       tabContents: [],
       num: 1
@@ -83,9 +87,43 @@ export default {
         }).catch(error => {
           console.log(error)
         })
+      },
+      getGoodsList (flag) {
+        // let sort = this.sortFlag ? 1 : -1
+        let param = 0
+          // page: 2
+        // sort: sort,
+          // // priceLevel: this.priceChecked,
+          // page: this.page
+        axios.post('http://172.20.10.3:8080/specialtime/reply.do', {page: JSON.stringify(param)}).then(res => {
+          if(flag) {
+            let data = res.data
+            for (let i=0;i<data.length; i++) {
+              this.tabc.push(data)
+            }
+            if (res.data.length === 0) {
+              this.busy = true
+            } else {
+              this.busy = false
+            }
+          } else {
+            // 第一次加载数据
+            this.tabc = res.data.specialContent
+            // 当第一次加载数据完之后，把这个滚动到底部的函数触发打开
+            this.busy = false
+          }
+        })
+      },
+      loadMore: function () {
+        this.busy = true
+        // 多次加载数据
+        // setTimeout(() => {
+        //   this.page++
+        //   this.getGoodsList(true)
+        // }, 1000)
       }
+    }
   }
-}
 </script>
 
 <style type="text/css">
