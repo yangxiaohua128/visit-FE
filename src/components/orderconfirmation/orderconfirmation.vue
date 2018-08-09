@@ -85,7 +85,7 @@
         if (!reg.test(this.$refs.E.value)) {
           Email.style.display = 'block'
         }
-        else{
+        else {
           Email.style.display = 'none'
         }
       },

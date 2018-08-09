@@ -89,7 +89,7 @@
       },
       changeN (i) {
         this.n = i
-        this.price = this.priceN[n]
+        this.price = this.priceN[i]
       },
       countdown: function () {
         const end = Date.parse(new Date('all[0].starttimes[0]'))
@@ -139,9 +139,7 @@
           }
           for(let i = 0; i < data.spemoneys.length; i++) {
             this.priceN.push(parseInt(data.spemoneys[i]))
-            this.priceN.sort(function (a, b) {
-              return a - b
-            })
+            this.priceN.sort(function (a, b) { return a - b })
           }
           this.priceL = this.priceN[0]
           this.priceH = this.priceN[this.priceN.length - 1]

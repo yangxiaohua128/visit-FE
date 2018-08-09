@@ -55,7 +55,7 @@
       },
     mounted: function () {
       this.show()
-    },
+    }
   }
 </script>
 

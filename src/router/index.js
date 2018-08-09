@@ -21,14 +21,15 @@ import order from '@/components/order/order'
 import orderconfirmation from '@/components/orderconfirmation/orderconfirmation'
 import message from '@/components/message/message'
 import collection from '@/components/collection/collection'
+import modify from '@/components/modify/modify'
+import shown from '@/components/shown/shown'
+import position from '@/components/position/position'
+import shows from '@/components/shows/shows'
 import backMoneyOk from '@/components/backMoneyOk/backMoneyOk'
 import backMoneyNo from '@/components/backMoneyNo/backMoneyNo'
 import pay from '@/components/pay/pay'
-import shows from '@/components/shows/shows'
-import modify from '@/components/modify/modify'
+import revocatory from '@/components/revocatory/revocatory'
 import save from '@/components/save/save'
-import shown from '@/components/shown/shown'
-import position from '@/components/position/position'
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -69,7 +70,6 @@ export default new Router({
       component: modify
     },
     {
-
       title: '首页',
       path: '/apppage',
       name: 'apppage',
@@ -256,5 +256,11 @@ export default new Router({
       path: '/position',
       name: 'position',
       component: position
+    },
+    {
+      title: '取消成功',
+      path: '/revocatory',
+      name: 'revocatory',
+      component: revocatory
     }]
 })

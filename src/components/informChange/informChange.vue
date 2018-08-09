@@ -1,3 +1,11 @@
+0
+2 0 moinoin/visit-FE
+Code  Issues 1  Pull requests 0  Projects 0  Wiki  Insights
+visit-FE/src/components/informChange/informChange.vue
+Fetching contributors…
+
+
+237 lines (231 sloc)  5.35 KB
 <template>
   <div class="informChange">
     <header>
@@ -5,40 +13,94 @@
       <p>编辑个人资料</p>
       <div></div>
     </header>
-    <form class="change" action="" method="post" name="myForm" onsubmit="console.log(input.value)">
-      <div class="name">
-        <div class="name1">真实姓名</div>
-        <input type="text" class="name2" name="myName" placeholder="请输入你的真实姓名" required="required" v-model.lazy="msg"/>
-      </div>
-      <div class="sex">
-        <div class="sex1">性别</div>
-        <div><input  type="radio" name="sex" value="男"/><img src="./img/man.png" width="50px" height="50px"/></div>
-        <div><input  type="radio" name="sex" value="女"/><img src="./img/woman.png" width="50px" height="50px"/></div>
-      </div>
-      <div class="time">
-        <div class="time1">出生日期</div>
-        <input type="date" class="time2"  name="myBirthday" placeholder="请输入你的生日" required="required"/>
-      </div>
-      <div class="save"><input type="submit" value="保存" name="submit"/></div>
-    </form>
+    <div class="content">
+      <form class="change"  id="myForm">
+        <div class="name">
+          <div class="name1">真实姓名</div>
+          <input type="text" class="name2" name="userName" id="userName" placeholder="*请填写你的真实姓名" required="required" v-model="name[0]"/>
+        </div>
+        <div class="sex">
+          <div class="sex1">性别</div>
+          <div class="sex2">
+            <div><input  type="radio" name ="userSex" id="sex1" value="男" v-model="sex[0]" :class="{'checked':judge}" checked/><img src="./img/man.png" width="50px" height="50px"/></div>
+            <div><input  type="radio" name ="userSex" id="sex2" value="女" v-model="sex[0]" :class="{'checked':judge}"/><img src="./img/woman.png" width="50px" height="50px"/></div>
+          </div>
+        </div>
+        <div class="time">
+          <div class="time1">出生日期</div>
+          <!--<input type="text" class="time2" ref="d" name="userBorn" id="userBorn" placeholder="*请输入你的真实生日 例：1998-02-10" required="required" v-model="born[0]"/>-->
+          <input type="date" class="time2" name="userBorn" id="userBorn" v-model="born[0]"/>
+        </div>
+        <p class="hint"  v-show="ok">*请完善您的全部信息</p>
+        <div class="blank"></div>
+        <div class="save">
+          <button type="button" value="Submit" @touchend="returnInform()">保存</button>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'informChange',
-  data () {
-    return {
-      msg: 'whh'
-      // arr = ["userName","msg"]
-    }
-  },
-  methods: {
-    toBack: function () {
-      this.$router.back(-1)
+  import axios from 'axios'
+  export default {
+    name: 'informChange',
+    data () {
+      return {
+        data1: [],
+        name: [],
+        sex: [],
+        born: [],
+        ok: false
+      }
+    },
+    mounted: function () {
+      this._initData()
+    },
+    methods: {
+      toBack: function () {
+        this.$router.back(-1)
+      },
+      toOrdermanagement: function () {
+        this.$router.push({
+          path: '/ordermanagement'
+        })
+      },
+      _initData: function () {
+        axios.get('http://192.168.43.47:8080/user/alterPerson.do').then(resp => {
+          let data = resp.data
+          this.name.push(data.userName)
+          this.born.push(data.userBorn)
+          this.sex.push(data.userSex)
+        }).catch(error => {
+          console.log(error)
+        })
+      },
+      returnInform: function () {
+        if (this.name[0] === '' || this.sex[0] === '' || this.born[0] === '') {
+          if (this.ok) {
+            this.ok = true
+          } else {
+            this.ok = !this.ok
+          }
+        } else {
+          let data1 = {'userName': this.name[0], 'userSex': this.sex[0], 'userBorn': this.born[0]}
+          axios({
+            method: 'post',
+            url: 'http://192.168.43.47:8080/user/savePerson.do',
+            'Content-Type': 'application/json;charset=utf-8',
+            data: data1
+          }).then(
+            this.$router.push({
+              path: '/ordermanagement'
+            })
+          ).catch(error => {
+            console.log(error)
+          })
+        }
+      }
     }
   }
-}
 </script>
 
 <style lang="scss">
@@ -57,20 +119,21 @@ export default {
     align-items:center;
     justify-content:space-between;
     margin-bottom: 20px;
-
     div{
       text-align: left;
       padding-left: 20px;
       width: 150px;
       height: 38px;
     }
-
     p{
       text-align: center;
       line-height: 38px;
       font-size: 36px;
       color:black;
     }
+  }
+  .content{
+    width: 750px;
   }
   input{
     border: none;
@@ -83,7 +146,6 @@ export default {
     margin-right: 6px;
     text-align: left;
     font-size: 34px;
-    border-top:2px #e4e4e4 solid ;
   }
   .name{
     justify-content: space-between;
@@ -91,7 +153,8 @@ export default {
     display: flex;
     width:736px;
     height: 100px;
-    border-bottom:1px #e4e4e4 solid;
+    border-top:1px #e4e4e4 solid;
+    margin-bottom: 10px;
   }
   .name1{
     width:200px ;
@@ -102,7 +165,6 @@ export default {
     width:536px;
     line-height: 100px;
     margin: 0;
-
   }
   .sex{
     justify-content: space-between;
@@ -110,6 +172,15 @@ export default {
     flex-wrap:wrap;
     display: flex;
     width:736px;
+    border-top:1px #e4e4e4 solid;
+    margin-bottom: 10px;
+    .sex2{
+      width: 536px;
+      display: flex;
+    }
+    img{
+      margin-right: 50px;
+    }
     input{
       height: 80px;
     }
@@ -119,28 +190,31 @@ export default {
     flex-wrap:wrap;
     display: flex;
     width:736px;
-    margin-bottom: 150px;
-    border-bottom: 1px #e4e4e4 solid ;
+    border-top: 1px #e4e4e4 solid ;
+    border-bottom: 1px #e4e4e4 solid;
+    margin-bottom: 10px;
   }
   .time1{
     width:200px ;
     height: 100px;
     line-height:100px;
-    border-top:1px #e4e4e4 solid;
+    /*border-top:1px #e4e4e4 solid;*/
     margin: 0;
   }
   .time2{
     width:536px;
     height: 100px;
     line-height: 100px;
-    border-top:1px #e4e4e4 solid;
+    /*border-top:1px #e4e4e4 solid;*/
     margin: 0;
+    background-color: white;
   }
   .save{
     width: 100%;
     display: flex;
     justify-content: center;
-    input {
+    position: relative;
+    button {
       width: 91%;
       background-color: #f9de57;
       height: 90px;
@@ -148,6 +222,20 @@ export default {
       font-size: 38px;
       border: none;
       margin: 0 auto;
+      position: absolute;
     }
+  }
+  .blank{
+    height: 100px;
+  }
+  .hint{
+    width: 50%;
+    font-size: 25px;
+    color:darkred;
+    margin: 0 auto;
+    /*display: none;*/
+  }
+  input[type="date"]::-webkit-clear-button {
+    display: none;
   }
 </style>
