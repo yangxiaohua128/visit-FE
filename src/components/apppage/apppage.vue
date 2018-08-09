@@ -1,12 +1,11 @@
 <template>
   <div class="apppage">
     <div class="home2">
-      <a href="http://www.baidu.com">
       <k-slider :banners="banners" :swiperOption="swiperOption"></k-slider>
-      </a>
     </div>
     <div class="search">
-      <img src="./img/air.png"/>
+      <img src="./img/air.png" @touchend="turnTopot()"/>
+      <span>{{tabs}}</span>
       <input type="search" placeholder="高级搜索"/>
     </div>
     <div class="nav">
@@ -27,18 +26,18 @@
     <div class="timesale">
       <div class="sale">
         <span class="sp3"></span><span class="sp2">限时特惠</span><span class="sp4"></span>
-        <div class="timer">{{ `${day}天 ${hr}小时 ${min}分钟 ${sec}秒` }}</div>
       </div>
-      <div class="show">
-        <img src="./img/banner2.jpg">
-        <img src="./img/banner3.jpg">
+      <div class="show" v-for='itemCon in showImg'
+           :key="itemCon.id">
+        <img :src="itemCon.specialImgurl.split('$')[0]"/>
+        <span>{{itemCon.specialContent.substring(1,40)}}</span>
       </div>
     </div>
     <div class="fwrap">
       <div class="footer">
         <div><img src="./img/homes.png"/></div>
-        <div><img src="./img/destss.png"/></div>
-        <div><img src="./img/historys.png"/></div>
+        <div @touchend="turnTodest()"><img src="./img/destss.png" /></div>
+        <div @touchend="turnTohis()"><img src="./img/historys.png" /></div>
         <div><img src="./img/mine.png"/></div>
       </div>
       <div class="text">
@@ -52,14 +51,12 @@
 </template>
 <script>
   import Slider from '../../../sslider/sslider.vue'
+  import axios from 'axios'
 export default {
     data: function () {
       return {
-        day: 0,
-        hr: 0,
-        min: 0,
-        sec: 0,
         banners: ['http://pic.lvmama.com/uploads/pc/place2/2018-07-16/c388073b-66b8-4a4a-ba73-a037d5479791.jpg', 'http://pic.lvmama.com/uploads/pc/place2/2018-07-31/6ca730cd-a8bd-4327-987d-1198bf6cd40d.jpg', 'http://pic.lvmama.com/uploads/pc/place2/2018-07-25/2e53cce1-52e6-4ee8-8df4-ab3ed33bfd2e.jpg', 'http://pic.lvmama.com/uploads/pc/place2/2018-07-16/5e772246-0115-40d1-b57d-eef53ffd242a.jpg'],
+        tabs: [],
         swiperOption: {
           direction: 'horizontal',
           loop: true,
@@ -67,34 +64,52 @@ export default {
           pagination: '.swiper-pagination',
           autoplay: {
             disableOnInteraction: false,
-            delay: 2500
+            delay: 3000
           }
-        }
+        },
+        showImg: []
       }
-    },
-    mounted: function () {
-      this.countdown()
     },
     components: {
       kSlider: Slider
     },
+  mounted: function () {
+    this.positioncity()
+    this.getImg()
+  },
     methods: {
-      countdown: function () {
-        const end = Date.parse(new Date('2018-8-5'))
-        const now = Date.parse(new Date())
-        const msec = end - now
-        let day = parseInt(msec / 1000 / 60 / 60 / 24)
-        let hr = parseInt(msec / 1000 / 60 / 60 % 24)
-        let min = parseInt(msec / 1000 / 60 % 60)
-        let sec = parseInt(msec / 1000 % 60)
-        this.day = day
-        this.hr = hr > 9 ? hr : '0' + hr
-        this.min = min > 9 ? min : '0' + min
-        this.sec = sec > 9 ? sec : '0' + sec
-        const that = this
-        setTimeout(function () {
-          that.countdown()
-        }, 1000)
+      turnTopot: function () {
+        this.$router.push({
+          path: '/position'
+        })
+      },
+      turnTodest: function () {
+        this.$router.push({
+          path: '/destination'
+        })
+      },
+      turnTohis: function () {
+        this.$router.push({
+          path: '/history'
+        })
+      },
+      positioncity: function () {
+        axios.get('http://192.168.43.168:80/user/getlocation.do').then(resp => {
+          let data = resp.data
+          this.tabs = data.location
+        }).catch(error => {
+          console.log(error)
+        })
+      },
+      getImg: function () {
+        axios.get('http://192.168.43.168/specialtime/spe.do').then(resp => {
+          let data = resp.data
+          for (let i=0;i<data.length; i++) {
+            this.showImg.push(data[i])
+          }
+        }).catch(error => {
+          console.log(error)
+        })
       }
     }
   }
@@ -126,7 +141,7 @@ export default {
     margin-right: 110px;
     margin-left: 30px;
     border-radius: 20px;
-    width: 500px;
+    width: 600px;
     border: 2px #98d8fc solid;
   }
   .nav{
@@ -138,12 +153,13 @@ export default {
     margin: 0;
   }
   .footer{
+    padding-top:10px;
     display: flex;
     justify-content: space-around;
   }
   .footer img{
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
   }
   .fwrap{
     border-top: 2px #ccc solid;
@@ -177,6 +193,7 @@ export default {
     font-size: 30px;
   }
   .timesale{
+    padding-bottom: 106px;
     margin-top: 40px;
   }
   hr{
@@ -204,12 +221,16 @@ export default {
     background-color: #7db7a9;
   }
   .show{
-    margin-top: 48px;
+    width: 730px;
+    border-bottom: 2px #ccc solid;
+    margin-top: 30px;
   }
   .show img{
-    margin-bottom: 60px;
-    width: 96%;
-    height: auto;
+    vertical-align:middle;
+    padding-left: 20px;
+    margin-bottom: 20px;
+    width: 200px;
+    height: 200px;
   }
   .fwrap{
     background-color: #f4f4f4;
@@ -218,5 +239,21 @@ export default {
     margin-top: 20px;
     font-size: 30px;
     color: #ff0000;
+  }
+  .search span{
+    width:80px;
+    height: 20px;
+  }
+  .show{
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .show span{
+    display: block;
+    font-size: 30px;
+    text-align:center;
+    text-indent: 2em;
+    line-height: 50px;
   }
 </style>

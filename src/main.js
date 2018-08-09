@@ -4,6 +4,8 @@ import 'lib-flexible/flexible.js'
 import Vue from 'vue'
 import axios from 'axios'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+// 前端解决跨域问题
+axios.defaults.withCredentials = true
 Vue.prototype.$ajax = axios
 Vue.use(VueAwesomeSwiper)
 // vue.config.productionTip = false;

@@ -1,7 +1,7 @@
 <template>
   <div class="history">
     <div class="header">
-      <img class="img1" src="./img/Rleft.png">
+      <img class="img1" src="./img/Rleft.png" @touchend="toBack()">
       <span class="sp1">历史记录</span>
     </div>
     <div class="hrecord">
@@ -14,17 +14,34 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     name: 'position',
     data : function () {
       return {
-        tabs : ['西安', '上海', '北京', '广州', '汉中', '成都', '上海', '北京', '广州', '汉中', '成都', '上海', '北京', '广州', '汉中'],
-        num : -1
+        tabs: [],
+        num: -1
       }
+    },
+    mounted: function () {
+      this.history()
     },
     methods: {
       tab (index) {
         this.num = index
+      },
+      toBack: function () {
+        this.$router.back(-1)
+      },
+      history: function () {
+          axios.get('http://192.168.43.138/historys/getHistorys.do').then(resp => {
+            let data = resp.data
+            for (var i=0;i<data.length; i++) {
+              this.tabs.push(data[i].productContent)
+            }
+          }).catch(error => {
+            console.log(error)
+          })
       }
     }
   }
@@ -59,8 +76,7 @@
   li{
     display: inline-block;
     width:96% ;
-    height: 80px;
-    background-color: #ffffff;
+    background-color:#7db7a9;
     margin-top: 20px;
     border: 2px #ccc solid;
     border-radius: 20px;

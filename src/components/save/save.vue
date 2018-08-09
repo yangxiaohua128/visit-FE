@@ -2,14 +2,17 @@
   <div class="save">
     <header>
       <header>
-        <img src="./img/arrowLeft.png"/>
-        <p>优惠券</p>
+        <img src="./img/arrowLeft.png" @touchend="toBack"/>
+        <p>优惠券</p >
       </header>
     </header>
     <div class="content">
-      <div class="sale">
-        <span>50元</span>
-        <p>满三百减五十</p>
+      <div class="sale" v-for="(site,index) in sale"
+           :class="{'active':index===m}"
+           @touchend="changeN(index)"
+           :key="site.id">
+        <span>{{site.price}}</span>
+        <p>{{site.content}}</p >
       </div>
     </div>
     <footer>不使用优惠券</footer>
@@ -18,6 +21,26 @@
 </template>
 
 <script>
+  export default {
+    name: 'save',
+    data : function () {
+      return {
+        m: -1,
+        sale: [{price: '￥50', content: '满300减50'},
+          {price: '￥100', content: '满600减100'},
+          {price: '￥1000', content: '满20000减1000'},
+        ]
+      }
+    },
+    methods:
+      {
+        changeN (i) {
+          this.m = i
+        },
+        toBack: function () {
+          this.$router.back(-1)
+        }
+      }}
 </script>
 
 <style lang="scss">
@@ -28,24 +51,23 @@
     justify-content:space-around;
     align-items:center;
     background-color:#fff;
-  p{
-    width: 750px;
-    font-size:36px;
-    color:#787878;
-    height:90px;
-    line-height:90px;
-  }
-  img{
-    width:22px;
-    height:38px;
-    vertical-align: middle;
-  }
+    p{
+      width: 750px;
+      font-size:36px;
+      color:#787878;
+      height:90px;
+      line-height:90px;
+    }
+    img{
+      width:22px;
+      height:38px;
+      vertical-align: middle;
+    }
   }
   .content{
     .sale {
       width: 700px;
       height: 244px;
-      /*background-color: #fdf4c3;*/
       display: flex;
       justify-content: space-between;
       border-radius: 5%;
@@ -67,6 +89,9 @@
         text-align:center;
         line-height: 244px;
       }
+    }
+    div.active{
+      background-color: #fdf4c3;
     }
   }
   footer{

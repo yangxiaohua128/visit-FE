@@ -1,23 +1,25 @@
 <template>
   <div class="position">
     <div class="search">
-      <img src="./img/Rleft.png"/>
-      <input type="search" placeholder="搜索城市"/>
+      <img src="./img/Rleft.png" @touchend="toBack()"/>
+      <!--<input type="search" placeholder="搜索城市"/>-->
     </div>
     <div class="nowposition">
       <span><img src="./img/positionpic.png"/>定位</span>
     </div>
     <div class="positionnew">
-      <div>定位失败</div>
+      <div>{{tabs}}</div>
     </div>
     <div class="hotcity">
-      <div class="hc">热门城市</div>
-      <div class="city">
+      <div class="hc">国内城市</div>
+      <div class="city" >
       <ul>
-        <li v-for="(item,index) in tabs"
+        <li v-for="(item,index) in tabc"
             :class="{active:index === num}"
-            @touchend="tab(index)"
-            :key="item.id">{{item}}</li>
+            @click="tab(index)"
+            :key="item.id"
+            @touchend="returnv(item)"
+            >{{item}}</li>
       </ul>
       </div>
     </div>
@@ -25,17 +27,59 @@
 </template>
 
 <script>
+  import axios from 'axios'
     export default {
         name: 'position',
-      data : function () {
+      data: function () {
           return {
-            tabs : ['西安', '上海', '北京', '广州', '汉中', '成都', '上海', '北京', '广州', '汉中', '成都'],
-            num : 1
+            tabs: [],
+            tabc: [],
+            num: 1
           }
+      },
+      mounted: function () {
+          this.hotcity()
+        this.positioncity()
       },
       methods: {
         tab (index) {
           this.num = index
+        },
+        positioncity: function () {
+          axios.get('http://192.168.43.168:80/user/getlocation.do').then(resp => {
+            let data = resp.data
+            this.tabs = data.location
+          }).catch(error => {
+            console.log(error)
+          })
+        },
+        hotcity: function () {
+          axios.get('http://192.168.43.168:80/area/city.do').then(resp => {
+            let data = resp.data
+            for (var i=0;i<data.length; i++) {
+               this.tabc.push(data[i].areaCity)
+            }
+          }).catch(error => {
+            console.log(error)
+          })
+        },
+        returnv: function (item) {
+          axios({
+            url: 'http://192.168.43.168/area/acceptlocation.do',
+            method: 'post',
+            data: item,
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            xhrFields: {
+              withCredentials: true
+            }
+          }).then(setTimeout(this.$router.push({
+            path: '/apppage'
+          }), 3000))
+        },
+        toBack: function () {
+          this.$router.back(-1)
         }
       }
     }
@@ -101,7 +145,6 @@
     align-content:space-between;
   }
   li{
-    order:;
     width: 20%;
     height: 50px;
     margin:0 0 30px 30px;
