@@ -7,34 +7,35 @@
       <p>评价晒单</p>
       <div></div>
     </header>
-    <form class="content" id="formid" name="evaluation" method="post" action="" enctype="multipart/form-data">
+    <div class="content">
       <p class="score">产品评分</p>
       <div class="level">
         <div>
-          <input id="item1" type="radio" name="item" value="差"/>
-          <label for="item1">差</label>
+          <input id="commentScore1" type="radio" name="commentScore" value="1" v-model="score"/>
+          <label for="commentScore1">差</label>
         </div>
         <div>
-          <input id="item2" type="radio" name="item" value="一般"/>
-          <label for="item2">一般</label>
+          <input id="commentScore2" type="radio" name="commentScore" value="2" v-model="score"/>
+          <label for="commentScore2">一般</label>
         </div>
         <div>
-          <input id="item3" type="radio" name="item" value="满意"/>
-          <label for="item3">满意</label>
+          <input id="commentScore3" type="radio" name="commentScore" value="3" v-model="score"/>
+          <label for="commentScore3">满意</label>
         </div>
         <div>
-          <input id="item4" type="radio" name="item" value="很好"/>
-          <label for="item4">很好</label>
+          <input id="commentScore4" type="radio" name="commentScore" value="4" v-model="score"/>
+          <label for="commentScore4">很好</label>
         </div>
         <div>
-          <input id="item5" type="radio" name="item" value="完美"/>
-          <label for="item5">完美</label>
+          <input id="commentScore5" type="radio" name="commentScore" value="5" v-model="score"/>
+          <label for="commentScore5">完美</label>
         </div>
       </div>
       <div class="comment">
-        <textarea name="comment" title="comment" style="width:100%; height:70%" placeholder="您的评价是对我们最大的支持哦！"></textarea>
+        <textarea name="commentContent" title="comment" style="width:100%; height:70%" placeholder="您的评价是对我们最大的支持哦！"
+                  v-model="content"></textarea>
         <div class="photo">
-          <input id="pic" type="file" @change="handleFileChange" ref="inputer" capture="video"
+          <input id="pic" type="file" name="files" @change="handleFileChange" ref="inputer" capture="video"
                  multiple="multiple" accept="image/png,image/gif,image/jpeg"/>
           <label for="pic"></label>
           <img :src="dataUrl"/>
@@ -48,80 +49,81 @@
           <span>行程安排</span>
           <div class="sch">
             <div>
-              <input id="p1" type="radio" name="p" value="差"/>
-              <label for="p1">差</label>
+              <input id="commentScheduling1" type="radio" name="commentScheduling" value="1" v-model="scheduling"/>
+              <label for="commentScheduling1">差</label>
             </div>
             <div>
-              <input id="p2" type="radio" name="p" value="一般"/>
-              <label for="p2">一般</label>
+              <input id="commentScheduling2" type="radio" name="commentScheduling" value="2" v-model="scheduling"/>
+              <label for="commentScheduling2">一般</label>
             </div>
             <div>
-              <input id="p3" type="radio" name="p" value="满意"/>
-              <label for="p3">满意</label>
+              <input id="commentScheduling3" type="radio" name="commentScheduling" value="3" v-model="scheduling"/>
+              <label for="commentScheduling3">满意</label>
             </div>
             <div>
-              <input id="p4" type="radio" name="p" value="很好"/>
-              <label for="p4">很好</label>
+              <input id="commentScheduling4" type="radio" name="commentScheduling" value="4" v-model="scheduling"/>
+              <label for="commentScheduling4">很好</label>
             </div>
             <div>
-              <input id="p5" type="radio" name="p" value="完美"/>
-              <label for="p5">完美</label>
+              <input id="commentScheduling5" type="radio" name="commentScheduling" value="5" v-model="scheduling"/>
+              <label for="commentScheduling5">完美</label>
             </div>
           </div>
           <span>描述相符</span>
           <div class="sch">
             <div>
-              <input id="f1" type="radio" name="f" value="差"/>
-              <label for="f1">差</label>
+              <input id="commentDescribe1" type="radio" name="commentDescribe" value="1" v-model="describe"/>
+              <label for="commentDescribe1">差</label>
             </div>
             <div>
-              <input id="f2" type="radio" name="f" value="一般"/>
-              <label for="f2">一般</label>
+              <input id="commentDescribe2" type="radio" name="commentDescribe" value="2" v-model="describe"/>
+              <label for="commentDescribe2">一般</label>
             </div>
             <div>
-              <input id="f3" type="radio" name="f" value="满意"/>
-              <label for="f3">满意</label>
+              <input id="commentDescribe3" type="radio" name="commentDescribe" value="3" v-model="describe"/>
+              <label for="commentDescribe3">满意</label>
             </div>
             <div>
-              <input id="f4" type="radio" name="f" value="很好"/>
-              <label for="f4">很好</label>
+              <input id="commentDescribe4" type="radio" name="commentDescribe" value="4" v-model="describe"/>
+              <label for="commentDescribe4">很好</label>
             </div>
             <div>
-              <input id="f5" type="radio" name="f" value="完美"/>
-              <label for="f5">完美</label>
+              <input id="commentDescribe5" type="radio" name="commentDescribe" value="5" v-model="describe"/>
+              <label for="commentDescribe5">完美</label>
             </div>
           </div>
           <span>导游讲解</span>
           <div class="sch">
             <div>
-              <input id="j1" type="radio" name="j" value="差"/>
-              <label for="j1">差</label>
+              <input id="commentExplain1" type="radio" name="commentExplain" value="1" v-model="explain"/>
+              <label for="commentExplain1">差</label>
             </div>
             <div>
-              <input id="j2" type="radio" name="j" value="一般"/>
-              <label for="j2">一般</label>
+              <input id="commentExplain2" type="radio" name="commentExplain" value="2" v-model="explain"/>
+              <label for="commentExplain2">一般</label>
             </div>
             <div>
-              <input id="j3" type="radio" name="j" value="满意"/>
-              <label for="j3">满意</label>
+              <input id="commentExplain3" type="radio" name="commentExplain" value="3" v-model="explain"/>
+              <label for="commentExplain3">满意</label>
             </div>
             <div>
-              <input id="j4" type="radio" name="j" value="很好"/>
-              <label for="j4">很好</label>
+              <input id="commentExplain4" type="radio" name="commentExplain" value="4" v-model="explain"/>
+              <label for="commentExplain4">很好</label>
             </div>
             <div>
-              <input id="j5" type="radio" name="j" value="完美"/>
-              <label for="j5">完美</label>
+              <input id="commentExplain5" type="radio" name="commentExplain" value="5" v-model="explain"/>
+              <label for="commentExplain5">完美</label>
             </div>
           </div>
         </div>
       </div>
-      <button type="submit" value="Submit">提交</button>
-    </form>
+      <button type="button" value="Submit" @touchend="submitData()">提交</button>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'userEvaluation',
   data () {
@@ -132,7 +134,12 @@ export default {
       fileName: '',
       errText: '',
       select: ['很差', '差', '一般', '满意', '完美'],
-      n: -1
+      n: -1,
+      score: '',
+      content: '',
+      scheduling: '',
+      describe: '',
+      explain: ''
     }
   },
   methods: {
@@ -166,6 +173,22 @@ export default {
           self.dataUrl = this.result
         }
       }
+    },
+    submitData () {
+      let photo = this.$refs.inputer.value
+      let data = {'commentScore': this.score, 'commentContent': this.content, 'files': photo, 'commentScheduling': this.scheduling, 'commentDescribe': this.describe, 'commentExplain': this.explain}
+      axios({
+        method: 'post',
+        url: 'http://192.168.43.29:8080/comment/commentOk.do',
+        data: data,
+        headers: {}
+      }).then(
+        this.$router.push({
+          path: '/Ordermanagement'
+        })
+      ).catch(error => {
+        console.log(error)
+      })
     }
   }
 }
@@ -337,6 +360,7 @@ export default {
       background-color: #f9de57;
       font-size: 30px;
       border-radius: 20px;
+      outline: none;
     }
   }
 </style>

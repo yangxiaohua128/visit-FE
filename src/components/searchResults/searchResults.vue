@@ -4,37 +4,44 @@
       <div>
         <img src="./img/return.png" @touchend="toBack">
       </div>
-      <p>西安</p>
-      <div>180条</div>
+      <p>产品列表</p>
+      <div></div>
     </header>
     <div class="content">
       <ul class="sort">
         <li v-for="(item,index) of items" :key="item.id" :class="{ 'checked':n==index}"
-            @touchend="changeN(index)">{{item}}</li>
+            @touchend="changeN(index),InitData()">{{item}}</li>
       </ul>
       <div class="list">
-        <div class="produce">
-          <div class="picture">图片</div>
+        <div class="produce" @touchend="toShows(item1.productId)"  v-for="item1 in produceList" :key="item1.id">
+          <img class="picture" :src="item1.productImgurl.split('$')[0]">
           <div class="goods">
-            <p class="message">商品信息</p>
-            <span class="comment">销量</span>
-            <span class="price">￥价格</span>
+            <p class="message">{{item1.productContent}}</p>
+            <span class="location"><img src="./img/location.png">{{item1.area_city}}</span>
+            <span class="comment">{{item1.productMonth}}人出游</span>
+            <span class="price">￥{{item1.starting_money}}</span>
           </div>
         </div>
       </div>
-      <img src="./img/foot.png" class="foot">
+      <img src="./img/foot.png" class="foot" @touchend="toHistory()">
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'searchResults',
   data () {
     return {
-      items: ['热度', '价格升序', '价格降序'],
-      n: 0
+      items: ['人气最高', '价格升序', '价格降序'],
+      n: 0,
+      produceList: [],
+      search: false
     }
+  },
+  mounted () {
+    this.InitData()
   },
   methods: {
     toBack () {
@@ -42,6 +49,89 @@ export default {
     },
     changeN (i) {
       this.n = i
+    },
+    toShows (id) {
+      this.$router.push({
+        path: '/shows',
+        params: {},
+        productId: id
+      })
+    },
+    toHistory () {
+      this.$router.push({
+        path: '/history'
+      })
+    },
+    InitData () {
+      if (this.search) {
+        if (this.n === 0) {
+          this.produceList.splice(0)
+          axios.get('http://172.20.10.6/product/advanceSearchByMonth.do').then(resp => {
+            let data = resp.data
+            for (let i = 0; i < data.length; i++) {
+              this.produceList.push(data[i])
+            }
+          }).catch(error => {
+            console.log(error)
+          })
+        }
+        if (this.n === 1) {
+          this.produceList.splice(0)
+          axios.get('http://172.20.10.6/product/advanceSearchByMoneyAsc.do').then(resp => {
+            let data = resp.data
+            for (let i = 0; i < data.length; i++) {
+              this.produceList.push(data[i])
+            }
+          }).catch(error => {
+            console.log(error)
+          })
+        }
+        if (this.n === 2) {
+          this.produceList.splice(0)
+          axios.get('http://172.20.10.6/product/advanceSearchByMoneyDesc.do').then(resp => {
+            let data = resp.data
+            for (let i = 0; i < data.length; i++) {
+              this.produceList.push(data[i])
+            }
+          }).catch(error => {
+            console.log(error)
+          })
+        }
+      } else {
+        if (this.n === 0) {
+          this.produceList.splice(0)
+          axios.get('http://192.168.43.168/product/month.do').then(resp => {
+            let data = resp.data
+            for (let i = 0; i < data.length; i++) {
+              this.produceList.push(data[i])
+            }
+          }).catch(error => {
+            console.log(error)
+          })
+        }
+        if (this.n === 1) {
+          this.produceList.splice(0)
+          axios.get('http://192.168.43.168/product/asc.do').then(resp => {
+            let data = resp.data
+            for (let i = 0; i < data.length; i++) {
+              this.produceList.push(data[i])
+            }
+          }).catch(error => {
+            console.log(error)
+          })
+        }
+        if (this.n === 2) {
+          this.produceList.splice(0)
+          axios.get('http://192.168.43.168/product/desc.do').then(resp => {
+            let data = resp.data
+            for (let i = 0; i < data.length; i++) {
+              this.produceList.push(data[i])
+            }
+          }).catch(error => {
+            console.log(error)
+          })
+        }
+      }
     }
   }
 }
@@ -61,9 +151,6 @@ export default {
       width:100px;
       height: 38px;
       line-height: 38px;
-      font-size: 28px;
-      letter-spacing: 0;
-      color: #aaa9a9;
       img{
         width:38px;
         height:38px;
@@ -110,37 +197,49 @@ export default {
         .picture{
           width: 190px;
           height: 190px;
-          background-color: black;
         }
         .goods{
           display: flex;
           width: 480px;
           height: 180px;
           justify-content: space-between;
-          background-color: chartreuse;
           flex-wrap: wrap;
           .message{
             width:100%;
             height: 80px;
-            font-size: 28px;
+            font-size: 30px;
             overflow: hidden;
-            background-color: antiquewhite;
+            text-align: left;
+            color: black;
+          }
+          .location{
+            width: 60%;
+            height:50px;
+            line-height: 50px;
+            font-size: 30px;
+            text-align: left;
+            color: #ff8401;
+            img{
+              width: 25px;
+              height: 25px;
+            }
           }
           .comment{
-            width:60%;
+            width:50%;
             height: 34px;
             line-height: 34px;
-            font-size: 28px;
-            background-color: aqua;
+            font-size: 26px;
             align-self: center;
+            text-align: left;
+            color: gray;
           }
           .price{
             width: 33%;
             height: 60px;
             line-height: 60px;
-            font-size:38px ;
-            background-color: blue;
+            font-size:46px ;
             align-self: flex-end;
+            color: #ff5500;
           }
         }
       }

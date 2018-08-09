@@ -18,6 +18,8 @@ import waitpay from '@/components/waitpay/waitpay'
 import order from '@/components/order/order'
 import orderconfirmation from '@/components/orderconfirmation/orderconfirmation'
 import message from '@/components/message/message'
+import shows from '@/components/shows/shows'
+import save from '@/components/save/save'
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -139,6 +141,18 @@ export default new Router({
       path: '/message',
       name: 'message',
       component: message
+    },
+    {
+      title: '单个产品展示',
+      path: '/shows',
+      name: 'shows',
+      component: shows
+    },
+    {
+      title: '优惠券',
+      path: '/save',
+      name: 'save',
+      component: save
     }
   ]
 })

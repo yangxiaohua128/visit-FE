@@ -8,20 +8,44 @@
       <div></div>
     </header>
     <div class="content">
-      <div class="album">
-        <p>2033</p>
-        <img>
+      <div class="none" ref="show">--暂时还没有照片--</div>
+      <div class="album" v-for="item in userAlbumList" :key="item.id">
+        <p>{{item.date}}</p>
+        <img v-for="item1 in item.urls" :key="item1.id" :src="item1">
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'userAlbum',
+  data () {
+    return {
+      userAlbumList: []
+    }
+  },
+  mounted () {
+    this.InitData()
+  },
   methods: {
     toBack () {
       this.$router.back(-1)
+    },
+    InitData () {
+      axios.get('http://192.168.43.29:8080/comment/photo.do').then(resp => {
+        let data = resp.data
+        if (data.length) {
+          for (let i = 0; i < data.length; i++) {
+            this.userAlbumList.push(data[i])
+          }
+        } else {
+          this.$refs.show.style.display = 'block'
+        }
+      }).catch(error => {
+        console.log(error)
+      })
     }
   }
 }
@@ -60,18 +84,27 @@ export default {
   .content {
     .album{
       width: 100%;
+      text-align: left;
       p{
-        height: 50px;
-        line-height: 50px;
+        height: 80px;
+        line-height: 80px;
         font-size: 36px;
-        width: 200px;
-        background-color: #007aff;
-        margin-bottom: 10px;
+        width: 300px;
+        padding-left: 20px;
       }
-      div{
-        background-color: aqua;
-        width: 100%;
+      img{
+        width: 200px;
+        height: 200px;
+        margin: 5px;
       }
     }
+  }
+  .none{
+    width: 100%;
+    height: 300px;
+    line-height: 300px;
+    font-size: 38px;
+    color: #ccc;
+    display: none;
   }
 </style>

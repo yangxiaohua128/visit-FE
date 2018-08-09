@@ -8,42 +8,42 @@
       <div></div>
     </header>
     <div class="content">
-      <div class="comment">
+      <div class="comment"  v-for="item2 in scoreList" :key="item2.id">
         <div class="level">
-          <div>5.0</div>
+          <div>{{item2.commentScore}}</div>
         </div>
         <div class="details">
-          <div>行程安排</div>
-          <div>描述相符</div>
-          <div>导游讲解</div>
+          <div>行程安排<div>{{item2.commentScheduling}}.0</div></div>
+          <div>描述相符<div>{{item2.commentDescribe}}.0</div></div>
+          <div>导游讲解<div>{{item2.commentExplain}}.0</div></div>
         </div>
         <div class="repertory">
           <div v-for="(item,index) of items" :key="item.id" :class="{ 'checked':n==index}"
-               @touchend="changeN(index)">{{item}}</div>
+               @touchend="changeN(index),InitData()">{{item}}</div>
         </div>
       </div>
-      <div class="message">
+      <div class="message" v-for="(item1,index) in userCommentList" :key="index">
         <div class="order">
           <span class="number1">
             <img src="./img/icon.png">
-            37407
+            {{item1.orderUserid}}
           </span>
-          <span class="number2">2334***0844</span>
+          <span class="number2">{{item1.commentOrderid}}</span>
         </div>
-        <div class="picture"></div>
+        <img class="picture" v-for="item3 in item1.commentImgurl.split('@')" :key="index" :src="item3">
         <div class="write">
-          <p></p>
+          <p>{{item1.commentContent}}</p>
         </div>
         <div class="time">
           <div @touchend="changeNumber()">
             <img src="./img/comment.png">
-            <span>赞({{number}})</span>
+            <span>赞({{item1.commentUseful}})</span>
           </div>
-          <span>2018-7-29 15:42</span>
+          <span>{{item1.commentTime}}</span>
         </div>
         <div class="reply">
-          <div>查看供应商回复<img :src="imgUrl"  @touchend="showReply()"></div>
-          <p v-if="show">[供应商回复]：</p>
+          <div>查看供应商回复<img :src="imgUrl"  @touchend="showReply(index)"></div>
+          <p v-if="show">[供应商回复]：{{item1.supplyReplyResponse}}</p>
         </div>
       </div>
     </div>
@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'userComment',
   data () {
@@ -59,8 +60,14 @@ export default {
       n: 0,
       imgUrl: require('./img/down.png'),
       number: 0,
-      show: false
+      show: false,
+      userCommentList: [],
+      scoreList: []
     }
+  },
+  mounted () {
+    this.getScore()
+    this.InitData()
   },
   methods: {
     toBack () {
@@ -76,7 +83,75 @@ export default {
     },
     changeNumber () {
       this.number++
-      console.log(Number)
+      console.log(this.number)
+    },
+    getScore () {
+      axios.get('http://172.20.10.5/comment/commentscore.do').then(resp => {
+        let data = resp.data
+        for (let i = 0; i < data.length; i++) {
+          this.scoreList.push(data[i])
+        }
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    InitData () {
+      if (this.n === 0) {
+        this.userCommentList.splice(0)
+        axios.get('http://172.20.10.5/comment/commentshow.do').then(resp => {
+          let data = resp.data
+          for (let i = 0; i < data.length; i++) {
+            this.userCommentList.push(data[i])
+          }
+        }).catch(error => {
+          console.log(error)
+        })
+      }
+      if (this.n === 1) {
+        this.userCommentList.splice(0)
+        axios.get('http://172.20.10.5/comment/selectwellrank.do').then(resp => {
+          let data = resp.data
+          for (let i = 0; i < data.length; i++) {
+            this.userCommentList.push(data[i])
+          }
+          console.log(this.userCommentList)
+        }).catch(error => {
+          console.log(error)
+        })
+      }
+      if (this.n === 2) {
+        this.userCommentList.splice(0)
+        axios.get('http://172.20.10.5/comment/selectminrank.do').then(resp => {
+          let data = resp.data
+          for (let i = 0; i < data.length; i++) {
+            this.userCommentList.push(data[i])
+          }
+        }).catch(error => {
+          console.log(error)
+        })
+      }
+      if (this.n === 3) {
+        this.userCommentList.splice(0)
+        axios.get('http://172.20.10.5/comment/selectbadrank.do').then(resp => {
+          let data = resp.data
+          for (let i = 0; i < data.length; i++) {
+            this.userCommentList.push(data[i])
+          }
+        }).catch(error => {
+          console.log(error)
+        })
+      }
+      if (this.n === 4) {
+        this.userCommentList.splice(0)
+        axios.get('http://172.20.10.5/comment/selectyestype.do').then(resp => {
+          let data = resp.data
+          for (let i = 0; i < data.length; i++) {
+            this.userCommentList.push(data[i])
+          }
+        }).catch(error => {
+          console.log(error)
+        })
+      }
     }
   }
 }
@@ -118,7 +193,6 @@ export default {
       width: 100%;
       height: 260px;
       justify-content: space-around;
-      align-items: center;
       flex-wrap: wrap;
       .level {
         width: 40%;
@@ -136,12 +210,22 @@ export default {
       }
       .details{
         width:60%;
-        height: 170px;
+        display: flex;
         div{
-          width: 180px;
-          height: 48px;
+          width: 140px;
+          height: 150px;
           font-size: 28px;
           line-height: 48px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          div{
+            width: 80px;
+            height: 80px;
+            border:2px #ec7e3f solid;
+            border-radius: 50%;
+            line-height: 80px;
+          }
         }
       }
       .repertory{
@@ -169,6 +253,8 @@ export default {
     }
     .message{
       width: 100%;
+      text-align: left;
+      margin-bottom: 20px;
       .order{
         display: flex;
         width: 100%;
@@ -180,7 +266,7 @@ export default {
           color: black;
           height: 80px;
           line-height: 80px;
-          width: 200px;
+          width: 150px;
           vertical-align: center;
           img{
             width: 80px;
@@ -188,10 +274,15 @@ export default {
             vertical-align: middle;
           }
         }
+        span:nth-child(2){
+          width: 60px;
+        }
       }
       .picture{
-        width: 100%;
-        background-color: #ccc;
+        width: 150px;
+        height: 150px;
+        margin: 10px;
+        border-radius: 10px;
       }
       .write{
         p{
