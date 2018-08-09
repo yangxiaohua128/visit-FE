@@ -6,25 +6,18 @@
         <k-slider :banners="banners[0]" :swiperOption="swiperOption"></k-slider>
       </div>
       <div class="number"><p>{{all[0].productTitle}}</p><p>产品编号：{{all[0].productId}}</p></div>
-      <div class="timer">{{ `${day}天 ${hr}小时 ${min}分钟 ${sec}秒` }}</div>
+      <div class="timer" v-show="on1">{{ `${day}天 ${hr}小时 ${min}分钟 ${sec}秒` }}</div>
     </header>
     <div class="content">
       <div class="name">{{all[0].productContent}}</div>
-      <div class="price">￥{{priceL}}~{{priceH}}</div>
-      <div id="date">
-        <span>选择：出游人群</span>
-        <img src="./img/arrowRight.png" @touchend="turnToOderPage()"/>
+      <div class="price">￥{{all[0].startingMoney}}</div>
+      <div id="site">
+        <span >选择：出发地</span>
+        <img src="./img/arrowRight.png" @touchend="turnToPosition"/>
       </div>
-      <div id="special">
-        <p>选择：出行日期</p>
-        <ul class="choice" >
-          <li v-for="(site,index) in sites"
-              :class="{active:index===n}"
-              @touchend="changeN(index);returnDate"
-              :key="site.id"
-          >{{site}}
-          </li>
-        </ul>
+      <div id="date">
+        <span>选择：日期和出游人群</span>
+        <img src="./img/arrowRight.png" @touchend="turnToOderPage()"/>
       </div>
       <div class="comment">
         <span>查看：评论</span>
@@ -66,13 +59,7 @@ export default {
       },
       bOn: false,
       dataUrl: require('./img/collect.png'),
-      sites: [],
-      n: -1,
       all:[],
-      priceN: [],
-      priceH: 0,
-      priceL: 0,
-      price: 0,
     }
   },
   mounted: function () {
@@ -89,10 +76,9 @@ export default {
     },
     changeN (i) {
       this.n = i
-      this.price = this.priceN[n]
     },
     countdown: function () {
-      const end = Date.parse(new Date('all[0].starttimes[0]'))
+      const end = Date.parse(new Date('all[0].starttimes[1]'))
       const now = Date.parse(new Date())
       const msec = end - now
       if(msec>0){
@@ -134,15 +120,6 @@ export default {
         let data = resp.data
         this.all.push(data)
         this.banners.push(data.imgProducts)
-        for(let i=0;i<data.starttimes.length;i++){
-          this.sites.push(data.starttimes[i])
-        }
-        for(let i=0;i<data.spemoneys.length;i++){
-          this.priceN.push(parseInt(data.spemoneys[i]))
-          this.priceN.sort(function(a,b){return a-b;})
-        }
-        this.priceL = this.priceN[0]
-        this.priceH = this.priceN[this.priceN.length-1]
     }).catch(error => {
       console.log(error)
 })
@@ -208,13 +185,13 @@ export default {
   }
   .name{
     width: 100%;
-    /*height: 150px;*/
     font-size: 32px;
     font-weight: bold;
     color: #5d5d5d;
     text-align: left;
   }
   .price{
+    margin-top: 10px;
     width: 100%;
     height: 60px;
     font-size:30px;
@@ -223,7 +200,7 @@ export default {
     text-align: left;
     line-height: 60px;
   }
-  #date,.comment,.company{
+  #site,#date,.comment,.company{
     width: 100%;
     height: 95px;
     display: flex;

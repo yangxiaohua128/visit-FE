@@ -3,24 +3,25 @@
     <header>
       <header>
         <img src="./img/arrowLeft.png" @touchend="toBack"/>
-        <p>优惠券</p>
+        <p>选择优惠券</p>
       </header>
     </header>
     <div class="content">
-      <div class="sale" v-for="(site,index) in sale"
+      <div class="sale" v-for="(site,index) in arr"
            :class="{'active':index===m}"
            @touchend="changeN(index)"
            :key="site.id">
-        <span>{{site.price}}</span>
-        <p>{{site.content}}</p>
+        <span>￥{{arr[index].discountReduce}}</span>
+        <p>满{{arr[index].discountReach}}减{{arr[index].discountReduce}}</p>
       </div>
     </div>
-    <footer>不使用优惠券</footer>
+    <footer>确定</footer>
   </div>
 
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     name: "save",
     data :function() {
@@ -29,7 +30,8 @@
         sale: [{price: "￥50", content: "满300减50"},
           {price: "￥100", content: "满600减100"},
           {price: "￥1000", content: "满20000减1000"},
-        ]
+        ],
+        arr: []
       }
     },
     methods :
@@ -40,8 +42,22 @@
         },
         toBack: function () {
           this.$router.back(-1)
+        },
+        show :function(){
+          axios.post('http://192.168.43.229/orders/showUDiscount.do').then(resp => {
+            let data = resp.data
+            for(let i=0;i<data.length;i++){
+              this.arr.push(data[i])
+            }
+          }).catch(error => {
+            console.log(error)
+          })
         }
-      }
+      },
+    mounted: function () {
+      this.show()
+    },
+
   }
 </script>
 
@@ -99,7 +115,8 @@
   footer{
     width: 100%;
     height: 100px;
-    font-size: 30px;
+    font-size: 38px;
+    color:#8c8353;
     background-color: #fae368;
     text-align: center;
     line-height: 100px;

@@ -20,7 +20,9 @@ import order from '@/components/order/order'
 import orderconfirmation from '@/components/orderconfirmation/orderconfirmation'
 import message from '@/components/message/message'
 import shows from '@/components/shows/shows'
+import shown from '@/components/shown/shown'
 import save from '@/components/save/save'
+import position from '@/components/position/position'
 Vue.use(Router)
 // const advancedSearch = (resolve) => {
 //   import('@/components/advancedSearch/advancedSearch').then((module) => {
@@ -159,10 +161,23 @@ export default new Router({
       component: message
     },
     {
-      title: '单个产品展示',
+      title: '特卖单个产品展示',
       path: '/shows',
       name: 'shows',
       component: shows
-    }
+    },
+    {
+      title: '普通单个产品展示',
+      path: '/shown',
+      name: 'shown',
+      component: shown
+    },
+    {
+      tille: '选择定位',
+      path: '/position',
+      name: 'position',
+      component: position
+    },
+
   ]
 })

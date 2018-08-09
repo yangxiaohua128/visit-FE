@@ -1,10 +1,10 @@
 <template>
  <div class="confirmation">
    <header>
-     <img src="./img/arrowLeft.png"/>
+     <img src="./img/arrowLeft.png" @touchend="toBack"/>
      <p>订单填写</p>
    </header>
-   <from class="information" method="get" action="http://www.baidu.com" require="required">
+   <form class="information" method="get">
      <div class="content">
        <div class="orderPage">
          <p>(订单显示)</p>
@@ -14,48 +14,111 @@
          <p>出行信息</p>
          <div>
            <span>出行人</span>
-           <input type="search"  placeholder="添加出行人"/>
-           <img src="./img/addBlue.png">
+           <input type="search"  placeholder="请添加出行人" required="required"/>
+           <img src="./img/addBlue.png" @touchend="turnToMessage">
          </div>
        </div>
        <div class="orderMassage">
-         <p>预订人信息</p>
+         <h1>预订人信息</h1>
          <div>
-           <span>联系人</span>
-           <input type="search" placeholder="请填写订单联系人姓名"/>
+           <p>联系人</p>
+           <input id="orderContactname" type="search" placeholder="请填写订单联系人姓名" required="required"/>
+           <span id="Name">请输入姓名</span>
+         </div>
+         <div>
+           <p>电话</p>
+           <input id="orderContactphone" type="search" placeholder="请输入手机号码" required="required" ref="N"/>
+           <span id="phone">请输入正确的电话号码</span>
+         </div>
+         <div>
+           <p>邮箱</p>
+           <input id="orderContactemail" type="email" placeholder="请输入邮箱" required="required" ref="E"/>
+           <span id="Email">请输入正确邮箱</span>
          </div>
        </div>
-       <div class="peopleMassage">
-         <div><p>电话</p><input type="search" placeholder="请输入手机号码"/></div>
-         <div class="div1"><p>验证码</p><input type="search" placeholder="请输入验证码"/><span>发送验证码</span></div>
-         <div><p>邮箱</p><input  type="search" placeholder="请输入邮箱"/></div>
-       </div>
-
        <div class="save">
          <p >优惠信息</p>
-         <span>选择优惠券<img src="./img/arrowRight.png"/></span>
+         <span>选择优惠券<img src="./img/arrowRight.png" @touchend="turnToSave"/></span>
        </div>
      </div>
      <footer>
        <span>总价：<br>￥</span>
-       <input type="submit" value="提交订单" name="submit">
+       <input type="button" value="提交订单" name="submit" @touchend = "toBlock();toBlock1();toBlock2()">
      </footer>
-   </from>
+   </form>
  </div>
 </template>
 
 <script>
-  import InformChange from "../informChange/informChange";
+  import InformChange from "../informChange/informChange"
+  import axios from 'axios'
   export default {
-  name: 'orderconfirmation',
-    components: {InformChange}
+    name: 'orderconfirmation',
+    components: {InformChange},
+    methods : {
+      toBack: function () {
+        this.$router.back(-1)
+      },
+      turnToMessage: function () {
+        this.$router.push({
+          path: '/message'
+        })
+      },
+      turnToSave: function () {
+        this.$router.push({
+          path: '/save'
+        })
+      },
+      toBlock1:function () {
+        let reg=/^1[3456789]\d{9}$/;
+        let phone = document.getElementById("phone");
+        if(!reg.test(this.$refs.N.value)){
+          phone.style.display = 'block';
+        }
+        else{
+          phone.style.display = 'none';
+        }
+      },
+      toBlock2:function () {
+        let reg= /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+        let Email = document.getElementById("Email");
+        if(!reg.test(this.$refs.E.value)){
+          Email.style.display = 'block';
+        }
+        else{
+          Email.style.display = 'none';
+        }
+      },
+      toBlock:function () {
+        let name = document.getElementById("orderContactname").value;
+        let Name = document.getElementById("Name");
+        if(name){
+          Name.style.display = 'none';
+        } else{
+          Name.style.display = 'block';
+        }
+      },
+      returnMessage: function () {
+        let phoneNumber = document.getElementById('orderContactphone').value
+        let name = document.getElementById('orderContactname').value
+        let email = document.getElementById('orderContactemail').value
+        let Detail = {'orderContactname': name,'orderContactphone': phoneNumber,'orderContactemail':email}
+        axios({
+          url:  'http://192.168.43.229/orders/insertVisitor.do',
+          'Content-Type': 'application/x-www-form-urlencoded',
+          method: 'post',
+          data: Detail,
+        }).catch(error => {
+          console.log(error)
+      })
+    }
+   }
   }
 </script>
 
 <style lang="scss">
   .confirmation{
     width:750px;
-    height:1450px;
     background-color:#f7f7f7;
   }
   input{
@@ -85,7 +148,7 @@
   }
   .orderPage{
     width:100%;
-    height:232px;
+    height:220px;
     background-color: #fff;
     margin-top: 10px;
     display:flex;
@@ -116,6 +179,7 @@
       text-align: left;
     }
     div{
+      padding-top: 15px;
       margin-bottom: 40px;
       display:flex;
       justify-content:space-between;
@@ -132,10 +196,9 @@
   }
   .orderMassage{
     width: 100%;
-    height:212px;
     background-color: #fff;
     margin-top: 20px;
-    p{
+    h1{
       font-size: 30px;
       height:30px;
       font-weight: bold;
@@ -144,66 +207,30 @@
       padding-top: 40px;
     }
     div{
-      padding-top:0;
-      margin-top: 30px;
-      display:flex;
-      align-items:center;
+        width:100%;
+        height:60px;
+        background-color:#fff;
+        margin-top:20px;
+        font-size:28px;
+        text-align: left;
+        color:#c1c1c1;
+        padding-top: 40px;
+        p{
+          color:#565656;
+          font-size:28px;
+          display: inline-block;
+          width:116px;
+        }
       span{
-        width:100px;
-        color:#565656;
-        font-size:30px;
+        color:#ea3c3c;
+        font-size:25px;
         text-align:left;
+        display: none;
+        margin-left: 218px ;
       }
     }
     input{
-      margin-left: 60px;
-    }
-    div{
-      width:100%;
-      height:102px;
-      background-color:#fff;
-      margin-top:20px;
-      font-size:28px;
-      text-align: left;
-      color:#c1c1c1;
-      padding-top: 40px;
-      p{
-        font-size: 30px;
-        display: inline-block;
-        width:116px;
-      }
-    }
-  }
-  .div1{
-    position: relative;
-  }
-  .peopleMassage {
-    margin-top:40px;
-    p{
-      font-size: 30px;
-      display: inline-block;
-      width: 100px;
-      color:#565656;
-    }
-    div{
-      width:100%;
-      height:102px;
-      background-color:#fff;
-      margin-top:20px;
-      font-size:28px;
-      text-align: left;
-      color:#c1c1c1;
-      display: flex;
-      align-items: center;
-    }
-    span{
-      font-size: 28px;
-      color:#7ab4ee;
-      position: absolute;
-      right:0;
-    }
-    input{
-      margin-left: 60px;
+      margin-left: 96px;
     }
   }
     .save{
