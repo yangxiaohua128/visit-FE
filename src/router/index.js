@@ -24,10 +24,10 @@ import collection from '@/components/collection/collection'
 import backMoneyOk from '@/components/backMoneyOk/backMoneyOk'
 import backMoneyNo from '@/components/backMoneyNo/backMoneyNo'
 import pay from '@/components/pay/pay'
-import position from '@/components/position/position'
 import shows from '@/components/shows/shows'
-import showOne from '@/components/showOne/showOne'
 import modify from '@/components/modify/modify'
+import position from '@/components/position/position'
+import save from '@/components/save/save'
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -56,10 +56,10 @@ export default new Router({
       component: register
     },
     {
-      title:'我的收藏',
-      path:'collection',
-      name:'collection',
-      component:collection
+      title: '我的收藏',
+      path: 'collection',
+      name: 'collection',
+      component: collection
     },
     {
       title: '用户信息修改页（1）',
@@ -87,6 +87,12 @@ export default new Router({
       component: destination
     },
     {
+      title: '单个产品',
+      path: '/shows',
+      name: 'shows',
+      component: shows
+    },
+    {
       title: '浏览历史',
       path: '/history',
       name: 'history',
@@ -96,17 +102,18 @@ export default new Router({
       title: '高级搜索页',
       path: '/advancedSearch',
       name: 'advancedSearch',
-      component: advanceSearch
+      component: advancedSearch
+    },
+    { title: '优惠券',
+      path: '/save',
+      name: 'save',
+      component: save
     },
     {
       tille: '选择定位',
       path: '/position',
       name: 'position',
       component: position
-    },
-    {path: '/advancedSearch',
-      name: 'advancedSearch',
-      component: advancedSearch
     },
     {
       title: '搜索结果页',
@@ -126,16 +133,10 @@ export default new Router({
       name: 'userComment',
       component: userComment
     },
-    {
-       path: '/userEvaluation',
-       name:'userEvaluation',
-      component:userEvaluation
-    },
-    { path: '/userEvaluation',
+    {path: '/userEvaluation',
       name: 'userEvaluation',
       component: userEvaluation
     },
-
     { title: '修改',
       path: '/userEvaluation',
       name: 'userEvaluation',
@@ -146,12 +147,6 @@ export default new Router({
       path: '/signin',
       name: 'signin',
       component: signin
-    },
-
-    {
-      path: '/userEvaluation',
-      name: 'userEvaluation',
-      component: userEvaluation
     },
     { title: '修改',
       path: '/informChange',
@@ -199,7 +194,6 @@ export default new Router({
       name: 'message',
       component: message
     },
-
     {
       title: '单个产品展示',
       path: '/shows',
@@ -236,12 +230,6 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: register
-    },
-    {title: '单个产品展示',
-      path: '/showOne',
-      name: 'showOne',
-      component: showOne
     }
-
   ]
 })

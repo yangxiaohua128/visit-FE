@@ -30,6 +30,10 @@ let vm = new Vue({
 import Vue from 'vue'
 import axios from 'axios'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import infiniteScroll from 'vue-infinite-scroll'
+Vue.use(infiniteScroll)
+// 前端解决跨域问题
+axios.defaults.withCredentials = true
 Vue.prototype.$ajax = axios
 Vue.use(VueAwesomeSwiper)
 // vue.config.productionTip = false;
