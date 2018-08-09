@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import signin2 from '@/components/signin2/signin2'
 import phone from '@/components/phone/phone'
 import register from '@/components/register/register'
-import orderPage from '@/components/orderPage/orderPage'
 import apppage from '@/components/apppage/apppage'
 import News from '@/components/News/News'
 import history from '@/components/history/history'
@@ -19,18 +18,34 @@ import informChange from '@/components/informChange/informChange'
 import waitpay from '@/components/waitpay/waitpay'
 import order from '@/components/order/order'
 import orderconfirmation from '@/components/orderconfirmation/orderconfirmation'
-import message from '@/components/message/message'
-import collection from '@/components/collection/collection'
-import modify from '@/components/modify/modify'
 import shown from '@/components/shown/shown'
 import position from '@/components/position/position'
-import shows from '@/components/shows/shows'
 import backMoneyOk from '@/components/backMoneyOk/backMoneyOk'
 import backMoneyNo from '@/components/backMoneyNo/backMoneyNo'
 import pay from '@/components/pay/pay'
 import revocatory from '@/components/revocatory/revocatory'
+import shows from '@/components/shows/shows'
+import modify from '@/components/modify/modify'
+import collection from '@/components/collection/collection'
+import orderPage from '@/components/orderPage/orderPage'
 import save from '@/components/save/save'
+import phonechange from '@/components/phonechange/phonechange'
+import names from '@/components/names/names'
+import emilechange from '@/components/emilechange/emilechange'
+import password from '@/components/password/password'
+import message from '@/components/message/message'
+import Head from '@/components/Head/Head'
 Vue.use(Router)
+//   import('@/components/advancedSearch/advancedSearch').then((module) => {
+//     resolve(module)
+//   })
+// }
+// const search = (resolve) => {
+//   import('@components/search/search').then((module) => {
+//     resolve(module)
+//   })
+// }
+
 export default new Router({
   routes: [
     {
@@ -59,7 +74,7 @@ export default new Router({
     },
     {
       title: '我的收藏',
-      path: 'collection',
+      path: '/collection',
       name: 'collection',
       component: collection
     },
@@ -68,6 +83,36 @@ export default new Router({
       path: '/modify',
       name: 'modify',
       component: modify
+    },
+    {
+      title: '手机号修改',
+      path: '/phonechange',
+      name: 'phonechange',
+      component: phonechange
+    },
+    {
+      title: '昵称修改',
+      path: '/names',
+      name: 'names',
+      component: names
+    },
+    {
+      title: '邮箱',
+      path: '/emilechange',
+      name: 'emilechange',
+      component: emilechange
+    },
+    {
+      title: '密码修改',
+      path: '/password',
+      name: 'password',
+      component: password
+    },
+    {
+      title: '更换头像',
+      path: '/Head',
+      name: 'Head',
+      component: Head
     },
     {
       title: '首页',
@@ -162,7 +207,8 @@ export default new Router({
       name: 'signin',
       component: signin
     },
-    { title: '修改',
+    {
+      title: '修改',
       path: '/informChange',
       name: 'informChange',
       component: informChange

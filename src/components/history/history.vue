@@ -17,7 +17,7 @@
   import axios from 'axios'
   export default {
     name: 'position',
-    data : function () {
+    data: function () {
       return {
         tabs: [],
         num: -1
@@ -36,7 +36,7 @@
       history: function () {
         axios.get('http://192.168.43.138/historys/getHistorys.do').then(resp => {
           let data = resp.data
-          for (var i=0;i<data.length; i++) {
+          for (var i = 0; i < data.length; i++) {
             this.tabs.push(data[i].productContent)
           }
         }).catch(error => {

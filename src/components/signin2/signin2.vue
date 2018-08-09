@@ -2,18 +2,20 @@
   <div class="signin2">
     <div class="div1" >
       <img id="img1" src="./img/news.png"/>
-      <div>
-        <img id="img2" src="./img/head.png"/>
-        <span>用户昵称</span>
+      <div @touchend="change()">
+        <img id="img2" :src="data1[0].userHead"/>
+        <span>{{data1[0].userNickname}}</span>
         <img id="img3" src="./img/jiantou.jpg"/>
       </div>
       <p>开始你的旅程</p>
     </div>
     <div class="div2"></div>
-    <div class="div3">积分：</div>
+    <div class="div3">积分:
+      <span>{{data1[0].userCredits}}</span>
+    </div>
     <div class="div4"></div>
     <div class="div5">
-      <div>
+      <div @touchend="tocollection">
         <img src="./img/collection.png"/><br/>
         <span>我的收藏</span>
       </div>
@@ -41,11 +43,13 @@
         <img src="./img/coupon.png"/><br/>
         <span>优惠券</span>
       </div>
+
       <div>
         <img src="./img/album.png"/><br/>
         <span>我的相册</span>
       </div>
     </div>
+    <div class="Re"><span>{{data1[0].number}}</span>张</div>
     <div class="div6">
       <div>
         <img src="./img/homepage.jpg"/><br/>
@@ -69,14 +73,54 @@
 </template>
 
 <script>
-  export default {
-    name: 'signin',
-    data () {
-      return {
-        msg: 'Welcome to Your Vue.js App'
-      }
+import axios from 'axios'
+export default {
+  data () {
+    return {
+      data1:[]
+    }
+  },
+  mounted: function () {
+    this.integral()
+    this.change()
+  },
+  methods: {
+    tocollection: function () {
+      this.$router.push({
+        path: '/collection'
+      })
+    },
+    tomodify: function () {
+      this.$router.push({
+        path: '/modify'
+      })
+    },
+    integral: function(){
+      axios.get('http://192.168.43.47:8080/user/myuser.do').then(resp => {
+        let data = resp.data
+        this.data1.push(data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    change: function(){
+      let data2 = {"userId":this.data1[0].userId}
+      axios({
+        method: 'post',
+        url: 'http://192.168.43.47:8080/user/userList.do',
+        data: data2,
+        'contentType':"application/json:charset=utf-8",
+      }).then(
+        this.$router.push({
+          path: '/modify'
+        })
+      ).catch(error => {
+        console.log(error)
+      })
     }
   }
+}
+
 </script>
 
 <style lang="scss">
@@ -87,7 +131,7 @@
     #img1{width:42px;height:46px;position:absolute;top:27px;right:0;}
     div{
       span{font-size:45px;display:inline-block;margin-left:152px;margin-top:150px;}
-      #img2{width:125px;height:125px;position:absolute;top:120px;left:0;}
+      #img2{width:125px;height:125px;position:absolute;top:120px;left:0;border-radius:50%;}
       #img3{width:20px;height:35px;position:absolute;top:158px;right:0;}
     }
     p{width:455px;height:105px;background-color:#ffe040;font-size:48px;
@@ -111,5 +155,11 @@
       img{width:42px;height:48px;padding-top:10px;}
       span{color:#4b414c;font-size:22px;padding-top:8px;display:block;text-align:center;}
     }
+  }
+  .Re{
+    width:150px;
+    position:fixed;
+    left:395px;
+    font-size:30px;
   }
 </style>
