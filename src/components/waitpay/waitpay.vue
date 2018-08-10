@@ -14,12 +14,12 @@
         <span>库存有限，请尽快完成付款</span>
       </div>
       <div class="waitTime">
-        <div class="countDown"><span>剩余支付时间</span>：<span class="time">{{`${min}分钟${sec}秒`}}</span></div>
+        <div class="countDown"><span>剩余支付时间</span>：<span class="time" ref="time">{{`${min}分钟${sec}秒`}}</span></div>
         <button type="button" @touchend="returnPay()">继续支付</button>
       </div>
       <div class="details">
         <div class="number">订单号 :{{data1[0].orderNumber}}</div>
-        <div class="time">{{data1[0].orderTime}}</div>
+        <div class="time">预定日期：{{data1[0].orderTime}}</div>
         <div class="img"><img :src="data1[0].productImgurl" width="100" height="100"></div>
         <div class="text">{{data1[0].productContent}}</div>
       </div>
@@ -28,7 +28,7 @@
         <p class="line"></p>
         <div class="end">返程日<br/><p>{{data1[0].orderReturntime}}</p></div>
         <div class="moneyPeople">
-          <div class="money">总额:￥{{data1[0].orderTotalmoney}}</div>
+          <div class="money">总额:<br>￥{{data1[0].orderTotalmoney}}</div>
           <div class="people">人数:<br>{{data1[0].orderAdultnum}}成人 {{data1[0].orderChildnum}}小孩</div>
         </div>
       </div>
@@ -55,6 +55,7 @@ export default {
   mounted: function () {
     this.countdown(this.authTime)
     this._initData()
+    this.returnTime()
   },
   methods: {
     toBack: function () {
@@ -82,7 +83,7 @@ export default {
       }, 1000)
     },
     _initData: function () {
-      axios.get('http://192.168.43.229/orders/showSingleOrderF.do').then(resp => {
+      axios.get('http://60.205.208.7/Travel_Summer_war/orders/showSingleOrderF.do').then(resp => {
         let data = resp.data
         this.data1.push(data)
       }).catch(error => {
@@ -93,7 +94,7 @@ export default {
       let dataPay = {'orderId': this.data1[0].orderId}
       axios({
         method: 'post',
-        url: 'http://192.168.43.229/orders/pay.do',
+        url: 'http://60.205.208.7/Travel_Summer_war/orders/pay.do',
         'Content-Type': 'application/json;charset=utf-8',
         data: dataPay
       }).then(
@@ -108,7 +109,7 @@ export default {
       let dataDelete = {'orderId': this.data1[0].orderId}
       axios({
         method: 'post',
-        url: 'http://192.168.43.229/orders/deleteOrder.do',
+        url: 'http://60.205.208.7/Travel_Summer_war/orders/deleteOrder.do',
         'Content-Type': 'application/json;charset=utf-8',
         data: dataDelete
       }).then(
@@ -118,6 +119,23 @@ export default {
       ).catch(error => {
         console.log(error)
       })
+    },
+    returnTime: function () {
+      let dataDelete = {'orderId': this.data1[0].orderId}
+      if (this.$refs.time.innerHTML === '00分00秒') {
+        axios({
+          method: 'post',
+          url: 'http://60.205.208.7/Travel_Summer_war/orders/deleteOrder.do',
+          'Content-Type': 'application/json;charset=utf-8',
+          data: dataDelete
+        }).then(
+          this.$router.push({
+            path: '/ordermanagement'
+          })
+        ).catch(error => {
+          console.log(error)
+        })
+      }
     }
   }
 }
@@ -223,38 +241,38 @@ export default {
       border-radius: 12px;
     }
     .number {
-      width: 300px;
+      width: 600px;
       height: 40px;
       border: 1px #0094e3 solid;
       border-radius: 12px;
       color: #858585;
-      text-align: left;
+      text-align: center;
       line-height: 40px;
-      padding: 10px;
+      padding: 5px;
       font-size: 24px;
-      margin-bottom: 30px;
+      margin-bottom: 10px;
     }
     .time {
-      width: 250px;
+      width: 750px;
       height: 40px;
-      color: #858585;
+      color: #086085;
       text-align: left;
       line-height: 40px;
       padding: 10px;
-      font-size: 24px;
-      margin-bottom: 30px;
+      font-size: 30px;
+      margin-bottom: 20px;
     }
     .img {
-      width: 200px;
-      height: 200px;
-      border: 1px rebeccapurple solid;
+      border: 3px #999898 solid;
       align-self: flex-end;
     }
     .text {
       width: 400px;
       height: 200px;
-      border: 1px rebeccapurple solid;
-      align-self: flex-end;
+      font-size: 30px;
+      text-align: left;
+      color: #539aef;
+      overflow: hidden;
     }
   }
   .message {
@@ -267,36 +285,37 @@ export default {
     padding-left: 20px;
     margin-bottom: 40px;
     .line {
-      width: 300px;
+      width: 280px;
       height: 3px;
       background-color: #e2e2e2;
     }
-    .start {
+    .start{
       width: 170px;
-      height: 200px;
-      font-size: 28px;
-      p {
-        font-size: 36px;
+      font-size: 33px;
+      p{
+        margin-bottom: 30px;
+        margin-top: 15px;
       }
     }
-    .end {
+    .end{
       width: 170px;
-      height: 200px;
-      font-size: 28px;
-      p {
-        font-size: 36px;
+      font-size: 33px;
+      p{
+        margin-bottom: 30px;
+        margin-top: 15px;
       }
     }
     .moneyPeople {
-      width: 690px;
+      width:690px;
       display: flex;
       justify-content: space-between;
       font-size: 32px;
-      color: #2a2a2a;
+      color:#2a2a2a;
       border-bottom: 3px #e2e2e2 solid;
       margin-bottom: 70px;
+      margin-top: 50px;
       .money {
-        width: 250px;
+        width: 150px;
         text-align: center;
       }
       .people {

@@ -59,7 +59,7 @@ export default {
       })
     },
     _initData: function () {
-      axios.get('http://192.168.43.47:8080/user/alterPerson.do').then(resp => {
+      axios.get('http://60.205.208.7/Travel_Summer_war/user/alterPerson.do').then(resp => {
         let data = resp.data
         this.name.push(data.userName)
         this.born.push(data.userBorn)
@@ -79,7 +79,7 @@ export default {
         let data1 = {'userName': this.name[0], 'userSex': this.sex[0], 'userBorn': this.born[0]}
         axios({
           method: 'post',
-          url: 'http://192.168.43.47:8080/user/savePerson.do',
+          url: 'http://60.205.208.7/Travel_Summer_war/user/savePerson.do',
           'Content-Type': 'application/json;charset=utf-8',
           data: data1
         }).then(

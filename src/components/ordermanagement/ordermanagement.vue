@@ -24,13 +24,13 @@
               <div class="title"><span>{{data.producttitle}}</span></div>
               <div class="from"><span>{{data.traveltime}}</span>至<span>{{data.returntime}}</span></div>
             </div>
-          <div class="money"><p class="p1">￥1500</p><p class="p2" >{{state[m]}}</p></div>
+              <div class="money"><p class="p1">￥1500</p><p class="p2" id="state"></p></div>
             </div>
           </div>
           <div class="block"></div>
           <div class="button">
-            <button type="button" id="btn1" v-show="show1" @touchend.stop="again(2)">去支付</button>
-            <button type="button" class="btn2" v-show="show2" @touchend.stop="again(1)">去点评</button>
+            <button type="button"  v-show="show1" @touchend.stop="again(2)">去支付</button>
+            <button type="button"  v-show="show2" @touchend.stop="again(1)">去点评</button>
           </div>
         </div>
       </div>
@@ -38,8 +38,8 @@
     <footer>
       <div>
       <!--<button type="button" @touchend="timeLose(x),changeUrl()">时间<img :src='dataUrl' width="25" height="25"> </button>-->
-        <button type="button" @touchend="timeLose(2)">近-->远<img src="./img/up.png" width="20" height="20"> </button>
-      <button type="button" @touchend="timeLose(1)">远-->近<img src="./img/down.png" width="20" height="20"> </button>
+        <button type="button" @touchend="timeLose(2)">近-->远<img src="./img/up.png" width="15" height="15"> </button>
+      <button type="button" @touchend="timeLose(1)">远-->近<img src="./img/down.png" width="15" height="15"> </button>
       <button type="button" @touchend="timeLose(3)">失效订单</button>
       </div>
       <!--<div class="sort"><img :src='dataUrl' @touchend="changeUrl"/></div>-->
@@ -67,7 +67,8 @@ export default {
       x: 0,
       state: ['待付款', '待出行', '待评价', '已退款', '已失效'],
       show1: true,
-      show2: true
+      show2: true,
+      states: ''
     }
   },
   mounted: function () {
@@ -87,14 +88,6 @@ export default {
           path: '/waitPay'
         })
       }
-    },
-    toOrder: function (id) {
-      this.$router.push({
-        path: '/order',
-        params: {
-          orderId: id
-        }
-      })
     },
     changeP (i) {
       this.n = i
@@ -167,12 +160,17 @@ export default {
     check: function () {
       this.data1 = []
       if (this.n === 0) {
-        axios.get('http://192.168.43.57:8080/orders/showAllOrders.do').then(resp => {
+        axios.get('http://60.205.208.7/Travel_Summer_war/orders/showAllOrders.do').then(resp => {
           let data = resp.data
           if (data.length) {
             for (let i = 0; i < data.length; i++) {
               this.data1.push(data[i])
               this.show1 = this.show2 = true
+              if (data[i].ispay !== 0) {
+                alert(data[i].ispay)
+              } else {
+                this.states = 'wu'
+              }
             }
           } else if (!data.length) {
             let None = document.getElementById('none')
@@ -183,7 +181,7 @@ export default {
         })
       } else if (this.n === 1) {
         this.data1 = []
-        axios.get('http://192.168.43.57:8080/orders/showAllOrdersByispay.do').then(resp => {
+        axios.get('http://60.205.208.7/Travel_Summer_war/orders/showAllOrdersByispay.do').then(resp => {
           let data = resp.data
           if (data.length) {
             for (let i = 0; i < data.length; i++) {
@@ -208,7 +206,7 @@ export default {
         })
       } else if (this.n === 2) {
         this.data1 = []
-        axios.get('http://192.168.43.57:8080/orders/showAllOrdersByisout.do').then(resp => {
+        axios.get('http://60.205.208.7/Travel_Summer_war/orders/showAllOrdersByisout.do').then(resp => {
           let data = resp.data
           if (data.length) {
             for (let i = 0; i < data.length; i++) {
@@ -225,7 +223,7 @@ export default {
         })
       } else if (this.n === 3) {
         this.data1 = []
-        axios.get('http://192.168.43.57:8080/orders/showAllOrdersByisevaluate.do').then(resp => {
+        axios.get('http://60.205.208.7/Travel_Summer_war/orders/showAllOrdersByisevaluate.do').then(resp => {
           let data = resp.data
           if (data.length) {
             for (let i = 0; i < data.length; i++) {
@@ -243,7 +241,7 @@ export default {
         })
       } else if (this.n === 4) {
         this.data1 = []
-        axios.get('http://192.168.43.57:8080/orders/showAllOrdersByisrefund.do').then(resp => {
+        axios.get('http://60.205.208.7/Travel_Summer_war/orders/showAllOrdersByisrefund.do').then(resp => {
           let data = resp.data
           if (data.length) {
             for (let i = 0; i < data.length; i++) {
@@ -263,7 +261,7 @@ export default {
     timeLose: function (num) {
       if (num === 1) {
         this.data1 = []
-        axios.get('http://192.168.43.57:8080/orders/showAllOrdersBytime.do').then(resp => {
+        axios.get('http://60.205.208.7/Travel_Summer_war/orders/showAllOrdersBytime.do').then(resp => {
           let data = resp.data
           if (data.length) {
             for (let i = 0; i < data.length; i++) {
@@ -278,7 +276,7 @@ export default {
         })
       } else if (num === 2) {
         this.data1 = []
-        axios.get('http://192.168.43.57:8080/orders/showAllOrdersBydesctime.do').then(resp => {
+        axios.get('http://60.205.208.7/Travel_Summer_war/orders/showAllOrdersBydesctime.do').then(resp => {
           let data = resp.data
           if (data.length) {
             for (let i = 0; i < data.length; i++) {
@@ -293,7 +291,7 @@ export default {
         })
       } else if (num === 3) {
         this.data1 = []
-        axios.get('http://192.168.43.57:8080/orders/showAllOrdersByislose.do').then(resp => {
+        axios.get('http://60.205.208.7/Travel_Summer_war/orders/showAllOrdersByislose.do').then(resp => {
           let data = resp.data
           if (data.length) {
             for (let i = 0; i < data.length; i++) {
@@ -486,7 +484,7 @@ export default {
     button{
       height: 70px;
       background-color:  #f9ee75;
-      font-size: 34px;
+      font-size: 30px;
       border-radius: 12px;
       padding: 5px;
       font-weight: 500;
