@@ -22,7 +22,8 @@
                @touchend="changeN(index),InitData()">{{item}}</div>
         </div>
       </div>
-      <div class="message" v-for="(item1,index) in userCommentList" :key="index">
+      <div class="none" ref="show">--暂时还没有评论--</div>
+      <div class="message" v-for="(item1,index) in userCommentList" :key="item1.id">
         <div class="order">
           <span class="number1">
             <img src="./img/icon.png">
@@ -30,12 +31,12 @@
           </span>
           <span class="number2">{{item1.commentOrderid}}</span>
         </div>
-        <img class="picture" v-for="item3 in item1.commentImgurl.split('@')" :key="index" :src="item3">
+        <img class="picture" v-for="item3 in item1.commentImgurl.split('@')" :key="item3.id" :src="item3">
         <div class="write">
           <p>{{item1.commentContent}}</p>
         </div>
         <div class="time">
-          <div @touchend="changeNumber()">
+          <div @touchend="changeNumber(index)">
             <img src="./img/comment.png">
             <span>赞({{item1.commentUseful}})</span>
           </div>
@@ -81,9 +82,23 @@ export default {
       this.show = !this.show
       this.isShow = !this.isShow
     },
-    changeNumber () {
-      this.number++
-      console.log(this.number)
+    changeNumber (i) {
+      this.userCommentList[i].commentUseful++
+      let number = this.userCommentList[i].productId
+      let data = {'productId': number}
+      axios({
+        method: 'post',
+        url: 'http://172.20.10.5/comment/commentuseful.do',
+        data: data,
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        }
+      }).then(success => {
+        console.log(success)
+      }
+      ).catch(error => {
+        console.log(error)
+      })
     },
     getScore () {
       axios.get('http://172.20.10.5/comment/commentscore.do').then(resp => {
@@ -100,8 +115,12 @@ export default {
         this.userCommentList.splice(0)
         axios.get('http://172.20.10.5/comment/commentshow.do').then(resp => {
           let data = resp.data
-          for (let i = 0; i < data.length; i++) {
-            this.userCommentList.push(data[i])
+          if (data.length) {
+            for (let i = 0; i < data.length; i++) {
+              this.userCommentList.push(data[i])
+            }
+          } else {
+            this.$refs.show.style.display = 'block'
           }
         }).catch(error => {
           console.log(error)
@@ -111,10 +130,13 @@ export default {
         this.userCommentList.splice(0)
         axios.get('http://172.20.10.5/comment/selectwellrank.do').then(resp => {
           let data = resp.data
-          for (let i = 0; i < data.length; i++) {
-            this.userCommentList.push(data[i])
+          if (data.length) {
+            for (let i = 0; i < data.length; i++) {
+              this.userCommentList.push(data[i])
+            }
+          } else {
+            this.$refs.show.style.display = 'block'
           }
-          console.log(this.userCommentList)
         }).catch(error => {
           console.log(error)
         })
@@ -123,8 +145,12 @@ export default {
         this.userCommentList.splice(0)
         axios.get('http://172.20.10.5/comment/selectminrank.do').then(resp => {
           let data = resp.data
-          for (let i = 0; i < data.length; i++) {
-            this.userCommentList.push(data[i])
+          if (data.length) {
+            for (let i = 0; i < data.length; i++) {
+              this.userCommentList.push(data[i])
+            }
+          } else {
+            this.$refs.show.style.display = 'block'
           }
         }).catch(error => {
           console.log(error)
@@ -134,8 +160,12 @@ export default {
         this.userCommentList.splice(0)
         axios.get('http://172.20.10.5/comment/selectbadrank.do').then(resp => {
           let data = resp.data
-          for (let i = 0; i < data.length; i++) {
-            this.userCommentList.push(data[i])
+          if (data.length) {
+            for (let i = 0; i < data.length; i++) {
+              this.userCommentList.push(data[i])
+            }
+          } else {
+            this.$refs.show.style.display = 'block'
           }
         }).catch(error => {
           console.log(error)
@@ -145,8 +175,12 @@ export default {
         this.userCommentList.splice(0)
         axios.get('http://172.20.10.5/comment/selectyestype.do').then(resp => {
           let data = resp.data
-          for (let i = 0; i < data.length; i++) {
-            this.userCommentList.push(data[i])
+          if (data.length) {
+            for (let i = 0; i < data.length; i++) {
+              this.userCommentList.push(data[i])
+            }
+          } else {
+            this.$refs.show.style.display = 'block'
           }
         }).catch(error => {
           console.log(error)
@@ -353,5 +387,13 @@ export default {
         }
       }
     }
+  }
+  .none{
+    width: 100%;
+    height: 300px;
+    line-height: 300px;
+    font-size: 38px;
+    color: #ccc;
+    display: none;
   }
 </style>

@@ -7,7 +7,7 @@
       <p>评价晒单</p>
       <div></div>
     </header>
-    <div class="content">
+    <form class="content" action="http://192.168.43.29:8080/comment/commentOk.do" method="post" name="myform" enctype="multipart/form-data">
       <p class="score">产品评分</p>
       <div class="level">
         <div>
@@ -117,8 +117,8 @@
           </div>
         </div>
       </div>
-      <button type="button" value="Submit" @touchend="submitData()">提交</button>
-    </div>
+      <button type="submit" value="Submit">提交</button>
+    </form>
   </div>
 </template>
 
@@ -139,7 +139,8 @@ export default {
       content: '',
       scheduling: '',
       describe: '',
-      explain: ''
+      explain: '',
+      list: []
     }
   },
   methods: {
@@ -175,18 +176,12 @@ export default {
       }
     },
     submitData () {
-      let photo = this.$refs.inputer.value
-      let data = {'commentScore': this.score, 'commentContent': this.content, 'files': photo, 'commentScheduling': this.scheduling, 'commentDescribe': this.describe, 'commentExplain': this.explain}
-      axios({
-        method: 'post',
-        url: 'http://192.168.43.29:8080/comment/commentOk.do',
-        data: data,
-        headers: {}
-      }).then(
-        this.$router.push({
-          path: '/Ordermanagement'
-        })
-      ).catch(error => {
+      axios.get('http://192.168.43.29:8080/comment/commentOk.do').then(resp => {
+        let data = resp.data
+        for (let i = 0; i < data.length; i++) {
+          this.userAlbumList.push(data[i])
+        }
+      }).catch(error => {
         console.log(error)
       })
     }

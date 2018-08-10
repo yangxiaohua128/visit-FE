@@ -139,7 +139,6 @@ export default {
         this.$refs.end.placeholder = '*此项必填'
       } else {
         let data = {'d': end, 'date': this.date, 'day': this.day, 'money': this.money, 's': start}
-        console.log(end)
         axios({
           method: 'post',
           url: 'http://172.20.10.6/product/advanceSearchByMonth.do',
