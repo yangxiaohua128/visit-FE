@@ -57,6 +57,7 @@
       return {
         banners: ['http://pic.lvmama.com/uploads/pc/place2/2018-07-16/c388073b-66b8-4a4a-ba73-a037d5479791.jpg', 'http://pic.lvmama.com/uploads/pc/place2/2018-07-31/6ca730cd-a8bd-4327-987d-1198bf6cd40d.jpg', 'http://pic.lvmama.com/uploads/pc/place2/2018-07-25/2e53cce1-52e6-4ee8-8df4-ab3ed33bfd2e.jpg', 'http://pic.lvmama.com/uploads/pc/place2/2018-07-16/5e772246-0115-40d1-b57d-eef53ffd242a.jpg'],
         tabs: [],
+        page: -1,
         swiperOption: {
           direction: 'horizontal',
           loop: true,
@@ -75,7 +76,9 @@
     },
     mounted: function () {
       this.positioncity()
-      this.getImg()
+      // this.getImg()
+      this.lazyload()
+      window.addEventListener('scroll', this.lazyload)
     },
     methods: {
       turnTopot: function () {
@@ -101,15 +104,40 @@
           console.log(error)
         })
       },
-      getImg: function () {
-        axios.get('http://192.168.43.168/specialtime/spe.do').then(resp => {
-          let data = resp.data
-          for (let i=0;i<data.length; i++) {
-            this.showImg.push(data[i])
-          }
-        }).catch(error => {
-          console.log(error)
-        })
+      // getImg: function () {
+      //   axios.get('http://192.168.43.168/specialtime/spe.do').then(resp => {
+      //     let data = resp.data
+      //     for (let i=0;i<data.length; i++) {
+      //       this.showImg.push(data[i])
+      //     }
+      //   }).catch(error => {
+      //     console.log(error)
+      //   })
+      // },
+      lazyload: function () {
+        this.scroll = document.documentElement.scrollTop || document.body.scrollTop
+        let clientHeight = window.innerHeight
+        let scrollTop = document.documentElement.scrollTop
+        let scrollHeight = document.documentElement.scrollHeight
+        if (clientHeight + scrollTop + 20 >= scrollHeight) {
+          this.page++
+          axios({
+            url: 'http://192.168.43.168/specialtime/spe.do',
+            method: 'post',
+            data: {'page': this.page},
+            headers: {
+              'Content-Type': 'text/html; charset=utf-8'
+            },
+            xhrFields: {
+              withCredentials: true
+            }
+          }).then(resp => {
+            let data = resp.data
+            for (let i = 0; i < data.length; i++) {
+              this.showImg.push(data[i])
+            }
+          })
+        }
       }
     }
   }

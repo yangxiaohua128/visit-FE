@@ -2,7 +2,7 @@
   <div class="advancedSearch">
     <header>
       <div>
-        <img src="./img/return.png"  @touchend="toBack">
+        <!--<img src="./img/return.png"  @touchend="toBack">-->
       </div>
       <p>高级搜索</p>
       <div></div>

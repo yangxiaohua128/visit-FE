@@ -21,7 +21,7 @@
 export default {
   name: 'collection',
   methods: {
-    tosignin2: function() {
+    tosignin2: function () {
       this.$router.push({
         path: '/signin2'
       })

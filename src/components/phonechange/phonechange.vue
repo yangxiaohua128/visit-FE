@@ -19,34 +19,33 @@
 <script>
 import axios from 'axios'
 export default {
-  data(){
+  data () {
     return {
-      data1:[],
-      phone:[]
+      data1: [],
+      phone: []
     }
   },
   mounted: function () {
     this.integral()
   },
   methods: {
-    tomodify:function(){
+    tomodify: function () {
       this.$router.push({
         path: '/modify'
       })
     },
-    toBlock1:function () {
-      var reg= /^1[3456789]\d{9}$/
-      let user_name = document.getElementById('puitCentent2-user')
-      if(!reg.test(this.$refs.sos.value)){
-        user_name.style.display = 'block'
-      }
-      else{
-        let data1 = {"userPhone": this.$refs.sos.value}
+    toBlock1: function () {
+      var reg = /^1[3456789]\d{9}$/
+      let username = document.getElementById('puitCentent2-user')
+      if (!reg.test(this.$refs.sos.value)) {
+        username.style.display = 'block' }
+      else {
+        let data1 = {'userPhone': this.$refs.sos.value}
         axios({
           method: 'post',
           url: 'http://192.168.43.47:8080/user/savePhone.do',
           data: data1,
-          'contentType': "application/json:charset=utf-8",
+          'contentType': 'application/json:charset=utf-8'
         }).then(
           this.$router.push({
             path: '/modify'
@@ -56,7 +55,7 @@ export default {
         })
       }
     },
-    integral: function(){
+    integral: function () {
       axios.get('http://192.168.43.47:8080/user/alterPhone.do').then(resp => {
         let data = resp.data
         this.data1.push(data)

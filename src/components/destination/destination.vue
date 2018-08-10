@@ -122,9 +122,8 @@
           }
         })
       },
-      returnshow: function () {
-        let city = document.getElementById('city')
-        alert(city.innerHTML)
+      returnshow: function (item) {
+        alert(item)
       }
     }
   }

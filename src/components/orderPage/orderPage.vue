@@ -12,17 +12,17 @@
         <div class="choice1">
           <span>成人：</span>
           <div class="coutter-wrapper">
-            <img src="./img/sub.png"  @touchend="minus();allPrice()">
+            <!--<img src="./img/sub.png"  @touchend="minus();allPrice()">-->
             <div>{{ orderAdultnum }}</div>
-            <img src="./img/add.png"  @touchend="plus();allPrice()">
+            <!--<img src="./img/add.png"  @touchend="plus();allPrice()">-->
           </div>
         </div>
         <div class="choice2">
           <span>儿童：</span>
           <div class="coutter-wrapper">
-            <img src="./img/sub.png"  @touchend="sub();allPrice()">
+            <!--<img src="./img/sub.png"  @touchend="sub();allPrice()">-->
             <div>{{ orderChildnum }}</div>
-            <img src="./img/add.png" @touchend="add();allPrice()">
+            <!--<img src="./img/add.png" @touchend="add();allPrice()">-->
           </div>
         </div>
       </div>
@@ -40,12 +40,9 @@
 </template>
 
 <script>
-  import calendarInput from '../../../node_modules/calendar-plugin/calendar-input.vue'
+  // import calendarInput from '../../../node_modules/calendar-plugin/calendar-input.vue'
   import axios from 'axios'
   export default {
-    components: {
-      calendarInput
-    },
     data () {
       return {
         orderAdultnum: 0,

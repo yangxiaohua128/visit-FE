@@ -77,7 +77,7 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      data1:[]
+      data1: []
     }
   },
   mounted: function () {
@@ -95,7 +95,7 @@ export default {
         path: '/modify'
       })
     },
-    integral: function(){
+    integral: function () {
       axios.get('http://192.168.43.47:8080/user/myuser.do').then(resp => {
         let data = resp.data
         this.data1.push(data)
@@ -103,13 +103,13 @@ export default {
         console.log(error)
       })
     },
-    change: function(){
-      let data2 = {"userId":this.data1[0].userId}
+    change: function () {
+      let data2 = {'userId': this.data1[0].userId}
       axios({
         method: 'post',
         url: 'http://192.168.43.47:8080/user/userList.do',
         data: data2,
-        'contentType':"application/json:charset=utf-8",
+        'contentType': 'application/json:charset=utf-8'
       }).then(
         this.$router.push({
           path: '/modify'

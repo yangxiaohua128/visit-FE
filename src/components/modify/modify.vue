@@ -63,19 +63,19 @@
 import axios from 'axios'
 export default {
   data () {
-    return{
-      data2:[]
+    return {
+      data2: []
     }
   },
   mounted: function () {
     this.integral()
   },
   methods: {
-    change2: function(){
+    change2: function () {
   axios({
     method: 'post',
     url: 'http://192.168.43.47:8080/user/alterPhone.do',
-    'contentType':"application/json:charset=utf-8",
+    'contentType': 'application/json:charset=utf-8'
   }).then(
     this.$router.push({
       path: '/phonechange'
@@ -83,12 +83,12 @@ export default {
   ).catch(error => {
     console.log(error)
   })
-},
-    change3: function(){
+    },
+    change3: function () {
   axios({
     method: 'post',
     url: 'http://192.168.43.47:8080/user/alterEmail.do',
-    'contentType':"application/json:charset=utf-8",
+    'contentType': 'application/json:charset=utf-8',
   }).then(
     this.$router.push({
       path: '/emilechange'
@@ -96,12 +96,12 @@ export default {
   ).catch(error => {
     console.log(error)
   })
-},
-    change4: function(){
+    },
+    change4: function () {
   axios({
     method: 'post',
     url: 'http://192.168.43.47:8080/user/alterPassword.do',
-    'contentType':"application/json:charset=utf-8",
+    'contentType': 'application/json:charset=utf-8',
   }).then(
     this.$router.push({
       path: '/password'
@@ -109,17 +109,17 @@ export default {
   ).catch(error => {
     console.log(error)
   })
-},
-    tosignin: function(){
+    },
+    tosignin: function () {
       this.$router.push({
         path: '/signin'
       })
     },
-    tosignin2: function(){
+    tosignin2: function () {
   axios({
     method: 'post',
     url: 'http://192.168.43.47:8080/user/myuser.do',
-    'contentType':"application/json:charset=utf-8",
+    'contentType': 'application/json:charset=utf-8',
   }).then(
     this.$router.push({
       path: '/signin2'
@@ -127,8 +127,8 @@ export default {
   ).catch(error => {
     console.log(error)
   })
-},
-    integral: function(){
+    },
+    integral: function () {
       axios.get('http://192.168.43.47:8080/user/userList.do').then(resp => {
         let data = resp.data
         this.data2.push(data)
@@ -136,11 +136,11 @@ export default {
         console.log(error)
       })
     },
-    change1: function(){
+    change1: function () {
       axios({
         method: 'post',
         url: 'http://192.168.43.47:8080/user/saveNickname.do',
-        'contentType':"application/json:charset=utf-8",
+        'contentType': 'application/json:charset=utf-8'
       }).then(
         this.$router.push({
           path: '/names'

@@ -30,7 +30,7 @@
           </span>
           <span class="number2">{{item1.commentOrderid}}</span>
         </div>
-        <img class="picture" v-for="item3 in item1.commentImgurl.split('@')" :key="index" :src="item3">
+        <img class="picture" v-for="item3 in item1.commentImgurl.split('@')" :key="item3.id" :src="item3">
         <div class="write">
           <p>{{item1.commentContent}}</p>
         </div>

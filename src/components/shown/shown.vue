@@ -59,7 +59,7 @@ export default {
       },
       bOn: false,
       dataUrl: require('./img/collect.png'),
-      all:[],
+      all: []
     }
   },
   mounted: function () {
@@ -81,7 +81,7 @@ export default {
       const end = Date.parse(new Date('all[0].starttimes[1]'))
       const now = Date.parse(new Date())
       const msec = end - now
-      if(msec>0){
+      if (msec > 0) {
         let day = parseInt(msec / 1000 / 60 / 60 / 24)
         let hr = parseInt(msec / 1000 / 60 / 60 % 24)
         let min = parseInt(msec / 1000 / 60 % 60)
@@ -94,12 +94,12 @@ export default {
         setTimeout(function () {
           that.countdown()
         }, 1000)
-        }else{
+      } else {
       }
     },
     toBack: function () {
-    this.$router.back(-1)
-  },
+      this.$router.back(-1)
+    },
     turnToOderPage: function () {
       this.$router.push({
         path: '/orderPage'
@@ -114,19 +114,19 @@ export default {
       this.$router.push({
         path: '/position'
       })
- },
-    show :function(){
+    },
+    show: function () {
       axios.get('http://172.20.10.12/product/getProduct.do').then(resp => {
         let data = resp.data
         this.all.push(data)
         this.banners.push(data.imgProducts)
-    }).catch(error => {
-      console.log(error)
-})
-  },
+      }).catch(error => {
+        console.log(error)
+      })
+    },
     returnDate: function (site) {
       axios({
-        url:  'http://192.168.43.168/area/acceptlocation.do',
+        url: 'http://192.168.43.168/area/acceptlocation.do',
         method: 'post',
         data: site,
         headers: {

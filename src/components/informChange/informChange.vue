@@ -1,11 +1,3 @@
-0
-2 0 moinoin/visit-FE
-Code  Issues 1  Pull requests 0  Projects 0  Wiki  Insights
-visit-FE/src/components/informChange/informChange.vue
-Fetching contributors…
-
-
-237 lines (231 sloc)  5.35 KB
 <template>
   <div class="informChange">
     <header>

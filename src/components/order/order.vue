@@ -1,7 +1,7 @@
 <template>
   <div class="order">
     <header>
-      <div><img src="./img/left.png" width="19" height="19" @touchend="toBack"/></div>
+      <!--<div><img src="./img/left.png" width="19" height="19" @touchend="toBack"/></div>-->
       <p>订单详情</p>
       <div></div>
     </header>
@@ -94,7 +94,7 @@
           data: dataBack
         }).then(resp => {
           let data = resp.data
-          if (parseInt(data.isSuccess) == 1) {
+          if (parseInt(data.isSuccess) === 1) {
             this.$router.push({
               path: '/backMoneyOk'
             })
