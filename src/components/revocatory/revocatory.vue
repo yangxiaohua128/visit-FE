@@ -9,26 +9,30 @@
     <div class="content">
       <div class="ok">
         <div><img src="./img/ok.png" width="60" height="60"/>取消成功</div>
-        <button>完成</button>
+        <button type="button" @touchend="toapp">重新预定</button>
       </div>
     </div>
   </div>
 </template>
-
 <script>
-export default {
-  name: 'revocatory',
-  data () {
-  },
-  methods: {
-    toBack: function () {
-      this.$router.back(-1)
+  export default {
+    name: 'revocatory',
+    data () {
+    },
+    methods: {
+      toBack: function () {
+        this.$router.back(-1)
+      },
+      toapp: function () {
+        this.$router.push({
+          path: '/apppage'
+        })
+      }
     }
   }
-}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   body{
     margin: 0;
     padding: 0;

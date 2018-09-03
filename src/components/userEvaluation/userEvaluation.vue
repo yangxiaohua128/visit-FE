@@ -7,7 +7,7 @@
       <p>评价晒单</p>
       <div></div>
     </header>
-    <div class="content">
+    <form class="content" action="http://192.168.43.29:8080/comment/commentOk.do" method="post" name="myform" enctype="multipart/form-data">
       <p class="score">产品评分</p>
       <div class="level">
         <div>
@@ -32,13 +32,20 @@
         </div>
       </div>
       <div class="comment">
-        <textarea name="commentContent" title="comment" style="width:100%; height:70%" placeholder="您的评价是对我们最大的支持哦！"
+        <textarea name="commentContent" title="comment" style="width:100%; height:200px" placeholder="您的评价是对我们最大的支持哦！"
                   v-model="content"></textarea>
         <div class="photo">
-          <input id="pic" type="file" name="files" @change="handleFileChange" ref="inputer" capture="video"
-                 multiple="multiple" accept="image/png,image/gif,image/jpeg"/>
-          <label for="pic"></label>
-          <img :src="dataUrl"/>
+          <input @change="fileChange($event)" type="file" id="upload_file" multiple style="display: none" ref="photo"/>
+          <label for="upload_file"><img src="./img/photo.png"></label>
+          <div class="add-img" v-show="imgList.length">
+            <p class="font14">图片(最多6张，还可上传<span v-text="6-imgList.length"></span>张)</p>
+            <ul class="img-list">
+              <li v-for="(url,index) in imgList" :key="url.id">
+                <img class="del" @click.stop="delImg(index)"/>
+                <img :src="url.file.src">
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <div class="details">
@@ -117,8 +124,8 @@
           </div>
         </div>
       </div>
-      <button type="button" value="Submit" @touchend="submitData()">提交</button>
-    </div>
+      <button type="button" value="Submit" @touchend="submitData">提交</button>
+    </form>
   </div>
 </template>
 
@@ -130,61 +137,131 @@
       return {
         items: ['行程安排', '描述相符', '导游讲解'],
         dataUrl: require('./img/photo.png'),
-        file: null,
-        fileName: '',
-        errText: '',
         select: ['很差', '差', '一般', '满意', '完美'],
         n: -1,
         score: '',
         content: '',
         scheduling: '',
         describe: '',
-        explain: ''
+        explain: '',
+        showFace: false,
+        imgList: [],
+        size: 0,
+        limit: 6,
+        tempImgs: [],
+        id: ''
       }
     },
+    mounted () {
+      this.receiveData()
+    },
     methods: {
-      toBack () {
-        this.$router.back(-1)
+      chooseType () {
+        document.getElementById('upload_file').click()
       },
-      handleFileChange (e) {
-        if (typeof e.target === 'undefined') this.file = e[0]
-        else this.file = e.target.files[0]
-        this.errText = ''
-        let size = Math.floor(this.file.size / 1024)
-        if (size > 5120) {
-          this.errText = `文件大小不能超过${this.sizeHumanRead}`
-          return false
-        }
-        // 双向绑定
-        this.$emit('input', this.file)
-        if (this.autoUpload) this.uploadFile()
-        this.onChange && this.onChange(this.file, this.file.name)
-        this.$emit('onChange', this.file, this.file.name)
-        this.imgPreview(this.file)
-        this.fileName = this.file.name
+      fileChange (el) {
+        if (!el.target.files[0].size) return
+        this.fileList(el.target)
+        el.target.value = ''
       },
-      imgPreview (file) {
-        let self = this
-        if (!file || !window.FileReader) return
-        if (/^image/.test(file.type)) {
-          let reader = new FileReader()
-          reader.readAsDataURL(file)
-          reader.onloadend = function () {
-            self.dataUrl = this.result
+      fileList (fileList) {
+        let files = fileList.files
+        for (let i = 0; i < files.length; i++) {
+          // 判断是否为文件夹
+          if (files[i].type !== '') {
+            this.fileAdd(files[i])
+          } else {
+            // 文件夹处理
+            this.folders(fileList.items[i])
           }
         }
       },
+      // 文件夹处理
+      folders (files) {
+        let _this = this
+        // 判断是否为原生file
+        if (files.kind) {
+          files = files.webkitGetAsEntry()
+        }
+        files.createReader().readEntries(function (file) {
+          for (let i = 0; i < file.length; i++) {
+            if (file[i].isFile) {
+              _this.foldersAdd(file[i])
+            } else {
+              _this.folders(file[i])
+            }
+          }
+        })
+      },
+      foldersAdd (entry) {
+        let _this = this
+        entry.file(function (file) {
+          _this.fileAdd(file)
+        })
+      },
+      fileAdd (file) {
+        if (this.limit !== undefined) this.limit--
+        if (this.limit !== undefined && this.limit < 0) return
+        // 总大小
+        this.size = this.size + file.size
+        // 判断是否为图片文件
+        if (file.type.indexOf('image') === -1) {
+          this.$dialog.toast({mes: '请选择图片文件'})
+        } else {
+          let reader = new FileReader()
+          let image = new Image()
+          let _this = this
+          reader.readAsDataURL(file)
+          reader.onload = function () {
+            file.src = this.result
+            image.onload = function () {
+              let width = image.width
+              let height = image.height
+              file.width = width
+              file.height = height
+              _this.imgList.push({
+                file
+              })
+              console.log(_this.imgList)
+            }
+            image.src = file.src
+          }
+        }
+      },
+      delImg (index) {
+        this.size = this.size - this.imgList[index].file.size
+        // 总大小
+        this.imgList.splice(index, 1)
+        if (this.limit !== undefined) this.limit = 6 - this.imgList.length
+      },
+      toBack () {
+        this.$router.back(-1)
+      },
+      receiveData () {
+        let orderId = this.$route.query.orderId
+        this.id = orderId
+      },
       submitData () {
-        let photo = this.$refs.inputer.value
-        let data = {'commentScore': this.score, 'commentContent': this.content, 'files': photo, 'commentScheduling': this.scheduling, 'commentDescribe': this.describe, 'commentExplain': this.explain}
+        let formData = new FormData()
+        formData.append('commentScore', this.score)
+        formData.append('commentContent', this.content)
+        formData.append('commentScheduling', this.scheduling)
+        formData.append('commentDescribe', this.describe)
+        formData.append('commentExplain', this.explain)
+        formData.append('commentOrderid', this.id)
+        for (let i = 0; i < this.imgList.length; i++) {
+          formData.append('files', this.imgList[i].file)
+        }
         axios({
           method: 'post',
-          url: 'http://192.168.43.29:8080/comment/commentOk.do',
-          data: data,
-          headers: {}
+          url: 'http://60.205.208.7/Travel_Summer_war/comment/commentOk.do',
+          data: formData,
+          headers: {
+
+          }
         }).then(
           this.$router.push({
-            path: '/Ordermanagement'
+            path: '/ordermanagement'
           })
         ).catch(error => {
           console.log(error)
@@ -267,7 +344,6 @@
     }
     .comment{
       width: 100%;
-      height: 550px;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
@@ -276,25 +352,58 @@
         font-size: 34px;
         line-height: 40px;
         width: 100%;
-        height: 50%;
         border: none;
       }
       img{
         width: 150px;
         height: 150px;
       }
-    }
-    .photo{
-      position: relative;
-      input {
-        position: absolute;
-        left: -9999px;
-      }
-      /* 使label充满整个box*/
-      label {
-        position: absolute;
-        top: 0;left: 0;right: 0;bottom: 0;
-        z-index: 10;
+      .photo{
+        width: 100%;
+        .app-bg >>>img{
+          width: 100%;
+          height: 100%;
+          -webkit-transform: scale(1.03);
+          -moz-transform: scale(1.03);
+          -ms-transform: scale(1.03);
+          -o-transform: scale(1.03);
+          transform: scale(1.03);
+        }
+        .add-img {
+          width: 100%;
+          padding: 10px;
+          p{
+            color: #5d585f;
+          }
+        }
+        .add-image {
+          padding-top: 15px;
+          margin-left: 10px;
+          width: 80px;
+          top: 20px;
+          height: 80px;
+          border: 1px dashed rgba(0, 0, 0, .2);
+        }
+        /*九宫格*/
+        .img-list {
+          overflow: hidden;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: left;
+          li {
+            width: 32%;
+            text-align: center;
+            margin-left: 1%;
+            margin-top: 1%;
+            position: relative;
+          }
+        }
+        .del {
+          position: absolute;
+          top: 0;
+          right: 35px;
+          z-index: 999
+        }
       }
     }
     .details{

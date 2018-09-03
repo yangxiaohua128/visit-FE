@@ -26,7 +26,12 @@
 <script>
   import axios from 'axios'
   export default {
-    name: 'phonechange',
+    data () {
+      return {
+        data1: [],
+        data2: []
+      }
+    },
     methods: {
       tomodify: function () {
         this.$router.push({
@@ -34,33 +39,46 @@
         })
       },
       toBlock: function () {
-
-        var reg =/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/
-        let user_name = document.getElementById('puitCentent1-user')
+        let reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/
+        let user_name1 = document.getElementById('puitCentent1-user')
         let user_name2 = document.getElementById('puitCentent2-user')
-        if(!reg.test(this.$refs.sos1.value)){
-          user_name.style.display = 'block'
-        }
-        else{
-          user_name.style.display = 'none'
-        }
-        if(this.$refs.sos1.value!==this.$refs.sos2.value){
-          user_name2.style.display='block'
-        }
-        else{
-          user_name2.style.display='none'
+        if (!reg.test(this.$refs.sos1.value)) {
+          user_name1.style.display = 'block'
+        } else {
+          if (this.$refs.sos1.value !== this.$refs.sos2.value) {
+            user_name2.style.display = 'block'
+          } else {
+            let data1 = {'oldpassword': this.$refs.sos.value,
+              'newpassword': this.$refs.sos1.value}
+            axios({
+              method: 'post',
+              url: 'http://60.205.208.7/Travel_Summer_war/user/savePassword.do',
+              data: data1,
+              'contentType': 'application/json:charset=utf-8'
+            }).then(resp => {
+              if(resp.data === 1) {
+                this.$router.push({
+                  path: '/modify'
+                })
+              } else {
+                let user_name = document.getElementById('puitCentent-user')
+                user_name.style.display = 'block'
+              }
+            }).catch(error => {
+              console.log(error)
+            })
+          }
         }
       }
     }
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .phonechange {width:750px;
     .top {
       position: fixed;
       top: 30px;
-      background-color: #ffe040;
       width: 750px;
       height: 68px;
       line-height: 68px;
@@ -85,7 +103,7 @@
       span{font-size:33px;
         display:inline-block;
         margin-left:40px;
-      margin-top:50px;}
+        margin-top:50px;}
       #puitCentent,#puitCentent1,#puitCentent2{
         font-size:33px;
         text-align:left;
@@ -108,3 +126,4 @@
     }
   }
 </style>
+

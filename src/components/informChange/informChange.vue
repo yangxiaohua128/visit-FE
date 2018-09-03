@@ -6,7 +6,7 @@
       <div></div>
     </header>
     <div class="content">
-      <form class="change"  id="myForm">
+      <form class="change" id="myForm">
         <div class="name">
           <div class="name1">真实姓名</div>
           <input type="text" class="name2" name="userName" id="userName" placeholder="*请填写你的真实姓名" required="required" v-model="name[0]"/>
@@ -30,6 +30,7 @@
         </div>
       </form>
     </div>
+    <img src="./img/imge.jpg" width="300" height="300" class="pic"/>
   </div>
 </template>
 
@@ -59,7 +60,7 @@
         })
       },
       _initData: function () {
-        axios.get('http://192.168.43.47:8080/user/alterPerson.do').then(resp => {
+        axios.get('http://60.205.208.7/Travel_Summer_war/user/alterPerson.do').then(resp => {
           let data = resp.data
           this.name.push(data.userName)
           this.born.push(data.userBorn)
@@ -79,12 +80,12 @@
           let data1 = {'userName': this.name[0], 'userSex': this.sex[0], 'userBorn': this.born[0]}
           axios({
             method: 'post',
-            url: 'http://192.168.43.47:8080/user/savePerson.do',
+            url: 'http://60.205.208.7/Travel_Summer_war/user/savePerson.do',
             'Content-Type': 'application/json;charset=utf-8',
             data: data1
           }).then(
             this.$router.push({
-              path: '/ordermanagement'
+              path: '/modify'
             })
           ).catch(error => {
             console.log(error)
@@ -95,7 +96,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   body{
     margin: 0;
     padding: 0;
@@ -111,12 +112,14 @@
     align-items:center;
     justify-content:space-between;
     margin-bottom: 20px;
+
     div{
       text-align: left;
       padding-left: 20px;
       width: 150px;
       height: 38px;
     }
+
     p{
       text-align: center;
       line-height: 38px;
@@ -131,7 +134,6 @@
     border: none;
     padding: 0;
     border-top:1px #e4e4e4 solid ;
-    border-bottom: 1px #e4e4e4 solid;
   }
   .change{
     margin-left: 6px;
@@ -157,6 +159,7 @@
     width:536px;
     line-height: 100px;
     margin: 0;
+
   }
   .sex{
     justify-content: space-between;
@@ -222,12 +225,16 @@
   }
   .hint{
     width: 50%;
-    font-size: 25px;
-    color:darkred;
+    font-size: 26px;
+    color: #ff0000;
     margin: 0 auto;
     /*display: none;*/
   }
   input[type="date"]::-webkit-clear-button {
     display: none;
+  }
+  .pic{
+    margin: 0 auto;
+    margin-top: 20px;
   }
 </style>

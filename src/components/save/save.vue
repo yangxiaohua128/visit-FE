@@ -3,19 +3,17 @@
     <header>
       <header>
         <img src="./img/arrowLeft.png" @touchend="toBack"/>
-        <p>选择优惠券</p>
+        <p>优惠券</p>
       </header>
     </header>
     <div class="content">
       <div class="sale" v-for="(site,index) in arr"
-           :class="{'active':index===m}"
-           @touchend="changeN(index)"
            :key="site.id">
         <span>￥{{arr[index].discountReduce}}</span>
-        <p>满{{arr[index].discountReach}}减{{arr[index].discountReduce}}</p>
+        <p>满{{arr[index].discountReach}}减{{arr[index].discountReduce}}<img src="./img/sale.png"></p>
       </div>
     </div>
-    <footer>确定</footer>
+    <footer @touchend="returnSave()">确定</footer>
   </div>
 
 </template>
@@ -26,40 +24,31 @@
     name: 'save',
     data: function () {
       return {
-        m: -1,
-        sale: [{price: '￥50', content: '满300减50'},
-          {price: '￥100', content: '满600减100'},
-          {price: '￥1000', content: '满20000减1000'}
-        ],
         arr: []
       }
     },
-    methods:
-      {
-        changeN (i) {
-          this.m = i
-        },
-        toBack: function () {
-          this.$router.back(-1)
-        },
-        show: function () {
-          axios.post('http://60.205.208.7/Travel_Summer_war/orders/showUDiscount.do').then(resp => {
-            let data = resp.data
-            for (let i = 0; i < data.length; i++) {
-              this.arr.push(data[i])
-            }
-          }).catch(error => {
-            console.log(error)
-          })
-        }
-      },
     mounted: function () {
-      this.show()
-    }
-  }
+      this.initData()
+    },
+    methods: {
+      toBack: function () {
+        this.$router.back(-1)
+      },
+      initData: function () {
+        axios.get('http://60.205.208.7/Travel_Summer_war/orders/showUDiscount2.do').then(resp => {
+          let data = resp.data
+          for (let i = 0; i < data.length; i++) {
+            this.arr.push(data[i])
+          }
+        }).catch(error => {
+          console.log(error)
+        })
+      }
+
+    }}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   header{
     width: 100%;
     height:90px;
@@ -83,19 +72,21 @@
   .content{
     .sale {
       width: 700px;
-      height: 244px;
+      height: 200px;
       display: flex;
       justify-content: space-between;
       border-radius: 5%;
       margin-top: 15px;
       border: 1px solid silver;
-      background-color:#f4f4f4;
+      /*!*background-color:#f4f4f4;*!*/
+      background:url("./img/bgc.png");
+      background-size:cover;
       span{
         font-size: 45px;
         width: 240px;
         color:#eb554e;
         text-align:center;
-        line-height: 244px;
+        line-height: 200px;
         border-right:1px silver dotted;
       }
       p{
@@ -103,11 +94,17 @@
         width: 460px;
         height: 240px;
         text-align:center;
-        line-height: 244px;
+        line-height: 200px;
+        position: relative;
+        img{
+          position: absolute;
+          bottom: 50px;
+          right: 20px;
+        }
       }
     }
-    div.active{
-      background-color: #fdf4c3;
+    div.checked{
+      border: #f7bc2e 5px solid;
     }
   }
   footer{

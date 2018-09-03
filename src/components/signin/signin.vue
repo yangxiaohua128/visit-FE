@@ -13,24 +13,19 @@
       <li v-for="item in items" :key="item.id" @touchend="tophone">
         <img :src='item.path'/><span>{{item.text}}</span></li>
     </ul>
-    <div class="div6">
-      <div>
-        <img src="./img/homepage.jpg"/><br/>
-        <span>首页</span>
+    <div class="fwrap">
+      <div class="footer">
+        <div @touchend="tohome()"><img src="./img/home1.png"/></div>
+        <div @touchend="todestss()"><img src="./img/dest1.png" /></div>
+        <div @touchend="tohistory()"><img src="./img/history1.png" /></div>
+        <div><img src="./img/mine2.png"/></div>
       </div>
-      <div>
-        <img src="./img/destination.jpg"/><br/>
+      <div class="text">
+        <span>旅游首页</span>
         <span>目的地</span>
-      </div>
-      <div>
-        <img src="./img/history.jpg"/><br/>
-        <span>浏览历史</span>
-      </div>
-      <div>
-        <img src="./img/my.jpg"/><br/>
+        <span class="his">浏览历史</span>
         <span>我的</span>
       </div>
-
     </div>
   </div>
 </template>
@@ -56,36 +51,106 @@
         this.$router.push({
           path: '/phone'
         })
+      },
+      tohome: function () {
+        this.$router.push({
+          path: '/apppage'
+        })
+      },
+      tohistory: function () {
+        this.$router.push({
+          path: '/history'
+        })
+      },
+      todestss: function () {
+        this.$router.push({
+          path: '/destination'
+        })
       }
     }
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   body{padding:0;margin:0;}
-  .signin{width:750px;position:relative;}
-  .head{height:420px;margin-left:40px;margin-right:40px;position: relative; text-align:left;}
-  #img1{position:absolute;right:30px;bottom:0;height:200px;width:280px;}
-  #img2{width:42px;height:46px;position:absolute;top:27px;right:0;}
-  .head p{width:500px;margin-top:130px;font-size:60px;display:inline-block;
+  .signin{
+    width:750px;
+    position:relative;
+    .head{
+      button{
+        width:300px;
+        height:100px;
+        background-color:#f9de57;
+        font-size:40px;
+        text-align: center;
+        line-height:100px;
+        margin-top:55px;
+        margin-left:0;
+        display:inline-block;
+      }
+      p{
+        width:500px;
+        margin-top:130px;
+        font-size:60px;
+        display:inline-block;
+      }
+      height:420px;
+      margin-left:40px;
+      margin-right:40px;
+      position: relative;
+      text-align:left;
+      #img1{
+        position:absolute;
+        right:30px;
+        bottom:0;
+        height:200px;
+        width:280px;
+      }
+      #img2{
+        width:42px;
+        height:46px;
+        position:absolute;
+        top:27px;
+        right:0;
+      }
+    }
+    .div2 ,.div4{
+      height:4px;
+      background-color:
+        #efecec
+    }
+    .div3{height:70px;
+      font-size:31px;
+      margin-left:57px;
+      line-height:70px;
+      text-align:left;
+    }
+    .fwrap{
+      background-color: #f5f5f5;
+      border-top: 2px #ccc solid;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      .footer{
+        display: flex;
+        justify-content: space-around;
+        img{
+          width: 50px;
+          height: 50px;
+        }
+      }
+      .text{
+        width: 733px;
+        display: flex;
+        justify-content:space-around ;
+      }
+    }
   }
-  .head button{width:300px;height:100px;background-color:#f9de57;font-size:40px;
-    text-align: center;line-height:100px;margin-top:55px;margin-left:0;display:inline-block;}
-  .div2 ,.div4{height:10px;background-color:#efecec}
-  .div3{height:70px;font-size:31px;margin-left:57px;line-height:70px;text-align:left;}
   .nav li{
     display: inline-block;margin-left:15px;
     margin-top:45px;height:97px;width:150px;
     img{width:42px;height:42px;}
     span{display: block; padding-top:25px;font-size:30px;
       text-align:center;}
-  }
-  .div6{
-    width:750px;height:98px;background-color:#efecec;position: fixed;bottom:0;left:0;
-    div{
-      display:inline-block;width:150px;margin-left:15px;
-      img{width:42px;height:48px;padding-top:10px;}
-      span{color:#4b414c;font-size:22px;padding-top:8px;display:block;text-align:center;}
-    }
   }
 </style>

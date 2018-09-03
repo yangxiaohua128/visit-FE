@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import signin2 from '@/components/signin2/signin2'
 import phone from '@/components/phone/phone'
+import lose from '@/components/lose/lose'
 import register from '@/components/register/register'
 import apppage from '@/components/apppage/apppage'
 import News from '@/components/News/News'
@@ -28,13 +29,13 @@ import shows from '@/components/shows/shows'
 import modify from '@/components/modify/modify'
 import collection from '@/components/collection/collection'
 import orderPage from '@/components/orderPage/orderPage'
-import save from '@/components/save/save'
+import orderPages from '@/components/orderPages/orderPages'
 import phonechange from '@/components/phonechange/phonechange'
 import names from '@/components/names/names'
 import emilechange from '@/components/emilechange/emilechange'
 import password from '@/components/password/password'
 import message from '@/components/message/message'
-import Head from '@/components/Head/Head'
+import save from '@/components/save/save'
 Vue.use(Router)
 //   import('@/components/advancedSearch/advancedSearch').then((module) => {
 //     resolve(module)
@@ -79,6 +80,18 @@ export default new Router({
       component: collection
     },
     {
+      title: '失效',
+      path: '/lose',
+      name: 'lose',
+      component: lose
+    },
+    {
+      title: '优惠券',
+      path: '/save',
+      name: 'save',
+      component: save
+    },
+    {
       title: '用户信息修改页（1）',
       path: '/modify',
       name: 'modify',
@@ -89,6 +102,12 @@ export default new Router({
       path: '/phonechange',
       name: 'phonechange',
       component: phonechange
+    },
+    {
+      title: '特卖预定页',
+      path: '/orderPages',
+      name: 'orderPages',
+      component: orderPages
     },
     {
       title: '昵称修改',
@@ -107,12 +126,6 @@ export default new Router({
       path: '/password',
       name: 'password',
       component: password
-    },
-    {
-      title: '更换头像',
-      path: '/Head',
-      name: 'Head',
-      component: Head
     },
     {
       title: '首页',
@@ -143,11 +156,6 @@ export default new Router({
       path: '/history',
       name: 'history',
       component: history
-    },
-    { title: '优惠券',
-      path: '/save',
-      name: 'save',
-      component: save
     },
     {
       tille: '选择定位',

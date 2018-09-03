@@ -10,40 +10,40 @@
     <div class="content">
       <div class="comment"  v-for="item2 in scoreList" :key="item2.id">
         <div class="level">
-          <div>{{item2.commentScore}}.0</div>
+          <div>{{item2.commentScore}}</div>
         </div>
         <div class="details">
-          <div>行程安排<div>{{item2.commentScheduling}}.0</div></div>
-          <div>描述相符<div>{{item2.commentDescribe}}.0</div></div>
-          <div>导游讲解<div>{{item2.commentExplain}}.0</div></div>
+          <div>行程安排<div>{{item2.commentScheduling}}</div></div>
+          <div>描述相符<div>{{item2.commentDescribe}}</div></div>
+          <div>导游讲解<div>{{item2.commentExplain}}</div></div>
         </div>
         <div class="repertory">
           <div v-for="(item,index) of items" :key="item.id" :class="{ 'checked':n==index}"
-               @touchend="changeN(index),InitData()">{{item}}</div>
+               @touchend="changeN(index),submitData()">{{item}}</div>
         </div>
       </div>
-      <div class="message" v-for="(item1,index) in userCommentList" :key="index">
+      <div class="none" ref="show">--暂时还没有评论--</div>
+      <div class="message" v-for="(item1,index) in userCommentList" :key="item1.id">
         <div class="order">
           <span class="number1">
             <img src="./img/icon.png">
             {{item1.orderUserid}}
           </span>
-          <span class="number2">{{item1.commentOrderid}}</span>
         </div>
-        <img class="picture" v-for="item3 in item1.commentImgurl.split('@')" :key="item3.id" :src="item3">
+        <img class="picture" v-for="item3 in item1.commentImgurl.split('@')" :key="item3.id" :src="item3"
+             v-show="item1.commentImgurl">
         <div class="write">
           <p>{{item1.commentContent}}</p>
         </div>
         <div class="time">
-          <div @touchend="changeNumber()">
+          <div @touchend="changeNumber(index)">
             <img src="./img/comment.png">
             <span>赞({{item1.commentUseful}})</span>
           </div>
           <span>{{item1.commentTime}}</span>
         </div>
-        <div class="reply">
-          <div>查看供应商回复<img :src="imgUrl"  @touchend="showReply(index)"></div>
-          <p v-if="show">[供应商回复]：{{item1.supplyReplyResponse}}</p>
+        <div class="reply" v-show="item1.supplyReplyResponse">
+          <p>[供应商回复]：{{item1.supplyReplyResponse}}</p>
         </div>
       </div>
     </div>
@@ -58,15 +58,14 @@
       return {
         items: ['全部', '好评', '中评', '差评', '有图'],
         n: 0,
-        imgUrl: require('./img/down.png'),
-        number: 0,
-        show: false,
         userCommentList: [],
-        scoreList: []
+        scoreList: [],
+        dataList: {}
       }
     },
     mounted () {
-      this.getScore()
+      this.receiveData()
+      this.InitScoreData()
       this.InitData()
     },
     methods: {
@@ -76,17 +75,20 @@
       changeN (i) {
         this.n = i
       },
-      showReply () {
-        this.show ? this.imgUrl = require('./img/down.png') : this.imgUrl = require('./img/up.png')
-        this.show = !this.show
-        this.isShow = !this.isShow
+      receiveData () {
+        let productId = this.$route.query.productId
+        this.dataList = {productId}
       },
-      changeNumber () {
-        this.number++
-        console.log(this.number)
-      },
-      getScore () {
-        axios.get('http://172.20.10.5/comment/commentscore.do').then(resp => {
+      InitScoreData () {
+        axios({
+          method: 'post',
+          url: 'http://60.205.208.7/Travel_Summer_war/comment/commentscore.do',
+          data: this.dataList,
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+          }
+        }).then(resp => {
+          this.scoreList.splice(0)
           let data = resp.data
           for (let i = 0; i < data.length; i++) {
             this.scoreList.push(data[i])
@@ -96,62 +98,141 @@
         })
       },
       InitData () {
-        if (this.n === 0) {
+        axios({
+          method: 'post',
+          url: 'http://60.205.208.7/Travel_Summer_war/comment/commentshow.do',
+          data: this.dataList,
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+          }
+        }).then(resp => {
           this.userCommentList.splice(0)
-          axios.get('http://172.20.10.5/comment/commentshow.do').then(resp => {
-            let data = resp.data
+          let data = resp.data
+          if (data.length) {
             for (let i = 0; i < data.length; i++) {
               this.userCommentList.push(data[i])
             }
-          }).catch(error => {
-            console.log(error)
-          })
+          } else {
+            this.$refs.show.style.display = 'block'
+          }
+        }).catch(error => {
+          console.log(error)
+        })
+      },
+      submitData () {
+        if (this.n === 0) {
+          this.InitData()
         }
         if (this.n === 1) {
-          this.userCommentList.splice(0)
-          axios.get('http://172.20.10.5/comment/selectwellrank.do').then(resp => {
-            let data = resp.data
-            for (let i = 0; i < data.length; i++) {
-              this.userCommentList.push(data[i])
+          axios({
+            method: 'post',
+            url: 'http://60.205.208.7/Travel_Summer_war/comment/selectwellrank.do',
+            data: this.dataList,
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
             }
-            console.log(this.userCommentList)
+          }).then(resp => {
+            this.userCommentList.splice(0)
+            let data = resp.data
+            if (data.length) {
+              this.$refs.show.style.display = 'none'
+              for (let i = 0; i < data.length; i++) {
+                this.userCommentList.push(data[i])
+              }
+            } else {
+              this.$refs.show.style.display = 'block'
+            }
           }).catch(error => {
             console.log(error)
           })
         }
         if (this.n === 2) {
-          this.userCommentList.splice(0)
-          axios.get('http://172.20.10.5/comment/selectminrank.do').then(resp => {
+          axios({
+            method: 'post',
+            url: 'http://60.205.208.7/Travel_Summer_war/comment/selectminrank.do',
+            data: this.dataList,
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            }
+          }).then(resp => {
+            this.userCommentList.splice(0)
             let data = resp.data
-            for (let i = 0; i < data.length; i++) {
-              this.userCommentList.push(data[i])
+            if (data.length) {
+              this.$refs.show.style.display = 'none'
+              for (let i = 0; i < data.length; i++) {
+                this.userCommentList.push(data[i])
+              }
+            } else {
+              this.$refs.show.style.display = 'block'
             }
           }).catch(error => {
             console.log(error)
           })
         }
         if (this.n === 3) {
-          this.userCommentList.splice(0)
-          axios.get('http://172.20.10.5/comment/selectbadrank.do').then(resp => {
+          axios({
+            method: 'post',
+            url: 'http://60.205.208.7/Travel_Summer_war/comment/selectbadrank.do',
+            data: this.dataList,
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            }
+          }).then(resp => {
+            this.userCommentList.splice(0)
             let data = resp.data
-            for (let i = 0; i < data.length; i++) {
-              this.userCommentList.push(data[i])
+            if (data.length) {
+              this.$refs.show.style.display = 'none'
+              for (let i = 0; i < data.length; i++) {
+                this.userCommentList.push(data[i])
+              }
+            } else {
+              this.$refs.show.style.display = 'block'
             }
           }).catch(error => {
             console.log(error)
           })
         }
         if (this.n === 4) {
-          this.userCommentList.splice(0)
-          axios.get('http://172.20.10.5/comment/selectyestype.do').then(resp => {
+          axios({
+            method: 'post',
+            url: 'http://60.205.208.7/Travel_Summer_war/comment/selectyestype.do',
+            data: this.dataList,
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            }
+          }).then(resp => {
+            this.userCommentList.splice(0)
             let data = resp.data
-            for (let i = 0; i < data.length; i++) {
-              this.userCommentList.push(data[i])
+            if (data.length) {
+              this.$refs.show.style.display = 'none'
+              for (let i = 0; i < data.length; i++) {
+                this.userCommentList.push(data[i])
+              }
+            } else {
+              this.$refs.show.style.display = 'block'
             }
           }).catch(error => {
             console.log(error)
           })
         }
+      },
+      changeNumber (i) {
+        this.userCommentList[i].commentUseful++
+        let number = this.userCommentList[i].commentId
+        let data = {'commentId': number}
+        axios({
+          method: 'post',
+          url: 'http://60.205.208.7/Travel_Summer_war/comment/commentuseful.do',
+          data: data,
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+          }
+        }).then(success => {
+            console.log(success)
+          }
+        ).catch(error => {
+          console.log(error)
+        })
       }
     }
   }
@@ -167,6 +248,8 @@
     display:flex;
     align-items: center;
     justify-content:space-between;
+    background-color: white;
+    position: fixed;
     .img{
       width:38px;
       height:38px;
@@ -188,6 +271,7 @@
     }
   }
   .content {
+    padding-top: 100px;
     .comment{
       display: flex;
       width: 100%;
@@ -294,6 +378,7 @@
           text-align: left;
           letter-spacing: 2px;
           line-height: 40px;
+          color:black;
         }
       }
       .time{
@@ -353,5 +438,13 @@
         }
       }
     }
+  }
+  .none{
+    width: 100%;
+    height: 300px;
+    line-height: 300px;
+    font-size: 38px;
+    color: #ccc;
+    display: none;
   }
 </style>

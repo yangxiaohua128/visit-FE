@@ -2,7 +2,7 @@
   <div class="advancedSearch">
     <header>
       <div>
-        <!--<img src="./img/return.png"  @touchend="toBack">-->
+        <img src="./img/return.png"  @touchend="toBack">
       </div>
       <p>高级搜索</p>
       <div></div>
@@ -18,13 +18,11 @@
           <input type="text" ref="end" placeholder="*请输入目的地城市名">
           <span></span>
         </div>
-        <div class="line"></div>
         <div class="location">
           <div>出发地</div>
           <input type="text" ref="start" placeholder="*请输入出发地城市名">
           <span></span>
         </div>
-        <div class="line"></div>
         <div class="start">出发日期</div>
         <input type="date" v-model="date"/>
         <div></div>
@@ -97,9 +95,9 @@
             </div>
           </div>
         </div>
-        <div class="white"></div>
-        <button class="search" @touchend="submitData()">搜索</button>
       </div>
+      <div class="white"></div>
+      <button class="search" @touchend="passData()">搜索</button>
     </div>
   </div>
 </template>
@@ -114,12 +112,15 @@
     name: 'advancedSearch',
     data () {
       return {
-        des: ['华山', '青海', '延安', '西北', '三亚', '四川', '北京', '重庆'],
+        des: [],
         n: -1,
         date: today,
         money: '0-100000',
         day: '0-100'
       }
+    },
+    mounted () {
+      this.getData()
     },
     methods: {
       toBack () {
@@ -131,28 +132,36 @@
       changeV (i) {
         this.$refs.end.value = this.des[i]
       },
-      submitData () {
+      getData () {
+        axios.get('http://60.205.208.7/Travel_Summer_war/product/getAreaByMonth.do').then(resp => {
+          let data = resp.data
+          for (let i = 0; i < data.length; i++) {
+            this.des.push(data[i])
+          }
+        }).catch(error => {
+          console.log(error)
+        })
+      },
+      passData () {
+        let type = 3
         let start = this.$refs.start.value
         let end = this.$refs.end.value
         if (end === '' || start === '') {
           this.$refs.start.placeholder = '*此项必填'
+          this.$refs.start.classList.add('checked')
           this.$refs.end.placeholder = '*此项必填'
+          this.$refs.end.classList.add('checked')
         } else {
-          let data = {'d': end, 'date': this.date, 'day': this.day, 'money': this.money, 's': start}
-          console.log(end)
-          axios({
-            method: 'post',
-            url: 'http://172.20.10.6/product/advanceSearchByMonth.do',
-            data: data,
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8'
+          this.$router.push({
+            path: '/searchResults',
+            query: {
+              d: end,
+              date: this.date,
+              day: this.day,
+              money: this.money,
+              s: start,
+              type: type
             }
-          }).then(
-            // this.$router.push({
-            //   path: '/searchResults'
-            // })
-          ).catch(error => {
-            console.log(error)
           })
         }
       }
@@ -203,7 +212,6 @@
       margin-top: 14px;
       margin-bottom: 20px;
       width: 100%;
-      height: 140px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -233,14 +241,15 @@
       flex-wrap: wrap;
       justify-content: space-between;
       font-size: 28px;
-      border-top: 1px #ccc solid;
-      border-bottom: 1px #ccc solid;
+      border-top: 2px #ccc solid;
+      border-bottom: 2px #ccc solid;
       .location {
         width: 100%;
         display: flex;
         justify-content: space-between;
         height: 90px;
         line-height: 90px;
+        border-bottom: 2px #ccc solid;
         span {
           width: 28px;
           height: 28px;
@@ -250,6 +259,7 @@
           font-size: 30px;
           text-align: center;
           border-radius: 10px;
+          height: 90px;
         }
       }
       .start {
@@ -270,19 +280,14 @@
     }
     .line {
       width: 100%;
-      height: 1px;
-      background-color: #ccc;
-    }
-    .anotherLine {
-      width: 1px;
-      height: 90px;
+      height: 2px;
       background-color: #ccc;
     }
     .select {
       display: flex;
       width: 100%;
-      border-top: 1px #ccc solid;
-      border-bottom: 1px #ccc solid;
+      border-top: 2px #ccc solid;
+      border-bottom: 2px #ccc solid;
       margin-top: 20px;
       flex-wrap: wrap;
       .budget, .days {
@@ -317,6 +322,9 @@
     }
     input::-webkit-input-placeholder {
       font-size: 26px;
+    }
+    input.checked::-webkit-input-placeholder {
+      color: red;
     }
   }
   .box{

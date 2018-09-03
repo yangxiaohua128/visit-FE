@@ -8,7 +8,7 @@
     <div class="cent">
       <span>设置昵称</span>
       <input type="text" placeholder="3-10位，支持字母、数字、_或汉字"
-      ref="sos1" v-model="name[0]"/>
+             ref="sos1" v-model="name[0]"/>
       <p></p>
       <span id="puitCentent-user">*昵称格式不正确</span>
       <button type="button" @touchend="submission()">确定</button>
@@ -20,10 +20,10 @@
   import axios from 'axios'
   export default {
     name: 'phonechange',
-    data (){
+    data () {
       return{
-        data1:[],
-        name:[]
+        data1: [],
+        name: []
       }
     },
     mounted: function () {
@@ -42,12 +42,12 @@
           user_name.style.display = 'block'
         }
         else {
-          let data1 = {"userNickname": this.$refs.sos1.value}
+          let data1 = {'userNickname': this.$refs.sos1.value}
           axios({
             method: 'post',
-            url: 'http://192.168.43.47:8080/user/saveNickname.do',
+            url: 'http://172.20.10.9：80/user/saveNickname.do',
             data: data1,
-            'contentType': "application/json:charset=utf-8",
+            'contentType': 'application/json:charset=utf-8'
           }).then(
             this.$router.push({
               path: '/modify'
@@ -57,8 +57,8 @@
           })
         }
       },
-      integral: function(){
-        axios.get('http://192.168.43.47:8080/user/alterNickname.do').then(resp => {
+      integral: function () {
+        axios.get('http://60.205.208.7/Travel_Summer_war/user/alterNickname.do').then(resp => {
           let data = resp.data
           this.data1.push(data)
           this.name.push(data.userNickname)
@@ -70,7 +70,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .phonechange {width:750px;
     .top {
       position: fixed;
@@ -95,7 +95,7 @@
       }
     }
     .cent{
-      span{display:block;font-size:50px;margin-top:340px;}
+      span{display:block;font-size:38px;margin-top:340px;}
       input{
         margin-top:100px;
         font-size:33px;

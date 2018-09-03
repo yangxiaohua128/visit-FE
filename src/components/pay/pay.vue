@@ -1,33 +1,40 @@
 <template>
-    <div class="pay">
-      <header>
-        <div><img src="./img/left.png" width="19" height="19" @touchend="toBack"/></div>
-        <p>支付成功</p>
-        <div></div>
-      </header>
-      <div class="content">
-       <div class="ok">
-         <div><img src="./img/ok.png" width="60" height="60"/>支付成功</div>
-         <button>完成</button>
-       </div>
+  <div class="pay">
+    <header>
+      <div><img src="./img/left.png" width="19" height="19" @touchend="toBack"/></div>
+      <p>支付成功</p>
+      <div></div>
+    </header>
+    <div class="content">
+      <div class="ok">
+        <div><img src="./img/ok.png" width="60" height="60"/>支付成功</div>
+        <button @touchend="toOrder">完成</button>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
-export default {
-  name: 'pay',
-  data () {
-  },
-  methods: {
-    toBack: function () {
-      this.$router.back(-1)
+  export default {
+    name: 'pay',
+    data () {
+      return {
+      }
+    },
+    methods: {
+      toBack: function () {
+        this.$router.back(-1)
+      },
+      toOrder: function () {
+        this.$router.push({
+          path: '/ordermanagement'
+        })
+      }
     }
   }
-}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   body{
     margin: 0;
     padding: 0;
@@ -44,19 +51,19 @@ export default {
     justify-content:space-between;
     margin-bottom: 20px;
 
-  div{
-    text-align: left;
-    padding-left: 20px;
-    width: 150px;
-    height: 38px;
-  }
+    div{
+      text-align: left;
+      padding-left: 20px;
+      width: 150px;
+      height: 38px;
+    }
 
-  p{
-    text-align: center;
-    line-height: 38px;
-    font-size: 36px;
-    color:black;
-  }
+    p{
+      text-align: center;
+      line-height: 38px;
+      font-size: 36px;
+      color:black;
+    }
   }
   .content{
     width: 750px;
@@ -78,13 +85,13 @@ export default {
       margin-bottom: 100px;
     }
     button{
-        width: 91%;
-        background-color: #f9de57;
-        height: 90px;
-        border-radius: 8px;
-        font-size: 38px;
-        border: none;
-        margin: 0 auto;
+      width: 91%;
+      background-color: #f9de57;
+      height: 90px;
+      border-radius: 8px;
+      font-size: 38px;
+      border: none;
+      margin: 0 auto;
     }
   }
 </style>

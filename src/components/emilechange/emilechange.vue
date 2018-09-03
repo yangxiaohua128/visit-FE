@@ -19,10 +19,10 @@
 <script>
   import axios from 'axios'
   export default {
-    data(){
-      return{
-        emile:[],
-          data1:[]
+    data () {
+      return {
+        emile: [],
+        data1: []
       }
     },
     methods: {
@@ -34,16 +34,16 @@
       toBlock1: function () {
         var reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
         let user_name = document.getElementById('puitCentent2-user')
-        if(!reg.test(this.$refs.sos.value)){
+        if(!reg.test(this.$refs.sos.value)) {
           user_name.style.display = 'block'
         }
         else{
-          let data1 = {"userEmail": this.$refs.sos.value}
+          let data1 = {'userEmail': this.$refs.sos.value}
           axios({
             method: 'post',
-            url: 'http://192.168.43.47:8080/user/saveEmail.do',
+            url: 'http://60.205.208.7/Travel_Summer_war/user/saveEmail.do',
             data: data1,
-            'contentType': "application/json:charset=utf-8",
+            'contentType': 'application/json:charset=utf-8'
           }).then(
             this.$router.push({
               path: '/modify'
@@ -53,8 +53,8 @@
           })
         }
       },
-      integral: function(){
-        axios.get('http://192.168.43.47:8080/user/alterEmail.do').then(resp => {
+      integral: function () {
+        axios.get('http://60.205.208.7/Travel_Summer_war/user/alterEmail.do').then(resp => {
           let data = resp.data
           this.data1.push(data)
           this.emile.push(data.userEmail)
@@ -66,24 +66,23 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .emilechange {width:750px;
     .top {
-      position: fixed;
-      top: 30px;
-      background-color: #ffe040;
+      margin-top: 30px;
       width: 750px;
       height: 68px;
-      line-height: 68px;
       text-align: left;
       img {
         width: 25px;
         height: 45px;
-        margin-left: 40px;
+        margin-left: 26px;
+        margin-top:11.5px;
       }
       span {
         font-size: 33px;
         margin-left: 235px;
+        line-height:68px;
       }
       p {
         width: 750px;
@@ -92,12 +91,13 @@
       }
     }
     .cent{
-      span{display:block;font-size:50px;margin-top:340px;}
+      span{display:block;font-size:38px;margin-top:340px;}
       #puitCentent2{
         margin-top:100px;
         font-size:33px;
         width:670px;
         text-align:left;
+        border:none;
       }
       #p2{height:2px;
         width:670px;

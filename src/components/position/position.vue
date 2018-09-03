@@ -18,14 +18,13 @@
               :class="{active:index === num}"
               @click="tab(index)"
               :key="item.id"
-              @touchend="returnv(item)"
+              @touchend="returnv(item);Toshown(item)"
           >{{item}}</li>
         </ul>
       </div>
     </div>
   </div>
 </template>
-
 <script>
   import axios from 'axios'
   export default {
@@ -46,7 +45,7 @@
         this.num = index
       },
       positioncity: function () {
-        axios.get('http://192.168.43.168:80/user/getlocation.do').then(resp => {
+        axios.get('http://60.205.208.7/Travel_Summer_war/user/getlocation.do').then(resp => {
           let data = resp.data
           this.tabs = data.location
         }).catch(error => {
@@ -54,9 +53,9 @@
         })
       },
       hotcity: function () {
-        axios.get('http://192.168.43.168:80/area/city.do').then(resp => {
+        axios.get('http://60.205.208.7/Travel_Summer_war/area/city.do').then(resp => {
           let data = resp.data
-          for (var i=0;i<data.length; i++) {
+          for (var i = 0; i < data.length; i++) {
             this.tabc.push(data[i].areaCity)
           }
         }).catch(error => {
@@ -65,7 +64,7 @@
       },
       returnv: function (item) {
         axios({
-          url: 'http://192.168.43.168/area/acceptlocation.do',
+          url: 'http://60.205.208.7/Travel_Summer_war/area/acceptlocation.do',
           method: 'post',
           data: item,
           headers: {
@@ -80,21 +79,30 @@
       },
       toBack: function () {
         this.$router.back(-1)
+      },
+      Toshown: function (item) {
+        let city = item
+        this.$router.push({
+          path: '/apppage',
+          query: {
+            city: city
+          }
+        })
       }
     }
   }
 </script>
 
-<style type="text/css">
+<style type="text/css" scoped>
   .search{
+    margin-top: 30px;
     display: flex;
     justify-content: center;
     justify-content: space-between;
   }
   .search img{
-    width: 50px;
-    height: 50px;
-    margin-left: 20px;
+    width: 45px;
+    height: 45px;
   }
   .search input{
     border-radius: 20px;

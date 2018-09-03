@@ -34,9 +34,10 @@
         this.$router.back(-1)
       },
       InitData () {
-        axios.get('http://192.168.43.29:8080/comment/photo.do').then(resp => {
+        axios.get('http://60.205.208.7/Travel_Summer_war/comment/photo.do').then(resp => {
           let data = resp.data
           if (data.length) {
+            this.$refs.show.style.display = 'none'
             for (let i = 0; i < data.length; i++) {
               this.userAlbumList.push(data[i])
             }
@@ -50,7 +51,6 @@
     }
   }
 </script>
-
 <style lang="scss" scoped>
   .advancedSearch{
     width:750px;
@@ -61,6 +61,8 @@
     display:flex;
     align-items: center;
     justify-content:space-between;
+    background-color: white;
+    position: fixed;
     img{
       width:38px;
       height:38px;
@@ -82,6 +84,7 @@
     }
   }
   .content {
+    padding-top: 100px;
     .album{
       width: 100%;
       text-align: left;

@@ -4,11 +4,7 @@
       <div class="header">
         <div class="top">
           <img src="./img/Rleft.png" @touchend="toBack()">
-          <span class="sp1">选择目的地</span>
-        </div>
-        <div class="search">
-          <input type="search" placeholder="西安"/>
-          <!--<button type="button" class="btn1">搜索</button>-->
+          <span class="sp121">选择目的地</span>
         </div>
       </div>
     </div>
@@ -31,17 +27,17 @@
       <div class="tabCon">
         <div v-for='itemCon in tabContents'
              :key="itemCon.id" >
-          <img :src="itemCon.areaImg" @touchend="returnshow()" />
+          <img :src="itemCon.areaImg" @click="Tosearch(itemCon)" />
           <span id="city">{{itemCon.areaCity}}</span>
         </div>
       </div>
     </div>
     <div class="wrap">
       <div class="footer">
-        <div @touchend="turnTohome"><img src="./img/home.png"/></div>
-        <div><img src="./img/dstns.png"/></div>
-        <div @touchend="turnTohis"><img src="./img/History.png"/></div>
-        <div><img src="./img/my.png"/></div>
+        <div @touchend="turnTohome"><img src="./img/home1.png"/></div>
+        <div><img src="./img/dest1.png"/></div>
+        <div @touchend="turnTohis"><img src="./img/historys.png"/></div>
+        <div @touchend="tomine"><img src="./img/mine.png"/></div>
       </div>
       <div class="text">
         <span>旅游首页</span>
@@ -61,10 +57,12 @@
       return {
         tabs: ['热门', '中国', '周边', '欧洲', '美洲', '澳中东非'],
         tabContents: [],
-        num: 0
+        num: 0,
+        tabc: []
       }
     },
     mounted: function () {
+      this.getvalue()
       this.returnfirst()
     },
     methods: {
@@ -84,9 +82,14 @@
           path: '/apppage'
         })
       },
+      turnTomine: function () {
+        this.$router.push({
+          path: '/signin'
+        })
+      },
       returntype: function (item) {
         axios({
-          url: 'http://192.168.43.168/area/alltarget.do',
+          url: 'http://60.205.208.7/Travel_Summer_war/area/alltarget.do',
           method: 'post',
           data: item,
           headers: {
@@ -98,14 +101,14 @@
         }).then(resp => {
           let data2 = resp.data
           this.tabContents = []
-          for (let i = 0; i < data2.length; i++) {
+          for (let i=0;i<data2.length; i++) {
             this.tabContents.push(data2[i])
           }
         })
       },
       returnfirst: function () {
         axios({
-          url: 'http://192.168.43.168/area/alltarget.do',
+          url: 'http://60.205.208.7/Travel_Summer_war/area/alltarget.do',
           method: 'post',
           data: '热门',
           headers: {
@@ -117,128 +120,147 @@
         }).then(resp => {
           let data3 = resp.data
           this.tabContents = []
-          for (let i = 0; i < data3.length; i++) {
+          for (let i=0;i<data3.length; i++) {
             this.tabContents.push(data3[i])
           }
         })
       },
-      returnshow: function (item) {
-        alert(item)
+      getvalue: function () {
+        axios.get('http://60.205.208.7/Travel_Summer_war/user/myuser1.do').then(resp => {
+          let data = resp.data
+          this.tabc.push(data)
+        }).catch(error => {
+          console.log(error)
+        })
+      },
+      tomine: function () {
+        if(this.tabc[0] === 1) {
+          this.$router.push({
+            path: '/signin2'
+          })
+        } else {
+          this.$router.push({
+            path: '/signin'
+          })
+        }
+      },
+      Tosearch: function (itemCon) {
+        let type = 2
+        let city = itemCon.areaCity
+        this.$router.push({
+          path: '/searchResults',
+          query: {
+            city: city,
+            type: type
+          }
+        })
       }
     }
   }
 </script>
-
-<style type="text/css">
+<style lang="scss" scoped>
   body{
     margin: 0;
     padding: 0;
   }
-  .hwarp{
-    width: 100%;
-    position: fixed;
-    top: 0;
-  }
   .destination{
     width: 750px;
+    .showpage{
+      z-index: -999;
+      position: absolute;
+      right: 0;
+      top: 240px;
+      bottom: 106px;
+      .tabCon{
+        margin-bottom: 106px;
+        width:600px;
+        img {
+          margin-bottom: 30px;
+          width: 250px;
+          height: 250px;
+          margin-left: 20px;
+        }
+        div{
+          margin-right: 30px;
+          display: inline-block;
+          width: 40%;
+          padding-left: -30px;
+          span{
+            position: relative;
+            left: 20px;
+            bottom: 20px;
+          }
+        }
+      }
+    }
+    .section{
+      position: fixed;
+      left: 0;
+      bottom: 92px;
+      li{
+        border-top: 1px #ccc solid;
+        width: 176px;
+        height: 144px;
+        background-color:#f4f4f4;
+        text-align: center;
+        line-height: 152px;
+        border-bottom: 2px #ccc solid;
+      }
+      li.active{
+        background-color:  #ffffff;
+        transition: 0.1s all linear;
+      }
+    }
+    .hwarp{
+      width: 100%;
+      position: fixed;
+      top: 0;
+      .header{
+        z-index: 999;
+        width: 750px;
+        height: 200px;
+        background-color: #5dc7b9;
+        img{
+          padding-left: 30px;
+          width: 45px;
+          height: 45px;
+        }
+        .top{
+          margin-bottom: 50px;
+          padding-top: 40px;
+          display: flex;
+          justify-content: space-between;
+          img{
+            padding-left: 20px;
+          }
+        }
+      }
+    }
+    .wrap{
+      background-color: #f5f5f5;
+      border-top: 2px #ccc solid;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      .footer{
+        display: flex;
+        justify-content: space-around;
+        img{
+          width: 50px;
+          height: 50px;
+        }
+      }
+      .text{
+        width: 733px;
+        display: flex;
+        justify-content:space-around ;
+      }
+    }
   }
-  .header{
-    z-index: 999;
-    width: 750px;
-    height: 240px;
-    background-color: #5dc7b9;
-  }
-  .top{
-    margin-bottom: 50px;
-    padding-top: 40px;
-    display: flex;
-    justify-content: space-between;
-  }
-  .header img{
-    padding-left: 30px;
-    width: 50px;
-    height: 50px;
-  }
-  .sp1{
+  .sp121{
     margin-right: 275px;
     font-size: 40px;
     color: #000000;
   }
-  .search  input{
-    border: 2px #5dc7b9 solid;
-    width: 500px;
-    height: 60px;
-    border-radius: 20px;
-    margin-left: 120px;
-  }
-  .search{
-    position: relative;
-  }
-  .section{
-    position: fixed;
-    left: 0;
-    bottom: 105px;
-  }
-  .section li{
-    border-top: 1px #ccc solid;
-    width: 176px;
-    height: 163px;
-    background-color:#f4f4f4;
-    text-align: center;
-    line-height: 152px;
-    border-bottom: 1px #ccc solid;
-  }
-  .footer{
-    display: flex;
-    justify-content: space-around;
-  }
-  .footer img{
-    width: 50px;
-    height: 50px;
-  }
-  .wrap{
-    background-color: #f5f5f5;
-    border-top: 2px #ccc solid;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
-  .text{
-    width: 733px;
-    display: flex;
-    justify-content:space-around ;
-  }
-  .tabCon img {
-    margin-bottom: 30px;
-    width: 250px;
-    height: 250px;
-    margin-left: 20px;
-  }
-  .showpage{
-    margin-top: 20px;
-    z-index: -999;
-    position: absolute;
-    right: 0;
-    top: 240px;
-    bottom: 106px;
-  }
-  li.active{
-    background-color:  #ffffff;
-    transition: 0.1s all linear;
-  }
-  .tabCon{
-    margin-bottom: 106px;
-    width:600px;
-  }
-  .tabCon div span{
-    position: relative;
-    left: 20px;
-    bottom: 20px;
-  }
-  .tabCon div{
-    margin-right: 30px;
-    display: inline-block;
-    width: 40%;
-    padding-left: -30px;
-  }
+
 </style>

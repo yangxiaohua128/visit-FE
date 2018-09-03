@@ -6,9 +6,9 @@
 </template>
 
 <script>
-  export default {
-    name: 'App'
-  }
+export default {
+  name: 'App'
+}
 </script>
 
 <style lang="scss">
@@ -18,7 +18,6 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
   }
   body{
     padding: 0;
@@ -48,7 +47,7 @@
     padding: 0;
   }
   a, img, input, button {
-    /*border: none;*/
+    border: none;
   }
   img {
     border: 0;

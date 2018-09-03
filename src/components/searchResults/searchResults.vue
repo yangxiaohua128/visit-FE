@@ -10,11 +10,15 @@
     <div class="content">
       <ul class="sort">
         <li v-for="(item,index) of items" :key="item.id" :class="{ 'checked':n==index}"
-            @touchend="changeN(index),InitData()">{{item}}</li>
+            @touchend="changeN(index),select()">{{item}}</li>
       </ul>
+      <div class="none" ref="show">--没有找到相关产品--</div>
       <div class="list">
-        <div class="produce" @touchend="toShows(item1.productId)"  v-for="item1 in produceList" :key="item1.id">
-          <img class="picture" :src="item1.productImgurl.split('$')[0]">
+        <div class="produce" @click="passData(item1)"  v-for="item1 in produceList" :key="item1.id">
+          <div class="picture">
+            <div class="special" v-show="item1.productIsSpecial === '1'">限时特卖</div>
+            <img :src="item1.productImgurl.split('$')[0]">
+          </div>
           <div class="goods">
             <p class="message">{{item1.productContent}}</p>
             <span class="location"><img src="./img/location.png">{{item1.area_city}}</span>
@@ -37,100 +41,284 @@
         items: ['人气最高', '价格升序', '价格降序'],
         n: 0,
         produceList: [],
-        search: false
+        dataList: {},
+        pageList: {},
+        destList: {},
+        type: ''
       }
     },
     mounted () {
-      this.InitData()
+      this.receiveType()
+      this.destData()
+      this.receiveData()
+      this.receivePageData()
+      if (this.type === 1) {
+        this.InitPageData()
+      } else if (this.type === 2) {
+        this.InitdestData()
+      } else if (this.type === 3) {
+        this.InitData()
+      }
     },
     methods: {
+      receiveType () {
+        this.type = this.$route.query.type
+      },
+      select () {
+        if (this.type === 1) {
+          this.submitPageData()
+        } else if (this.type === 2) {
+          this.submitDestData()
+        } else if (this.type === 3) {
+          this.submitData()
+        }
+      },
+      receiveData () {
+        let d = this.$route.query.d
+        let date = this.$route.query.date
+        let day = this.$route.query.day
+        let money = this.$route.query.money
+        let s = this.$route.query.s
+        this.dataList = {d, date, day, money, s}
+      },
+      receivePageData () {
+        let tag = this.$route.query.id
+        let user_location = ''
+        this.pageList = {tag, user_location}
+      },
+      destData () {
+        let user_location = this.$route.query.city
+        let tag = 5
+        this.destList = {tag, user_location}
+      },
       toBack () {
         this.$router.back(-1)
       },
       changeN (i) {
         this.n = i
       },
-      toShows (id) {
-        this.$router.push({
-          path: '/shows',
-          params: {},
-          productId: id
-        })
+      passData (item1) {
+        let id = item1.productId
+        if (item1.productIsSpecial === '1') {
+          this.$router.push({
+            path: '/shows',
+            query: {
+              productId: id
+            }
+          })
+        } else {
+          this.$router.push({
+            path: '/shown',
+            query: {
+              productId: id
+            }
+          })
+        }
       },
       toHistory () {
         this.$router.push({
           path: '/history'
         })
       },
+      InitPageData () {
+        axios({
+          method: 'post',
+          url: 'http://60.205.208.7/Travel_Summer_war/product/month.do',
+          data: this.pageList,
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+          }
+        }).then(resp => {
+            this.produceList.splice(0)
+            let data = resp.data
+            if (data.length) {
+              this.$refs.show.style.display = 'none'
+              for (let i = 0; i < data.length; i++) {
+                this.produceList.push(data[i])
+              }
+            } else {
+              this.$refs.show.style.display = 'block'
+            }
+          }
+        ).catch(error => {
+          console.log(error)
+        })
+      },
+      InitdestData () {
+        axios({
+          method: 'post',
+          url: 'http://60.205.208.7/Travel_Summer_war/product/month.do',
+          data: this.destList,
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+          }
+        }).then(resp => {
+            this.produceList.splice(0)
+            let data = resp.data
+            if (data.length) {
+              this.$refs.show.style.display = 'none'
+              for (let i = 0; i < data.length; i++) {
+                this.produceList.push(data[i])
+              }
+            } else {
+              this.$refs.show.style.display = 'block'
+            }
+          }
+        ).catch(error => {
+          console.log(error)
+        })
+      },
       InitData () {
-        if (this.search) {
-          if (this.n === 0) {
+        axios({
+          method: 'post',
+          url: 'http://60.205.208.7/Travel_Summer_war/product/advanceSearchByMonth.do',
+          data: this.dataList,
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+          }
+        }).then(resp => {
             this.produceList.splice(0)
-            axios.get('http://172.20.10.6/product/advanceSearchByMonth.do').then(resp => {
+            let data = resp.data
+            if (data.length) {
+              this.$refs.show.style.display = 'none'
+              for (let i = 0; i < data.length; i++) {
+                this.produceList.push(data[i])
+              }
+            } else {
+              this.$refs.show.style.display = 'block'
+            }
+          }
+        ).catch(error => {
+          console.log(error)
+        })
+      },
+      submitData () {
+        if (this.n === 0) {
+          this.InitData()
+        }
+        if (this.n === 1) {
+          axios({
+            method: 'post',
+            url: 'http://60.205.208.7/Travel_Summer_war/product/advanceSearchByMoneyAsc.do',
+            data: this.dataList,
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            }
+          }).then(resp => {
+              this.produceList.splice(0)
               let data = resp.data
               for (let i = 0; i < data.length; i++) {
                 this.produceList.push(data[i])
               }
-            }).catch(error => {
-              console.log(error)
-            })
-          }
-          if (this.n === 1) {
-            this.produceList.splice(0)
-            axios.get('http://172.20.10.6/product/advanceSearchByMoneyAsc.do').then(resp => {
+            }
+          ).catch(error => {
+            console.log(error)
+          })
+        }
+        if (this.n === 2) {
+          axios({
+            method: 'post',
+            url: 'http://60.205.208.7/Travel_Summer_war/product/advanceSearchByMoneyDesc.do',
+            data: this.dataList,
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            }
+          }).then(resp => {
+              this.produceList.splice(0)
               let data = resp.data
               for (let i = 0; i < data.length; i++) {
                 this.produceList.push(data[i])
               }
-            }).catch(error => {
-              console.log(error)
-            })
-          }
-          if (this.n === 2) {
-            this.produceList.splice(0)
-            axios.get('http://172.20.10.6/product/advanceSearchByMoneyDesc.do').then(resp => {
+            }
+          ).catch(error => {
+            console.log(error)
+          })
+        }
+      },
+      submitPageData () {
+        if (this.n === 0) {
+          this.InitPageData()
+        }
+        if (this.n === 1) {
+          axios({
+            method: 'post',
+            url: 'http://60.205.208.7/Travel_Summer_war/product/asc.do',
+            data: this.pageList,
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            }
+          }).then(resp => {
+              this.produceList.splice(0)
               let data = resp.data
               for (let i = 0; i < data.length; i++) {
                 this.produceList.push(data[i])
               }
-            }).catch(error => {
-              console.log(error)
-            })
-          }
-        } else {
-          if (this.n === 0) {
-            this.produceList.splice(0)
-            axios.get('http://192.168.43.168/product/month.do').then(resp => {
+            }
+          ).catch(error => {
+            console.log(error)
+          })
+        }
+        if (this.n === 2) {
+          axios({
+            method: 'post',
+            url: 'http://60.205.208.7/Travel_Summer_war/product/desc.do',
+            data: this.pageList,
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            }
+          }).then(resp => {
+              this.produceList.splice(0)
               let data = resp.data
               for (let i = 0; i < data.length; i++) {
                 this.produceList.push(data[i])
               }
-            }).catch(error => {
-              console.log(error)
-            })
-          }
-          if (this.n === 1) {
-            this.produceList.splice(0)
-            axios.get('http://192.168.43.168/product/asc.do').then(resp => {
+            }
+          ).catch(error => {
+            console.log(error)
+          })
+        }
+      },
+      submitDestData () {
+        if (this.n === 0) {
+          this.InitdestData()
+        }
+        if (this.n === 1) {
+          axios({
+            method: 'post',
+            url: 'http://60.205.208.7/Travel_Summer_war/product/asc.do',
+            data: this.destList,
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            }
+          }).then(resp => {
+              this.produceList.splice(0)
               let data = resp.data
               for (let i = 0; i < data.length; i++) {
                 this.produceList.push(data[i])
               }
-            }).catch(error => {
-              console.log(error)
-            })
-          }
-          if (this.n === 2) {
-            this.produceList.splice(0)
-            axios.get('http://192.168.43.168/product/desc.do').then(resp => {
+            }
+          ).catch(error => {
+            console.log(error)
+          })
+        }
+        if (this.n === 2) {
+          axios({
+            method: 'post',
+            url: 'http://60.205.208.7/Travel_Summer_war/product/desc.do',
+            data: this.destList,
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            }
+          }).then(resp => {
+              this.produceList.splice(0)
               let data = resp.data
               for (let i = 0; i < data.length; i++) {
                 this.produceList.push(data[i])
               }
-            }).catch(error => {
-              console.log(error)
-            })
-          }
+            }
+          ).catch(error => {
+            console.log(error)
+          })
         }
       }
     }
@@ -195,8 +383,21 @@
         flex-wrap: wrap;
         border-bottom: 1px #ccc solid;
         .picture{
-          width: 190px;
-          height: 190px;
+          position: relative;
+          img{
+            width: 190px;
+            height: 190px;
+          }
+          .special{
+            position: absolute;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            background-color: #ff332f;
+            color: white;
+            font-size: 20px;
+            border-radius: 15px;
+          }
         }
         .goods{
           display: flex;
@@ -251,5 +452,13 @@
       bottom: 100px;
       right: 30px;
     }
+  }
+  .none{
+    width: 100%;
+    height: 300px;
+    line-height: 300px;
+    font-size: 38px;
+    color: #ccc;
+    display: none;
   }
 </style>

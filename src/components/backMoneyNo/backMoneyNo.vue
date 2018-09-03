@@ -16,25 +16,25 @@
 </template>
 
 <script>
-export default {
-  name: 'backMoneyNo',
-  data () {
-    return {}
-  },
-  methods: {
-    toBack: function () {
-      this.$router.back(-1)
+  export default {
+    name: 'backMoneyNo',
+    data () {
+      return {}
     },
-    toOrdermanagement: function () {
-      this.$router.push({
-        path: '/ordermanagement'
-      })
+    methods: {
+      toBack: function () {
+        this.$router.back(-1)
+      },
+      toOrdermanagement: function () {
+        this.$router.push({
+          path: '/ordermanagement'
+        })
+      }
     }
   }
-}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   body{
     margin: 0;
     padding: 0;
